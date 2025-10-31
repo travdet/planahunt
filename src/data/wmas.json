@@ -1,0 +1,711 @@
+[
+  {
+    "id": "ALAPAHA-RIVER",
+    "name": "Alapaha River WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 6870,
+    "phone": "229-426-5267",
+    "counties": [
+      "Irwin",
+      "Tift"
+    ],
+    "region": "Region 6",
+    "lat": 31.49,
+    "lng": -83.56,
+    "source_url": null,
+    "tags": [
+      "Bonus"
+    ]
+  },
+  {
+    "id": "ALBANY-NURSERY",
+    "name": "Albany Nursery WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 300,
+    "phone": "229-430-4254",
+    "counties": [
+      "Dougherty"
+    ],
+    "region": "Region 6",
+    "lat": 31.53,
+    "lng": -84.1,
+    "source_url": null,
+    "tags": [
+      "Youth",
+      "Mobility-Impaired"
+    ]
+  },
+  {
+    "id": "ALEXANDER",
+    "name": "Alexander WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 1300,
+    "phone": "706-595-4222",
+    "counties": [
+      "Burke"
+    ],
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": []
+  },
+  {
+    "id": "ALLATOONA",
+    "name": "Allatoona WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 6818,
+    "phone": "706-295-6041",
+    "counties": [
+      "Bartow",
+      "Cherokee"
+    ],
+    "region": "Region 1",
+    "lat": 34.13,
+    "lng": -84.67,
+    "source_url": null,
+    "tags": [
+      "Specialty"
+    ]
+  },
+  {
+    "id": "ALLIGATOR-CREEK",
+    "name": "Alligator Creek WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 3086,
+    "phone": "229-426-5267",
+    "counties": [
+      "Wheeler"
+    ],
+    "region": "Region 6",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": []
+  },
+  {
+    "id": "ALTAMA-PLANTATION",
+    "name": "Altama Plantation WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 4612,
+    "phone": "912-262-3173",
+    "counties": [
+      "Glynn"
+    ],
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota"
+    ]
+  },
+  {
+    "id": "ALTAMAHA-WMA-WMA",
+    "name": "Altamaha WMA \u2014 Waterfowl Management Area",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 11402,
+    "phone": "912-262-3173",
+    "counties": [
+      "McIntosh",
+      "Glynn"
+    ],
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Youth"
+    ]
+  },
+  {
+    "id": "ARROWHEAD",
+    "name": "Arrowhead WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 337,
+    "phone": "706-295-6041",
+    "counties": [
+      "Floyd"
+    ],
+    "region": "Region 1",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Mobility-Impaired",
+      "Specialty"
+    ]
+  },
+  {
+    "id": "BF-GRANT",
+    "name": "B. F. Grant WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 11400,
+    "phone": "706-595-4222",
+    "counties": [
+      "Putnam"
+    ],
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Bonus",
+      "Youth"
+    ]
+  },
+  {
+    "id": "BARTRAM-FOREST",
+    "name": "Bartram Forest WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 1343,
+    "phone": "706-595-4222",
+    "counties": [
+      "Baldwin"
+    ],
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Archery-Only"
+    ]
+  },
+  {
+    "id": "BEAVERDAM",
+    "name": "Beaverdam WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 5500,
+    "phone": "229-426-5267",
+    "counties": [
+      "Laurens"
+    ],
+    "region": "Region 6",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Specialty",
+      "Bonus"
+    ]
+  },
+  {
+    "id": "BERRY-COLLEGE",
+    "name": "Berry College WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 15605,
+    "phone": "706-295-6041",
+    "counties": [
+      "Floyd"
+    ],
+    "region": "Region 1",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Specialty",
+      "Bonus"
+    ]
+  },
+  {
+    "id": "BIG-DUKES-POND",
+    "name": "Big Dukes Pond WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 1692,
+    "phone": "706-595-4222",
+    "counties": [
+      "Emanuel",
+      "Jenkins"
+    ],
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": []
+  },
+  {
+    "id": "BIG-HAMMOCK",
+    "name": "Big Hammock WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 7315,
+    "phone": "229-426-5267",
+    "counties": [
+      "Tattnall"
+    ],
+    "region": "Region 6",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": []
+  },
+  {
+    "id": "BIG-LAZER",
+    "name": "Big Lazer Creek WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 7200,
+    "phone": "229-430-4254",
+    "counties": [
+      "Talbot"
+    ],
+    "region": "Region 4",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Specialty",
+      "Bonus",
+      "Youth"
+    ]
+  },
+  {
+    "id": "BLANTON-CREEK",
+    "name": "Blanton Creek WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 4800,
+    "phone": "229-430-4254",
+    "counties": [
+      "Harris"
+    ],
+    "region": "Region 4",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Specialty",
+      "Bonus"
+    ]
+  },
+  {
+    "id": "BLUE-RIDGE",
+    "name": "Blue Ridge WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 20900,
+    "phone": "770-535-5700",
+    "counties": [
+      "Fannin",
+      "Union"
+    ],
+    "region": "Region 2",
+    "lat": 34.77,
+    "lng": -84.12,
+    "source_url": null,
+    "tags": [
+      "Bonus"
+    ]
+  },
+  {
+    "id": "BROAD-RIVER",
+    "name": "Broad River WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 440,
+    "phone": "770-535-5700",
+    "counties": [
+      "Madison"
+    ],
+    "region": "Region 2",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": []
+  },
+  {
+    "id": "BUCK-SHOALS",
+    "name": "Buck Shoals WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 582,
+    "phone": "770-535-5700",
+    "counties": [
+      "White"
+    ],
+    "region": "Region 2",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Youth"
+    ]
+  },
+  {
+    "id": "BULLARD-CREEK",
+    "name": "Bullard Creek WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 15636,
+    "phone": "229-426-5267",
+    "counties": [
+      "Jeff Davis",
+      "Appling"
+    ],
+    "region": "Region 6",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Specialty",
+      "Bonus",
+      "Quota"
+    ]
+  },
+  {
+    "id": "CANOOCH",
+    "name": "Canoochee Sandhills WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 10224,
+    "phone": "229-426-5267",
+    "counties": [
+      "Bulloch",
+      "Bryan"
+    ],
+    "region": "Region 6",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": []
+  },
+  {
+    "id": "CARTERS-LAKE",
+    "name": "Carters Lake WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 3300,
+    "phone": "706-295-6041",
+    "counties": [
+      "Murray",
+      "Gilmer"
+    ],
+    "region": "Region 1",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Youth",
+      "Mobility-Impaired"
+    ]
+  },
+  {
+    "id": "CEDAR-CREEK",
+    "name": "Cedar Creek WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 41000,
+    "phone": "706-595-4222",
+    "counties": [
+      "Jasper",
+      "Putnam",
+      "Jones"
+    ],
+    "region": "Region 7",
+    "lat": 33.23,
+    "lng": -83.53,
+    "source_url": null,
+    "tags": [
+      "Specialty",
+      "Bonus",
+      "Quota"
+    ]
+  },
+  {
+    "id": "CEYLON",
+    "name": "Ceylon WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 16000,
+    "phone": "912-262-3173",
+    "counties": [
+      "Camden"
+    ],
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Bonus"
+    ]
+  },
+  {
+    "id": "CHATTAHOOCHEE",
+    "name": "Chattahoochee WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 25150,
+    "phone": "770-535-5700",
+    "counties": [
+      "White",
+      "Lumpkin"
+    ],
+    "region": "Region 2",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Bonus",
+      "Quota"
+    ]
+  },
+  {
+    "id": "CHESTATEE",
+    "name": "Chestatee WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 27123,
+    "phone": "770-535-5700",
+    "counties": [
+      "Lumpkin",
+      "Dawson"
+    ],
+    "region": "Region 2",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Bonus",
+      "Quota"
+    ]
+  },
+  {
+    "id": "CHICKASAWHATCHEE",
+    "name": "Chickasawhatchee WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 19700,
+    "phone": "229-430-4254",
+    "counties": [
+      "Baker",
+      "Calhoun"
+    ],
+    "region": "Region 4",
+    "lat": 31.35,
+    "lng": -84.46,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Youth",
+      "Bonus"
+    ]
+  },
+  {
+    "id": "CLARKS-HILL-EAST",
+    "name": "Clarks Hill WMA \u2014 East",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 10224,
+    "phone": "706-595-4222",
+    "counties": [
+      "McDuffie",
+      "Wilkes"
+    ],
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota"
+    ]
+  },
+  {
+    "id": "CLARKS-HILL-WEST",
+    "name": "Clarks Hill WMA \u2014 West",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 3067,
+    "phone": "706-595-4222",
+    "counties": [
+      "McDuffie"
+    ],
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": []
+  },
+  {
+    "id": "CLAYHOLE-SWAMP",
+    "name": "Clayhole Swamp WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 5242,
+    "phone": "912-262-3173",
+    "counties": [
+      "Glynn"
+    ],
+    "region": "Region 7",
+    "lat": 31.2,
+    "lng": -81.56,
+    "source_url": null,
+    "tags": [
+      "Youth",
+      "Bonus",
+      "Archery-Only Area"
+    ]
+  },
+  {
+    "id": "CLYBEL",
+    "name": "Clybel WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 6700,
+    "phone": "706-595-4222",
+    "counties": [
+      "Newton",
+      "Jasper"
+    ],
+    "region": "Region 7",
+    "lat": 33.45,
+    "lng": -83.95,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Specialty",
+      "Youth",
+      "Hunt & Learn"
+    ]
+  },
+  {
+    "id": "COCHRANS-CREEK",
+    "name": "Cochrans Creek WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 2057,
+    "phone": "770-535-5700",
+    "counties": [
+      "Dawson"
+    ],
+    "region": "Region 2",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Specialty",
+      "Bonus"
+    ]
+  },
+  {
+    "id": "COHUTTA",
+    "name": "Cohutta WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 96583,
+    "phone": "706-295-6041",
+    "counties": [
+      "Murray",
+      "Fannin",
+      "Gilmer"
+    ],
+    "region": "Region 1",
+    "lat": 34.99,
+    "lng": -84.64,
+    "source_url": null,
+    "tags": [
+      "Bonus"
+    ]
+  },
+  {
+    "id": "CONASAUGA-RIVER",
+    "name": "Conasauga River WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 338,
+    "phone": "706-295-6041",
+    "counties": [
+      "Whitfield",
+      "Murray"
+    ],
+    "region": "Region 1",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Youth"
+    ]
+  },
+  {
+    "id": "COOPERS-CREEK",
+    "name": "Coopers Creek WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 30000,
+    "phone": "770-535-5700",
+    "counties": [
+      "Fannin",
+      "Union"
+    ],
+    "region": "Region 2",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Bonus",
+      "Specialty"
+    ]
+  },
+  {
+    "id": "COOSAWATTEE",
+    "name": "Coosawattee WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 2040,
+    "phone": "706-295-6041",
+    "counties": [
+      "Murray",
+      "Gilmer"
+    ],
+    "region": "Region 1",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Specialty",
+      "Bonus"
+    ]
+  },
+  {
+    "id": "CROCKFORD-PM",
+    "name": "Crockford\u2013Pigeon Mountain WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 20657,
+    "phone": "706-295-6041",
+    "counties": [
+      "Walker"
+    ],
+    "region": "Region 1",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Specialty",
+      "Bonus",
+      "Quota"
+    ]
+  }
+]

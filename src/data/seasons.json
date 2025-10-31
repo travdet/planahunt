@@ -1,0 +1,2943 @@
+[
+  {
+    "id": "ALAPAHA-RIVER-Deer-Archery-2025-09-13",
+    "wma_id": "ALAPAHA-RIVER",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-19",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALAPAHA-RIVER-Deer-Firearms-2025-10-25",
+    "wma_id": "ALAPAHA-RIVER",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-25",
+    "end_date": "2025-10-26",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALAPAHA-RIVER-Deer-Firearms-2025-11-26",
+    "wma_id": "ALAPAHA-RIVER",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-26",
+    "end_date": "2025-11-30",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALAPAHA-RIVER-Deer-Firearms-2025-12-16",
+    "wma_id": "ALAPAHA-RIVER",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-12-16",
+    "end_date": "2025-12-21",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALAPAHA-RIVER-Deer-Firearms-2025-11-13",
+    "wma_id": "ALAPAHA-RIVER",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-13",
+    "end_date": "2025-11-15",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "ALAPAHA-RIVER-Turkey-Firearms-2026-04-04",
+    "wma_id": "ALAPAHA-RIVER",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-04-10",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALAPAHA-RIVER-Turkey-Firearms-2026-04-11",
+    "wma_id": "ALAPAHA-RIVER",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-11",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALAPAHA-RIVER-Dove-Shotgun-2025-09-06",
+    "wma_id": "ALAPAHA-RIVER",
+    "species": "Dove",
+    "weapon": "Shotgun",
+    "start_date": "2025-09-06",
+    "end_date": "2025-09-06",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": "Sign-in"
+  },
+  {
+    "id": "ALAPAHA-RIVER-Dove-Shotgun-2025-09-13",
+    "wma_id": "ALAPAHA-RIVER",
+    "species": "Dove",
+    "weapon": "Shotgun",
+    "start_date": "2025-09-13",
+    "end_date": "2026-01-31",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALAPAHA-RIVER-Coyote-Firearms-2026-05-16",
+    "wma_id": "ALAPAHA-RIVER",
+    "species": "Coyote",
+    "weapon": "Firearms",
+    "start_date": "2026-05-16",
+    "end_date": "2026-05-31",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALBANY-NURSERY-Deer-Archery-2025-09-13",
+    "wma_id": "ALBANY-NURSERY",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-09-28",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALBANY-NURSERY-Deer-Archery-2025-10-06",
+    "wma_id": "ALBANY-NURSERY",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-10-06",
+    "end_date": "2025-10-23",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALBANY-NURSERY-Deer-Archery-2025-12-07",
+    "wma_id": "ALBANY-NURSERY",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-12-07",
+    "end_date": "2026-01-11",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALBANY-NURSERY-Deer-Shotgun-2025-10-30",
+    "wma_id": "ALBANY-NURSERY",
+    "species": "Deer",
+    "weapon": "Shotgun",
+    "start_date": "2025-10-30",
+    "end_date": "2025-11-02",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Mobility-Impaired"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "ALBANY-NURSERY-Deer-Shotgun-2025-11-27",
+    "wma_id": "ALBANY-NURSERY",
+    "species": "Deer",
+    "weapon": "Shotgun",
+    "start_date": "2025-11-27",
+    "end_date": "2025-11-30",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Mobility-Impaired"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "ALBANY-NURSERY-Turkey-Firearms-2026-04-11",
+    "wma_id": "ALBANY-NURSERY",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-11",
+    "end_date": "2026-04-15",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Mobility-Impaired"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "ALBANY-NURSERY-Turkey-Firearms-2026-04-25",
+    "wma_id": "ALBANY-NURSERY",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-25",
+    "end_date": "2026-04-29",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Mobility-Impaired"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "ALBANY-NURSERY-Turkey-Firearms-2026-04-04",
+    "wma_id": "ALBANY-NURSERY",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-04-08",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Youth"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "ALBANY-NURSERY-Turkey-Firearms-2026-04-18",
+    "wma_id": "ALBANY-NURSERY",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-18",
+    "end_date": "2026-04-22",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Youth"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "ALBANY-NURSERY-Dove-Shotgun-2025-09-06",
+    "wma_id": "ALBANY-NURSERY",
+    "species": "Dove",
+    "weapon": "Shotgun",
+    "start_date": "2025-09-06",
+    "end_date": "2025-09-06",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": "Sign-in"
+  },
+  {
+    "id": "ALBANY-NURSERY-Dove-Shotgun-2025-09-13",
+    "wma_id": "ALBANY-NURSERY",
+    "species": "Dove",
+    "weapon": "Shotgun",
+    "start_date": "2025-09-13",
+    "end_date": "2026-01-31",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": "Open except quota fields"
+  },
+  {
+    "id": "ALEXANDER-Deer-Archery-2025-09-13",
+    "wma_id": "ALEXANDER",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-17",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALEXANDER-Deer-Archery-2025-12-01",
+    "wma_id": "ALEXANDER",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-12-01",
+    "end_date": "2026-01-11",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALEXANDER-Deer-Firearms-2025-10-18",
+    "wma_id": "ALEXANDER",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-18",
+    "end_date": "2025-11-30",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALEXANDER-Turkey-Firearms-2026-04-04",
+    "wma_id": "ALEXANDER",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALEXANDER-Dove-Shotgun-2025-09-06",
+    "wma_id": "ALEXANDER",
+    "species": "Dove",
+    "weapon": "Shotgun",
+    "start_date": "2025-09-06",
+    "end_date": "2026-01-31",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": "Fields quota dates listed"
+  },
+  {
+    "id": "ALLATOONA-Deer-Archery-2025-09-13",
+    "wma_id": "ALLATOONA",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-17",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALLATOONA-Deer-Firearms-2025-10-18",
+    "wma_id": "ALLATOONA",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-18",
+    "end_date": "2025-10-31",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Specialty"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "ALLATOONA-Deer-Firearms-2025-11-01",
+    "wma_id": "ALLATOONA",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-01",
+    "end_date": "2026-01-01",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALLATOONA-Turkey-Firearms-2026-04-04",
+    "wma_id": "ALLATOONA",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALLATOONA-Coyote-Firearms-2026-05-16",
+    "wma_id": "ALLATOONA",
+    "species": "Coyote",
+    "weapon": "Firearms",
+    "start_date": "2026-05-16",
+    "end_date": "2026-05-31",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALLIGATOR-CREEK-Deer-Archery-2025-09-13",
+    "wma_id": "ALLIGATOR-CREEK",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2026-01-11",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": "State seasons (derived)"
+  },
+  {
+    "id": "ALLIGATOR-CREEK-Turkey-Firearms-2026-04-04",
+    "wma_id": "ALLIGATOR-CREEK",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALLIGATOR-CREEK-Coyote-Firearms-2026-05-16",
+    "wma_id": "ALLIGATOR-CREEK",
+    "species": "Coyote",
+    "weapon": "Firearms",
+    "start_date": "2026-05-16",
+    "end_date": "2026-05-31",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALTAMA-PLANTATION-Deer-Archery-2025-09-13",
+    "wma_id": "ALTAMA-PLANTATION",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-11-12",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALTAMA-PLANTATION-Deer-Archery-2026-01-04",
+    "wma_id": "ALTAMA-PLANTATION",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2026-01-04",
+    "end_date": "2026-01-11",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALTAMA-PLANTATION-Deer-Firearms-2025-11-13",
+    "wma_id": "ALTAMA-PLANTATION",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-13",
+    "end_date": "2025-11-15",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALTAMA-PLANTATION-Deer-Firearms-2025-12-04",
+    "wma_id": "ALTAMA-PLANTATION",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-12-04",
+    "end_date": "2025-12-06",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALTAMA-PLANTATION-Deer-Firearms-2026-01-01",
+    "wma_id": "ALTAMA-PLANTATION",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2026-01-01",
+    "end_date": "2026-01-03",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALTAMA-PLANTATION-Turkey-Firearms-2026-04-04",
+    "wma_id": "ALTAMA-PLANTATION",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALTAMAHA-WMA-WMA-Deer-Archery-2025-09-13",
+    "wma_id": "ALTAMAHA-WMA-WMA",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-11-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALTAMAHA-WMA-WMA-Dove-Shotgun-2025-09-06",
+    "wma_id": "ALTAMAHA-WMA-WMA",
+    "species": "Dove",
+    "weapon": "Shotgun",
+    "start_date": "2025-09-06",
+    "end_date": "2025-09-28",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ALTAMAHA-WMA-WMA-Waterfowl-Shotgun-2025-11-22",
+    "wma_id": "ALTAMAHA-WMA-WMA",
+    "species": "Waterfowl",
+    "weapon": "Shotgun",
+    "start_date": "2025-11-22",
+    "end_date": "2026-01-31",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": "Butler/Champney quota schedules; noon cutoff"
+  },
+  {
+    "id": "ARROWHEAD-Deer/Bear-Archery-2025-09-13",
+    "wma_id": "ARROWHEAD",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-31",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Specialty"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "ARROWHEAD-Deer/Bear-Firearms-2025-11-01",
+    "wma_id": "ARROWHEAD",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-11-01",
+    "end_date": "2025-11-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Mobility-Impaired"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "ARROWHEAD-Deer/Bear-Firearms-2025-11-16",
+    "wma_id": "ARROWHEAD",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-11-16",
+    "end_date": "2026-01-11",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "ARROWHEAD-Turkey-Firearms-2026-04-04",
+    "wma_id": "ARROWHEAD",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-04-10",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Mobility-Impaired"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "ARROWHEAD-Turkey-Firearms-2026-04-11",
+    "wma_id": "ARROWHEAD",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-11",
+    "end_date": "2026-04-17",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Specialty"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "ARROWHEAD-Turkey-Firearms-2026-04-18",
+    "wma_id": "ARROWHEAD",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-18",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BF-GRANT-Deer-Archery-2025-09-13",
+    "wma_id": "BF-GRANT",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-05",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BF-GRANT-Deer-Archery-2025-11-23",
+    "wma_id": "BF-GRANT",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-11-23",
+    "end_date": "2025-12-07",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BF-GRANT-Deer-Primitive-2025-12-18",
+    "wma_id": "BF-GRANT",
+    "species": "Deer",
+    "weapon": "Primitive",
+    "start_date": "2025-12-18",
+    "end_date": "2025-12-21",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BF-GRANT-Deer-Firearms-2025-11-06",
+    "wma_id": "BF-GRANT",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-06",
+    "end_date": "2025-11-08",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BF-GRANT-Deer-Firearms-2025-11-20",
+    "wma_id": "BF-GRANT",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-20",
+    "end_date": "2025-11-22",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BF-GRANT-Turkey-Firearms-2026-04-04",
+    "wma_id": "BF-GRANT",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-04-10",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Youth"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BF-GRANT-Turkey-Firearms-2026-04-11",
+    "wma_id": "BF-GRANT",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-11",
+    "end_date": "2026-04-17",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BF-GRANT-Turkey-Firearms-2026-04-18",
+    "wma_id": "BF-GRANT",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-18",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BARTRAM-FOREST-Deer-Archery-2025-09-13",
+    "wma_id": "BARTRAM-FOREST",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2026-01-11",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BARTRAM-FOREST-Turkey-Archery-2026-04-04",
+    "wma_id": "BARTRAM-FOREST",
+    "species": "Turkey",
+    "weapon": "Archery",
+    "start_date": "2026-04-04",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BEAVERDAM-Deer-Archery-2025-09-13",
+    "wma_id": "BEAVERDAM",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-09-19",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BEAVERDAM-Deer-Archery-2025-09-27",
+    "wma_id": "BEAVERDAM",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-27",
+    "end_date": "2025-10-17",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BEAVERDAM-Deer-Firearms-2025-09-20",
+    "wma_id": "BEAVERDAM",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-09-20",
+    "end_date": "2025-09-26",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Specialty"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BEAVERDAM-Deer-Firearms-2025-10-30",
+    "wma_id": "BEAVERDAM",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-30",
+    "end_date": "2025-11-01",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BEAVERDAM-Deer-Firearms-2025-11-27",
+    "wma_id": "BEAVERDAM",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-27",
+    "end_date": "2025-11-29",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BEAVERDAM-Deer-Firearms-2025-12-17",
+    "wma_id": "BEAVERDAM",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-12-17",
+    "end_date": "2025-12-20",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BEAVERDAM-Turkey-Firearms-2026-04-04",
+    "wma_id": "BEAVERDAM",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BERRY-COLLEGE-Deer/Bear-Archery-2025-09-13",
+    "wma_id": "BERRY-COLLEGE",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-28",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BERRY-COLLEGE-Deer/Bear-Archery-2025-11-02",
+    "wma_id": "BERRY-COLLEGE",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-11-02",
+    "end_date": "2025-11-14",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BERRY-COLLEGE-Deer/Bear-Firearms-2025-10-29",
+    "wma_id": "BERRY-COLLEGE",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-10-29",
+    "end_date": "2025-11-01",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BERRY-COLLEGE-Deer/Bear-Firearms-2025-12-03",
+    "wma_id": "BERRY-COLLEGE",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-12-03",
+    "end_date": "2025-12-06",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BERRY-COLLEGE-Deer/Bear-Firearms-2026-01-03",
+    "wma_id": "BERRY-COLLEGE",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2026-01-03",
+    "end_date": "2026-01-04",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Specialty"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BERRY-COLLEGE-Turkey-Firearms-2026-04-04",
+    "wma_id": "BERRY-COLLEGE",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-DUKES-POND-Deer-Archery-2025-09-13",
+    "wma_id": "BIG-DUKES-POND",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-10",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-DUKES-POND-Deer-Archery-2025-12-01",
+    "wma_id": "BIG-DUKES-POND",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-12-01",
+    "end_date": "2026-01-11",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-DUKES-POND-Deer-Primitive-2025-10-11",
+    "wma_id": "BIG-DUKES-POND",
+    "species": "Deer",
+    "weapon": "Primitive",
+    "start_date": "2025-10-11",
+    "end_date": "2025-10-17",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-DUKES-POND-Deer-Firearms-2025-10-18",
+    "wma_id": "BIG-DUKES-POND",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-18",
+    "end_date": "2025-11-30",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-DUKES-POND-Turkey-Firearms-2026-04-04",
+    "wma_id": "BIG-DUKES-POND",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-HAMMOCK-Deer-Archery-2025-09-13",
+    "wma_id": "BIG-HAMMOCK",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-08",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-HAMMOCK-Deer-Primitive-2025-10-09",
+    "wma_id": "BIG-HAMMOCK",
+    "species": "Deer",
+    "weapon": "Primitive",
+    "start_date": "2025-10-09",
+    "end_date": "2025-10-11",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-HAMMOCK-Deer-Archery-2025-10-12",
+    "wma_id": "BIG-HAMMOCK",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-10-12",
+    "end_date": "2025-10-24",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-HAMMOCK-Deer-Firearms-2025-10-25",
+    "wma_id": "BIG-HAMMOCK",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-25",
+    "end_date": "2025-11-09",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-HAMMOCK-Deer-Archery-2025-11-10",
+    "wma_id": "BIG-HAMMOCK",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-11-10",
+    "end_date": "2026-01-11",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-HAMMOCK-Turkey-Firearms-2026-04-04",
+    "wma_id": "BIG-HAMMOCK",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-LAZER-Deer-Archery-2025-09-13",
+    "wma_id": "BIG-LAZER",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-05",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-LAZER-Deer-Archery-2025-10-26",
+    "wma_id": "BIG-LAZER",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-10-26",
+    "end_date": "2025-11-09",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-LAZER-Deer-Firearms-2025-10-11",
+    "wma_id": "BIG-LAZER",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-11",
+    "end_date": "2025-10-12",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Youth"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-LAZER-Deer-Firearms-2025-10-23",
+    "wma_id": "BIG-LAZER",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-23",
+    "end_date": "2025-10-25",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Either-sex last day",
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-LAZER-Deer-Firearms-2025-11-13",
+    "wma_id": "BIG-LAZER",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-13",
+    "end_date": "2025-11-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-LAZER-Deer-Firearms-2025-11-21",
+    "wma_id": "BIG-LAZER",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-21",
+    "end_date": "2025-11-23",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Specialty"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-LAZER-Turkey-Firearms-2026-04-04",
+    "wma_id": "BIG-LAZER",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-04-10",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-LAZER-Turkey-Firearms-2026-04-11",
+    "wma_id": "BIG-LAZER",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-11",
+    "end_date": "2026-04-17",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BIG-LAZER-Turkey-Firearms-2026-04-18",
+    "wma_id": "BIG-LAZER",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-18",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BLANTON-CREEK-Deer-Archery-2025-09-13",
+    "wma_id": "BLANTON-CREEK",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-09",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BLANTON-CREEK-Deer-Archery-2025-10-13",
+    "wma_id": "BLANTON-CREEK",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-10-13",
+    "end_date": "2025-10-19",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BLANTON-CREEK-Deer-Archery-2025-11-23",
+    "wma_id": "BLANTON-CREEK",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-11-23",
+    "end_date": "2025-11-30",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BLANTON-CREEK-Deer-Firearms-2025-10-11",
+    "wma_id": "BLANTON-CREEK",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-11",
+    "end_date": "2025-10-12",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Specialty"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BLANTON-CREEK-Deer-Firearms-2025-10-23",
+    "wma_id": "BLANTON-CREEK",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-23",
+    "end_date": "2025-10-25",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BLANTON-CREEK-Deer-Firearms-2025-11-20",
+    "wma_id": "BLANTON-CREEK",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-20",
+    "end_date": "2025-11-22",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BLANTON-CREEK-Turkey-Firearms-2026-04-04",
+    "wma_id": "BLANTON-CREEK",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-04-10",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BLANTON-CREEK-Turkey-Firearms-2026-04-11",
+    "wma_id": "BLANTON-CREEK",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-11",
+    "end_date": "2026-04-17",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BLANTON-CREEK-Turkey-Firearms-2026-04-18",
+    "wma_id": "BLANTON-CREEK",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-18",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BLUE-RIDGE-Deer/Bear-Archery-2025-09-13",
+    "wma_id": "BLUE-RIDGE",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-09-26",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BLUE-RIDGE-Deer/Bear-Archery-2025-10-04",
+    "wma_id": "BLUE-RIDGE",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-10-04",
+    "end_date": "2025-10-10",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BLUE-RIDGE-Deer/Bear-Firearms-2025-11-12",
+    "wma_id": "BLUE-RIDGE",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-11-12",
+    "end_date": "2025-11-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BLUE-RIDGE-Deer/Bear-Firearms-2025-12-26",
+    "wma_id": "BLUE-RIDGE",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-12-26",
+    "end_date": "2026-01-01",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BLUE-RIDGE-Deer/Bear-Firearms-2025-12-03",
+    "wma_id": "BLUE-RIDGE",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-12-03",
+    "end_date": "2025-12-06",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BROAD-RIVER-Deer/Bear-Archery-2025-09-13",
+    "wma_id": "BROAD-RIVER",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-11-29",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": "Archery only"
+  },
+  {
+    "id": "BUCK-SHOALS-Deer/Bear-Firearms-2025-11-01",
+    "wma_id": "BUCK-SHOALS",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-11-01",
+    "end_date": "2025-11-02",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Youth",
+      "Bonus"
+    ],
+    "notes_short": "Bag limit 1"
+  },
+  {
+    "id": "BUCK-SHOALS-Deer/Bear-Firearms-2025-11-22",
+    "wma_id": "BUCK-SHOALS",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-11-22",
+    "end_date": "2025-11-23",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Youth",
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BUCK-SHOALS-Deer/Bear-Firearms-2025-12-06",
+    "wma_id": "BUCK-SHOALS",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-12-06",
+    "end_date": "2025-12-07",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Youth",
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BULLARD-CREEK-Deer-Archery-2025-09-13",
+    "wma_id": "BULLARD-CREEK",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-09-24",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BULLARD-CREEK-Deer-Primitive-2025-09-25",
+    "wma_id": "BULLARD-CREEK",
+    "species": "Deer",
+    "weapon": "Primitive",
+    "start_date": "2025-09-25",
+    "end_date": "2025-09-27",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BULLARD-CREEK-Deer-Archery-2025-09-28",
+    "wma_id": "BULLARD-CREEK",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-28",
+    "end_date": "2025-10-13",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BULLARD-CREEK-Deer-Firearms-2025-10-23",
+    "wma_id": "BULLARD-CREEK",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-23",
+    "end_date": "2025-10-25",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BULLARD-CREEK-Deer-Firearms-2025-10-31",
+    "wma_id": "BULLARD-CREEK",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-31",
+    "end_date": "2025-11-02",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Specialty"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "BULLARD-CREEK-Deer-Firearms-2025-11-27",
+    "wma_id": "BULLARD-CREEK",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-27",
+    "end_date": "2025-11-30",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BULLARD-CREEK-Deer-Firearms-2025-12-18",
+    "wma_id": "BULLARD-CREEK",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-12-18",
+    "end_date": "2025-12-20",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": "Buck Only"
+  },
+  {
+    "id": "BULLARD-CREEK-Turkey-Firearms-2026-04-04",
+    "wma_id": "BULLARD-CREEK",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-04-10",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "BULLARD-CREEK-Turkey-Firearms-2026-04-11",
+    "wma_id": "BULLARD-CREEK",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-11",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CANOOCH-Deer-Archery-2025-09-13",
+    "wma_id": "CANOOCH",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-11",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CANOOCH-Deer-Firearms-2025-10-23",
+    "wma_id": "CANOOCH",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-23",
+    "end_date": "2025-10-25",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CANOOCH-Deer-Firearms-2025-11-06",
+    "wma_id": "CANOOCH",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-06",
+    "end_date": "2025-11-08",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CANOOCH-Deer-Firearms-2025-12-18",
+    "wma_id": "CANOOCH",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-12-18",
+    "end_date": "2025-12-20",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CANOOCH-Turkey-Firearms-2026-04-04",
+    "wma_id": "CANOOCH",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CARTERS-LAKE-Deer/Bear-Archery-2025-09-13",
+    "wma_id": "CARTERS-LAKE",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-30",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CARTERS-LAKE-Deer/Bear-Archery-2025-11-03",
+    "wma_id": "CARTERS-LAKE",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-11-03",
+    "end_date": "2025-11-07",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CARTERS-LAKE-Deer/Bear-Archery-2025-11-10",
+    "wma_id": "CARTERS-LAKE",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-11-10",
+    "end_date": "2026-01-01",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CARTERS-LAKE-Deer/Bear-Firearms-2025-10-31",
+    "wma_id": "CARTERS-LAKE",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-10-31",
+    "end_date": "2025-11-02",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Mobility-Impaired",
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CARTERS-LAKE-Deer/Bear-Firearms-2025-11-08",
+    "wma_id": "CARTERS-LAKE",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-11-08",
+    "end_date": "2025-11-09",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Youth",
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CARTERS-LAKE-Turkey-Firearms-2026-04-04",
+    "wma_id": "CARTERS-LAKE",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CEDAR-CREEK-Deer-Archery-2025-09-13",
+    "wma_id": "CEDAR-CREEK",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-22",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CEDAR-CREEK-Deer-Archery-2025-10-26",
+    "wma_id": "CEDAR-CREEK",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-10-26",
+    "end_date": "2025-11-12",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CEDAR-CREEK-Deer-Archery-2025-11-16",
+    "wma_id": "CEDAR-CREEK",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-11-16",
+    "end_date": "2025-11-23",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CEDAR-CREEK-Deer-Archery-2025-12-15",
+    "wma_id": "CEDAR-CREEK",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-12-15",
+    "end_date": "2026-01-01",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CEDAR-CREEK-Deer-Firearms-2025-10-23",
+    "wma_id": "CEDAR-CREEK",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-23",
+    "end_date": "2025-10-25",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Either-sex last day",
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CEDAR-CREEK-Deer-Firearms-2025-11-13",
+    "wma_id": "CEDAR-CREEK",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-13",
+    "end_date": "2025-11-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CEDAR-CREEK-Deer-Firearms-2025-11-24",
+    "wma_id": "CEDAR-CREEK",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-24",
+    "end_date": "2025-11-30",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Specialty"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CEDAR-CREEK-Deer-Firearms-2025-12-01",
+    "wma_id": "CEDAR-CREEK",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-12-01",
+    "end_date": "2025-12-14",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CEDAR-CREEK-Turkey-Firearms-2026-04-04",
+    "wma_id": "CEDAR-CREEK",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-04-10",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CEDAR-CREEK-Turkey-Firearms-2026-04-11",
+    "wma_id": "CEDAR-CREEK",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-11",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CEYLON-Deer-Archery-2025-09-13",
+    "wma_id": "CEYLON",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-12",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CEYLON-Deer-Archery-2025-12-07",
+    "wma_id": "CEYLON",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-12-07",
+    "end_date": "2025-12-28",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CEYLON-Deer-Primitive-2025-10-16",
+    "wma_id": "CEYLON",
+    "species": "Deer",
+    "weapon": "Primitive",
+    "start_date": "2025-10-16",
+    "end_date": "2025-10-18",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CEYLON-Deer-Firearms-2025-11-06",
+    "wma_id": "CEYLON",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-06",
+    "end_date": "2025-11-08",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CEYLON-Deer-Firearms-2025-12-04",
+    "wma_id": "CEYLON",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-12-04",
+    "end_date": "2025-12-06",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CEYLON-Turkey-Firearms-2026-04-04",
+    "wma_id": "CEYLON",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-04-10",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CEYLON-Turkey-Firearms-2026-04-18",
+    "wma_id": "CEYLON",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-18",
+    "end_date": "2026-04-24",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CEYLON-Turkey-Firearms-2026-05-02",
+    "wma_id": "CEYLON",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-05-02",
+    "end_date": "2026-05-08",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHATTAHOOCHEE-Deer/Bear-Archery-2025-09-13",
+    "wma_id": "CHATTAHOOCHEE",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-09-26",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHATTAHOOCHEE-Deer/Bear-Archery-2025-10-13",
+    "wma_id": "CHATTAHOOCHEE",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-10-13",
+    "end_date": "2025-10-21",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHATTAHOOCHEE-Deer/Bear-Archery-2025-10-26",
+    "wma_id": "CHATTAHOOCHEE",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-10-26",
+    "end_date": "2025-10-31",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHATTAHOOCHEE-Deer/Bear-Firearms-2025-10-22",
+    "wma_id": "CHATTAHOOCHEE",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-10-22",
+    "end_date": "2025-10-25",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHATTAHOOCHEE-Deer/Bear-Firearms-2025-11-22",
+    "wma_id": "CHATTAHOOCHEE",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-11-22",
+    "end_date": "2025-11-29",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHATTAHOOCHEE-Deer/Bear-Firearms-2025-12-10",
+    "wma_id": "CHATTAHOOCHEE",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-12-10",
+    "end_date": "2025-12-13",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CHATTAHOOCHEE-Bear-Firearms-2025-09-27",
+    "wma_id": "CHATTAHOOCHEE",
+    "species": "Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-09-27",
+    "end_date": "2025-10-03",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHATTAHOOCHEE-Bear-Firearms-2025-10-04",
+    "wma_id": "CHATTAHOOCHEE",
+    "species": "Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-10-04",
+    "end_date": "2025-10-12",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": "Dog/Bear quota bag limits apply"
+  },
+  {
+    "id": "CHATTAHOOCHEE-Turkey-Firearms-2026-04-04",
+    "wma_id": "CHATTAHOOCHEE",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHESTATEE-Deer/Bear-Archery-2025-09-13",
+    "wma_id": "CHESTATEE",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-09-26",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHESTATEE-Deer/Bear-Archery-2025-10-13",
+    "wma_id": "CHESTATEE",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-10-13",
+    "end_date": "2025-10-30",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHESTATEE-Deer/Bear-Firearms-2025-11-19",
+    "wma_id": "CHESTATEE",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-11-19",
+    "end_date": "2025-11-22",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHESTATEE-Deer/Bear-Firearms-2025-12-26",
+    "wma_id": "CHESTATEE",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-12-26",
+    "end_date": "2026-01-01",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHESTATEE-Deer/Bear-Firearms-2025-12-10",
+    "wma_id": "CHESTATEE",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-12-10",
+    "end_date": "2025-12-13",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CHESTATEE-Bear-Firearms-2025-09-27",
+    "wma_id": "CHESTATEE",
+    "species": "Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-09-27",
+    "end_date": "2025-10-03",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHESTATEE-Bear-Firearms-2025-10-04",
+    "wma_id": "CHESTATEE",
+    "species": "Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-10-04",
+    "end_date": "2025-10-12",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": "Dog/Bear quota"
+  },
+  {
+    "id": "CHICKASAWHATCHEE-Deer-Archery-2025-09-13",
+    "wma_id": "CHICKASAWHATCHEE",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-10",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHICKASAWHATCHEE-Deer-Archery-2025-12-25",
+    "wma_id": "CHICKASAWHATCHEE",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-12-25",
+    "end_date": "2026-01-31",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHICKASAWHATCHEE-Deer-Primitive-2025-10-11",
+    "wma_id": "CHICKASAWHATCHEE",
+    "species": "Deer",
+    "weapon": "Primitive",
+    "start_date": "2025-10-11",
+    "end_date": "2025-10-24",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHICKASAWHATCHEE-Deer-Firearms-2025-11-06",
+    "wma_id": "CHICKASAWHATCHEE",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-06",
+    "end_date": "2025-11-08",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CHICKASAWHATCHEE-Deer-Firearms-2025-12-11",
+    "wma_id": "CHICKASAWHATCHEE",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-12-11",
+    "end_date": "2025-12-13",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CHICKASAWHATCHEE-Deer-Firearms-2025-11-21",
+    "wma_id": "CHICKASAWHATCHEE",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-21",
+    "end_date": "2025-11-28",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Youth"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CHICKASAWHATCHEE-Turkey-Firearms-2026-04-04",
+    "wma_id": "CHICKASAWHATCHEE",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-04-10",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHICKASAWHATCHEE-Turkey-Firearms-2026-04-11",
+    "wma_id": "CHICKASAWHATCHEE",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-11",
+    "end_date": "2026-04-17",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHICKASAWHATCHEE-Turkey-Firearms-2026-04-18",
+    "wma_id": "CHICKASAWHATCHEE",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-18",
+    "end_date": "2026-04-24",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHICKASAWHATCHEE-Turkey-Firearms-2026-04-25",
+    "wma_id": "CHICKASAWHATCHEE",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-25",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CHICKASAWHATCHEE-Dove-Shotgun-2025-09-06",
+    "wma_id": "CHICKASAWHATCHEE",
+    "species": "Dove",
+    "weapon": "Shotgun",
+    "start_date": "2025-09-06",
+    "end_date": "2025-09-06",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": "Sign-in quota field"
+  },
+  {
+    "id": "CHICKASAWHATCHEE-Dove-Shotgun-2025-09-13",
+    "wma_id": "CHICKASAWHATCHEE",
+    "species": "Dove",
+    "weapon": "Shotgun",
+    "start_date": "2025-09-13",
+    "end_date": "2026-01-31",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLARKS-HILL-EAST-Deer-Archery-2025-09-13",
+    "wma_id": "CLARKS-HILL-EAST",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-10",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLARKS-HILL-EAST-Deer-Primitive-2025-10-11",
+    "wma_id": "CLARKS-HILL-EAST",
+    "species": "Deer",
+    "weapon": "Primitive",
+    "start_date": "2025-10-11",
+    "end_date": "2025-10-17",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLARKS-HILL-EAST-Deer-Firearms-2025-10-18",
+    "wma_id": "CLARKS-HILL-EAST",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-18",
+    "end_date": "2025-11-30",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLARKS-HILL-EAST-Turkey-Firearms-2026-04-04",
+    "wma_id": "CLARKS-HILL-EAST",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLARKS-HILL-WEST-Deer-Archery-2025-09-13",
+    "wma_id": "CLARKS-HILL-WEST",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2026-01-11",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": "State seasons"
+  },
+  {
+    "id": "CLARKS-HILL-WEST-Turkey-Firearms-2026-04-04",
+    "wma_id": "CLARKS-HILL-WEST",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLAYHOLE-SWAMP-Deer-Archery-2025-09-13",
+    "wma_id": "CLAYHOLE-SWAMP",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-09-18",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLAYHOLE-SWAMP-Deer-Archery-2025-09-22",
+    "wma_id": "CLAYHOLE-SWAMP",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-22",
+    "end_date": "2025-10-01",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLAYHOLE-SWAMP-Deer-Archery-2025-10-05",
+    "wma_id": "CLAYHOLE-SWAMP",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-10-05",
+    "end_date": "2025-11-21",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLAYHOLE-SWAMP-Deer-Archery-2025-12-01",
+    "wma_id": "CLAYHOLE-SWAMP",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-12-01",
+    "end_date": "2025-12-19",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLAYHOLE-SWAMP-Deer-Firearms-2025-09-19",
+    "wma_id": "CLAYHOLE-SWAMP",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-09-19",
+    "end_date": "2025-09-21",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Youth"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CLAYHOLE-SWAMP-Deer-Firearms-2025-10-02",
+    "wma_id": "CLAYHOLE-SWAMP",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-02",
+    "end_date": "2025-10-04",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CLAYHOLE-SWAMP-Deer-Firearms-2025-11-22",
+    "wma_id": "CLAYHOLE-SWAMP",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-22",
+    "end_date": "2025-11-30",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLAYHOLE-SWAMP-Deer-Firearms-2025-12-20",
+    "wma_id": "CLAYHOLE-SWAMP",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-12-20",
+    "end_date": "2026-01-11",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLAYHOLE-SWAMP-Turkey-Firearms-2026-04-04",
+    "wma_id": "CLAYHOLE-SWAMP",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-05-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLYBEL-Deer-Archery-2025-09-13",
+    "wma_id": "CLYBEL",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-09-26",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLYBEL-Deer-Archery-2025-11-12",
+    "wma_id": "CLYBEL",
+    "species": "Deer",
+    "weapon": "Archery",
+    "start_date": "2025-11-12",
+    "end_date": "2025-11-16",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLYBEL-Deer-Firearms-2025-09-27",
+    "wma_id": "CLYBEL",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-09-27",
+    "end_date": "2025-10-02",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Youth"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CLYBEL-Deer-Firearms-2025-10-03",
+    "wma_id": "CLYBEL",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-10-03",
+    "end_date": "2025-10-05",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Hunt & Learn"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CLYBEL-Deer-Firearms-2025-11-06",
+    "wma_id": "CLYBEL",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-06",
+    "end_date": "2025-11-08",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CLYBEL-Deer-Firearms-2025-11-20",
+    "wma_id": "CLYBEL",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-20",
+    "end_date": "2025-11-22",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CLYBEL-Deer-Firearms-2025-11-24",
+    "wma_id": "CLYBEL",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "start_date": "2025-11-24",
+    "end_date": "2025-11-30",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Specialty"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CLYBEL-Turkey-Firearms-2026-04-04",
+    "wma_id": "CLYBEL",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-04-08",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Youth"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CLYBEL-Turkey-Firearms-2026-04-11",
+    "wma_id": "CLYBEL",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-11",
+    "end_date": "2026-04-15",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLYBEL-Turkey-Firearms-2026-04-18",
+    "wma_id": "CLYBEL",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-18",
+    "end_date": "2026-04-22",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Youth"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CLYBEL-Turkey-Firearms-2026-05-02",
+    "wma_id": "CLYBEL",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-05-02",
+    "end_date": "2026-05-06",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CLYBEL-Turkey-Firearms-2026-04-24",
+    "wma_id": "CLYBEL",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-24",
+    "end_date": "2026-04-26",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Youth",
+      "Hunt & Learn"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "COCHRANS-CREEK-Deer/Bear-Archery-2025-09-13",
+    "wma_id": "COCHRANS-CREEK",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-10",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "COCHRANS-CREEK-Deer/Bear-Archery-2025-12-14",
+    "wma_id": "COCHRANS-CREEK",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-12-14",
+    "end_date": "2025-12-20",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "COCHRANS-CREEK-Deer/Bear-Firearms-2025-10-29",
+    "wma_id": "COCHRANS-CREEK",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-10-29",
+    "end_date": "2025-11-01",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Specialty",
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "COCHRANS-CREEK-Deer/Bear-Firearms-2025-11-19",
+    "wma_id": "COCHRANS-CREEK",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-11-19",
+    "end_date": "2025-11-22",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "COCHRANS-CREEK-Deer/Bear-Primitive-2025-12-31",
+    "wma_id": "COCHRANS-CREEK",
+    "species": "Deer/Bear",
+    "weapon": "Primitive",
+    "start_date": "2025-12-31",
+    "end_date": "2026-01-03",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Either Sex last two days"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "COHUTTA-Deer/Bear-Archery-2025-09-13",
+    "wma_id": "COHUTTA",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-01",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "COHUTTA-Deer/Bear-Archery-2025-10-06",
+    "wma_id": "COHUTTA",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-10-06",
+    "end_date": "2025-12-02",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "COHUTTA-Deer/Bear-Archery-2025-12-08",
+    "wma_id": "COHUTTA",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-12-08",
+    "end_date": "2026-01-01",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "COHUTTA-Deer/Bear-Firearms-2025-10-02",
+    "wma_id": "COHUTTA",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-10-02",
+    "end_date": "2025-10-05",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "COHUTTA-Deer/Bear-Firearms-2025-12-03",
+    "wma_id": "COHUTTA",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-12-03",
+    "end_date": "2025-12-07",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CONASAUGA-RIVER-Deer/Bear-Archery-2025-09-13",
+    "wma_id": "CONASAUGA-RIVER",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2026-01-01",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CONASAUGA-RIVER-Turkey-Firearms-2026-04-04",
+    "wma_id": "CONASAUGA-RIVER",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "start_date": "2026-04-04",
+    "end_date": "2026-04-26",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "COOPERS-CREEK-Deer/Bear-Archery-2025-09-13",
+    "wma_id": "COOPERS-CREEK",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-09-26",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "COOPERS-CREEK-Deer/Bear-Archery-2025-10-04",
+    "wma_id": "COOPERS-CREEK",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-10-04",
+    "end_date": "2025-10-10",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "COOPERS-CREEK-Deer/Bear-Primitive-2025-10-22",
+    "wma_id": "COOPERS-CREEK",
+    "species": "Deer/Bear",
+    "weapon": "Primitive",
+    "start_date": "2025-10-22",
+    "end_date": "2025-10-25",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "COOPERS-CREEK-Deer/Bear-Firearms-2025-11-05",
+    "wma_id": "COOPERS-CREEK",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-11-05",
+    "end_date": "2025-11-08",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [
+      "Specialty",
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "COOPERS-CREEK-Deer/Bear-Firearms-2025-11-26",
+    "wma_id": "COOPERS-CREEK",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-11-26",
+    "end_date": "2025-11-29",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "COOPERS-CREEK-Deer/Bear-Firearms-2025-12-26",
+    "wma_id": "COOPERS-CREEK",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-12-26",
+    "end_date": "2026-01-01",
+    "quota_required": false,
+    "buck_only": true,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "COOSAWATTEE-Deer/Bear-Archery-2025-09-13",
+    "wma_id": "COOSAWATTEE",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-16",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "COOSAWATTEE-Deer/Bear-Archery-2025-10-20",
+    "wma_id": "COOSAWATTEE",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-10-20",
+    "end_date": "2025-11-06",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "COOSAWATTEE-Deer/Bear-Archery-2025-11-10",
+    "wma_id": "COOSAWATTEE",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-11-10",
+    "end_date": "2026-01-01",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "COOSAWATTEE-Deer/Bear-Firearms-2025-10-17",
+    "wma_id": "COOSAWATTEE",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-10-17",
+    "end_date": "2025-10-19",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Specialty",
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "COOSAWATTEE-Deer/Bear-Firearms-2025-11-07",
+    "wma_id": "COOSAWATTEE",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-11-07",
+    "end_date": "2025-11-09",
+    "quota_required": true,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CROCKFORD-PM-Deer/Bear-Archery-2025-09-13",
+    "wma_id": "CROCKFORD-PM",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-09-13",
+    "end_date": "2025-10-17",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CROCKFORD-PM-Deer/Bear-Archery-2025-10-20",
+    "wma_id": "CROCKFORD-PM",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-10-20",
+    "end_date": "2025-11-12",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CROCKFORD-PM-Deer/Bear-Archery-2025-11-16",
+    "wma_id": "CROCKFORD-PM",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-11-16",
+    "end_date": "2025-12-09",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CROCKFORD-PM-Deer/Bear-Archery-2025-12-14",
+    "wma_id": "CROCKFORD-PM",
+    "species": "Deer/Bear",
+    "weapon": "Archery",
+    "start_date": "2025-12-14",
+    "end_date": "2026-01-01",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [],
+    "notes_short": ""
+  },
+  {
+    "id": "CROCKFORD-PM-Deer/Bear-Firearms-2025-10-18",
+    "wma_id": "CROCKFORD-PM",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-10-18",
+    "end_date": "2025-10-19",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Specialty",
+      "Bonus"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CROCKFORD-PM-Deer/Bear-Firearms-2025-11-13",
+    "wma_id": "CROCKFORD-PM",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-11-13",
+    "end_date": "2025-11-15",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Bonus",
+      "Either-sex Last Day"
+    ],
+    "notes_short": ""
+  },
+  {
+    "id": "CROCKFORD-PM-Deer/Bear-Firearms-2025-12-10",
+    "wma_id": "CROCKFORD-PM",
+    "species": "Deer/Bear",
+    "weapon": "Firearms",
+    "start_date": "2025-12-10",
+    "end_date": "2025-12-13",
+    "quota_required": false,
+    "buck_only": false,
+    "tags": [
+      "Bonus"
+    ],
+    "notes_short": ""
+  }
+]

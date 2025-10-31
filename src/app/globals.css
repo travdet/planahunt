@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --bg:#F4F1E8; --ink:#1E2A1B; }
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--ink); font-family: theme('fontFamily.inter'); }
+.badge { @apply text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-200; }
+.pill { @apply px-3 py-1 rounded-full border border-slate-300 bg-white hover:bg-slate-50 text-sm; }
+.hcard { @apply bg-white rounded-xl shadow-sm border border-slate-200; }
+.label { @apply text-xs uppercase tracking-wide text-slate-500; }
+.table th { @apply text-left text-slate-500 py-1; }
+.table td { @apply py-2 align-top; }
