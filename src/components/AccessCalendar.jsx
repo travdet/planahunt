@@ -1,18 +1,13 @@
 "use client";
 import { useMemo, useState } from "react";
 import { fmtMDY, toISO, isDateWithin } from "@/lib/util";
-import type { SeasonRule } from "@/lib/types";
 
 /** colors:
  * green = general (open, not quota_required)
  * yellow = quota only (rule.quota_required)
  * gray = closed
  */
-export default function AccessCalendar({
-  rules
-}: {
-  rules: SeasonRule[];
-}) {
+export default function AccessCalendar({ rules }) {
   const [monthOffset, setMonthOffset] = useState(0);
   const base = new Date(); base.setDate(1);
   const view = new Date(base); view.setMonth(base.getMonth()+monthOffset);
@@ -32,7 +27,7 @@ export default function AccessCalendar({
       const dayNum = i - ((startWeekday+6)%7) + 1; // start Mon grid
       const inMonth = dayNum >= 1 && dayNum <= daysInMonth;
       const iso = inMonth ? toISO(new Date(yyyy, mm, dayNum)) : "";
-      let status: "closed"|"general"|"quota" = "closed";
+      let status = "closed";
       if (iso) {
         const matches = rulesForMonth.filter(r => isDateWithin(iso, r.start_date, r.end_date));
         if (matches.length) {

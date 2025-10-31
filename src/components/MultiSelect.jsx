@@ -1,31 +1,21 @@
-// src/components/MultiSelect.tsx
 "use client";
 
 import { useEffect, useRef, useState } from "react";
 
-type Opt = { value: string; label?: string };
-
-type Props = {
-  label: string;
-  options: Opt[];
-  values: string[];
-  onChange: (next: string[]) => void;
-};
-
-export default function MultiSelect({ label, options, values, onChange }: Props) {
+export default function MultiSelect({ label, options, values, onChange }) {
   const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef(null);
 
   useEffect(() => {
-    function onClick(e: MouseEvent) {
+    function onClick(e) {
       if (!ref.current) return;
-      if (!ref.current.contains(e.target as Node)) setOpen(false);
+      if (!ref.current.contains(e.target)) setOpen(false);
     }
     window.addEventListener("click", onClick);
     return () => window.removeEventListener("click", onClick);
   }, []);
 
-  function toggle(v: string) {
+  function toggle(v) {
     if (values.includes(v)) onChange(values.filter(x => x !== v));
     else onChange([...values, v]);
   }

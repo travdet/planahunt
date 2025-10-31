@@ -1,8 +1,7 @@
-// src/lib/map.ts
-const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN as string;
+const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "";
 
 // Geocode a human address -> {lat,lng,place_name}
-export async function geocodeAddress(query: string) {
+export async function geocodeAddress(query) {
   const url = new URL(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json`);
   url.searchParams.set("access_token", TOKEN);
   url.searchParams.set("autocomplete", "true");
@@ -10,16 +9,16 @@ export async function geocodeAddress(query: string) {
   const r = await fetch(url.toString());
   if (!r.ok) throw new Error("Geocoding failed");
   const j = await r.json();
-  const features = (j.features || []).map((f: any) => ({
-    place_name: f.place_name as string,
-    lat: f.center?.[1] as number,
-    lng: f.center?.[0] as number,
+  const features = (j.features || []).map((f) => ({
+    place_name: f.place_name,
+    lat: f.center?.[1],
+    lng: f.center?.[0],
   }));
-  return features as {place_name: string; lat: number; lng: number;}[];
+  return features;
 }
 
 // Driving distance + ETA (minutes) using Directions API
-export async function drivingStats(from: {lat:number; lng:number}, to: {lat:number; lng:number}) {
+export async function drivingStats(from, to) {
   const url = new URL(
     `https://api.mapbox.com/directions/v5/mapbox/driving/${from.lng},${from.lat};${to.lng},${to.lat}`
   );
@@ -31,7 +30,7 @@ export async function drivingStats(from: {lat:number; lng:number}, to: {lat:numb
   const j = await r.json();
   const route = j.routes?.[0];
   if (!route) return null;
-  const meters = route.distance as number;
-  const seconds = route.duration as number;
+  const meters = route.distance;
+  const seconds = route.duration;
   return { miles: meters / 1609.344, minutes: seconds / 60 };
 }

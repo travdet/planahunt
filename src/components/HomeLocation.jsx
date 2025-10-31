@@ -1,19 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
-import type { HomeLoc } from "@/lib/types";
 
 const endpoint = "https://api.mapbox.com/geocoding/v5/mapbox.places";
 
 export default function HomeLocation({
   value,
   onChange
-}: {
-  value: HomeLoc;
-  onChange: (v: HomeLoc) => void;
 }) {
   const [query, setQuery] = useState(value.address || "");
   const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState<string | null>(null);
+  const [err, setErr] = useState(null);
 
   async function geocode() {
     if (!query.trim()) return;
@@ -30,7 +26,7 @@ export default function HomeLocation({
       } else {
         setErr("Address not found.");
       }
-    } catch (e:any) {
+    } catch (e) {
       setErr(e?.message || "Geocoding failed");
     } finally {
       setLoading(false);

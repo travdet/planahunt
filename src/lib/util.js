@@ -1,24 +1,24 @@
-export function fmtMDY(iso: string) {
+export function fmtMDY(iso) {
   // input yyyy-mm-dd -> MM-DD-YYYY
   const [y, m, d] = iso.split("-");
   return `${m}-${d}-${y}`;
 }
 
-export function toISO(date: Date) {
+export function toISO(date) {
   return date.toISOString().slice(0,10);
 }
 
-export function overlap(aStart: string, aEnd: string, bStart: string, bEnd: string) {
+export function overlap(aStart, aEnd, bStart, bEnd) {
   return !(aEnd < bStart || bEnd < aStart);
 }
 
-export function isDateWithin(isoDate: string, start: string, end: string) {
+export function isDateWithin(isoDate, start, end) {
   return isoDate >= start && isoDate <= end;
 }
 
-export function haversineMi(a: {lat:number, lng:number}, b:{lat:number,lng:number}) {
+export function haversineMi(a, b) {
   const R = 3958.8; // miles
-  const toRad = (v:number)=>v*Math.PI/180;
+  const toRad = (v)=>v*Math.PI/180;
   const dLat = toRad(b.lat - a.lat);
   const dLon = toRad(b.lng - a.lng);
   const lat1 = toRad(a.lat);
@@ -27,7 +27,7 @@ export function haversineMi(a: {lat:number, lng:number}, b:{lat:number,lng:numbe
   return 2*R*Math.asin(Math.sqrt(h));
 }
 
-export function minutesAt(avgMph:number, miles:number){
+export function minutesAt(avgMph, miles){
   if (!avgMph || avgMph<=0) return null;
   return Math.round((miles/avgMph)*60);
 }

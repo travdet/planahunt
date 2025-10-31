@@ -1,8 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
-import type { FilterState, WMA, SeasonRule } from "@/lib/types";
 
-export default function Filters({ value, onChange, wmas, rules }:{ value: FilterState, onChange:(v:FilterState)=>void, wmas: WMA[], rules: SeasonRule[] }){
+export default function Filters({ value, onChange, wmas, rules }){
   const [q, setQ] = useState(value.query||"");
   const regions = useMemo(()=> Array.from(new Set(wmas.map(w=>w.region))).sort(), [wmas]);
   const counties = useMemo(()=> Array.from(new Set(wmas.flatMap(w=>w.counties))).sort(), [wmas]);
@@ -10,7 +9,7 @@ export default function Filters({ value, onChange, wmas, rules }:{ value: Filter
   const speciesOptions = useMemo(()=> Array.from(new Set(rules.map(r=>r.species))).sort(), [rules]);
   const weaponOptions = useMemo(()=> Array.from(new Set(rules.map(r=>r.weapon))).sort(), [rules]);
 
-  const toggle = (arr: string[], item: string) => {
+  const toggle = (arr, item) => {
     const set = new Set(arr||[]);
     set.has(item) ? set.delete(item) : set.add(item);
     return Array.from(set);
@@ -47,14 +46,14 @@ export default function Filters({ value, onChange, wmas, rules }:{ value: Filter
       <div className="hcard p-3 grid grid-cols-2 gap-3">
         <div>
           <div className="label mb-1">Quota</div>
-          <select value={value.quota} onChange={e=>onChange({...value, quota: e.target.value as any})}
+          <select value={value.quota} onChange={e=>onChange({...value, quota: e.target.value})}
                   className="w-full rounded-md border px-2 py-1">
             {["any","non-quota","quota"].map(o => <option key={o} value={o}>{o}</option>)}
           </select>
         </div>
         <div>
           <div className="label mb-1">Buck-only</div>
-          <select value={value.buckOnly} onChange={e=>onChange({...value, buckOnly: e.target.value as any})}
+          <select value={value.buckOnly} onChange={e=>onChange({...value, buckOnly: e.target.value})}
                   className="w-full rounded-md border px-2 py-1">
             {["any","yes","no"].map(o => <option key={o} value={o}>{o}</option>)}
           </select>
