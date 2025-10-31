@@ -7,20 +7,11 @@ import { useState, useMemo } from "react";
 import WMACard from "@/components/WMACard";
 import WMAModal from "@/components/WMAModal";
 import FilterBar from "@/components/FilterBar";
+import HomeLocation from "@/components/HomeLocation";
 import Mapbox from "@/components/Mapbox";
-
-// ...rest of your existing page.tsx code unchanged
 
 import wmas from "@/data/wmas.json";
 import rulesRaw from "@/data/seasons.json";
-import type { FilterState, HomeLoc, SeasonRule, WMA } from "@/lib/types";
-import { applyFilters } from "@/lib/filters";
-import { fmtMDY } from "@/lib/util";
-import { useState, useMemo } from "react";
-import WMACard from "@/components/WMACard";
-import WMAModal from "@/components/WMAModal";
-import FilterBar from "@/components/FilterBar";
-import HomeLocation from "@/components/HomeLocation";
 
 export default function Page() {
   // initial filters
