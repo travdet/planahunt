@@ -1,24 +1,34 @@
 export type AccessType = "general" | "quota";
 export type SexFilter = "any" | "either" | "buck" | "doe";
-export type Weapon = "archery" | "primitive" | "firearms" | "shotgun" | "muzzleloader";
+export type Weapon = "archery" | "primitive" | "firearms" | "shotgun" | "muzzleloader" | string;
 
-export type DateRange = { start: string; end: string }; // yyyy-mm-dd
+export type DateRange = { start: string | null; end: string | null }; // yyyy-mm-dd
 
 export type SeasonRule = {
   id: string;
   wma_id: string;
   species: string;          // "Deer" | "Turkey" | "Dove" | etc
-  weapon: Weapon | string;  // keep string to tolerate raw data
+  weapon: Weapon;            // keep string to tolerate raw data
   start_date: string;       // yyyy-mm-dd
   end_date: string;         // yyyy-mm-dd
   follows_statewide?: boolean;
   quota_required?: boolean;
   notes_short?: string;
-  buck_only?: "yes" | "no";
+  buck_only?: boolean | "yes" | "no";
+  doe_only?: boolean;
   either_sex_last_day?: boolean;
   last_two_days_either_sex?: boolean;
   tags?: string[];
+  weekdays?: number[] | string[]; // optional restricted weekdays (0=Sun)
   // optional future fields
+};
+
+export type SeasonWithMeta = SeasonRule & {
+  access: AccessType;
+  speciesKey: string;
+  weaponKey: string;
+  sexRule: "either" | "buck" | "doe";
+  weekdaysNormalized?: number[];
 };
 
 export type WMA = {
@@ -34,6 +44,11 @@ export type WMA = {
   lng?: number | null;
   source_url?: string;
   tags?: string[];
+};
+
+export type WMAWithRules = {
+  wma: WMA;
+  rules: SeasonWithMeta[];
 };
 
 export type FilterState = {

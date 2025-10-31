@@ -1,126 +1,241 @@
 "use client";
 
-import type { FilterState, HomeLoc, SeasonRule, WMA } from "@/lib/types";
-import { applyFilters } from "@/lib/filters";
-import { fmtMDY } from "@/lib/util";
-import { useState, useMemo } from "react";
-import WMACard from "@/components/WMACard";
-import WMAModal from "@/components/WMAModal";
+import { useEffect, useMemo, useState } from "react";
+import type { FilterState, HomeLoc } from "@/lib/types";
+import { AREAS_WITH_RULES, FILTER_OPTIONS, hasActiveFilters } from "@/lib/data";
+import { filterAreas } from "@/lib/filters";
+import { geocodeFirst } from "@/lib/map";
+import { STORAGE_KEYS } from "@/lib/constants";
 import FilterBar from "@/components/FilterBar";
 import HomeLocation from "@/components/HomeLocation";
 import Mapbox from "@/components/Mapbox";
+import WMACard from "@/components/WMACard";
+import WMAModal from "@/components/WMAModal";
+import { fmtMDY } from "@/lib/util";
 
-import wmas from "@/data/wmas.json";
-import rulesRaw from "@/data/seasons.json";
+const INITIAL_FILTERS: FilterState = {
+  query: "",
+  date: null,
+  dateRange: null,
+  accessType: "any",
+  sex: "any",
+  weapons: [],
+  species: [],
+  counties: [],
+  regions: [],
+  tags: [],
+  maxDistanceMi: null
+};
 
 export default function Page() {
-  // initial filters
-  const [filters, setFilters] = useState<FilterState>({
-    query: "",
-    date: null,
-    dateRange: null,
-    accessType: "any",
-    sex: "any",
-    weapons: [],
-    species: [],
-    counties: [],
-    regions: [],
-    tags: [],
-    maxDistanceMi: null
-  });
-
+  const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
   const [home, setHome] = useState<HomeLoc>({ address: "", lat: null, lng: null });
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [coordOverrides, setCoordOverrides] = useState<Record<string, { lat: number; lng: number }>>({});
 
-  // Modal state
-  const [openId, setOpenId] = useState<string | null>(null);
-
-  // Data joins
-  const rows = useMemo(()=>{
-    const byWma = new Map<string, WMA>();
-    (wmas as WMA[]).forEach(w => byWma.set(w.id, w));
-    return (rulesRaw as SeasonRule[])
-      .map(r => ({ wma: byWma.get(r.wma_id)! , rule: r }))
-      .filter(x => !!x.wma);
+  // load stored home location
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const stored = window.localStorage.getItem(STORAGE_KEYS.home);
+    if (!stored) return;
+    try {
+      const parsed = JSON.parse(stored);
+      setHome({
+        address: parsed.address ?? "",
+        lat: parsed.lat ?? null,
+        lng: parsed.lng ?? null
+      });
+    } catch (error) {
+      console.warn("Failed to load stored home location", error);
+    }
   }, []);
 
-  const allCounties = useMemo(()=>{
-    const set = new Set<string>();
-    (wmas as WMA[]).forEach(w => w.counties.forEach(c => set.add(c)));
-    return Array.from(set);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(STORAGE_KEYS.home, JSON.stringify(home));
+  }, [home]);
+
+  // load stored WMA coordinates
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const stored = window.localStorage.getItem(STORAGE_KEYS.wmaCoords);
+    if (!stored) return;
+    try {
+      const parsed = JSON.parse(stored);
+      setCoordOverrides(parsed ?? {});
+    } catch (error) {
+      console.warn("Failed to load cached WMA coordinates", error);
+    }
   }, []);
 
-  const filtered = useMemo(()=>{
-    return applyFilters(rows, filters, { lat: home.lat, lng: home.lng }, filters.maxDistanceMi || null);
-  }, [rows, filters, home.lat, home.lng]);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(STORAGE_KEYS.wmaCoords, JSON.stringify(coordOverrides));
+  }, [coordOverrides]);
 
-  const grouped = useMemo(()=>{
-    const m = new Map<string, { wma: WMA; rules: SeasonRule[] }>();
-    filtered.forEach(({ wma, rule }) => {
-      if (!m.has(wma.id)) m.set(wma.id, { wma, rules: [] });
-      m.get(wma.id)!.rules.push(rule);
+  // geocode WMAs missing coordinates
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const missing = AREAS_WITH_RULES.map((area) => area.wma)
+      .filter((wma) => (wma.lat == null || wma.lng == null) && !coordOverrides[wma.id]);
+    if (!missing.length) return;
+
+    let cancelled = false;
+
+    async function run() {
+      for (const wma of missing) {
+        try {
+          const query = `${wma.name} ${wma.counties[0] ?? ""} GA`;
+          const hit = await geocodeFirst(query);
+          if (!hit || cancelled) continue;
+          setCoordOverrides((prev) => {
+            if (prev[wma.id]) return prev;
+            return { ...prev, [wma.id]: { lat: hit.lat, lng: hit.lng } };
+          });
+          await new Promise((resolve) => setTimeout(resolve, 250));
+        } catch (error) {
+          console.warn("Failed to geocode WMA", wma.name, error);
+        }
+      }
+    }
+
+    run();
+    return () => {
+      cancelled = true;
+    };
+  }, [coordOverrides]);
+
+  const areasWithCoords = useMemo(() => {
+    return AREAS_WITH_RULES.map((area) => {
+      const override = coordOverrides[area.wma.id];
+      return {
+        wma: override ? { ...area.wma, lat: override.lat, lng: override.lng } : area.wma,
+        rules: area.rules
+      };
     });
-    return Array.from(m.values()).sort((a,b)=>a.wma.name.localeCompare(b.wma.name));
-  }, [filtered]);
+  }, [coordOverrides]);
 
-  const selected = useMemo(()=> grouped.find(g => g.wma.id === openId) || null, [grouped, openId]);
+  const filterOptions = useMemo(
+    () => ({
+      species: FILTER_OPTIONS.species,
+      weapons: FILTER_OPTIONS.weapons,
+      counties: FILTER_OPTIONS.counties,
+      regions: FILTER_OPTIONS.regions,
+      tags: FILTER_OPTIONS.tags
+    }),
+    []
+  );
+
+  const filtered = useMemo(() => {
+    return filterAreas(
+      areasWithCoords,
+      {
+        ...filters,
+        species: filters.species.map((value) => value.toLowerCase()),
+        weapons: filters.weapons.map((value) => value.toLowerCase()),
+        tags: filters.tags.map((value) => value.toLowerCase())
+      },
+      { lat: home.lat, lng: home.lng },
+      filters.maxDistanceMi ?? null
+    );
+  }, [areasWithCoords, filters, home.lat, home.lng]);
+
+  const mapPoints = useMemo(
+    () =>
+      filtered
+        .filter((item) => typeof item.wma.lat === "number" && typeof item.wma.lng === "number")
+        .map((item) => ({
+          id: item.wma.id,
+          name: item.wma.name,
+          lat: item.wma.lat as number,
+          lng: item.wma.lng as number
+        })),
+    [filtered]
+  );
+
+  const selectedArea = useMemo(() => {
+    if (!selectedId) return null;
+    const area = areasWithCoords.find((entry) => entry.wma.id === selectedId);
+    if (!area) return null;
+    const match = filtered.find((entry) => entry.wma.id === selectedId);
+    return {
+      ...area,
+      distanceMi: match?.distanceMi ?? null
+    };
+  }, [selectedId, areasWithCoords, filtered]);
+
+  const resultCount = filtered.length;
+  const anyFilters = hasActiveFilters(filters);
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-6">
-      {/* Top green header without search input per your direction */}
       <div className="mb-6 rounded-2xl bg-emerald-700 px-6 py-4 text-white">
-        <h1 className="text-2xl font-semibold">Plan A Hunt (Georgia)</h1>
-        <p className="text-sm opacity-90">Filter WMAs by date, access type, species, and more.</p>
+        <h1 className="text-2xl font-semibold">Plan-A-Hunt · Georgia WMAs</h1>
+        <p className="text-sm opacity-90">
+          Discover Wildlife Management Areas, compare access rules, and plan a season in minutes.
+        </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-[320px,1fr]">
-        {/* Left filter column */}
+      <div className="grid gap-6 lg:grid-cols-[320px,1fr]">
         <div className="space-y-6">
           <HomeLocation value={home} onChange={setHome} />
-          <div>
-            <label className="text-sm font-medium">Max Distance (mi)</label>
-            <input
-              type="number"
-              className="mt-1 w-full rounded-md border px-3 py-2"
-              placeholder="e.g. 60"
-              value={filters.maxDistanceMi ?? ""}
-              onChange={(e)=>setFilters(prev=>({...prev, maxDistanceMi: e.target.value ? Number(e.target.value) : null}))}
-            />
-            <p className="mt-1 text-xs text-slate-600">Straight-line distance for now. Driving ETA shows approx on cards.</p>
-          </div>
-
           <FilterBar
             filters={filters}
-            onChange={(f)=>setFilters(prev=>({ ...prev, ...f }))}
-            allCounties={allCounties}
+            options={filterOptions}
+            onChange={(partial) => setFilters((prev) => ({ ...prev, ...partial }))}
+            onReset={() => setFilters(INITIAL_FILTERS)}
           />
         </div>
 
-        {/* Results */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="text-sm text-slate-600">{grouped.length} areas</div>
-            {filters.date && <div className="text-sm text-slate-700">Hunt date: <span className="font-medium">{fmtMDY(filters.date)}</span></div>}
+        <div className="space-y-5">
+          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <div>
+                <p className="text-sm font-semibold text-slate-700">{resultCount} WMAs match</p>
+                {filters.date && (
+                  <p className="text-xs text-slate-500">
+                    Showing seasons active on <span className="font-medium">{fmtMDY(filters.date)}</span>
+                  </p>
+                )}
+                {!filters.date && filters.dateRange?.start && filters.dateRange?.end && (
+                  <p className="text-xs text-slate-500">
+                    Matching seasons overlapping {fmtMDY(filters.dateRange.start)} – {fmtMDY(filters.dateRange.end)}
+                  </p>
+                )}
+              </div>
+              <div className="text-xs text-slate-500">
+                {anyFilters ? "Filters applied" : "All WMAs shown"}
+              </div>
+            </div>
+            <div className="mt-4">
+              <Mapbox points={mapPoints} onPick={(id) => setSelectedId(id)} />
+            </div>
           </div>
 
-          {grouped.map(({ wma, rules })=>(
-            <WMACard
-              key={wma.id}
-              wma={wma}
-              rules={rules}
-              date={filters.date || null}
-              home={{ lat: home.lat, lng: home.lng }}
-              onOpen={()=>setOpenId(wma.id)}
-            />
-          ))}
+          <div className="space-y-4">
+            {filtered.map((item) => (
+              <WMACard
+                key={item.wma.id}
+                wma={item.wma}
+                matchingRules={item.matchingRules}
+                allRules={item.allRules}
+                selectedDate={filters.date ?? null}
+                distanceMi={item.distanceMi}
+                driveMinutes={item.driveMinutes}
+                onOpen={() => setSelectedId(item.wma.id)}
+              />
+            ))}
+            {filtered.length === 0 && (
+              <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-600">
+                No WMAs match those filters. Try widening your date range or clearing filters.
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
-      {selected && (
-        <WMAModal
-          wma={selected.wma}
-          rules={selected.rules}
-          onClose={()=>setOpenId(null)}
-        />
+      {selectedArea && (
+        <WMAModal wma={selectedArea.wma} rules={selectedArea.rules} onClose={() => setSelectedId(null)} />
       )}
     </main>
   );

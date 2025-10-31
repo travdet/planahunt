@@ -4,6 +4,7 @@
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { getMapboxToken } from "@/lib/map";
 
 type Point = { id: string; name: string; lng: number; lat: number };
 type Props = {
@@ -15,14 +16,12 @@ type Props = {
 export default function Mapbox({ points, onPick, token }: Props) {
   const el = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
+  const markersRef = useRef<mapboxgl.Marker[]>([]);
 
   useEffect(() => {
     if (!el.current || mapRef.current) return;
 
-    const accessToken =
-      token ||
-      process.env.NEXT_PUBLIC_MAPBOX_TOKEN ||
-      "pk.eyJ1IjoidHJhdmRldCIsImEiOiJjbWhlNmMzMXYwN2N5MnNwd2IwZWJjc20zIn0.WxziVb9nSzPYoPuQPpGbXA";
+    const accessToken = token || getMapboxToken();
 
     mapboxgl.accessToken = accessToken;
 
@@ -35,30 +34,43 @@ export default function Mapbox({ points, onPick, token }: Props) {
 
     mapRef.current = map;
 
-    // add markers
-    points.forEach((p) => {
-      const m = new mapboxgl.Marker()
-        .setLngLat([p.lng, p.lat])
-        .setPopup(new mapboxgl.Popup({ closeOnClick: true }).setText(p.name))
-        .addTo(map);
-
-      m.getElement().addEventListener("click", () => onPick?.(p.id));
-    });
-
     return () => {
+      markersRef.current.forEach((marker) => marker.remove());
+      markersRef.current = [];
       map.remove();
       mapRef.current = null;
     };
-  }, [points, onPick, token]);
+  }, [token]);
 
-  // fit bounds when points change
+  // update markers when points change
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || !points.length) return;
-    const bounds = new mapboxgl.LngLatBounds();
-    points.forEach((p) => bounds.extend([p.lng, p.lat]));
-    map.fitBounds(bounds, { padding: 40, maxZoom: 10 });
-  }, [points]);
+    if (!map) return;
+
+    markersRef.current.forEach((marker) => marker.remove());
+    markersRef.current = [];
+
+    const validPoints = points.filter((point) =>
+      typeof point.lat === "number" && typeof point.lng === "number"
+    );
+
+    validPoints.forEach((point) => {
+      const marker = new mapboxgl.Marker({ color: "#0FA47A" })
+        .setLngLat([point.lng, point.lat])
+        .setPopup(new mapboxgl.Popup({ closeOnClick: true }).setText(point.name))
+        .addTo(map);
+      marker.getElement().addEventListener("click", () => onPick?.(point.id));
+      markersRef.current.push(marker);
+    });
+
+    if (validPoints.length) {
+      const bounds = new mapboxgl.LngLatBounds();
+      validPoints.forEach((point) => bounds.extend([point.lng, point.lat]));
+      map.fitBounds(bounds, { padding: 48, maxZoom: 9 });
+    } else {
+      map.easeTo({ center: [-84.29, 33.77], zoom: 6.2 });
+    }
+  }, [points, onPick]);
 
   return (
     <div

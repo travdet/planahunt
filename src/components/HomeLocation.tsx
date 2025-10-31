@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
-import type { HomeLoc } from "@/lib/types";
 
-const endpoint = "https://api.mapbox.com/geocoding/v5/mapbox.places";
+import { useEffect, useMemo, useState } from "react";
+import type { HomeLoc } from "@/lib/types";
+import { geocodeFirst } from "@/lib/map";
 
 export default function HomeLocation({
   value,
@@ -13,33 +13,36 @@ export default function HomeLocation({
 }) {
   const [query, setQuery] = useState(value.address || "");
   const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setQuery(value.address || "");
+  }, [value.address]);
+
+  const hasLocation = useMemo(() => value.lat != null && value.lng != null, [value.lat, value.lng]);
 
   async function geocode() {
-    if (!query.trim()) return;
+    const trimmed = query.trim();
+    if (!trimmed) return;
     setLoading(true);
-    setErr(null);
+    setError(null);
     try {
-      const url = `${endpoint}/${encodeURIComponent(query)}.json?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`;
-      const res = await fetch(url);
-      const json = await res.json();
-      const f = json?.features?.[0];
-      if (f && Array.isArray(f.center)) {
-        const [lng, lat] = f.center;
-        onChange({ address: f.place_name || query, lat, lng });
-      } else {
-        setErr("Address not found.");
+      const result = await geocodeFirst(`${trimmed}, Georgia`);
+      if (!result) {
+        setError("Address not found. Try adding city and zip.");
+        return;
       }
-    } catch (e:any) {
-      setErr(e?.message || "Geocoding failed");
+      onChange({ address: result.placeName, lat: result.lat, lng: result.lng });
+    } catch (err: any) {
+      setError(err?.message || "Geocoding failed");
     } finally {
       setLoading(false);
     }
   }
 
-  useEffect(() => {
-    setQuery(value.address || "");
-  }, [value.address]);
+  function clear() {
+    onChange({ address: "", lat: null, lng: null });
+  }
 
   return (
     <div className="space-y-2">
@@ -49,7 +52,7 @@ export default function HomeLocation({
           className="w-full rounded-md border px-3 py-2"
           placeholder="123 Main St, City, GA"
           value={query}
-          onChange={(e)=>setQuery(e.target.value)}
+          onChange={(event) => setQuery(event.target.value)}
         />
         <button
           className="rounded-md bg-emerald-600 px-3 py-2 text-white disabled:opacity-50"
@@ -57,13 +60,18 @@ export default function HomeLocation({
           disabled={loading}
           type="button"
         >
-          {loading ? "..." : "Set"}
+          {loading ? "…" : "Set"}
         </button>
       </div>
-      {value.lat && value.lng ? (
-        <p className="text-xs text-slate-600">Saved • {value.address}</p>
-      ) : null}
-      {err && <p className="text-xs text-red-600">{err}</p>}
+      <div className="flex items-center justify-between text-xs text-slate-600">
+        {hasLocation ? <span>Saved • {value.address}</span> : <span>Enter your home base to sort by distance.</span>}
+        {hasLocation && (
+          <button type="button" className="text-emerald-700 hover:underline" onClick={clear}>
+            Clear
+          </button>
+        )}
+      </div>
+      {error && <p className="text-xs text-red-600">{error}</p>}
     </div>
   );
 }
