@@ -1,7 +1,7 @@
 // src/components/MultiSelect.tsx
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 
 type Opt = { value: string; label?: string };
 
@@ -15,6 +15,8 @@ type Props = {
 export default function MultiSelect({ label, options, values, onChange }: Props) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const listboxId = useId();
+  const labelId = useId();
 
   useEffect(() => {
     function onClick(e: MouseEvent) {
@@ -43,11 +45,23 @@ export default function MultiSelect({ label, options, values, onChange }: Props)
 
   return (
     <div className="space-y-2" ref={ref}>
-      <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500">{label}</label>
+      <label id={labelId} className="block text-xs font-semibold uppercase tracking-wide text-slate-500">
+        {label}
+      </label>
       <button
         type="button"
-        onClick={() => setOpen(!open)}
+        onClick={() => setOpen((prev) => !prev)}
+        onKeyDown={(event) => {
+          if (["ArrowDown", "Enter", " "].includes(event.key)) {
+            event.preventDefault();
+            setOpen(true);
+          }
+        }}
         className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-left shadow-sm transition hover:border-emerald-400"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-labelledby={labelId}
+        aria-controls={listboxId}
       >
         <div className="flex items-center justify-between">
           <span className="font-medium text-slate-700">{labelText}</span>
@@ -56,7 +70,13 @@ export default function MultiSelect({ label, options, values, onChange }: Props)
       </button>
 
       {open && (
-        <div className="mt-2 w-full rounded-lg border border-slate-200 bg-white shadow-lg">
+        <div
+          id={listboxId}
+          role="listbox"
+          aria-multiselectable="true"
+          aria-labelledby={labelId}
+          className="mt-2 w-full rounded-lg border border-slate-200 bg-white shadow-lg"
+        >
           <div className="flex items-center justify-between border-b border-slate-200 px-3 py-2 text-xs text-slate-500">
             <span>{values.length ? `${values.length} selected` : "No filters applied"}</span>
             <div className="flex gap-2">
@@ -82,6 +102,8 @@ export default function MultiSelect({ label, options, values, onChange }: Props)
             {options.map((o) => (
               <label
                 key={o.value}
+                role="option"
+                aria-selected={values.includes(o.value)}
                 className="flex cursor-pointer items-center gap-3 px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-50"
               >
                 <input
