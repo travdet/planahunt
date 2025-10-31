@@ -52,12 +52,12 @@ export type WMA = {
   lng?: number | null;
   source_url?: string;
   tags?: string[];
-  directions?: string;
-  area_notes?: string;
-  camping_allowed?: boolean;
-  atv_allowed?: boolean;
-  area_category?: "WMA" | "Federal" | "State Park" | "VPA" | string;
-  managing_agency?: string;
+  directions: string;
+  area_notes: string;
+  camping_allowed: boolean;
+  atv_allowed: boolean;
+  area_category: "WMA" | "Federal" | "State Park" | "VPA" | string;
+  managing_agency: string;
 };
 
 export type WMAWithRules = {

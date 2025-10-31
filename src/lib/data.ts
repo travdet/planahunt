@@ -76,11 +76,31 @@ function resolveSex(rule: SeasonRule): "either" | "buck" | "doe" {
   return "either";
 }
 
-export const WMA_LIST: WMA[] = (wmasData as WMA[]).map((w) => ({
-  ...w,
-  tags: w.tags ?? [],
+type RawWMA = Partial<WMA> & {
+  id: string;
+  name: string;
+  counties?: string[];
+};
+
+export const WMA_LIST: WMA[] = (wmasData as RawWMA[]).map((w) => ({
+  id: w.id,
+  name: w.name,
+  tract_name: w.tract_name ?? "",
+  area_type: w.area_type ?? "WMA",
+  acreage: w.acreage,
+  phone: w.phone,
+  counties: w.counties ?? [],
+  region: w.region,
   lat: w.lat ?? null,
-  lng: w.lng ?? null
+  lng: w.lng ?? null,
+  source_url: w.source_url ?? "",
+  tags: w.tags ?? [],
+  directions: w.directions ?? "",
+  area_notes: w.area_notes ?? "",
+  camping_allowed: w.camping_allowed ?? false,
+  atv_allowed: w.atv_allowed ?? false,
+  area_category: w.area_category ?? "WMA",
+  managing_agency: w.managing_agency ?? "GA DNR Wildlife Resources Division"
 }));
 
 export const SEASON_LIST: SeasonWithMeta[] = (seasonsData as SeasonRule[])
@@ -88,15 +108,27 @@ export const SEASON_LIST: SeasonWithMeta[] = (seasonsData as SeasonRule[])
   .map((rule) => {
     const speciesKey = rule.species.toLowerCase();
     const weaponKey = String(rule.weapon).toLowerCase();
-    return {
+    const normalizedRule: SeasonRule = {
       ...rule,
       tags: rule.tags ?? [],
       quota_required: !!rule.quota_required,
-      access: rule.quota_required ? "quota" : "general",
+      weapon_subcategory: rule.weapon_subcategory ?? null,
+      antler_restrictions: rule.antler_restrictions ?? null,
+      bag_limit: rule.bag_limit ?? null,
+      quota_details: rule.quota_details ?? null,
+      shooting_hours_restriction: rule.shooting_hours_restriction ?? null,
+      sign_in_required: rule.sign_in_required ?? false,
+      important_notes: rule.important_notes ?? [],
+      activity_type: rule.activity_type ?? "Hunting"
+    };
+
+    return {
+      ...normalizedRule,
+      access: normalizedRule.quota_required ? "quota" : "general",
       speciesKey,
       weaponKey,
-      sexRule: resolveSex(rule),
-      weekdaysNormalized: normalizeWeekdays(rule.weekdays)
+      sexRule: resolveSex(normalizedRule),
+      weekdaysNormalized: normalizeWeekdays(normalizedRule.weekdays)
     } as SeasonWithMeta;
   })
   .sort((a, b) => a.start_date.localeCompare(b.start_date));
