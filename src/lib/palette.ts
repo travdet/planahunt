@@ -52,3 +52,43 @@ export function getSpeciesIcon(species: string) {
   }
   return "🎯";
 }
+
+export function getAreaCategoryStyle(category: string) {
+  switch (category) {
+    case "WMA":
+      return {
+        color: "#22c55e",
+        bgColor: "#dcfce7",
+        textColor: "#166534",
+        label: "WMA"
+      } as const;
+    case "Federal":
+      return {
+        color: "#3b82f6",
+        bgColor: "#dbeafe",
+        textColor: "#1e40af",
+        label: "Federal"
+      } as const;
+    case "State Park":
+      return {
+        color: "#ef4444",
+        bgColor: "#fee2e2",
+        textColor: "#991b1b",
+        label: "State Park"
+      } as const;
+    case "VPA":
+      return {
+        color: "#a855f7",
+        bgColor: "#f3e8ff",
+        textColor: "#6b21a8",
+        label: "VPA"
+      } as const;
+    default:
+      return {
+        color: "#6b7280",
+        bgColor: "#f3f4f6",
+        textColor: "#374151",
+        label: "Area"
+      } as const;
+  }
+}
