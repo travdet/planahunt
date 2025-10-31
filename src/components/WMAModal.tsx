@@ -189,12 +189,28 @@ export default function WMAModal({ wma, rules, onClose }: Props) {
   const totalHunts = allWeaponKeys.length;
   const selectedHunts = selectedWeapons.size;
 
+  useEffect(() => {
+    function handleKey(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [onClose]);
+
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 p-4">
-      <div className="mt-10 w-full max-w-5xl rounded-2xl bg-white p-6 shadow-xl">
+    <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 p-4" onClick={onClose}>
+      <div
+        className="mt-10 w-full max-w-5xl rounded-2xl bg-white p-6 shadow-xl"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="wma-modal-title"
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <h3 className="text-xl font-semibold text-slate-900">
+            <h3 id="wma-modal-title" className="text-xl font-semibold text-slate-900">
               {wma.name}
               {wma.tract_name ? ` — ${wma.tract_name}` : ""}
             </h3>

@@ -10,18 +10,28 @@ export type FilteredArea = {
   driveMinutes: number | null;
 };
 
+function isRuleActiveOnDay(rule: SeasonWithMeta, target: string) {
+  if (!isDateWithin(target, rule.start_date, rule.end_date)) return false;
+  if (rule.weekdaysNormalized?.length) {
+    const day = new Date(`${target}T00:00:00`).getDay();
+    if (!rule.weekdaysNormalized.includes(day)) return false;
+  }
+  return true;
+}
+
 function ruleMatches(rule: SeasonWithMeta, filters: FilterState) {
   if (filters.species.length && !filters.species.includes(rule.speciesKey)) return false;
   if (filters.weapons.length && !filters.weapons.includes(rule.weaponKey)) return false;
   if (filters.accessType !== "any" && rule.access !== filters.accessType) return false;
   if (filters.sex !== "any" && rule.sexRule !== filters.sex) return false;
 
-  if (filters.date) {
-    if (!isDateWithin(filters.date, rule.start_date, rule.end_date)) return false;
-    if (rule.weekdaysNormalized?.length) {
-      const day = new Date(filters.date).getDay();
-      if (!rule.weekdaysNormalized.includes(day)) return false;
-    }
+  const explicitDates: string[] = [];
+  if (filters.date) explicitDates.push(filters.date);
+  if (filters.dates?.length) explicitDates.push(...filters.dates);
+
+  if (explicitDates.length) {
+    const match = explicitDates.some((value) => isRuleActiveOnDay(rule, value));
+    if (!match) return false;
   }
 
   if (filters.dateRange?.start && filters.dateRange?.end) {
@@ -38,8 +48,11 @@ function wmaMatchesFilters(area: WMAWithRules, filters: FilterState, matchingRul
   if (filters.counties.length && !wma.counties.some((c) => filters.counties.includes(c))) {
     return false;
   }
-  if (filters.regions.length && (!wma.region || !filters.regions.includes(wma.region))) {
-    return false;
+  if (filters.regions.length) {
+    const regionValue = wma.region ?? "";
+    if (!filters.regions.includes(regionValue)) {
+      return false;
+    }
   }
 
   if (filters.tags.length) {

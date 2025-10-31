@@ -12,11 +12,13 @@ import Mapbox from "@/components/Mapbox";
 import WMACard from "@/components/WMACard";
 import WMAModal from "@/components/WMAModal";
 import { fmtMDY } from "@/lib/util";
+import { getUpcomingWindows } from "@/lib/rules";
 
 const INITIAL_FILTERS: FilterState = {
   query: "",
   date: null,
   dateRange: null,
+  dates: [],
   accessType: "any",
   sex: "any",
   weapons: [],
@@ -140,18 +142,34 @@ export default function Page() {
     );
   }, [areasWithCoords, filters, home.lat, home.lng]);
 
-  const mapPoints = useMemo(
-    () =>
-      filtered
-        .filter((item) => typeof item.wma.lat === "number" && typeof item.wma.lng === "number")
-        .map((item) => ({
+  const mapPoints = useMemo(() => {
+    return filtered
+      .filter((item) => typeof item.wma.lat === "number" && typeof item.wma.lng === "number")
+      .map((item) => {
+        const upcoming = getUpcomingWindows(item.allRules, 1)[0];
+        const upcomingLabel = upcoming
+          ? `${upcoming.species} (${upcoming.weapon}) • ${fmtMDY(upcoming.start)} – ${fmtMDY(upcoming.end)}`
+          : null;
+
+        return {
           id: item.wma.id,
           name: item.wma.name,
           lat: item.wma.lat as number,
-          lng: item.wma.lng as number
-        })),
-    [filtered]
-  );
+          lng: item.wma.lng as number,
+          counties: item.wma.counties,
+          region: item.wma.region ?? null,
+          acreage: item.wma.acreage ?? null,
+          distanceMi: item.distanceMi,
+          driveMinutes: item.driveMinutes,
+          upcoming: upcomingLabel
+            ? {
+                label: upcomingLabel,
+                access: upcoming.access === "general" ? "General access" : "Quota access"
+              }
+            : null
+        };
+      });
+  }, [filtered]);
 
   const selectedArea = useMemo(() => {
     if (!selectedId) return null;
@@ -178,7 +196,17 @@ export default function Page() {
 
       <div className="grid gap-6 lg:grid-cols-[320px,1fr]">
         <div className="space-y-6">
-          <HomeLocation value={home} onChange={setHome} />
+          <HomeLocation
+            value={home}
+            onChange={setHome}
+            maxDistance={filters.maxDistanceMi ?? null}
+            onDistanceChange={(miles) =>
+              setFilters((prev) => ({
+                ...prev,
+                maxDistanceMi: miles
+              }))
+            }
+          />
           <FilterBar
             filters={filters}
             options={filterOptions}
@@ -202,13 +230,23 @@ export default function Page() {
                     Matching seasons overlapping {fmtMDY(filters.dateRange.start)} – {fmtMDY(filters.dateRange.end)}
                   </p>
                 )}
+                {!filters.date && !filters.dateRange?.start && !filters.dateRange?.end && filters.dates && filters.dates.length > 0 && (
+                  <p className="text-xs text-slate-500">
+                    Matching seasons on {filters.dates.slice(0, 3).map((value) => fmtMDY(value)).join(", ")}
+                    {filters.dates.length > 3 ? ` +${filters.dates.length - 3} more` : ""}
+                  </p>
+                )}
               </div>
               <div className="text-xs text-slate-500">
                 {anyFilters ? "Filters applied" : "All WMAs shown"}
               </div>
             </div>
             <div className="mt-4">
-              <Mapbox points={mapPoints} onPick={(id) => setSelectedId(id)} />
+              <Mapbox
+                points={mapPoints}
+                onPick={(id) => setSelectedId(id)}
+                home={home.lat != null && home.lng != null ? { lat: home.lat, lng: home.lng } : null}
+              />
             </div>
           </div>
 

@@ -139,6 +139,7 @@ export function hasActiveFilters(filters: FilterState): boolean {
   return [
     filters.query,
     filters.date,
+    filters.dates && filters.dates.length,
     filters.dateRange?.start,
     filters.dateRange?.end,
     filters.maxDistanceMi,

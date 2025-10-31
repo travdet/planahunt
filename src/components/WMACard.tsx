@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, type KeyboardEvent } from "react";
 import { MapPin } from "lucide-react";
 import type { SeasonWithMeta, WMA } from "@/lib/types";
 import { fmtMDY } from "@/lib/util";
@@ -37,8 +37,21 @@ export default function WMACard({
 
   const upcoming = useMemo(() => getUpcomingWindows(allRules, 3), [allRules]);
 
+  function handleKey(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      onOpen();
+    }
+  }
+
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div
+      className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-300 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-500"
+      role="button"
+      tabIndex={0}
+      onClick={onOpen}
+      onKeyDown={handleKey}
+    >
       <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <div>
           <h3 className="text-lg font-semibold text-slate-900">
@@ -70,7 +83,10 @@ export default function WMACard({
           )}
           <button
             className="rounded-md bg-emerald-600 px-3 py-2 text-sm font-medium text-white"
-            onClick={onOpen}
+            onClick={(event) => {
+              event.stopPropagation();
+              onOpen();
+            }}
           >
             Details
           </button>

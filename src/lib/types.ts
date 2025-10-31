@@ -55,6 +55,7 @@ export type FilterState = {
   query: string;
   date?: string | null;           // yyyy-mm-dd (single day)
   dateRange?: DateRange | null;   // for future range picker
+  dates?: string[];               // explicit multiple dates
   accessType: "any" | AccessType;
   sex: SexFilter;
   weapons: string[];              // chosen weapons

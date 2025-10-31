@@ -17,6 +17,9 @@ type Props = {
   };
 };
 
+import DateSelector from "./DateSelector";
+import MultiSelect from "./MultiSelect";
+
 const SELECTED_CLASS = "bg-[#0FA47A] text-white border-transparent";
 const UNSELECTED_CLASS = "bg-[#E6DFC8] text-slate-800 border-transparent";
 
@@ -28,18 +31,11 @@ export default function FilterBar({ filters, onChange, onReset, options }: Props
     onChange({ [key]: Array.from(current) });
   }
 
-  function updateDateRange(partial: Partial<NonNullable<FilterState["dateRange"]>>) {
-    const next = {
-      start: filters.dateRange?.start ?? null,
-      end: filters.dateRange?.end ?? null,
-      ...partial
-    };
-    if (!next.start && !next.end) {
-      onChange({ dateRange: null });
-    } else {
-      onChange({ dateRange: next });
-    }
-  }
+  const countyOptions = options.counties.map((county) => ({ value: county, label: county }));
+  const regionOptions = options.regions.map((region) => {
+    const value = region?.trim() ?? "";
+    return { value, label: value || "Not listed" };
+  });
 
   return (
     <aside className="space-y-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
@@ -64,35 +60,7 @@ export default function FilterBar({ filters, onChange, onReset, options }: Props
         />
       </div>
 
-      <div className="grid gap-3">
-        <div>
-          <label className="text-sm font-medium text-slate-700">Single Hunt Date</label>
-          <input
-            type="date"
-            className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
-            value={filters.date || ""}
-            onChange={(event) => onChange({ date: event.target.value || null })}
-          />
-        </div>
-        <div>
-          <label className="text-sm font-medium text-slate-700">Date Range</label>
-          <div className="mt-1 grid grid-cols-2 gap-2">
-            <input
-              type="date"
-              className="rounded-md border border-slate-300 px-3 py-2 text-sm"
-              value={filters.dateRange?.start || ""}
-              onChange={(event) => updateDateRange({ start: event.target.value || null })}
-            />
-            <input
-              type="date"
-              className="rounded-md border border-slate-300 px-3 py-2 text-sm"
-              value={filters.dateRange?.end || ""}
-              onChange={(event) => updateDateRange({ end: event.target.value || null })}
-            />
-          </div>
-          <p className="mt-1 text-xs text-slate-500">Leave blank to include the entire season.</p>
-        </div>
-      </div>
+      <DateSelector filters={filters} onChange={onChange} />
 
       <div className="grid gap-3">
         <div>
@@ -186,58 +154,19 @@ export default function FilterBar({ filters, onChange, onReset, options }: Props
         </div>
       </div>
 
-      <div className="grid gap-3">
-        <div>
-          <label className="text-sm font-medium text-slate-700">Counties</label>
-          <select
-            multiple
-            className="mt-1 h-28 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
-            value={filters.counties}
-            onChange={(event) =>
-              onChange({ counties: Array.from(event.target.selectedOptions).map((option) => option.value) })
-            }
-          >
-            {options.counties.map((county) => (
-              <option key={county} value={county}>
-                {county}
-              </option>
-            ))}
-          </select>
-          <p className="mt-1 text-xs text-slate-500">Hold Cmd/Ctrl to select multiple counties.</p>
-        </div>
-        <div>
-          <label className="text-sm font-medium text-slate-700">Regions</label>
-          <select
-            multiple
-            className="mt-1 h-24 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
-            value={filters.regions}
-            onChange={(event) =>
-              onChange({ regions: Array.from(event.target.selectedOptions).map((option) => option.value) })
-            }
-          >
-            {options.regions.map((region) => (
-              <option key={region} value={region}>
-                {region}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
+      <MultiSelect
+        label="Counties"
+        options={countyOptions}
+        values={filters.counties}
+        onChange={(next) => onChange({ counties: next })}
+      />
 
-      <div>
-        <label className="text-sm font-medium text-slate-700">Max Distance (miles)</label>
-        <input
-          type="number"
-          min="0"
-          className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
-          value={filters.maxDistanceMi ?? ""}
-          onChange={(event) =>
-            onChange({ maxDistanceMi: event.target.value ? Number(event.target.value) : null })
-          }
-          placeholder="e.g. 60"
-        />
-        <p className="mt-1 text-xs text-slate-500">Requires a saved home address.</p>
-      </div>
+      <MultiSelect
+        label="Regions"
+        options={regionOptions}
+        values={filters.regions}
+        onChange={(next) => onChange({ regions: next })}
+      />
     </aside>
   );
 }
