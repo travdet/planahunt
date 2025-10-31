@@ -1,62 +1,56 @@
 import wmas from "@/data/wmas.json";
-import rulesData from "@/data/seasons.json";
+import rulesRaw from "@/data/seasons.json";
 import type { SeasonRule, WMA } from "@/lib/types";
 import { fmtMDY } from "@/lib/util";
+import AccessCalendar from "@/components/AccessCalendar";
 
-type Props = { params: { id: string } };
-
-export default function HuntPage({ params }: Props){
-  const wma = (wmas as WMA[]).find(w => w.id === params.id);
-  if (!wma) return <div className="p-6">Not found</div>;
-  const items = (rulesData as SeasonRule[]).filter(r => r.wma_id === wma.id);
-
-  const groups = new Map<string, SeasonRule[]>();
-  for (const r of items) {
-    const k = `${r.species}|${r.weapon}`;
-    if (!groups.has(k)) groups.set(k, []);
-    groups.get(k)!.push(r);
-  }
+export default function HuntDetail({ params }: { params: { id: string } }) {
+  const id = decodeURIComponent(params.id);
+  const wma = (wmas as WMA[]).find(w => w.id === id);
+  if (!wma) return <div className="p-6">WMA not found.</div>;
+  const rules = (rulesRaw as SeasonRule[]).filter(r => r.wma_id === id);
 
   return (
-    <div className="space-y-4">
-      <div className="hcard p-4">
-        <div className="text-2xl font-semibold">{wma.name}</div>
-        <div className="text-sm text-slate-600">{wma.region} • {wma.counties.join(", ")} {wma.acreage?`• ${wma.acreage.toLocaleString()} acres`:""}</div>
+    <main className="mx-auto max-w-5xl px-4 py-6">
+      <div className="mb-6 rounded-2xl bg-emerald-700 px-6 py-4 text-white">
+        <h1 className="text-2xl font-semibold">{wma.name}{wma.tract_name ? ` — ${wma.tract_name}` : ""}</h1>
+        <p className="text-sm opacity-90">
+          {wma.counties.join(", ")}
+          {wma.acreage ? ` • ${wma.acreage.toLocaleString()} ac` : ""}
+          {wma.phone ? ` • ${wma.phone}` : ""}
+        </p>
       </div>
 
-      <div className="hcard p-4 overflow-x-auto">
-        <table className="w-full text-sm table">
-          <thead>
-            <tr>
-              <th>Species / Weapon</th>
-              <th>Dates</th>
-              <th>Access</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Array.from(groups.entries()).map(([k, arr]) => (
-              <tr key={k} className="border-t align-top">
-                <td className="py-2">{k.replace("|"," • ")}</td>
-                <td className="py-2">
-                  {arr.sort((a,b)=> a.start_date.localeCompare(b.start_date)).map(r => (
-                    <div key={r.id}>{fmtMDY(r.start_date)} – {fmtMDY(r.end_date)}</div>
-                  ))}
-                </td>
-                <td className="py-2">
-                  <div className="flex gap-1 flex-wrap">
-                    {arr.some(r=>!r.quota_required) && <span className="badge">General</span>}
-                    {arr.some(r=> r.quota_required) && <span className="badge">Quota</span>}
-                    {arr.some(r=> r.buck_only) && <span className="badge">Buck-only</span>}
-                    {arr.flatMap(r=>r.tags||[]).slice(0,3).map(t => <span key={t} className="badge">{t}</span>)}
-                  </div>
-                </td>
-                <td className="py-2">{arr.find(r=>r.notes_short)?.notes_short||""}</td>
+      <div className="grid gap-6 md:grid-cols-2">
+        <div>
+          <h2 className="mb-2 text-lg font-semibold">Windows</h2>
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-left text-slate-500">
+                <th className="py-1">Species</th>
+                <th className="py-1">Weapon</th>
+                <th className="py-1">Access</th>
+                <th className="py-1">Dates</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {rules.map(r=>(
+                <tr key={r.id} className="border-t">
+                  <td className="py-1">{r.species}</td>
+                  <td className="py-1">{String(r.weapon)}</td>
+                  <td className="py-1">{r.quota_required ? "Quota" : "General"}</td>
+                  <td className="py-1">{fmtMDY(r.start_date)} – {fmtMDY(r.end_date)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          <h2 className="mb-2 text-lg font-semibold">Calendar</h2>
+          <AccessCalendar rules={rules} />
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
