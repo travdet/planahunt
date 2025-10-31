@@ -71,3 +71,107 @@ body {
   font-size: 0.875rem;
   color: #334155;
 }
+
+/* Print styles */
+@media print {
+  nav,
+  footer,
+  .no-print,
+  button:not(.print-keep),
+  .map-container,
+  .sidebar,
+  .filter-controls,
+  header,
+  .search-bar {
+    display: none !important;
+  }
+
+  * {
+    color: black !important;
+    background: white !important;
+    box-shadow: none !important;
+  }
+
+  table,
+  th,
+  td,
+  .season-card,
+  .restriction-info {
+    border: 1px solid black !important;
+  }
+
+  body {
+    font-size: 11pt;
+    line-height: 1.4;
+  }
+
+  h1 {
+    font-size: 20pt;
+    font-weight: 700;
+    margin-bottom: 12pt;
+    page-break-after: avoid;
+  }
+
+  h2 {
+    font-size: 16pt;
+    font-weight: 600;
+    margin-top: 12pt;
+    margin-bottom: 8pt;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 13pt;
+    font-weight: 600;
+    margin-top: 8pt;
+    margin-bottom: 6pt;
+  }
+
+  .season-card,
+  .restriction-info,
+  .important-notes,
+  .season-details {
+    page-break-inside: avoid;
+  }
+
+  .print-header {
+    display: block !important;
+    text-align: center;
+    margin-bottom: 20pt;
+    padding-bottom: 10pt;
+    border-bottom: 2px solid black !important;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666 !important;
+  }
+
+  @page {
+    margin: 0.75in;
+    size: letter portrait;
+  }
+
+  .bg-yellow-50,
+  .bg-yellow-100 {
+    background: #ffffcc !important;
+    border: 2px solid #000 !important;
+  }
+
+  .season-badge,
+  .category-badge {
+    border: 1px solid black !important;
+    padding: 2pt 4pt !important;
+  }
+}
+
+.print-only {
+  display: none;
+}
+
+@media print {
+  .print-only {
+    display: block;
+  }
+}

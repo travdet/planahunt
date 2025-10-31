@@ -1,6 +1,7 @@
 "use client";
 
 import type { FilterState } from "@/lib/types";
+import { getAreaCategoryStyle } from "@/lib/palette";
 
 type Option = { label: string; value: string };
 
@@ -14,6 +15,9 @@ type Props = {
     counties: string[];
     regions: string[];
     tags: string[];
+    areaCategories: string[];
+    weaponSubcategories: string[];
+    activityTypes: string[];
   };
 };
 
@@ -36,6 +40,22 @@ export default function FilterBar({ filters, onChange, onReset, options }: Props
     const value = region?.trim() ?? "";
     return { value, label: value || "Not listed" };
   });
+
+  const weaponSubcategoryOptions = options.weaponSubcategories.map((value) => ({
+    value,
+    label: value
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ")
+  }));
+
+  const activityOptions = options.activityTypes.map((value) => ({
+    value,
+    label: value
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ")
+  }));
 
   return (
     <aside className="space-y-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
@@ -167,6 +187,118 @@ export default function FilterBar({ filters, onChange, onReset, options }: Props
         values={filters.regions}
         onChange={(next) => onChange({ regions: next })}
       />
+
+      <div>
+        <label className="text-sm font-medium text-slate-700">Area Type</label>
+        <div className="mt-2 space-y-2">
+          {options.areaCategories.map((value) => {
+            const canonical = value === "federal"
+              ? "Federal"
+              : value === "state park"
+              ? "State Park"
+              : value === "vpa"
+              ? "VPA"
+              : "WMA";
+            const style = getAreaCategoryStyle(canonical);
+            const label = style.label;
+            const checked = filters.areaCategories.includes(value);
+            return (
+              <label key={value} className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 px-3 py-2 text-sm">
+                <span className="flex items-center gap-2">
+                  <span
+                    aria-hidden
+                    className="inline-flex h-3 w-3 rounded-full"
+                    style={{ backgroundColor: style.color }}
+                  />
+                  {label}
+                </span>
+                <input
+                  type="checkbox"
+                  className="h-4 w-4"
+                  checked={checked}
+                  onChange={(event) =>
+                    onChange({
+                      areaCategories: event.target.checked
+                        ? Array.from(new Set([...filters.areaCategories, value]))
+                        : filters.areaCategories.filter((item) => item !== value)
+                    })
+                  }
+                />
+              </label>
+            );
+          })}
+        </div>
+      </div>
+
+      <div>
+        <label className="text-sm font-medium text-slate-700">Amenities</label>
+        <div className="mt-2 space-y-2 text-sm text-slate-700">
+          <label className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 px-3 py-2">
+            <span className="flex items-center gap-2">
+              <span aria-hidden>🏕️</span> Camping available
+            </span>
+            <input
+              type="checkbox"
+              className="h-4 w-4"
+              checked={filters.campingAllowed === true}
+              onChange={(event) => onChange({ campingAllowed: event.target.checked ? true : null })}
+            />
+          </label>
+          <label className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 px-3 py-2">
+            <span className="flex items-center gap-2">
+              <span aria-hidden>🏍️</span> ATVs allowed
+            </span>
+            <input
+              type="checkbox"
+              className="h-4 w-4"
+              checked={filters.atvAllowed === true}
+              onChange={(event) => onChange({ atvAllowed: event.target.checked ? true : null })}
+            />
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <label className="text-sm font-medium text-slate-700">Weapon restrictions</label>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {weaponSubcategoryOptions.map((option) => {
+            const selected = filters.weaponSubcategories.includes(option.value);
+            return (
+              <button
+                key={option.value}
+                type="button"
+                className={`rounded-full border px-3 py-1 text-xs font-medium transition ${
+                  selected ? SELECTED_CLASS : UNSELECTED_CLASS
+                }`}
+                onClick={() => toggleList("weaponSubcategories", option.value)}
+              >
+                {option.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div>
+        <label className="text-sm font-medium text-slate-700">Activity type</label>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {activityOptions.map((option) => {
+            const selected = filters.activityTypes.includes(option.value);
+            return (
+              <button
+                key={option.value}
+                type="button"
+                className={`rounded-full border px-3 py-1 text-xs font-medium transition ${
+                  selected ? SELECTED_CLASS : UNSELECTED_CLASS
+                }`}
+                onClick={() => toggleList("activityTypes", option.value)}
+              >
+                {option.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
     </aside>
   );
 }

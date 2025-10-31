@@ -3,6 +3,9 @@ import { AREAS_WITH_RULES } from "@/lib/data";
 import { fmtMDY } from "@/lib/util";
 import AccessCalendar from "@/components/AccessCalendar";
 import Mapbox from "@/components/Mapbox";
+import FavoriteButton from "@/components/FavoriteButton";
+import PrintButton from "@/components/PrintButton";
+import ShareButton from "@/components/ShareButton";
 import { getUpcomingWindows, groupBySpecies } from "@/lib/rules";
 import { getAreaCategoryStyle, getSpeciesIcon, getWeaponColor } from "@/lib/palette";
 
@@ -37,17 +40,20 @@ export default function HuntDetail({ params }: Params) {
             counties: wma.counties,
             region: wma.region ?? null,
             acreage: wma.acreage ?? null,
-            areaCategory: wma.area_category ?? null,
-            managingAgency: wma.managing_agency ?? null,
+            areaCategory: wma.area_category ?? "WMA",
             campingAllowed: !!wma.camping_allowed,
-            atvAllowed: !!wma.atv_allowed,
-            areaNotes: wma.area_notes ?? ""
+            atvAllowed: !!wma.atv_allowed
           }
         ]
       : [];
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
+      <div className="print-only mb-6 text-center">
+        <h1 className="text-2xl font-bold">{wma.name}</h1>
+        <p>Georgia Hunting Regulations 2025-2026</p>
+        <p>Printed: {new Date().toLocaleDateString()}</p>
+      </div>
       <div className="rounded-3xl border border-slate-200 bg-white px-6 py-6 shadow-sm">
         <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
           <div className="space-y-2">
@@ -90,7 +96,12 @@ export default function HuntDetail({ params }: Params) {
               </div>
             )}
           </div>
-          <div className="text-sm text-slate-600">
+          <div className="flex flex-col items-end gap-3 text-sm text-slate-600">
+            <div className="flex items-center gap-2 no-print">
+              <FavoriteButton wmaId={wma.id} />
+              <ShareButton wmaId={wma.id} wmaName={wma.name} />
+              <PrintButton />
+            </div>
             {wma.source_url && (
               <a
                 href={wma.source_url}

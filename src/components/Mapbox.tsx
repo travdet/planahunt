@@ -1,9 +1,10 @@
-// src/components/Mapbox.tsx
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+
+import { getAreaCategoryStyle } from "@/lib/palette";
 import { getMapboxToken } from "@/lib/map";
 
 type UpcomingSummary = { label: string; access?: string | null } | null;
@@ -19,7 +20,11 @@ type Point = {
   distanceMi?: number | null;
   driveMinutes?: number | null;
   upcoming?: UpcomingSummary;
+  areaCategory?: string | null;
+  campingAllowed?: boolean;
+  atvAllowed?: boolean;
 };
+
 type Props = {
   points: Point[];
   onPick?: (id: string) => void;
@@ -35,16 +40,16 @@ type MarkerHandle = {
 };
 
 export default function Mapbox({ points, onPick, token, home }: Props) {
-  const el = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const markersRef = useRef<MarkerHandle[]>([]);
   const homeMarkerRef = useRef<mapboxgl.Marker | null>(null);
   const [hoverInfo, setHoverInfo] = useState<{ point: Point; x: number; y: number } | null>(null);
 
   const hoverDisplay = useMemo(() => {
-    if (!hoverInfo || !el.current) return null;
-    const width = el.current.clientWidth;
-    const height = el.current.clientHeight;
+    if (!hoverInfo || !containerRef.current) return null;
+    const width = containerRef.current.clientWidth;
+    const height = containerRef.current.clientHeight;
     const bufferX = 140;
     const bufferY = 160;
     const clampedX = Math.min(Math.max(hoverInfo.x, bufferX), Math.max(bufferX, width - bufferX));
@@ -53,16 +58,15 @@ export default function Mapbox({ points, onPick, token, home }: Props) {
   }, [hoverInfo]);
 
   useEffect(() => {
-    if (!el.current || mapRef.current) return;
+    if (!containerRef.current || mapRef.current) return;
 
     const accessToken = token || getMapboxToken();
-
     mapboxgl.accessToken = accessToken;
 
     const map = new mapboxgl.Map({
-      container: el.current,
+      container: containerRef.current,
       style: "mapbox://styles/mapbox/outdoors-v12",
-      center: [-84.29, 33.77], // GA-ish
+      center: [-84.29, 33.77],
       zoom: 7
     });
 
@@ -88,7 +92,6 @@ export default function Mapbox({ points, onPick, token, home }: Props) {
     };
   }, [token]);
 
-  // update markers when points change
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
@@ -108,13 +111,14 @@ export default function Mapbox({ points, onPick, token, home }: Props) {
     const validPoints = points.filter((point) => typeof point.lat === "number" && typeof point.lng === "number");
 
     validPoints.forEach((point) => {
-      const marker = new mapboxgl.Marker({ color: "#0FA47A" })
-        .setLngLat([point.lng, point.lat])
-        .addTo(map);
+      const shape = normalizeCategory(point.areaCategory);
+      const style = getAreaCategoryStyle(shape);
+      const element = buildMarkerElement(shape, style.color);
 
-      const element = marker.getElement();
+      const marker = new mapboxgl.Marker({ element }).setLngLat([point.lng, point.lat]).addTo(map);
       element.classList.add("cursor-pointer");
       element.setAttribute("tabindex", "0");
+      element.setAttribute("aria-label", `${point.name} marker`);
 
       const enter = () => {
         const position = map.project([point.lng, point.lat]);
@@ -143,7 +147,10 @@ export default function Mapbox({ points, onPick, token, home }: Props) {
     }
 
     if (coords.length) {
-      const bounds = coords.reduce((acc, [lng, lat]) => acc.extend([lng, lat]), new mapboxgl.LngLatBounds(coords[0], coords[0]));
+      const bounds = coords.reduce(
+        (acc, [lng, lat]) => acc.extend([lng, lat]),
+        new mapboxgl.LngLatBounds(coords[0], coords[0])
+      );
       map.fitBounds(bounds, { padding: 48, maxZoom: 9 });
     } else {
       map.easeTo({ center: [-84.29, 33.77], zoom: 6.2 });
@@ -160,16 +167,17 @@ export default function Mapbox({ points, onPick, token, home }: Props) {
     }
 
     if (home && typeof home.lat === "number" && typeof home.lng === "number") {
-      homeMarkerRef.current = new mapboxgl.Marker({ color: "#ef4444" })
-        .setLngLat([home.lng, home.lat])
-        .addTo(map);
+      const element = document.createElement("div");
+      element.innerHTML =
+        '<svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 3l11 10v14a2 2 0 0 1-2 2h-6v-8h-6v8H7a2 2 0 0 1-2-2V13L16 3z" fill="#ef4444" stroke="white" stroke-width="2" stroke-linejoin="round"/></svg>';
+      element.className = "drop-shadow-md";
+      homeMarkerRef.current = new mapboxgl.Marker({ element }).setLngLat([home.lng, home.lat]).addTo(map);
     }
   }, [home]);
 
   useEffect(() => {
     const map = mapRef.current;
-    if (!map) return;
-    if (!hoverInfo) return;
+    if (!map || !hoverInfo) return;
 
     const update = () => {
       setHoverInfo((current) => {
@@ -189,13 +197,16 @@ export default function Mapbox({ points, onPick, token, home }: Props) {
 
   return (
     <div className="relative h-[400px] w-full">
-      <div ref={el} className="h-full w-full overflow-hidden rounded-xl border border-slate-200" />
+      <div ref={containerRef} className="h-full w-full overflow-hidden rounded-xl border border-slate-200" />
       {hoverDisplay && (
         <div
           className="pointer-events-none absolute z-20 w-72 -translate-x-1/2 -translate-y-full rounded-xl border border-slate-200 bg-white p-3 text-sm shadow-xl"
           style={{ left: hoverDisplay.x, top: hoverDisplay.y }}
         >
           <p className="text-sm font-semibold text-slate-900">{hoverDisplay.point.name}</p>
+          {hoverDisplay.point.areaCategory && (
+            <p className="text-xs text-slate-500">{hoverDisplay.point.areaCategory}</p>
+          )}
           {hoverDisplay.point.region && (
             <p className="text-xs text-slate-500">{hoverDisplay.point.region}</p>
           )}
@@ -223,8 +234,100 @@ export default function Mapbox({ points, onPick, token, home }: Props) {
           ) : (
             <p className="mt-3 text-xs text-slate-500">No upcoming seasons posted.</p>
           )}
+          <div className="mt-2 flex flex-wrap gap-2 text-[11px]">
+            {hoverDisplay.point.campingAllowed && (
+              <span className="rounded-full bg-emerald-100 px-2 py-1 text-emerald-700">🏕️ Camping</span>
+            )}
+            {hoverDisplay.point.atvAllowed && (
+              <span className="rounded-full bg-sky-100 px-2 py-1 text-sky-700">🏍️ ATVs</span>
+            )}
+          </div>
         </div>
       )}
+      <MapLegend />
     </div>
+  );
+}
+
+function normalizeCategory(category?: string | null) {
+  if (!category) return "WMA";
+  const lower = category.toLowerCase();
+  if (lower.includes("federal")) return "Federal";
+  if (lower.includes("state")) return "State Park";
+  if (lower.includes("vpa")) return "VPA";
+  return "WMA";
+}
+
+function buildMarkerElement(category: string, color: string) {
+  const shape = category.toLowerCase();
+  const svg = createShapeSVG(shape, color);
+  const element = document.createElement("div");
+  element.innerHTML = svg;
+  element.className = "drop-shadow-md";
+  return element;
+}
+
+function createShapeSVG(shape: string, color: string) {
+  if (shape === "federal") {
+    return `<svg width="30" height="30" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="24" height="24" fill="${color}" stroke="white" stroke-width="2" rx="4"/></svg>`;
+  }
+  if (shape === "state park") {
+    return `<svg width="30" height="30" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><polygon points="16,4 28,28 4,28" fill="${color}" stroke="white" stroke-width="2" stroke-linejoin="round"/></svg>`;
+  }
+  if (shape === "vpa") {
+    return `<svg width="30" height="30" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><polygon points="16,4 28,16 16,28 4,16" fill="${color}" stroke="white" stroke-width="2" stroke-linejoin="round"/></svg>`;
+  }
+  return `<svg width="30" height="30" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="14" fill="${color}" stroke="white" stroke-width="2"/></svg>`;
+}
+
+function MapLegend() {
+  return (
+    <div className="pointer-events-none absolute bottom-4 left-4 z-10 rounded-lg border border-slate-200 bg-white p-3 text-xs text-slate-600 shadow">
+      <p className="mb-2 font-semibold text-slate-700">Area types</p>
+      <div className="space-y-1.5">
+        <LegendRow label="WMA" color="#22c55e" shape="circle" />
+        <LegendRow label="Federal" color="#3b82f6" shape="square" />
+        <LegendRow label="State Park" color="#ef4444" shape="triangle" />
+        <LegendRow label="VPA" color="#a855f7" shape="diamond" />
+      </div>
+    </div>
+  );
+}
+
+function LegendRow({ label, color, shape }: { label: string; color: string; shape: "circle" | "square" | "triangle" | "diamond" }) {
+  return (
+    <div className="flex items-center gap-2">
+      <LegendIcon color={color} shape={shape} />
+      <span>{label}</span>
+    </div>
+  );
+}
+
+function LegendIcon({ color, shape }: { color: string; shape: "circle" | "square" | "triangle" | "diamond" }) {
+  if (shape === "square") {
+    return (
+      <svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4" width="24" height="24" fill={color} stroke="white" strokeWidth="2" rx="4" />
+      </svg>
+    );
+  }
+  if (shape === "triangle") {
+    return (
+      <svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="16,4 28,28 4,28" fill={color} stroke="white" strokeWidth="2" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+  if (shape === "diamond") {
+    return (
+      <svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="16,4 28,16 16,28 4,16" fill={color} stroke="white" strokeWidth="2" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+  return (
+    <svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="14" fill={color} stroke="white" strokeWidth="2" />
+    </svg>
   );
 }

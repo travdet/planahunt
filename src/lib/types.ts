@@ -21,14 +21,14 @@ export type SeasonRule = {
   tags?: string[];
   weekdays?: number[] | string[]; // optional restricted weekdays (0=Sun)
   // optional future fields
-  weapon_subcategory?: string | null;
-  antler_restrictions?: string | null;
-  bag_limit?: string | null;
-  quota_details?: string | null;
-  shooting_hours_restriction?: string | null;
-  sign_in_required?: boolean;
-  important_notes?: string[];
-  activity_type?: "Hunting" | "Dog Training" | "Shooting Range" | "Archery Range" | string;
+  weapon_subcategory: string | null;
+  antler_restrictions: string | null;
+  bag_limit: string | null;
+  quota_details: string | null;
+  shooting_hours_restriction: string | null;
+  sign_in_required: boolean;
+  important_notes: string[];
+  activity_type: "Hunting" | "Dog Training" | "Shooting Range" | "Archery Range" | string;
 };
 
 export type SeasonWithMeta = SeasonRule & {
@@ -77,6 +77,11 @@ export type FilterState = {
   counties: string[];             // chosen counties
   regions: string[];              // chosen DNR regions
   tags: string[];                 // misc tags (archery-only area, MI hunts, bird range, etc)
+  areaCategories: string[];       // WMA, Federal, State Park, VPA
+  weaponSubcategories: string[];  // shotgun-only, etc
+  activityTypes: string[];        // hunting, dog training, etc
+  campingAllowed: boolean | null;
+  atvAllowed: boolean | null;
   maxDistanceMi?: number | null;  // from home
 };
 

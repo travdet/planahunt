@@ -164,7 +164,16 @@ export const FILTER_OPTIONS = {
   tags: sortUnique([
     ...WMA_LIST.flatMap((w) => w.tags ?? []),
     ...SEASON_LIST.flatMap((r) => r.tags ?? [])
-  ]).map(normalizeLabel)
+  ]).map(normalizeLabel),
+  areaCategories: sortUnique(
+    WMA_LIST.map((w) => (w.area_category || "WMA").toLowerCase()).filter((value) => value.trim().length > 0)
+  ),
+  weaponSubcategories: sortUnique(
+    SEASON_LIST.map((r) => r.weapon_subcategory || "").filter((value) => value.trim().length > 0)
+  ).map((value) => value.toLowerCase()),
+  activityTypes: sortUnique(
+    SEASON_LIST.map((r) => (r.activity_type || "Hunting").toLowerCase())
+  )
 };
 
 export function hasActiveFilters(filters: FilterState): boolean {
@@ -180,6 +189,11 @@ export function hasActiveFilters(filters: FilterState): boolean {
     filters.counties.length,
     filters.regions.length,
     filters.tags.length,
+    filters.areaCategories.length,
+    filters.weaponSubcategories.length,
+    filters.activityTypes.length,
+    filters.campingAllowed !== null,
+    filters.atvAllowed !== null,
     filters.accessType !== "any",
     filters.sex !== "any"
   ].some((value) => {

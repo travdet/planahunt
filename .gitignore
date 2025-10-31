@@ -19,3 +19,6 @@ pnpm-debug.log*
 .wrangler
 wrangler.log
 
+# TypeScript incremental build info
+tsconfig.tsbuildinfo
+

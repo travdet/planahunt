@@ -3,16 +3,20 @@
 import { useEffect, useMemo, useState } from "react";
 import type { FilterState, HomeLoc } from "@/lib/types";
 import { AREAS_WITH_RULES, FILTER_OPTIONS, hasActiveFilters } from "@/lib/data";
-import { filterAreas } from "@/lib/filters";
+import { filterAreas, type FilteredArea } from "@/lib/filters";
 import { geocodeFirst } from "@/lib/map";
 import { STORAGE_KEYS } from "@/lib/constants";
 import FilterBar from "@/components/FilterBar";
 import HomeLocation from "@/components/HomeLocation";
+import QuickFilters, { resetQuickFilters, type QuickFilterState } from "@/components/QuickFilters";
+import FavoritesSection from "@/components/FavoritesSection";
 import Mapbox from "@/components/Mapbox";
+import SortDropdown, { type SortOption } from "@/components/SortDropdown";
 import WMACard from "@/components/WMACard";
 import WMAModal from "@/components/WMAModal";
-import { fmtMDY } from "@/lib/util";
-import { getUpcomingWindows } from "@/lib/rules";
+import { fmtMDY, todayISO } from "@/lib/util";
+import { getUpcomingWindows, isRuleActiveOnDate } from "@/lib/rules";
+import { useFavorites } from "@/hooks/useFavorites";
 
 const INITIAL_FILTERS: FilterState = {
   query: "",
@@ -26,6 +30,11 @@ const INITIAL_FILTERS: FilterState = {
   counties: [],
   regions: [],
   tags: [],
+  areaCategories: [],
+  weaponSubcategories: [],
+  activityTypes: [],
+  campingAllowed: null,
+  atvAllowed: null,
   maxDistanceMi: null
 };
 
@@ -34,6 +43,9 @@ export default function Page() {
   const [home, setHome] = useState<HomeLoc>({ address: "", lat: null, lng: null });
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [coordOverrides, setCoordOverrides] = useState<Record<string, { lat: number; lng: number }>>({});
+  const { favorites } = useFavorites();
+  const [quickFilters, setQuickFilters] = useState<QuickFilterState>(() => resetQuickFilters());
+  const [sortBy, setSortBy] = useState<SortOption>("name");
 
   // load stored home location
   useEffect(() => {
@@ -117,13 +129,30 @@ export default function Page() {
     });
   }, [coordOverrides]);
 
+  const openTodaySummary = useMemo(() => {
+    const today = todayISO();
+    const ids = new Set<string>();
+    let huntCount = 0;
+    for (const area of areasWithCoords) {
+      const openRules = area.rules.filter((rule) => isRuleActiveOnDate(rule, today));
+      if (openRules.length) {
+        ids.add(area.wma.id);
+        huntCount += openRules.length;
+      }
+    }
+    return { wmaCount: ids.size, huntCount };
+  }, [areasWithCoords]);
+
   const filterOptions = useMemo(
     () => ({
       species: FILTER_OPTIONS.species,
       weapons: FILTER_OPTIONS.weapons,
       counties: FILTER_OPTIONS.counties,
       regions: FILTER_OPTIONS.regions,
-      tags: FILTER_OPTIONS.tags
+      tags: FILTER_OPTIONS.tags,
+      areaCategories: FILTER_OPTIONS.areaCategories,
+      weaponSubcategories: FILTER_OPTIONS.weaponSubcategories,
+      activityTypes: FILTER_OPTIONS.activityTypes
     }),
     []
   );
@@ -135,15 +164,30 @@ export default function Page() {
         ...filters,
         species: filters.species.map((value) => value.toLowerCase()),
         weapons: filters.weapons.map((value) => value.toLowerCase()),
-        tags: filters.tags.map((value) => value.toLowerCase())
+        tags: filters.tags.map((value) => value.toLowerCase()),
+        areaCategories: filters.areaCategories.map((value) => value.toLowerCase()),
+        weaponSubcategories: filters.weaponSubcategories.map((value) => value.toLowerCase()),
+        activityTypes: filters.activityTypes.map((value) => value.toLowerCase())
       },
       { lat: home.lat, lng: home.lng },
       filters.maxDistanceMi ?? null
     );
   }, [areasWithCoords, filters, home.lat, home.lng]);
 
+  const quickFiltered = useMemo(
+    () => applyQuickFilters(filtered, quickFilters, favorites),
+    [filtered, quickFilters, favorites]
+  );
+
+  const sorted = useMemo(() => sortAreas(quickFiltered, sortBy), [quickFiltered, sortBy]);
+
+  const quickFiltersActive = useMemo(
+    () => Object.values(quickFilters).some(Boolean),
+    [quickFilters]
+  );
+
   const mapPoints = useMemo(() => {
-    return filtered
+    return sorted
       .filter((item) => typeof item.wma.lat === "number" && typeof item.wma.lng === "number")
       .map((item) => {
         const upcoming = getUpcomingWindows(item.allRules, 1)[0];
@@ -166,24 +210,36 @@ export default function Page() {
                 label: upcomingLabel,
                 access: upcoming.access === "general" ? "General access" : "Quota access"
               }
-            : null
+            : null,
+          areaCategory: item.wma.area_category ?? "WMA",
+          campingAllowed: !!item.wma.camping_allowed,
+          atvAllowed: !!item.wma.atv_allowed
         };
       });
-  }, [filtered]);
+  }, [sorted]);
 
   const selectedArea = useMemo(() => {
     if (!selectedId) return null;
     const area = areasWithCoords.find((entry) => entry.wma.id === selectedId);
     if (!area) return null;
-    const match = filtered.find((entry) => entry.wma.id === selectedId);
+    const match =
+      sorted.find((entry) => entry.wma.id === selectedId) ??
+      filtered.find((entry) => entry.wma.id === selectedId);
     return {
       ...area,
       distanceMi: match?.distanceMi ?? null
     };
-  }, [selectedId, areasWithCoords, filtered]);
+  }, [selectedId, areasWithCoords, sorted, filtered]);
 
-  const resultCount = filtered.length;
-  const anyFilters = hasActiveFilters(filters);
+  const resultCount = sorted.length;
+  const anyFilters = hasActiveFilters(filters) || quickFiltersActive;
+
+  const handleOpenToday = () => {
+    setQuickFilters((current) => ({ ...current, openNow: true }));
+    if (typeof document !== "undefined") {
+      document.getElementById("wma-list")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-6">
@@ -193,6 +249,28 @@ export default function Page() {
           Discover Wildlife Management Areas, compare access rules, and plan a season in minutes.
         </p>
       </div>
+
+      <div className="mb-8">
+        <button
+          type="button"
+          onClick={handleOpenToday}
+          className="w-full rounded-2xl bg-emerald-600 px-6 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-emerald-700 hover:shadow-xl md:w-auto md:px-8"
+        >
+          <span className="mr-3 text-2xl" aria-hidden>
+            🎯
+          </span>
+          What&apos;s open today?
+          <span className="ml-3 inline-flex items-center rounded-full bg-white px-3 py-1 text-sm font-bold text-emerald-600">
+            {openTodaySummary.wmaCount}
+          </span>
+        </button>
+        <p className="mt-2 text-center text-sm text-slate-600 md:text-left">
+          {openTodaySummary.huntCount} hunting {openTodaySummary.huntCount === 1 ? "opportunity" : "opportunities"} available today
+          across {openTodaySummary.wmaCount} {openTodaySummary.wmaCount === 1 ? "area" : "areas"}
+        </p>
+      </div>
+
+      <FavoritesSection wmas={areasWithCoords} onOpen={(id) => setSelectedId(id)} />
 
       <div className="grid gap-6 lg:grid-cols-[320px,1fr]">
         <div className="space-y-6">
@@ -216,8 +294,13 @@ export default function Page() {
         </div>
 
         <div className="space-y-5">
+          <QuickFilters
+            value={quickFilters}
+            onChange={setQuickFilters}
+            favoritesCount={favorites.length}
+          />
           <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
               <div>
                 <p className="text-sm font-semibold text-slate-700">{resultCount} WMAs match</p>
                 {filters.date && (
@@ -237,8 +320,11 @@ export default function Page() {
                   </p>
                 )}
               </div>
-              <div className="text-xs text-slate-500">
-                {anyFilters ? "Filters applied" : "All WMAs shown"}
+              <div className="flex flex-col items-start gap-2 md:items-end">
+                <SortDropdown value={sortBy} onChange={setSortBy} />
+                <span className="text-xs text-slate-500">
+                  {anyFilters ? "Filters applied" : "All WMAs shown"}
+                </span>
               </div>
             </div>
             <div className="mt-4">
@@ -250,8 +336,8 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="space-y-4">
-            {filtered.map((item) => (
+          <div id="wma-list" className="space-y-4">
+            {sorted.map((item) => (
               <WMACard
                 key={item.wma.id}
                 wma={item.wma}
@@ -263,7 +349,7 @@ export default function Page() {
                 onOpen={() => setSelectedId(item.wma.id)}
               />
             ))}
-            {filtered.length === 0 && (
+            {sorted.length === 0 && (
               <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-600">
                 No WMAs match those filters. Try widening your date range or clearing filters.
               </div>
@@ -277,4 +363,69 @@ export default function Page() {
       )}
     </main>
   );
+}
+
+function applyQuickFilters(
+  list: FilteredArea[],
+  quick: QuickFilterState,
+  favorites: string[]
+): FilteredArea[] {
+  if (!list.length) return list;
+  const favoritesSet = new Set(favorites);
+  const today = todayISO();
+
+  return list.filter((entry) => {
+    const category = (entry.wma.area_category || "WMA").toLowerCase().trim();
+    const hasGeneral = entry.allRules.some((rule) => rule.access === "general");
+    const hasArchery = entry.allRules.some((rule) => {
+      const weapon = String(rule.weapon).toLowerCase();
+      return rule.weaponKey.includes("archery") || weapon.includes("archery");
+    });
+    const hasDeer = entry.allRules.some((rule) => rule.speciesKey === "deer");
+    const hasTurkey = entry.allRules.some((rule) => rule.speciesKey === "turkey");
+    const isOpenToday = entry.allRules.some((rule) => isRuleActiveOnDate(rule, today));
+
+    if (quick.favoritesOnly && !favoritesSet.has(entry.wma.id)) return false;
+    if (quick.openNow && !isOpenToday) return false;
+    if (quick.camping && !entry.wma.camping_allowed) return false;
+    if (quick.noQuota && !hasGeneral) return false;
+    if (quick.archery && !hasArchery) return false;
+    if (quick.federal && category !== "federal") return false;
+    if (quick.stateParks && category !== "state park") return false;
+    if (quick.deer && !hasDeer) return false;
+    if (quick.turkey && !hasTurkey) return false;
+
+    return true;
+  });
+}
+
+function sortAreas(list: FilteredArea[], sortBy: SortOption): FilteredArea[] {
+  const arr = [...list];
+
+  if (sortBy === "acreage") {
+    arr.sort((a, b) => {
+      const aSize = a.wma.acreage ?? 0;
+      const bSize = b.wma.acreage ?? 0;
+      if (bSize !== aSize) return bSize - aSize;
+      return a.wma.name.localeCompare(b.wma.name);
+    });
+    return arr;
+  }
+
+  if (sortBy === "opening-soon") {
+    const today = todayISO();
+    arr.sort((a, b) => {
+      const aOpen = a.allRules.some((rule) => isRuleActiveOnDate(rule, today));
+      const bOpen = b.allRules.some((rule) => isRuleActiveOnDate(rule, today));
+      if (aOpen !== bOpen) return aOpen ? -1 : 1;
+      const aNext = getUpcomingWindows(a.allRules, 1, today)[0]?.start ?? "9999-12-31";
+      const bNext = getUpcomingWindows(b.allRules, 1, today)[0]?.start ?? "9999-12-31";
+      if (aNext !== bNext) return aNext.localeCompare(bNext);
+      return a.wma.name.localeCompare(b.wma.name);
+    });
+    return arr;
+  }
+
+  arr.sort((a, b) => a.wma.name.localeCompare(b.wma.name));
+  return arr;
 }

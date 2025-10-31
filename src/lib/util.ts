@@ -21,8 +21,8 @@ export function normalizeLabel(value: string) {
     .join(" ");
 }
 
-export function todayISO() {
-  const d = new Date();
+export function todayISO(base: Date = new Date()) {
+  const d = new Date(base);
   d.setHours(0, 0, 0, 0);
   return toISO(d);
 }

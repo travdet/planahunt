@@ -22,6 +22,14 @@ function isRuleActiveOnDay(rule: SeasonWithMeta, target: string) {
 function ruleMatches(rule: SeasonWithMeta, filters: FilterState) {
   if (filters.species.length && !filters.species.includes(rule.speciesKey)) return false;
   if (filters.weapons.length && !filters.weapons.includes(rule.weaponKey)) return false;
+  if (filters.weaponSubcategories.length) {
+    const subcategory = (rule.weapon_subcategory || "").toLowerCase();
+    if (!subcategory || !filters.weaponSubcategories.includes(subcategory)) return false;
+  }
+  if (filters.activityTypes.length) {
+    const activity = (rule.activity_type || "Hunting").toLowerCase();
+    if (!filters.activityTypes.includes(activity)) return false;
+  }
   if (filters.accessType !== "any" && rule.access !== filters.accessType) return false;
   if (filters.sex !== "any" && rule.sexRule !== filters.sex) return false;
 
@@ -45,6 +53,16 @@ function ruleMatches(rule: SeasonWithMeta, filters: FilterState) {
 
 function wmaMatchesFilters(area: WMAWithRules, filters: FilterState, matchingRules: SeasonWithMeta[]) {
   const { wma } = area;
+  const categoryValue = (wma.area_category || "WMA").toLowerCase();
+  if (filters.areaCategories.length && !filters.areaCategories.includes(categoryValue)) {
+    return false;
+  }
+  if (filters.campingAllowed !== null && !!wma.camping_allowed !== filters.campingAllowed) {
+    return false;
+  }
+  if (filters.atvAllowed !== null && !!wma.atv_allowed !== filters.atvAllowed) {
+    return false;
+  }
   if (filters.counties.length && !wma.counties.some((c) => filters.counties.includes(c))) {
     return false;
   }
