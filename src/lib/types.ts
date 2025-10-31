@@ -21,6 +21,14 @@ export type SeasonRule = {
   tags?: string[];
   weekdays?: number[] | string[]; // optional restricted weekdays (0=Sun)
   // optional future fields
+  weapon_subcategory?: string | null;
+  antler_restrictions?: string | null;
+  bag_limit?: string | null;
+  quota_details?: string | null;
+  shooting_hours_restriction?: string | null;
+  sign_in_required?: boolean;
+  important_notes?: string[];
+  activity_type?: "Hunting" | "Dog Training" | "Shooting Range" | "Archery Range" | string;
 };
 
 export type SeasonWithMeta = SeasonRule & {
@@ -44,6 +52,12 @@ export type WMA = {
   lng?: number | null;
   source_url?: string;
   tags?: string[];
+  directions?: string;
+  area_notes?: string;
+  camping_allowed?: boolean;
+  atv_allowed?: boolean;
+  area_category?: "WMA" | "Federal" | "State Park" | "VPA" | string;
+  managing_agency?: string;
 };
 
 export type WMAWithRules = {
