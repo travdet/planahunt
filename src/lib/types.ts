@@ -1,58 +1,57 @@
-// src/lib/types.ts
+export type AccessType = "general" | "quota";
+export type SexFilter = "any" | "either" | "buck" | "doe";
+export type Weapon = "archery" | "primitive" | "firearms" | "shotgun" | "muzzleloader";
+
+export type DateRange = { start: string; end: string }; // yyyy-mm-dd
+
+export type SeasonRule = {
+  id: string;
+  wma_id: string;
+  species: string;          // "Deer" | "Turkey" | "Dove" | etc
+  weapon: Weapon | string;  // keep string to tolerate raw data
+  start_date: string;       // yyyy-mm-dd
+  end_date: string;         // yyyy-mm-dd
+  follows_statewide?: boolean;
+  quota_required?: boolean;
+  notes_short?: string;
+  buck_only?: "yes" | "no";
+  either_sex_last_day?: boolean;
+  last_two_days_either_sex?: boolean;
+  tags?: string[];
+  // optional future fields
+};
 
 export type WMA = {
-  id: string;
+  id: string;               // slug
   name: string;
   tract_name?: string;
-  area_type?: string;
+  area_type?: string;       // "WMA"
   acreage?: number;
-  phone?: string | null;
+  phone?: string;
   counties: string[];
-  region: string;
+  region?: string;
   lat?: number | null;
   lng?: number | null;
   source_url?: string;
   tags?: string[];
 };
 
-export type SeasonWindow = {
-  id?: string;
-  start_date: string;   // yyyy-mm-dd
-  end_date: string;     // yyyy-mm-dd
-  quota_required?: boolean;
-  notes_short?: string;
-};
-
-export type SeasonRule = {
-  id: string;
-  wma_id: string;
-  species: string;       // e.g. "Deer"
-  weapon: string;        // "Archery" | "Firearms" | "Primitive" | etc.
-  follows_statewide?: boolean;
-  includes?: SeasonWindow[];
-  excludes?: SeasonWindow[];
-  buck_only?: boolean;   // true = buck-only window
-};
-
-export type AccessType = "any" | "general" | "quota";
-export type SexFilter = "any" | "either" | "buck" | "doe";
-
 export type FilterState = {
   query: string;
-  species: string[];         // none selected = all
-  weapons: string[];         // none selected = all
-  accessType: AccessType;    // replaces "quota"
-  sex: SexFilter;            // replaces "buckOnly"
-  regions: string[];
-  counties: string[];
-  tags: string[];
+  date?: string | null;           // yyyy-mm-dd (single day)
+  dateRange?: DateRange | null;   // for future range picker
+  accessType: "any" | AccessType;
+  sex: SexFilter;
+  weapons: string[];              // chosen weapons
+  species: string[];              // chosen species
+  counties: string[];             // chosen counties
+  regions: string[];              // chosen DNR regions
+  tags: string[];                 // misc tags (archery-only area, MI hunts, bird range, etc)
+  maxDistanceMi?: number | null;  // from home
+};
 
-  // Hunt Dates (range). If end is empty, treat as single day.
-  huntStart?: string; // yyyy-mm-dd
-  huntEnd?: string;   // yyyy-mm-dd
-
-  // Home (address + coords)
-  homeAddress?: string;
-  homeLat?: number;
-  homeLng?: number;
+export type HomeLoc = {
+  address: string;
+  lat: number | null;
+  lng: number | null;
 };
