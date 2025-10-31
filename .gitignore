@@ -9,3 +9,13 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# Vercel
+.vercel
+
+# OpenNext build output
+.open-next
+
+# Wrangler
+.wrangler
+wrangler.log
+
