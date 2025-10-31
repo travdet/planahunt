@@ -1,0 +1,435 @@
+[
+  {
+    "id": "wma-alapaha-river-deer-archery-any-2025-09-13",
+    "wma_id": "wma-alapaha-river",
+    "species": "Deer",
+    "weapon": "Archery",
+    "weapon_subcategory": null,
+    "follows_statewide": false,
+    "includes": [
+      {
+        "start": "2025-09-13",
+        "end": "2025-10-19"
+      }
+    ],
+    "excludes": [],
+    "quota_required": false,
+    "buck_only": false,
+    "notes_short": "",
+    "antler_restrictions": null,
+    "bag_limit": null,
+    "quota_details": null,
+    "shooting_hours_restriction": null,
+    "sign_in_required": false,
+    "important_notes": [],
+    "activity_type": "Hunting",
+    "tags": []
+  },
+  {
+    "id": "wma-alapaha-river-deer-firearms-any-2025-11-13",
+    "wma_id": "wma-alapaha-river",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "weapon_subcategory": null,
+    "follows_statewide": false,
+    "includes": [
+      {
+        "start": "2025-11-13",
+        "end": "2025-11-15"
+      }
+    ],
+    "excludes": [],
+    "quota_required": false,
+    "buck_only": false,
+    "notes_short": "",
+    "antler_restrictions": null,
+    "bag_limit": null,
+    "quota_details": null,
+    "shooting_hours_restriction": null,
+    "sign_in_required": false,
+    "important_notes": [],
+    "activity_type": "Hunting",
+    "tags": ["Bonus"]
+  },
+  {
+    "id": "wma-alapaha-river-turkey-firearms-any-2026-04-11",
+    "wma_id": "wma-alapaha-river",
+    "species": "Turkey",
+    "weapon": "Firearms",
+    "weapon_subcategory": null,
+    "follows_statewide": false,
+    "includes": [
+      {
+        "start": "2026-04-11",
+        "end": "2026-05-15"
+      }
+    ],
+    "excludes": [],
+    "quota_required": false,
+    "buck_only": false,
+    "notes_short": "",
+    "antler_restrictions": null,
+    "bag_limit": null,
+    "quota_details": null,
+    "shooting_hours_restriction": null,
+    "sign_in_required": false,
+    "important_notes": [],
+    "activity_type": "Hunting",
+    "tags": []
+  },
+  {
+    "id": "wma-alapaha-river-dove-firearms-any-2025-09-06",
+    "wma_id": "wma-alapaha-river",
+    "species": "Dove",
+    "weapon": "Firearms",
+    "weapon_subcategory": null,
+    "follows_statewide": false,
+    "includes": [
+      {
+        "start": "2025-09-06",
+        "end": "2025-09-06"
+      }
+    ],
+    "excludes": [],
+    "quota_required": true,
+    "buck_only": false,
+    "notes_short": "",
+    "antler_restrictions": null,
+    "bag_limit": null,
+    "quota_details": "Q50",
+    "shooting_hours_restriction": null,
+    "sign_in_required": true,
+    "important_notes": [
+      "Sign-in required",
+      "Quota hunt - permit required"
+    ],
+    "activity_type": "Hunting",
+    "tags": []
+  },
+  {
+    "id": "wma-albany-nursery-deer-firearms-shotgun-mobility-2025-10-30",
+    "wma_id": "wma-albany-nursery",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "weapon_subcategory": "Shotgun Only",
+    "follows_statewide": false,
+    "includes": [
+      {
+        "start": "2025-10-30",
+        "end": "2025-11-02"
+      }
+    ],
+    "excludes": [],
+    "quota_required": false,
+    "buck_only": false,
+    "notes_short": "",
+    "antler_restrictions": null,
+    "bag_limit": null,
+    "quota_details": null,
+    "shooting_hours_restriction": null,
+    "sign_in_required": false,
+    "important_notes": [],
+    "activity_type": "Hunting",
+    "tags": ["Mobility-Impaired"]
+  },
+  {
+    "id": "wma-albany-nursery-quail-firearms-any-2025-11-15",
+    "wma_id": "wma-albany-nursery",
+    "species": "Quail",
+    "weapon": "Firearms",
+    "weapon_subcategory": null,
+    "follows_statewide": false,
+    "includes": [
+      {
+        "start": "2025-11-15",
+        "end": "2025-11-15"
+      }
+    ],
+    "excludes": [],
+    "quota_required": true,
+    "buck_only": false,
+    "notes_short": "Maximum 3 persons per party. Hunting party must report harvest at kiosk or online; one survey per party.",
+    "antler_restrictions": null,
+    "bag_limit": "3/person",
+    "quota_details": "Q1",
+    "shooting_hours_restriction": null,
+    "sign_in_required": true,
+    "important_notes": [
+      "Sign-in required",
+      "Bag limits apply - see details",
+      "Quota hunt - permit required"
+    ],
+    "activity_type": "Hunting",
+    "tags": ["Youth"]
+  },
+  {
+    "id": "wma-dawson-forest-deer-archery-buck-2025-09-13",
+    "wma_id": "wma-dawson-forest",
+    "species": "Deer",
+    "weapon": "Archery",
+    "weapon_subcategory": null,
+    "follows_statewide": false,
+    "includes": [
+      {
+        "start": "2025-09-13",
+        "end": "2025-10-10"
+      }
+    ],
+    "excludes": [],
+    "quota_required": false,
+    "buck_only": true,
+    "notes_short": "",
+    "antler_restrictions": "Only bucks with at least 4 points (1-inch or longer) on either antler or a minimum 15-inch outside antler spread are legal",
+    "bag_limit": null,
+    "quota_details": null,
+    "shooting_hours_restriction": null,
+    "sign_in_required": false,
+    "important_notes": [
+      "Antler restrictions apply"
+    ],
+    "activity_type": "Hunting",
+    "tags": []
+  },
+  {
+    "id": "wma-dawson-forest-bear-archery-any-2025-09-13",
+    "wma_id": "wma-dawson-forest",
+    "species": "Bear",
+    "weapon": "Archery",
+    "weapon_subcategory": null,
+    "follows_statewide": false,
+    "includes": [
+      {
+        "start": "2025-09-13",
+        "end": "2025-10-10"
+      }
+    ],
+    "excludes": [],
+    "quota_required": false,
+    "buck_only": false,
+    "notes_short": "",
+    "antler_restrictions": null,
+    "bag_limit": null,
+    "quota_details": null,
+    "shooting_hours_restriction": null,
+    "sign_in_required": false,
+    "important_notes": [],
+    "activity_type": "Hunting",
+    "tags": []
+  },
+  {
+    "id": "wma-altamaha-waterfowl-champney-2025-11-15",
+    "wma_id": "wma-altamaha-waterfowl",
+    "species": "Waterfowl",
+    "weapon": "Firearms",
+    "weapon_subcategory": "Shotgun Only",
+    "follows_statewide": false,
+    "includes": [
+      {
+        "start": "2025-11-15",
+        "end": "2025-11-15"
+      }
+    ],
+    "excludes": [],
+    "quota_required": true,
+    "buck_only": false,
+    "notes_short": "Max 3 persons per quota party. No stand-by hunters allowed.",
+    "antler_restrictions": null,
+    "bag_limit": null,
+    "quota_details": "Q20 Champney Island: Saturday & Sunday Only. First hunt open only to youth and veterans to apply (other 2 party members don't have to be youth or veteran).",
+    "shooting_hours_restriction": "End at noon, except last day of season when shooting hours end at sunset",
+    "sign_in_required": false,
+    "important_notes": [
+      "Shooting hours restricted - see details",
+      "Quota hunt - permit required"
+    ],
+    "activity_type": "Hunting",
+    "tags": []
+  },
+  {
+    "id": "wma-alexander-bird-dog-training-2025-08-15",
+    "wma_id": "wma-alexander",
+    "species": "Bird Dog Training",
+    "weapon": null,
+    "weapon_subcategory": null,
+    "follows_statewide": false,
+    "includes": [
+      {
+        "start": "2025-08-15",
+        "end": "2026-03-15"
+      }
+    ],
+    "excludes": [],
+    "quota_required": false,
+    "buck_only": false,
+    "notes_short": "Training allowed year round in designated areas.",
+    "antler_restrictions": null,
+    "bag_limit": null,
+    "quota_details": null,
+    "shooting_hours_restriction": null,
+    "sign_in_required": false,
+    "important_notes": [],
+    "activity_type": "Dog Training",
+    "tags": []
+  },
+  {
+    "id": "wma-alligator-creek-deer-statewide-2025-09-13",
+    "wma_id": "wma-alligator-creek",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "weapon_subcategory": null,
+    "follows_statewide": true,
+    "includes": [],
+    "excludes": [],
+    "quota_required": false,
+    "buck_only": false,
+    "notes_short": "Follows statewide seasons",
+    "antler_restrictions": null,
+    "bag_limit": null,
+    "quota_details": null,
+    "shooting_hours_restriction": null,
+    "sign_in_required": false,
+    "important_notes": [],
+    "activity_type": "Hunting",
+    "tags": []
+  },
+  {
+    "id": "wma-di-lane-deer-primitive-anterless-2025-12-01",
+    "wma_id": "wma-di-lane",
+    "species": "Deer",
+    "weapon": "Primitive",
+    "weapon_subcategory": null,
+    "follows_statewide": false,
+    "includes": [
+      {
+        "start": "2025-12-01",
+        "end": "2026-01-11"
+      }
+    ],
+    "excludes": [],
+    "quota_required": false,
+    "buck_only": false,
+    "notes_short": "Antlerless only",
+    "antler_restrictions": null,
+    "bag_limit": null,
+    "quota_details": null,
+    "shooting_hours_restriction": null,
+    "sign_in_required": false,
+    "important_notes": [],
+    "activity_type": "Hunting",
+    "tags": []
+  },
+  {
+    "id": "wma-dixon-memorial-deer-firearms-buckshot-dog-2025-11-14",
+    "wma_id": "wma-dixon-memorial",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "weapon_subcategory": "Buckshot Only",
+    "follows_statewide": false,
+    "includes": [
+      {
+        "start": "2025-11-14",
+        "end": "2025-11-15"
+      }
+    ],
+    "excludes": [],
+    "quota_required": true,
+    "buck_only": false,
+    "notes_short": "Dog hunting in designated area only. All dogs used in the hunt must be marked with the selected hunter's name & valid phone number.",
+    "antler_restrictions": null,
+    "bag_limit": null,
+    "quota_details": "Q3 Dog Hunting/Buckshot Only",
+    "shooting_hours_restriction": null,
+    "sign_in_required": false,
+    "important_notes": [
+      "Quota hunt - permit required"
+    ],
+    "activity_type": "Hunting",
+    "tags": []
+  },
+  {
+    "id": "park-hard-labor-creek-deer-firearms-any-2025-11-04",
+    "wma_id": "park-hard-labor-creek",
+    "species": "Deer",
+    "weapon": "Firearms",
+    "weapon_subcategory": null,
+    "follows_statewide": false,
+    "includes": [
+      {
+        "start": "2025-11-04",
+        "end": "2025-11-05"
+      }
+    ],
+    "excludes": [],
+    "quota_required": true,
+    "buck_only": false,
+    "notes_short": "Hunt participants charged $30 nonrefundable hunt fee. Park Pass required. All park access closed to public during hunt.",
+    "antler_restrictions": null,
+    "bag_limit": "5, no more than 2 antlered",
+    "quota_details": "Q250",
+    "shooting_hours_restriction": null,
+    "sign_in_required": false,
+    "important_notes": [
+      "Bag limits apply - see details",
+      "Quota hunt - permit required"
+    ],
+    "activity_type": "Hunting",
+    "tags": ["Bonus"]
+  },
+  {
+    "id": "federal-bond-swamp-nwr-waterfowl-firearms-any-2025-12-12",
+    "wma_id": "federal-bond-swamp-nwr",
+    "species": "Waterfowl",
+    "weapon": "Firearms",
+    "weapon_subcategory": "Shotgun Only",
+    "follows_statewide": false,
+    "includes": [
+      {
+        "start": "2025-12-12",
+        "end": "2025-12-13"
+      }
+    ],
+    "excludes": [],
+    "quota_required": true,
+    "buck_only": false,
+    "notes_short": "Refuge permits required. Hunters required to sign out harvested game using Georgia Game Check System.",
+    "antler_restrictions": null,
+    "bag_limit": null,
+    "quota_details": "Q40",
+    "shooting_hours_restriction": "End at noon",
+    "sign_in_required": false,
+    "important_notes": [
+      "Shooting hours restricted - see details",
+      "Quota hunt - permit required"
+    ],
+    "activity_type": "Hunting",
+    "tags": []
+  },
+  {
+    "id": "vpa-london-farms-dove-firearms-any-2025-09-06",
+    "wma_id": "vpa-london-farms",
+    "species": "Dove",
+    "weapon": "Firearms",
+    "weapon_subcategory": null,
+    "follows_statewide": false,
+    "includes": [
+      {
+        "start": "2025-09-06",
+        "end": "2025-09-06"
+      }
+    ],
+    "excludes": [],
+    "quota_required": true,
+    "buck_only": false,
+    "notes_short": "Selected hunters may check in at 6:00 a.m. Selected hunter may bring up to two guests. No stand-bys.",
+    "antler_restrictions": null,
+    "bag_limit": null,
+    "quota_details": "Q30",
+    "shooting_hours_restriction": null,
+    "sign_in_required": false,
+    "important_notes": [
+      "Quota hunt - permit required"
+    ],
+    "activity_type": "Hunting",
+    "tags": []
+  }
+]

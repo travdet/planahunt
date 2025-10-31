@@ -6,7 +6,7 @@ import type { SeasonWithMeta, WMA } from "@/lib/types";
 import { fmtMDY, normalizeLabel } from "@/lib/util";
 import AccessCalendar from "./AccessCalendar";
 import { getUpcomingWindows } from "@/lib/rules";
-import { getSpeciesIcon, getWeaponColor } from "@/lib/palette";
+import { getSpeciesIcon, getWeaponColor, getAreaCategoryStyle } from "@/lib/palette";
 
 type Props = {
   wma: WMA;
@@ -25,6 +25,14 @@ type WeaponOption = {
   quotaRules: SeasonWithMeta[];
   generalSummary: string | null;
   quotaSummary: string | null;
+  warnings: string[];
+  weaponRestrictions: string[];
+  bagLimits: string[];
+  antlerRestrictions: string[];
+  shootingHours: string[];
+  quotaDetails: string[];
+  notes: string[];
+  activityTypes: string[];
 };
 
 type SpeciesGroup = {
@@ -92,7 +100,15 @@ function buildGroups(rules: SeasonWithMeta[]) {
         generalRules: [],
         quotaRules: [],
         generalSummary: null,
-        quotaSummary: null
+        quotaSummary: null,
+        warnings: [],
+        weaponRestrictions: [],
+        bagLimits: [],
+        antlerRestrictions: [],
+        shootingHours: [],
+        quotaDetails: [],
+        notes: [],
+        activityTypes: []
       };
       speciesEntry.weaponsMap.set(weaponKey, option);
       weaponMeta[weaponKey] = option;
@@ -104,6 +120,27 @@ function buildGroups(rules: SeasonWithMeta[]) {
       option.generalRules.push(rule);
     } else {
       option.quotaRules.push(rule);
+    }
+
+    (rule.important_notes ?? []).forEach((note) => {
+      if (note && !option.warnings.includes(note)) option.warnings.push(note);
+    });
+    if (rule.weapon_subcategory && !option.weaponRestrictions.includes(rule.weapon_subcategory)) {
+      option.weaponRestrictions.push(rule.weapon_subcategory);
+    }
+    if (rule.bag_limit && !option.bagLimits.includes(rule.bag_limit)) option.bagLimits.push(rule.bag_limit);
+    if (rule.antler_restrictions && !option.antlerRestrictions.includes(rule.antler_restrictions)) {
+      option.antlerRestrictions.push(rule.antler_restrictions);
+    }
+    if (rule.shooting_hours_restriction && !option.shootingHours.includes(rule.shooting_hours_restriction)) {
+      option.shootingHours.push(rule.shooting_hours_restriction);
+    }
+    if (rule.quota_details && !option.quotaDetails.includes(rule.quota_details)) {
+      option.quotaDetails.push(rule.quota_details);
+    }
+    if (rule.notes_short && !option.notes.includes(rule.notes_short)) option.notes.push(rule.notes_short);
+    if (rule.activity_type && !option.activityTypes.includes(rule.activity_type)) {
+      option.activityTypes.push(rule.activity_type);
     }
   }
 
@@ -136,6 +173,23 @@ export default function WMAModal({ wma, rules, onClose }: Props) {
   const [selectedWeapons, setSelectedWeapons] = useState<Set<string>>(() => new Set(allWeaponKeys));
   const [expandedWeapons, setExpandedWeapons] = useState<Set<string>>(() => new Set());
   const [hoveredWeapon, setHoveredWeapon] = useState<string | null>(null);
+  const categoryStyle = useMemo(() => getAreaCategoryStyle(wma.area_category), [wma.area_category]);
+  const propertyWarnings = useMemo(() => {
+    const notes = new Set<string>();
+    rules.forEach((rule) => {
+      (rule.important_notes ?? []).forEach((note) => {
+        if (note) notes.add(note);
+      });
+    });
+    return Array.from(notes).sort((a, b) => a.localeCompare(b));
+  }, [rules]);
+  const amenityChips = useMemo(
+    () => [
+      { icon: "🏕️", label: "Camping", allowed: !!wma.camping_allowed },
+      { icon: "🏍️", label: "ATVs", allowed: !!wma.atv_allowed }
+    ],
+    [wma.camping_allowed, wma.atv_allowed]
+  );
 
   const weaponKeysSignature = useMemo(() => allWeaponKeys.join("|"), [allWeaponKeys]);
 
@@ -209,18 +263,28 @@ export default function WMAModal({ wma, rules, onClose }: Props) {
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <h3 id="wma-modal-title" className="text-xl font-semibold text-slate-900">
-              {wma.name}
-              {wma.tract_name ? ` — ${wma.tract_name}` : ""}
-            </h3>
+          <div className="space-y-2">
+            <div className="flex flex-wrap items-center gap-3">
+              <span
+                className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide"
+                style={{ backgroundColor: `${categoryStyle.color}1A`, color: categoryStyle.color }}
+              >
+                <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: categoryStyle.color }} aria-hidden />
+                {categoryStyle.label}
+              </span>
+              <h3 id="wma-modal-title" className="text-xl font-semibold text-slate-900">
+                {wma.name}
+                {wma.tract_name ? ` — ${wma.tract_name}` : ""}
+              </h3>
+            </div>
             <p className="text-sm text-slate-600">
-              {wma.counties.join(", ")}
+              {wma.managing_agency ? `${wma.managing_agency} • ` : ""}
+              {wma.counties.length ? wma.counties.join(", ") : "County pending"}
               {wma.acreage ? ` • ${wma.acreage.toLocaleString()} ac` : ""}
               {wma.phone ? ` • ${wma.phone}` : ""}
             </p>
             {wma.tags && wma.tags.length > 0 && (
-              <div className="mt-2 flex flex-wrap gap-2 text-xs text-slate-600">
+              <div className="flex flex-wrap gap-2 text-xs text-slate-600">
                 {wma.tags.map((tag) => (
                   <span key={tag} className="rounded-full bg-[#E6DFC8] px-2 py-1 text-xs text-slate-700">
                     {tag}
@@ -228,6 +292,19 @@ export default function WMAModal({ wma, rules, onClose }: Props) {
                 ))}
               </div>
             )}
+            <div className="flex flex-wrap gap-2 text-xs text-slate-600">
+              {amenityChips.map((chip) => (
+                <span
+                  key={chip.label}
+                  className={`inline-flex items-center gap-1 rounded-full px-2 py-1 ${
+                    chip.allowed ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"
+                  }`}
+                >
+                  <span aria-hidden>{chip.icon}</span>
+                  {chip.label}: {chip.allowed ? "Allowed" : "Not allowed"}
+                </span>
+              ))}
+            </div>
           </div>
           <div className="flex flex-wrap items-center justify-end gap-2 text-sm text-slate-600">
             <Link
@@ -242,8 +319,58 @@ export default function WMAModal({ wma, rules, onClose }: Props) {
           </div>
         </div>
 
+        {propertyWarnings.length > 0 && (
+          <div className="mt-5 rounded-2xl border-l-4 border-amber-400 bg-amber-50 p-4 text-sm text-amber-800">
+            <div className="flex items-center gap-2 font-semibold">
+              <span aria-hidden>⚠️</span>
+              Important property notes
+            </div>
+            <ul className="mt-2 space-y-1 list-disc pl-5">
+              {propertyWarnings.map((note) => (
+                <li key={note}>{note}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         <div className="mt-8 grid gap-6 lg:grid-cols-[360px,1fr]">
           <div className="space-y-6">
+            <div className="rounded-2xl border border-slate-200 bg-white/60 p-4 shadow-sm">
+              <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Property overview</h4>
+              <div className="mt-3 space-y-3 text-sm text-slate-600">
+                {wma.directions && wma.directions.trim().length > 0 && (
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Directions</p>
+                    <p className="mt-1 leading-relaxed">{wma.directions}</p>
+                  </div>
+                )}
+                {wma.area_notes && wma.area_notes.trim().length > 0 && (
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Area notes</p>
+                    <p className="mt-1 leading-relaxed">{wma.area_notes}</p>
+                  </div>
+                )}
+                <div className="grid gap-2 text-xs text-slate-500 sm:grid-cols-2">
+                  <div>
+                    <p className="font-semibold text-slate-600">Counties</p>
+                    <p className="mt-1 text-slate-700">{wma.counties.length ? wma.counties.join(", ") : "TBD"}</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-slate-600">Region</p>
+                    <p className="mt-1 text-slate-700">{wma.region || "TBD"}</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-slate-600">Acreage</p>
+                    <p className="mt-1 text-slate-700">{wma.acreage ? `${wma.acreage.toLocaleString()} acres` : "—"}</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-slate-600">Contact</p>
+                    <p className="mt-1 text-slate-700">{wma.phone || "—"}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="rounded-2xl border border-slate-200 bg-white/60 p-4 shadow-sm">
               <div className="flex items-center justify-between">
                 <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Hunt filters</h4>
@@ -336,8 +463,38 @@ export default function WMAModal({ wma, rules, onClose }: Props) {
                                   {isExpanded ? "Hide dates" : "Show dates"}
                                 </button>
                               </div>
+                              <div className="mt-2 flex flex-wrap gap-2 text-[11px] text-slate-600">
+                                {weapon.activityTypes.map((activity) => (
+                                  <span key={activity} className="rounded-full bg-slate-100 px-2 py-1 font-medium text-slate-700">
+                                    Activity: {activity}
+                                  </span>
+                                ))}
+                                {weapon.weaponRestrictions.map((restriction) => (
+                                  <span key={restriction} className="rounded-full border border-slate-200 px-2 py-1">
+                                    Restriction: {restriction}
+                                  </span>
+                                ))}
+                                {weapon.quotaDetails.map((detail) => (
+                                  <span key={detail} className="rounded-full border border-amber-200 bg-amber-50 px-2 py-1 text-amber-700">
+                                    {detail}
+                                  </span>
+                                ))}
+                              </div>
+                              {weapon.warnings.length > 0 && (
+                                <div className="mt-2 flex flex-wrap gap-2 text-xs">
+                                  {weapon.warnings.map((warning) => (
+                                    <span
+                                      key={warning}
+                                      className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-1 text-amber-800"
+                                    >
+                                      <span aria-hidden>⚠️</span>
+                                      {warning}
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
                               {isExpanded && (
-                                <div className="mt-3 space-y-1 text-xs text-slate-600">
+                                <div className="mt-3 space-y-2 text-xs text-slate-600">
                                   {hasGeneral && (
                                     <div>
                                       <span className="font-semibold text-slate-700">General:</span> {weapon.generalSummary}
@@ -349,6 +506,46 @@ export default function WMAModal({ wma, rules, onClose }: Props) {
                                     </div>
                                   )}
                                   {!hasGeneral && !hasQuota && <div>No posted dates yet.</div>}
+                                  {weapon.bagLimits.length > 0 && (
+                                    <div>
+                                      <p className="font-semibold text-slate-700">Bag limit</p>
+                                      <ul className="ml-4 list-disc space-y-1">
+                                        {weapon.bagLimits.map((limit) => (
+                                          <li key={limit}>{limit}</li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  )}
+                                  {weapon.antlerRestrictions.length > 0 && (
+                                    <div>
+                                      <p className="font-semibold text-slate-700">Antler restrictions</p>
+                                      <ul className="ml-4 list-disc space-y-1">
+                                        {weapon.antlerRestrictions.map((restriction) => (
+                                          <li key={restriction}>{restriction}</li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  )}
+                                  {weapon.shootingHours.length > 0 && (
+                                    <div>
+                                      <p className="font-semibold text-slate-700">Shooting hours</p>
+                                      <ul className="ml-4 list-disc space-y-1">
+                                        {weapon.shootingHours.map((hours) => (
+                                          <li key={hours}>{hours}</li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  )}
+                                  {weapon.notes.length > 0 && (
+                                    <div>
+                                      <p className="font-semibold text-slate-700">Additional notes</p>
+                                      <ul className="ml-4 list-disc space-y-1">
+                                        {weapon.notes.map((note) => (
+                                          <li key={note}>{note}</li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  )}
                                 </div>
                               )}
                             </div>
