@@ -1,11 +1,11 @@
 import { Suspense } from "react";
-import BetaSavedPageContent from "@/components/beta/BetaSavedPageContent";
+import NotFoundContent from "@/components/NotFoundContent";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
-export default function BetaSavedPage() {
+export default function NotFound() {
   return (
     <Suspense fallback={<LoadingSpinner />}>
-      <BetaSavedPageContent />
+      <NotFoundContent />
     </Suspense>
   );
 }
