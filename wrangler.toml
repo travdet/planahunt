@@ -1,4 +1,4 @@
 name = "planahunt"
 compatibility_date = "2025-11-01"
-pages_build_output_dir = ".open-next/worker"
+pages_build_output_dir = ".open-next"
 compatibility_flags = ["nodejs_compat"]
