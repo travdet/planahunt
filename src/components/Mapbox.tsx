@@ -5,9 +5,9 @@ import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-type Point = { id: string; name: string; lng: number; lat: number };
+export type MapPoint = { id: string; name: string; lng: number; lat: number };
 type Props = {
-  points: Point[];
+  points: MapPoint[];
   onPick?: (id: string) => void;
   token?: string;
 };
