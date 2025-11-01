@@ -4,51 +4,51 @@ export type Weapon = "archery" | "primitive" | "firearms" | "shotgun" | "muzzlel
 
 export type DateRange = { start: string; end: string }; // yyyy-mm-dd
 
-export type SeasonRule = {
+export interface SeasonRule {
   id: string;
   wma_id: string;
-  species: string;          // "Deer" | "Turkey" | "Dove" | etc
-  weapon: Weapon | string;  // keep string to tolerate raw data
-  start_date: string;       // yyyy-mm-dd
-  end_date: string;         // yyyy-mm-dd
-  follows_statewide?: boolean;
-  quota_required?: boolean;
-  notes_short?: string;
-  buck_only?: "yes" | "no";
-  either_sex_last_day?: boolean;
-  last_two_days_either_sex?: boolean;
-  tags?: string[];
-  // optional future fields
-};
+  species: string;
+  weapon: string;
+  start_date: string;
+  end_date: string;
+  quota_required: boolean;
+  buck_only: boolean;
+  tags: string[];
+  notes_short: string;
+}
 
-export type WMA = {
-  id: string;               // slug
+export interface WMA {
+  id: string; // slug
   name: string;
-  tract_name?: string;
-  area_type?: string;       // "WMA"
-  acreage?: number;
-  phone?: string;
+  tract_name: string | null;
+  area_type: string | null;
+  acreage: number | null;
+  phone: string | null;
   counties: string[];
-  region?: string;
-  lat?: number | null;
-  lng?: number | null;
-  source_url?: string;
-  tags?: string[];
-};
+  region: string | null;
+  lat: number | null;
+  lng: number | null;
+  source_url: string | null;
+  tags: string[];
+}
 
-export type FilterState = {
+export interface FilterState {
   query: string;
-  date?: string | null;           // yyyy-mm-dd (single day)
-  dateRange?: DateRange | null;   // for future range picker
+  date: string | null;
+  dateRange: DateRange | null;
   accessType: "any" | AccessType;
   sex: SexFilter;
-  weapons: string[];              // chosen weapons
-  species: string[];              // chosen species
-  counties: string[];             // chosen counties
-  regions: string[];              // chosen DNR regions
-  tags: string[];                 // misc tags (archery-only area, MI hunts, bird range, etc)
-  maxDistanceMi?: number | null;  // from home
-};
+  weapons: string[];
+  species: string[];
+  counties: string[];
+  regions: string[];
+  tags: string[];
+  maxDistanceMi: number | null;
+  home?: {
+    lat: number | null;
+    lng: number | null;
+  } | null;
+}
 
 export type HomeLoc = {
   address: string;

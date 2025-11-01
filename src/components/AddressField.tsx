@@ -3,15 +3,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { geocodeAddress } from "@/lib/map";
-import type { FilterState } from "@/lib/types";
+
+type AddressValue = {
+  homeAddress?: string;
+  homeLat?: number | null;
+  homeLng?: number | null;
+};
 
 type Props = {
-  value: Pick<FilterState, "homeAddress" | "homeLat" | "homeLng">;
-  onChange: (next: Partial<FilterState>) => void;
+  value: AddressValue;
+  onChange: (next: AddressValue) => void;
 };
 
 export default function AddressField({ value, onChange }: Props) {
-  const [q, setQ] = useState(value.homeAddress ?? "");
+  const [q, setQ] = useState<string>(value.homeAddress ?? "");
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<{place_name:string; lat:number; lng:number;}[]>([]);
   const boxRef = useRef<HTMLDivElement>(null);

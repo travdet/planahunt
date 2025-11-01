@@ -125,7 +125,8 @@ export default function FilterBar({
           className="w-full rounded-md border px-3 py-2 h-28"
           value={filters.counties}
           onChange={(e)=>{
-            const opts = Array.from(e.target.selectedOptions).map(o=>o.value);
+            const target = e.target as HTMLSelectElement;
+            const opts = Array.from(target.selectedOptions).map(o=>o.value);
             onChange({ counties: opts });
           }}
         >

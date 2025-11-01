@@ -3,12 +3,30 @@ import { useMemo, useState } from "react";
 import type { FilterState, WMA, SeasonRule } from "@/lib/types";
 
 export default function Filters({ value, onChange, wmas, rules }:{ value: FilterState, onChange:(v:FilterState)=>void, wmas: WMA[], rules: SeasonRule[] }){
-  const [q, setQ] = useState(value.query||"");
-  const regions = useMemo(()=> Array.from(new Set(wmas.map(w=>w.region))).sort(), [wmas]);
-  const counties = useMemo(()=> Array.from(new Set(wmas.flatMap(w=>w.counties))).sort(), [wmas]);
-  const tags = useMemo(()=> Array.from(new Set([...(wmas.flatMap(w=>w.tags||[])), ...(rules.flatMap(r=>r.tags||[]))])).sort(), [wmas, rules]);
-  const speciesOptions = useMemo(()=> Array.from(new Set(rules.map(r=>r.species))).sort(), [rules]);
-  const weaponOptions = useMemo(()=> Array.from(new Set(rules.map(r=>r.weapon))).sort(), [rules]);
+  const [q, setQ] = useState(value.query || "");
+  const regions = useMemo(
+    () => Array.from(new Set(wmas.map((w) => w.region).filter((r): r is string => !!r))).sort(),
+    [wmas]
+  );
+  const counties = useMemo(
+    () => Array.from(new Set(wmas.flatMap((w) => w.counties))).sort(),
+    [wmas]
+  );
+  const tags = useMemo(
+    () =>
+      Array.from(
+        new Set([...(wmas.flatMap((w) => w.tags || [])), ...(rules.flatMap((r) => r.tags || []))])
+      ).sort(),
+    [wmas, rules]
+  );
+  const speciesOptions = useMemo(
+    () => Array.from(new Set(rules.map((r) => r.species))).sort(),
+    [rules]
+  );
+  const weaponOptions = useMemo(
+    () => Array.from(new Set(rules.map((r) => r.weapon))).sort(),
+    [rules]
+  );
 
   const toggle = (arr: string[], item: string) => {
     const set = new Set(arr||[]);
@@ -46,24 +64,43 @@ export default function Filters({ value, onChange, wmas, rules }:{ value: Filter
 
       <div className="hcard p-3 grid grid-cols-2 gap-3">
         <div>
-          <div className="label mb-1">Quota</div>
-          <select value={value.quota} onChange={e=>onChange({...value, quota: e.target.value as any})}
-                  className="w-full rounded-md border px-2 py-1">
-            {["any","non-quota","quota"].map(o => <option key={o} value={o}>{o}</option>)}
-          </select>
-        </div>
-        <div>
-          <div className="label mb-1">Buck-only</div>
-          <select value={value.buckOnly} onChange={e=>onChange({...value, buckOnly: e.target.value as any})}
-                  className="w-full rounded-md border px-2 py-1">
-            {["any","yes","no"].map(o => <option key={o} value={o}>{o}</option>)}
-          </select>
-        </div>
-        <div className="col-span-2">
-          <div className="label mb-1">Open on date</div>
-          <input type="date" value={value.openOn||""} onChange={e=>onChange({...value, openOn: e.target.value||null})}
-                 className="w-full rounded-md border px-2 py-1"/>
-        </div>
+        <div className="label mb-1">Access Type</div>
+        <select
+          value={value.accessType}
+          onChange={e=>onChange({
+            ...value,
+            accessType: e.target.value as FilterState["accessType"],
+          })}
+          className="w-full rounded-md border px-2 py-1"
+        >
+          {["any","general","quota"].map(o => <option key={o} value={o}>{o}</option>)}
+        </select>
+      </div>
+      <div>
+        <div className="label mb-1">Sex</div>
+        <select
+          value={value.sex}
+          onChange={e=>onChange({
+            ...value,
+            sex: e.target.value as FilterState["sex"],
+          })}
+          className="w-full rounded-md border px-2 py-1"
+        >
+          {["any","either","buck","doe"].map(o => <option key={o} value={o}>{o}</option>)}
+        </select>
+      </div>
+      <div className="col-span-2">
+        <div className="label mb-1">Open on date</div>
+        <input
+          type="date"
+          value={value.date || ""}
+          onChange={e=>onChange({
+            ...value,
+            date: e.target.value ? e.target.value : null,
+          })}
+          className="w-full rounded-md border px-2 py-1"
+        />
+      </div>
       </div>
 
       <div className="hcard p-3">
@@ -99,17 +136,45 @@ export default function Filters({ value, onChange, wmas, rules }:{ value: Filter
       <div className="hcard p-3 grid gap-2">
         <div className="label">Distance from Home</div>
         <div className="grid grid-cols-2 gap-2">
-          <input type="number" step="any" placeholder="Lat" className="rounded-md border px-2 py-1"
+          <input
+            type="number"
+            step="any"
+            placeholder="Lat"
+            className="rounded-md border px-2 py-1"
             value={value.home?.lat ?? ""}
-            onChange={e=>onChange({...value, home: { lat: parseFloat(e.target.value||"0"), lng: value.home?.lng ?? 0 }})}/>
-          <input type="number" step="any" placeholder="Lng" className="rounded-md border px-2 py-1"
+            onChange={e=>{
+              const nextLat = e.target.value ? parseFloat(e.target.value) : null;
+              onChange({
+                ...value,
+                home: { lat: nextLat, lng: value.home?.lng ?? null },
+              });
+            }}
+          />
+          <input
+            type="number"
+            step="any"
+            placeholder="Lng"
+            className="rounded-md border px-2 py-1"
             value={value.home?.lng ?? ""}
-            onChange={e=>onChange({...value, home: { lat: value.home?.lat ?? 0, lng: parseFloat(e.target.value||"0") }})}/>
+            onChange={e=>{
+              const nextLng = e.target.value ? parseFloat(e.target.value) : null;
+              onChange({
+                ...value,
+                home: { lat: value.home?.lat ?? null, lng: nextLng },
+              });
+            }}
+          />
         </div>
-        <input type="number" placeholder="Max miles"
+        <input
+          type="number"
+          placeholder="Max miles"
           className="rounded-md border px-2 py-1"
-          value={value.distanceMi ?? ""}
-          onChange={e=>onChange({...value, distanceMi: e.target.value? parseFloat(e.target.value): null})}/>
+          value={value.maxDistanceMi ?? ""}
+          onChange={e=>onChange({
+            ...value,
+            maxDistanceMi: e.target.value ? parseFloat(e.target.value) : null,
+          })}
+        />
       </div>
     </aside>
   );
