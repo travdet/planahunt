@@ -14,7 +14,7 @@ export type SeasonRule = {
   follows_statewide?: boolean;
   quota_required?: boolean;
   notes_short?: string;
-  buck_only?: "yes" | "no";
+  buck_only?: boolean;
   either_sex_last_day?: boolean;
   last_two_days_either_sex?: boolean;
   tags?: string[];
