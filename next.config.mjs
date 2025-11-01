@@ -1,1 +1,7 @@
-export default { reactStrictMode: false }
+export default { 
+  reactStrictMode: false,
+  output: 'export',
+  images: {
+    unoptimized: true,
+  },
+}
