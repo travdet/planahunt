@@ -25,7 +25,7 @@ export default function MapPage(){
     }).filter(x=>!!x.wma);
   }, []);
 
-  const filtered = useMemo(()=> applyFilters(rows, filters, filters.home || undefined, filters.maxDistanceMi || null), [rows, filters]);
+  const filtered = useMemo(()=> applyFilters(rows, filters, filters.home ?? undefined, filters.maxDistanceMi || null), [rows, filters]);
 
   const points = useMemo(()=>{
     const m = new Map<string, {wma:WMA, count:number}>();

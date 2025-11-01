@@ -30,7 +30,7 @@ function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
 export function applyFilters(
   rows: Row[],
   f: FilterState,
-  home?: { lat: number|null; lng: number|null },
+  home?: { lat: number; lng: number } | undefined,
   maxDistanceMi?: number | null
 ) {
   let filtered = rows.filter(({ rule }) => ruleMatchesFilters(rule, f));
@@ -55,11 +55,11 @@ export function applyFilters(
     );
   }
 
-  if (home?.lat && home?.lng && maxDistanceMi) {
+  if (home && maxDistanceMi) {
     filtered = filtered.filter(({ wma }) => {
       if (wma.lat == null || wma.lng == null) return false;
-      const dx = wma.lat - home.lat!;
-      const dy = wma.lng - home.lng!;
+      const dx = wma.lat - home.lat;
+      const dy = wma.lng - home.lng;
       // cheap bounding box ~ ignore if too far (quick cull)
       return Math.abs(dx) < 5 && Math.abs(dy) < 5; // ~ ok
     });
