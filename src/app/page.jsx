@@ -1,6 +1,5 @@
 "use client";
 
-import type { FilterState, HomeLoc, SeasonRule, WMA } from "@/lib/types";
 import { applyFilters } from "@/lib/filters";
 import { fmtMDY } from "@/lib/util";
 import { useState, useMemo } from "react";
@@ -8,14 +7,13 @@ import WMACard from "@/components/WMACard";
 import WMAModal from "@/components/WMAModal";
 import FilterBar from "@/components/FilterBar";
 import HomeLocation from "@/components/HomeLocation";
-import Mapbox from "@/components/Mapbox";
 
 import wmas from "@/data/wmas.json";
 import rulesRaw from "@/data/seasons.json";
 
 export default function Page() {
   // initial filters
-  const [filters, setFilters] = useState<FilterState>({
+  const [filters, setFilters] = useState({
     query: "",
     date: null,
     dateRange: null,
@@ -29,23 +27,26 @@ export default function Page() {
     maxDistanceMi: null
   });
 
-  const [home, setHome] = useState<HomeLoc>({ address: "", lat: null, lng: null });
+  const [home, setHome] = useState({ address: "", lat: null, lng: null });
 
   // Modal state
-  const [openId, setOpenId] = useState<string | null>(null);
+  const [openId, setOpenId] = useState(null);
 
   // Data joins
   const rows = useMemo(()=>{
-    const byWma = new Map<string, WMA>();
-    (wmas as WMA[]).forEach(w => byWma.set(w.id, w));
-    return (rulesRaw as SeasonRule[])
-      .map(r => ({ wma: byWma.get(r.wma_id)! , rule: r }))
-      .filter(x => !!x.wma);
+    const byWma = new Map();
+    wmas.forEach((w) => byWma.set(w.id, w));
+    return rulesRaw
+      .map((r) => {
+        const wma = byWma.get(r.wma_id);
+        return wma ? { wma, rule: r } : null;
+      })
+      .filter(Boolean);
   }, []);
 
   const allCounties = useMemo(()=>{
-    const set = new Set<string>();
-    (wmas as WMA[]).forEach(w => w.counties.forEach(c => set.add(c)));
+    const set = new Set();
+    wmas.forEach((w) => w.counties.forEach((c) => set.add(c)));
     return Array.from(set);
   }, []);
 
@@ -54,10 +55,10 @@ export default function Page() {
   }, [rows, filters, home.lat, home.lng]);
 
   const grouped = useMemo(()=>{
-    const m = new Map<string, { wma: WMA; rules: SeasonRule[] }>();
+    const m = new Map();
     filtered.forEach(({ wma, rule }) => {
       if (!m.has(wma.id)) m.set(wma.id, { wma, rules: [] });
-      m.get(wma.id)!.rules.push(rule);
+      m.get(wma.id).rules.push(rule);
     });
     return Array.from(m.values()).sort((a,b)=>a.wma.name.localeCompare(b.wma.name));
   }, [filtered]);

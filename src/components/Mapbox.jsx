@@ -5,16 +5,9 @@ import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-type Point = { id: string; name: string; lng: number; lat: number };
-type Props = {
-  points: Point[];
-  onPick?: (id: string) => void;
-  token?: string;
-};
-
-export default function Mapbox({ points, onPick, token }: Props) {
-  const el = useRef<HTMLDivElement | null>(null);
-  const mapRef = useRef<mapboxgl.Map | null>(null);
+export default function Mapbox({ points, onPick, token }) {
+  const el = useRef(null);
+  const mapRef = useRef(null);
 
   useEffect(() => {
     if (!el.current || mapRef.current) return;

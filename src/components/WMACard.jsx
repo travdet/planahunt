@@ -1,24 +1,21 @@
 "use client";
 import { fmtMDY, haversineMi, minutesAt } from "@/lib/util";
-import type { SeasonRule, WMA } from "@/lib/types";
 import { useMemo } from "react";
 import { MapPin } from "lucide-react";
 
 export default function WMACard({
-  wma, rules, date, home, onOpen
-}: {
-  wma: WMA;
-  rules: SeasonRule[];
-  date?: string | null;
-  home?: { lat: number|null, lng: number|null } | null;
-  onOpen: ()=>void;
+  wma,
+  rules,
+  date,
+  home,
+  onOpen
 }) {
   const today = date || null;
 
   const summary = useMemo(()=>{
     // fold rules into “today open?” & next/active windows
-    let openNow: null | { access: "general"|"quota"; weapons: string[]; species: string[] } = null;
-    const windows: { access:"general"|"quota"; start:string; end:string; weapon:string; species:string }[] = [];
+    let openNow = null;
+    const windows = [];
 
     rules.forEach(r => {
       const access = r.quota_required ? "quota" : "general";

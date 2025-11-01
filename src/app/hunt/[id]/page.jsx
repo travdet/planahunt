@@ -1,14 +1,13 @@
 import wmas from "@/data/wmas.json";
 import rulesRaw from "@/data/seasons.json";
-import type { SeasonRule, WMA } from "@/lib/types";
 import { fmtMDY } from "@/lib/util";
 import AccessCalendar from "@/components/AccessCalendar";
 
-export default function HuntDetail({ params }: { params: { id: string } }) {
+export default function HuntDetail({ params }) {
   const id = decodeURIComponent(params.id);
-  const wma = (wmas as WMA[]).find(w => w.id === id);
+  const wma = wmas.find((w) => w.id === id);
   if (!wma) return <div className="p-6">WMA not found.</div>;
-  const rules = (rulesRaw as SeasonRule[]).filter(r => r.wma_id === id);
+  const rules = rulesRaw.filter((r) => r.wma_id === id);
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-6">

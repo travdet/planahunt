@@ -1,14 +1,11 @@
 "use client";
-import type { SeasonRule, WMA } from "@/lib/types";
 import { fmtMDY } from "@/lib/util";
 import AccessCalendar from "./AccessCalendar";
 
 export default function WMAModal({
-  wma, rules, onClose
-}:{
-  wma: WMA;
-  rules: SeasonRule[];
-  onClose: ()=>void;
+  wma,
+  rules,
+  onClose
 }) {
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 p-4">

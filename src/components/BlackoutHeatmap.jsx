@@ -1,7 +1,6 @@
 "use client";
-import type { SeasonRule } from "@/lib/types";
 
-export default function BlackoutHeatmap({ rules }:{ rules: SeasonRule[] }){
+export default function BlackoutHeatmap({ rules }){
   const days = 90;
   const today = new Date(); today.setHours(0,0,0,0);
   const boxes = Array.from({length:days}, (_,i)=>{

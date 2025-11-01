@@ -1,25 +1,17 @@
-// src/components/AddressField.tsx
 "use client";
 
 import { useEffect, useRef, useState } from "react";
 import { geocodeAddress } from "@/lib/map";
-import type { FilterState } from "@/lib/types";
-
-type Props = {
-  value: Pick<FilterState, "homeAddress" | "homeLat" | "homeLng">;
-  onChange: (next: Partial<FilterState>) => void;
-};
-
-export default function AddressField({ value, onChange }: Props) {
+export default function AddressField({ value, onChange }) {
   const [q, setQ] = useState(value.homeAddress ?? "");
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState<{place_name:string; lat:number; lng:number;}[]>([]);
-  const boxRef = useRef<HTMLDivElement>(null);
+  const [results, setResults] = useState([]);
+  const boxRef = useRef(null);
 
   useEffect(() => {
-    function onClick(e: MouseEvent) {
+    function onClick(e) {
       if (!boxRef.current) return;
-      if (!boxRef.current.contains(e.target as Node)) setResults([]);
+      if (!boxRef.current.contains(e.target)) setResults([]);
     }
     window.addEventListener("click", onClick);
     return () => window.removeEventListener("click", onClick);
@@ -36,7 +28,7 @@ export default function AddressField({ value, onChange }: Props) {
     }
   }
 
-  function select(hit: {place_name:string; lat:number; lng:number}) {
+  function select(hit) {
     onChange({ homeAddress: hit.place_name, homeLat: hit.lat, homeLng: hit.lng });
     setQ(hit.place_name);
     setResults([]);

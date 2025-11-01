@@ -1,8 +1,7 @@
-import type { FilterState, WMA, SeasonRule } from "./types";
 import { overlap, isDateWithin } from "./util";
 
 // Determines if a rule matches filter selections
-function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
+function ruleMatchesFilters(rule, f) {
   if (f.species.length && !f.species.includes(rule.species.toLowerCase())) return false;
   if (f.weapons.length && !f.weapons.includes(String(rule.weapon).toLowerCase())) return false;
   if (f.accessType !== "any") {
@@ -26,10 +25,10 @@ function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
 }
 
 export function applyFilters(
-  rows: { wma: WMA; rule: SeasonRule }[],
-  f: FilterState,
-  home?: { lat: number|null; lng: number|null },
-  maxDistanceMi?: number | null
+  rows,
+  f,
+  home,
+  maxDistanceMi
 ) {
   let filtered = rows.filter(({ rule }) => ruleMatchesFilters(rule, f));
 
@@ -56,8 +55,8 @@ export function applyFilters(
   if (home?.lat && home?.lng && maxDistanceMi) {
     filtered = filtered.filter(({ wma }) => {
       if (wma.lat == null || wma.lng == null) return false;
-      const dx = wma.lat - home.lat!;
-      const dy = wma.lng - home.lng!;
+      const dx = wma.lat - home.lat;
+      const dy = wma.lng - home.lng;
       // cheap bounding box ~ ignore if too far (quick cull)
       return Math.abs(dx) < 5 && Math.abs(dy) < 5; // ~ ok
     });

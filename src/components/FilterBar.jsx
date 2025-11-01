@@ -1,6 +1,5 @@
 "use client";
 import { useMemo } from "react";
-import type { FilterState } from "@/lib/types";
 import clsx from "clsx";
 
 const tan = "bg-amber-100 text-amber-900 border-amber-200";
@@ -10,16 +9,15 @@ const weaponOptions = ["archery","primitive","firearms","shotgun","muzzleloader"
 const speciesOptions = ["deer","turkey","bear","dove","quail","rabbit","hog","waterfowl","small game"];
 
 export default function FilterBar({
-  filters, onChange, allCounties
-}: {
-  filters: FilterState;
-  onChange: (f: Partial<FilterState>) => void;
-  allCounties: string[];
+  filters,
+  onChange,
+  allCounties
 }) {
   const countySorted = useMemo(() => Array.from(new Set(allCounties)).sort(), [allCounties]);
 
-  function toggleArr(key: keyof FilterState, value: string) {
-    const arr = new Set((filters[key] as string[]) || []);
+  function toggleArr(key, value) {
+    const current = Array.isArray(filters[key]) ? filters[key] : [];
+    const arr = new Set(current);
     if (arr.has(value)) { arr.delete(value); } else { arr.add(value); }
     onChange({ [key]: Array.from(arr) });
   }
@@ -52,7 +50,7 @@ export default function FilterBar({
         <select
           className="w-full rounded-md border px-3 py-2"
           value={filters.accessType}
-          onChange={(e)=>onChange({ accessType: e.target.value as any })}
+          onChange={(e)=>onChange({ accessType: e.target.value })}
         >
           <option value="any">Any</option>
           <option value="general">General</option>
@@ -65,7 +63,7 @@ export default function FilterBar({
         <select
           className="w-full rounded-md border px-3 py-2"
           value={filters.sex}
-          onChange={(e)=>onChange({ sex: e.target.value as any })}
+          onChange={(e)=>onChange({ sex: e.target.value })}
         >
           <option value="any">Any</option>
           <option value="either">Either Sex</option>

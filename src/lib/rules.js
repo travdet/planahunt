@@ -1,6 +1,4 @@
-import type { SeasonRule } from "./types";
-
-export function isOpenOn(rule: SeasonRule, dateISO: string){
+export function isOpenOn(rule, dateISO){
   const s = new Date(rule.start_date+"T00:00:00").getTime();
   const e = new Date(rule.end_date+"T23:59:59").getTime();
   const t = new Date(dateISO+"T12:00:00").getTime();
@@ -8,7 +6,7 @@ export function isOpenOn(rule: SeasonRule, dateISO: string){
 }
 
 // Placeholder statewide resolver (extend with real per-species windows if needed)
-export function resolveStatewide(rule: SeasonRule, statewide: any){
+export function resolveStatewide(rule, statewide){
   if (!rule.follows_statewide) return rule;
   const key = rule.species.toLowerCase().includes("turkey") ? "Turkey" : "Deer Archery";
   const sw = statewide[key];
