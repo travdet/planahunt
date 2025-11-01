@@ -29,7 +29,14 @@ export type SeasonRule = {
   sign_in_required: boolean;
   important_notes: string[];
   activity_type: "Hunting" | "Dog Training" | "Shooting Range" | "Archery Range" | string;
+  application_deadline?: string | null;
+  results_notification_date?: string | null;
+  spots_available?: number | null;
+  estimated_applicants?: number | null;
+  application_url?: string | null;
 };
+
+export type AccessProfile = "general" | "quota" | "mixed" | "none";
 
 export type SeasonWithMeta = SeasonRule & {
   access: AccessType;

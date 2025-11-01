@@ -3,10 +3,11 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import type { SeasonWithMeta, WMA } from "@/lib/types";
-import { fmtMDY, normalizeLabel } from "@/lib/util";
+import { fmtMDY, normalizeLabel, daysUntil, todayISO } from "@/lib/util";
 import AccessCalendar from "./AccessCalendar";
 import { getUpcomingWindows } from "@/lib/rules";
 import { getSpeciesIcon, getWeaponColor, getAreaCategoryStyle } from "@/lib/palette";
+import QuotaReminder from "./QuotaReminder";
 
 type Props = {
   wma: WMA;
@@ -560,21 +561,62 @@ export default function WMAModal({ wma, rules, onClose }: Props) {
 
             <div className="rounded-2xl border border-slate-200 bg-white/60 p-4 shadow-sm">
               <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Upcoming windows</h4>
-              <div className="mt-3 space-y-2 text-sm text-slate-600">
+              <div className="mt-3 space-y-3 text-sm text-slate-600">
                 {upcoming.length ? (
-                  upcoming.map((window) => (
-                    <div key={window.id} className="rounded-lg border border-slate-200 bg-slate-50 p-2">
-                      <div className="flex items-center justify-between text-xs uppercase tracking-wide text-slate-500">
-                        <span>{window.species}</span>
-                        <span className={window.access === "general" ? "text-emerald-600" : "text-amber-600"}>
-                          {window.access === "general" ? "General" : "Quota"}
-                        </span>
+                  upcoming.map((window) => {
+                    const deadline = window.applicationDeadline ?? null;
+                    const daysRemaining = deadline ? daysUntil(deadline, todayISO()) : null;
+                    const quota = window.access === "quota";
+                    return (
+                      <div key={window.id} className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                        <div className="flex flex-wrap items-center justify-between gap-2 text-xs uppercase tracking-wide text-slate-500">
+                          <span>{window.species}</span>
+                          <span className={quota ? "text-amber-600" : "text-emerald-600"}>
+                            {quota ? "Quota" : "General"}
+                          </span>
+                        </div>
+                        <div className="mt-1 text-sm font-semibold text-slate-800">{window.weapon}</div>
+                        <div className="text-xs text-slate-500">{fmtMDY(window.start)} – {fmtMDY(window.end)}</div>
+                        {window.notes ? <div className="mt-2 text-xs text-slate-500">{window.notes}</div> : null}
+                        {quota && (deadline || window.spotsAvailable || window.estimatedApplicants) && (
+                          <div className="mt-2 space-y-1 text-[11px] text-slate-600">
+                            {deadline && (
+                              <div className="inline-flex flex-wrap items-center gap-1 rounded bg-amber-50 px-2 py-1 text-amber-800">
+                                <span aria-hidden>⏰</span>
+                                Apply by {fmtMDY(deadline)}
+                                {typeof daysRemaining === "number" && daysRemaining >= 0 && (
+                                  <span className="font-semibold">
+                                    {daysRemaining === 0
+                                      ? " • Deadline today"
+                                      : daysRemaining === 1
+                                      ? " • 1 day left"
+                                      : ` • ${daysRemaining} days left`}
+                                  </span>
+                                )}
+                              </div>
+                            )}
+                            <div className="flex flex-wrap gap-2">
+                              {window.spotsAvailable != null && <span>Spots: {window.spotsAvailable}</span>}
+                              {window.estimatedApplicants != null && (
+                                <span>Last year: ~{window.estimatedApplicants} applications</span>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                        {quota && deadline && (
+                          <div className="mt-3">
+                            <QuotaReminder
+                              huntId={window.id}
+                              wmaName={wma.name}
+                              label={`${window.species} — ${window.weapon}`}
+                              applicationDeadline={deadline}
+                              applicationUrl={window.applicationUrl}
+                            />
+                          </div>
+                        )}
                       </div>
-                      <div className="mt-1 text-sm font-medium text-slate-800">{window.weapon}</div>
-                      <div className="text-xs text-slate-500">{fmtMDY(window.start)} – {fmtMDY(window.end)}</div>
-                      {window.notes ? <div className="mt-1 text-xs text-slate-500">{window.notes}</div> : null}
-                    </div>
-                  ))
+                    );
+                  })
                 ) : (
                   <p className="text-xs text-slate-500">No upcoming seasons posted.</p>
                 )}

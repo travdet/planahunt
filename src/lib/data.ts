@@ -119,7 +119,12 @@ export const SEASON_LIST: SeasonWithMeta[] = (seasonsData as SeasonRule[])
       shooting_hours_restriction: rule.shooting_hours_restriction ?? null,
       sign_in_required: rule.sign_in_required ?? false,
       important_notes: rule.important_notes ?? [],
-      activity_type: rule.activity_type ?? "Hunting"
+      activity_type: rule.activity_type ?? "Hunting",
+      application_deadline: rule.application_deadline ?? null,
+      results_notification_date: rule.results_notification_date ?? null,
+      spots_available: rule.spots_available ?? null,
+      estimated_applicants: rule.estimated_applicants ?? null,
+      application_url: rule.application_url ?? null
     };
 
     return {

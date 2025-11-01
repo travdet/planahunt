@@ -1,3 +1,5 @@
+import type { AccessProfile } from "./types";
+
 const WEAPON_COLOR_MAP: Record<string, string> = {
   archery: "#10b981",
   bow: "#10b981",
@@ -89,6 +91,43 @@ export function getAreaCategoryStyle(category: string) {
         bgColor: "#f3f4f6",
         textColor: "#374151",
         label: "Area"
+      } as const;
+  }
+}
+
+export function getAccessBadgeStyle(profile: AccessProfile) {
+  switch (profile) {
+    case "general":
+      return {
+        color: "#10B981",
+        bgColor: "#D1FAE5",
+        textColor: "#065F46",
+        icon: "✓",
+        label: "General access"
+      } as const;
+    case "quota":
+      return {
+        color: "#F59E0B",
+        bgColor: "#FEF3C7",
+        textColor: "#92400E",
+        icon: "🎟️",
+        label: "Quota hunt"
+      } as const;
+    case "mixed":
+      return {
+        color: "#6366F1",
+        bgColor: "#E0E7FF",
+        textColor: "#312E81",
+        icon: "◐",
+        label: "Mixed access"
+      } as const;
+    default:
+      return {
+        color: "#6B7280",
+        bgColor: "#F3F4F6",
+        textColor: "#374151",
+        icon: "–",
+        label: "No seasons"
       } as const;
   }
 }

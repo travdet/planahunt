@@ -15,7 +15,8 @@ import SortDropdown, { type SortOption } from "@/components/SortDropdown";
 import WMACard from "@/components/WMACard";
 import WMAModal from "@/components/WMAModal";
 import { fmtMDY, todayISO } from "@/lib/util";
-import { getUpcomingWindows, isRuleActiveOnDate } from "@/lib/rules";
+import { getUpcomingWindows, isRuleActiveOnDate, summarizeAccessProfile } from "@/lib/rules";
+import { getAccessBadgeStyle } from "@/lib/palette";
 import { useFavorites } from "@/hooks/useFavorites";
 
 const INITIAL_FILTERS: FilterState = {
@@ -23,7 +24,7 @@ const INITIAL_FILTERS: FilterState = {
   date: null,
   dateRange: null,
   dates: [],
-  accessType: "any",
+  accessType: "general",
   sex: "any",
   weapons: [],
   species: [],
@@ -194,6 +195,8 @@ export default function Page() {
         const upcomingLabel = upcoming
           ? `${upcoming.species} (${upcoming.weapon}) • ${fmtMDY(upcoming.start)} – ${fmtMDY(upcoming.end)}`
           : null;
+        const accessProfile = summarizeAccessProfile(item.allRules);
+        const accessBadge = getAccessBadgeStyle(accessProfile);
 
         return {
           id: item.wma.id,
@@ -213,7 +216,10 @@ export default function Page() {
             : null,
           areaCategory: item.wma.area_category ?? "WMA",
           campingAllowed: !!item.wma.camping_allowed,
-          atvAllowed: !!item.wma.atv_allowed
+          atvAllowed: !!item.wma.atv_allowed,
+          accessProfile,
+          accessLabel: accessBadge.label,
+          accessIcon: accessBadge.icon
         };
       });
   }, [sorted]);
@@ -376,7 +382,8 @@ function applyQuickFilters(
 
   return list.filter((entry) => {
     const category = (entry.wma.area_category || "WMA").toLowerCase().trim();
-    const hasGeneral = entry.allRules.some((rule) => rule.access === "general");
+    const accessProfile = summarizeAccessProfile(entry.allRules);
+    const hasGeneral = accessProfile === "general" || accessProfile === "mixed";
     const hasArchery = entry.allRules.some((rule) => {
       const weapon = String(rule.weapon).toLowerCase();
       return rule.weaponKey.includes("archery") || weapon.includes("archery");
@@ -388,7 +395,7 @@ function applyQuickFilters(
     if (quick.favoritesOnly && !favoritesSet.has(entry.wma.id)) return false;
     if (quick.openNow && !isOpenToday) return false;
     if (quick.camping && !entry.wma.camping_allowed) return false;
-    if (quick.noQuota && !hasGeneral) return false;
+    if (quick.generalAccess && !hasGeneral) return false;
     if (quick.archery && !hasArchery) return false;
     if (quick.federal && category !== "federal") return false;
     if (quick.stateParks && category !== "state park") return false;

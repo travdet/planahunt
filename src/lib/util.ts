@@ -60,3 +60,11 @@ export function minutesAt(avgMph: number, miles: number) {
   if (!avgMph || avgMph <= 0) return null;
   return Math.round((miles / avgMph) * 60);
 }
+
+export function daysUntil(iso: string, from: string = todayISO()) {
+  if (!iso) return null;
+  const target = new Date(`${iso}T00:00:00`);
+  const base = new Date(`${from}T00:00:00`);
+  const diffMs = target.getTime() - base.getTime();
+  return Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+}

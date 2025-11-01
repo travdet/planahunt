@@ -2,6 +2,7 @@
 
 import type { FilterState } from "@/lib/types";
 import { getAreaCategoryStyle } from "@/lib/palette";
+import { CircleCheck, Ticket } from "lucide-react";
 
 type Option = { label: string; value: string };
 
@@ -85,15 +86,42 @@ export default function FilterBar({ filters, onChange, onReset, options }: Props
       <div className="grid gap-3">
         <div>
           <label className="text-sm font-medium text-slate-700">Access Type</label>
-          <select
-            className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
-            value={filters.accessType}
-            onChange={(event) => onChange({ accessType: event.target.value as FilterState["accessType"] })}
-          >
-            <option value="any">Any</option>
-            <option value="general">General</option>
-            <option value="quota">Quota</option>
-          </select>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {[{
+              value: "any" as FilterState["accessType"],
+              label: "All hunts",
+              description: "Show both general and quota opportunities"
+            },
+            {
+              value: "general" as FilterState["accessType"],
+              label: "General access",
+              description: "Walk-on hunting, no lottery required",
+              icon: <CircleCheck className="h-4 w-4" aria-hidden />
+            },
+            {
+              value: "quota" as FilterState["accessType"],
+              label: "Quota hunts",
+              description: "Lottery or reservation required",
+              icon: <Ticket className="h-4 w-4" aria-hidden />
+            }].map((option) => {
+              // dev-note: keep these options in sync with INITIAL_FILTERS.accessType defaults.
+              const selected = filters.accessType === option.value;
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  title={option.description}
+                  className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium transition ${
+                    selected ? SELECTED_CLASS : UNSELECTED_CLASS
+                  }`}
+                  onClick={() => onChange({ accessType: option.value })}
+                >
+                  {option.icon ?? null}
+                  {option.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
         <div>
           <label className="text-sm font-medium text-slate-700">Buck / Doe</label>

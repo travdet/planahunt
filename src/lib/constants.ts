@@ -3,7 +3,8 @@ export const FALLBACK_MAPBOX_TOKEN =
 
 export const STORAGE_KEYS = {
   home: "planahunt:home-location",
-  wmaCoords: "planahunt:wma-coords"
+  wmaCoords: "planahunt:wma-coords",
+  quotaReminders: "planahunt:quota-reminders"
 } as const;
 
 export const AVERAGE_DRIVE_SPEED_MPH = 45;

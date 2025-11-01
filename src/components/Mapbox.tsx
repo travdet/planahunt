@@ -4,8 +4,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-import { getAreaCategoryStyle } from "@/lib/palette";
+import { getAccessBadgeStyle } from "@/lib/palette";
 import { getMapboxToken } from "@/lib/map";
+import type { AccessProfile } from "@/lib/types";
 
 type UpcomingSummary = { label: string; access?: string | null } | null;
 
@@ -23,6 +24,9 @@ type Point = {
   areaCategory?: string | null;
   campingAllowed?: boolean;
   atvAllowed?: boolean;
+  accessProfile: AccessProfile;
+  accessLabel: string;
+  accessIcon?: string | null;
 };
 
 type Props = {
@@ -111,14 +115,12 @@ export default function Mapbox({ points, onPick, token, home }: Props) {
     const validPoints = points.filter((point) => typeof point.lat === "number" && typeof point.lng === "number");
 
     validPoints.forEach((point) => {
-      const shape = normalizeCategory(point.areaCategory);
-      const style = getAreaCategoryStyle(shape);
-      const element = buildMarkerElement(shape, style.color);
+      const markerElement = buildMarkerElement(point.accessProfile, point.accessIcon ?? "");
 
-      const marker = new mapboxgl.Marker({ element }).setLngLat([point.lng, point.lat]).addTo(map);
-      element.classList.add("cursor-pointer");
-      element.setAttribute("tabindex", "0");
-      element.setAttribute("aria-label", `${point.name} marker`);
+      const marker = new mapboxgl.Marker({ element: markerElement }).setLngLat([point.lng, point.lat]).addTo(map);
+      markerElement.classList.add("cursor-pointer");
+      markerElement.setAttribute("tabindex", "0");
+      markerElement.setAttribute("aria-label", `${point.name} marker`);
 
       const enter = () => {
         const position = map.project([point.lng, point.lat]);
@@ -132,11 +134,11 @@ export default function Mapbox({ points, onPick, token, home }: Props) {
         onPick?.(point.id);
       };
 
-      element.addEventListener("mouseenter", enter);
-      element.addEventListener("mouseleave", leave);
-      element.addEventListener("focus", enter);
-      element.addEventListener("blur", leave);
-      element.addEventListener("click", click);
+      markerElement.addEventListener("mouseenter", enter);
+      markerElement.addEventListener("mouseleave", leave);
+      markerElement.addEventListener("focus", enter);
+      markerElement.addEventListener("blur", leave);
+      markerElement.addEventListener("click", click);
 
       markersRef.current.push({ marker, enter, leave, click });
     });
@@ -204,6 +206,7 @@ export default function Mapbox({ points, onPick, token, home }: Props) {
           style={{ left: hoverDisplay.x, top: hoverDisplay.y }}
         >
           <p className="text-sm font-semibold text-slate-900">{hoverDisplay.point.name}</p>
+          <p className="text-xs uppercase tracking-wide text-slate-500">{hoverDisplay.point.accessLabel}</p>
           {hoverDisplay.point.areaCategory && (
             <p className="text-xs text-slate-500">{hoverDisplay.point.areaCategory}</p>
           )}
@@ -249,85 +252,48 @@ export default function Mapbox({ points, onPick, token, home }: Props) {
   );
 }
 
-function normalizeCategory(category?: string | null) {
-  if (!category) return "WMA";
-  const lower = category.toLowerCase();
-  if (lower.includes("federal")) return "Federal";
-  if (lower.includes("state")) return "State Park";
-  if (lower.includes("vpa")) return "VPA";
-  return "WMA";
-}
-
-function buildMarkerElement(category: string, color: string) {
-  const shape = category.toLowerCase();
-  const svg = createShapeSVG(shape, color);
-  const element = document.createElement("div");
-  element.innerHTML = svg;
-  element.className = "drop-shadow-md";
-  return element;
-}
-
-function createShapeSVG(shape: string, color: string) {
-  if (shape === "federal") {
-    return `<svg width="30" height="30" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="24" height="24" fill="${color}" stroke="white" stroke-width="2" rx="4"/></svg>`;
-  }
-  if (shape === "state park") {
-    return `<svg width="30" height="30" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><polygon points="16,4 28,28 4,28" fill="${color}" stroke="white" stroke-width="2" stroke-linejoin="round"/></svg>`;
-  }
-  if (shape === "vpa") {
-    return `<svg width="30" height="30" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><polygon points="16,4 28,16 16,28 4,16" fill="${color}" stroke="white" stroke-width="2" stroke-linejoin="round"/></svg>`;
-  }
-  return `<svg width="30" height="30" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="14" fill="${color}" stroke="white" stroke-width="2"/></svg>`;
-}
-
 function MapLegend() {
   return (
     <div className="pointer-events-none absolute bottom-4 left-4 z-10 rounded-lg border border-slate-200 bg-white p-3 text-xs text-slate-600 shadow">
-      <p className="mb-2 font-semibold text-slate-700">Area types</p>
+      <p className="mb-2 font-semibold text-slate-700">Access on this map</p>
       <div className="space-y-1.5">
-        <LegendRow label="WMA" color="#22c55e" shape="circle" />
-        <LegendRow label="Federal" color="#3b82f6" shape="square" />
-        <LegendRow label="State Park" color="#ef4444" shape="triangle" />
-        <LegendRow label="VPA" color="#a855f7" shape="diamond" />
+        <LegendRow profile="general" />
+        <LegendRow profile="quota" />
+        <LegendRow profile="mixed" />
+        <LegendRow profile="none" />
       </div>
     </div>
   );
 }
 
-function LegendRow({ label, color, shape }: { label: string; color: string; shape: "circle" | "square" | "triangle" | "diamond" }) {
+function LegendRow({ profile }: { profile: AccessProfile }) {
+  const style = getAccessBadgeStyle(profile);
   return (
     <div className="flex items-center gap-2">
-      <LegendIcon color={color} shape={shape} />
-      <span>{label}</span>
+      <LegendMarker profile={profile} icon={style.icon} />
+      <span>{style.label}</span>
     </div>
   );
 }
 
-function LegendIcon({ color, shape }: { color: string; shape: "circle" | "square" | "triangle" | "diamond" }) {
-  if (shape === "square") {
-    return (
-      <svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-        <rect x="4" y="4" width="24" height="24" fill={color} stroke="white" strokeWidth="2" rx="4" />
-      </svg>
-    );
-  }
-  if (shape === "triangle") {
-    return (
-      <svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="16,4 28,28 4,28" fill={color} stroke="white" strokeWidth="2" strokeLinejoin="round" />
-      </svg>
-    );
-  }
-  if (shape === "diamond") {
-    return (
-      <svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="16,4 28,16 16,28 4,16" fill={color} stroke="white" strokeWidth="2" strokeLinejoin="round" />
-      </svg>
-    );
-  }
+function buildMarkerElement(profile: AccessProfile, icon: string) {
+  const style = getAccessBadgeStyle(profile);
+  const wrapper = document.createElement("div");
+  wrapper.className = "flex h-8 w-8 items-center justify-center rounded-full border-2 border-white text-sm font-semibold text-white drop-shadow";
+  wrapper.style.backgroundColor = style.color;
+  wrapper.textContent = icon || style.icon || "•";
+  wrapper.setAttribute("role", "presentation");
+  return wrapper;
+}
+
+function LegendMarker({ profile, icon }: { profile: AccessProfile; icon: string }) {
+  const style = getAccessBadgeStyle(profile);
   return (
-    <svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="16" cy="16" r="14" fill={color} stroke="white" strokeWidth="2" />
-    </svg>
+    <span
+      className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white text-sm font-semibold text-white shadow"
+      style={{ backgroundColor: style.color }}
+    >
+      {icon || style.icon || "•"}
+    </span>
   );
 }

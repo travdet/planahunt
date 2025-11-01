@@ -6,7 +6,7 @@ import { Star } from "lucide-react";
 export type QuickFilterState = {
   openNow: boolean;
   camping: boolean;
-  noQuota: boolean;
+  generalAccess: boolean;
   archery: boolean;
   federal: boolean;
   stateParks: boolean;
@@ -24,7 +24,7 @@ type Props = {
 const INITIAL_STATE: QuickFilterState = {
   openNow: false,
   camping: false,
-  noQuota: false,
+  generalAccess: false,
   archery: false,
   federal: false,
   stateParks: false,
@@ -61,7 +61,7 @@ export default function QuickFilters({ value, onChange, favoritesCount }: Props)
       <div className="mt-3 flex flex-wrap gap-2">
         <FilterChip label="🎯 Open now" active={value.openNow} onClick={() => toggle("openNow")} />
         <FilterChip label="🏕️ Camping" active={value.camping} onClick={() => toggle("camping")} />
-        <FilterChip label="🚫 No quota" active={value.noQuota} onClick={() => toggle("noQuota")} />
+        <FilterChip label="✓ General access" active={value.generalAccess} onClick={() => toggle("generalAccess")} />
         <FilterChip label="🏹 Archery" active={value.archery} onClick={() => toggle("archery")} />
         <FilterChip label="🏛️ Federal" active={value.federal} onClick={() => toggle("federal")} />
         <FilterChip label="🌲 State Parks" active={value.stateParks} onClick={() => toggle("stateParks")} />

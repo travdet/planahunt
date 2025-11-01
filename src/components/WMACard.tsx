@@ -6,9 +6,9 @@ import { MapPin } from "lucide-react";
 import FavoriteButton from "@/components/FavoriteButton";
 import SeasonBadge from "@/components/SeasonBadge";
 import type { SeasonWithMeta, WMA } from "@/lib/types";
-import { fmtMDY } from "@/lib/util";
-import { dayStatus, getUpcomingWindows, isRuleActiveOnDate } from "@/lib/rules";
-import { getAreaCategoryStyle } from "@/lib/palette";
+import { fmtMDY, todayISO, daysUntil } from "@/lib/util";
+import { dayStatus, getUpcomingWindows, isRuleActiveOnDate, summarizeAccessProfile } from "@/lib/rules";
+import { getAreaCategoryStyle, getAccessBadgeStyle } from "@/lib/palette";
 
 type Props = {
   wma: WMA;
@@ -43,6 +43,10 @@ export default function WMACard({
 
   const upcoming = useMemo(() => getUpcomingWindows(allRules, 3), [allRules]);
   const categoryStyle = getAreaCategoryStyle(wma.area_category || "WMA");
+  // dev-note: summarise the rule set once so card badges, map pins and detail
+  // views stay consistent about whether a property is walk-on vs quota only.
+  const accessProfile = summarizeAccessProfile(allRules);
+  const accessBadge = getAccessBadgeStyle(accessProfile);
   const amenityChips = [
     { icon: "🏕️", label: "Camping", allowed: !!wma.camping_allowed },
     { icon: "🏍️", label: "ATVs", allowed: !!wma.atv_allowed }
@@ -65,7 +69,14 @@ export default function WMACard({
     >
       <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <div className="space-y-2">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <span
+              className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-[11px] font-semibold"
+              style={{ backgroundColor: accessBadge.bgColor, color: accessBadge.textColor }}
+            >
+              <span aria-hidden>{accessBadge.icon}</span>
+              {accessBadge.label}
+            </span>
             <span
               className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-[11px] font-semibold"
               style={{ backgroundColor: categoryStyle.bgColor, color: categoryStyle.textColor }}
@@ -154,19 +165,57 @@ export default function WMACard({
       {!compact && (
         <div className="mt-4 text-xs text-slate-600">
           <p className="font-semibold text-slate-700">Upcoming windows</p>
-          <div className="mt-2 flex flex-wrap gap-3">
+          <div className="mt-2 flex flex-col gap-3">
             {upcoming.length > 0 ? (
-              upcoming.map((window) => (
-                <span
-                  key={window.id}
-                  className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-[11px] shadow-sm"
-                >
-                  <span className={window.access === "general" ? "text-emerald-700" : "text-amber-700"}>
-                    {window.access === "general" ? "General" : "Quota"}
-                  </span>{" "}
-                  {window.species} ({window.weapon}) • {fmtMDY(window.start)} – {fmtMDY(window.end)}
-                </span>
-              ))
+              upcoming.map((window) => {
+                const deadline = window.applicationDeadline ?? null;
+                const daysRemaining = deadline ? daysUntil(deadline, todayISO()) : null;
+                const quotaCopy = window.access === "quota";
+                return (
+                  <div
+                    key={window.id}
+                    className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-[11px] shadow-sm"
+                  >
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className={quotaCopy ? "text-amber-700" : "text-emerald-700"}>
+                        {quotaCopy ? "Quota" : "General"}
+                      </span>
+                      <span className="font-semibold text-slate-700">
+                        {window.species} ({window.weapon})
+                      </span>
+                      <span className="text-slate-500">{fmtMDY(window.start)} – {fmtMDY(window.end)}</span>
+                    </div>
+                    {quotaCopy && (deadline || window.spotsAvailable || window.estimatedApplicants) && (
+                      <div className="mt-1 flex flex-wrap items-center gap-2 text-[10px] text-slate-600">
+                        {deadline && (
+                          <span className="inline-flex items-center gap-1 rounded bg-amber-50 px-2 py-1 text-amber-800">
+                            <span aria-hidden>⏰</span>
+                            Apply by {fmtMDY(deadline)}
+                            {typeof daysRemaining === "number" && daysRemaining >= 0 && (
+                              <span className="font-semibold">
+                                {daysRemaining === 0
+                                  ? " • Deadline today"
+                                  : daysRemaining === 1
+                                  ? " • 1 day left"
+                                  : ` • ${daysRemaining} days left`}
+                              </span>
+                            )}
+                          </span>
+                        )}
+                        {window.spotsAvailable != null && (
+                          <span>Spots: {window.spotsAvailable}</span>
+                        )}
+                        {window.estimatedApplicants != null && (
+                          <span>Last year: ~{window.estimatedApplicants} apps</span>
+                        )}
+                      </div>
+                    )}
+                    {window.notes && (
+                      <p className="mt-1 text-slate-500">{window.notes}</p>
+                    )}
+                  </div>
+                );
+              })
             ) : (
               <span>No upcoming seasons posted.</span>
             )}

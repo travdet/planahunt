@@ -1,4 +1,4 @@
-import type { SeasonWithMeta } from "./types";
+import type { AccessProfile, SeasonWithMeta } from "./types";
 import { compareISO, fmtMDY, isDateWithin, todayISO } from "./util";
 
 export type DayStatus = "general" | "quota" | "closed";
@@ -31,6 +31,11 @@ export function getUpcomingWindows(
     start: string;
     end: string;
     notes?: string;
+    applicationDeadline?: string | null;
+    resultsNotificationDate?: string | null;
+    spotsAvailable?: number | null;
+    estimatedApplicants?: number | null;
+    applicationUrl?: string | null;
   }[];
 
   const sorted = [...rules].sort((a, b) => {
@@ -48,7 +53,12 @@ export function getUpcomingWindows(
       access: rule.access,
       start: rule.start_date,
       end: rule.end_date,
-      notes: rule.notes_short || undefined
+      notes: rule.notes_short || undefined,
+      applicationDeadline: rule.application_deadline || null,
+      resultsNotificationDate: rule.results_notification_date || null,
+      spotsAvailable: rule.spots_available ?? null,
+      estimatedApplicants: rule.estimated_applicants ?? null,
+      applicationUrl: rule.application_url ?? null
     });
     if (windows.length >= limit) break;
   }
@@ -77,4 +87,21 @@ export function formatWindowSummary(window: {
 }) {
   const label = window.access === "general" ? "General" : "Quota";
   return `${label}: ${fmtMDY(window.start)} – ${fmtMDY(window.end)}`;
+}
+
+/**
+ * Summarise the overall access feel for a set of rules so that the UI can
+ * quickly highlight whether a property is truly walk-on, lottery-only or a
+ * mixture. This is reused across cards, map markers and hover tooltips so we
+ * centralise it here for future developers.
+ */
+export function summarizeAccessProfile(rules: SeasonWithMeta[]): AccessProfile {
+  if (!rules.length) return "none";
+  const hasGeneral = rules.some((rule) => rule.access === "general");
+  const hasQuota = rules.some((rule) => rule.access === "quota");
+
+  if (hasGeneral && hasQuota) return "mixed";
+  if (hasGeneral) return "general";
+  if (hasQuota) return "quota";
+  return "none";
 }

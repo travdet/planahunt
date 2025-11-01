@@ -59,7 +59,12 @@
     "tags": [
       "Bonus"
     ],
-    "notes_short": ""
+    "notes_short": "",
+    "application_deadline": "2025-10-15",
+    "results_notification_date": "2025-10-25",
+    "spots_available": 100,
+    "estimated_applicants": 600,
+    "application_url": "https://gooutdoorsgeorgia.com/QuotaHunts"
   },
   {
     "id": "ALAPAHA-RIVER-Turkey-Firearms-2026-04-04",
@@ -71,7 +76,12 @@
     "quota_required": true,
     "buck_only": false,
     "tags": [],
-    "notes_short": ""
+    "notes_short": "",
+    "application_deadline": "2026-03-01",
+    "results_notification_date": "2026-03-10",
+    "spots_available": 40,
+    "estimated_applicants": 350,
+    "application_url": "https://gooutdoorsgeorgia.com/QuotaHunts"
   },
   {
     "id": "ALAPAHA-RIVER-Turkey-Firearms-2026-04-11",
