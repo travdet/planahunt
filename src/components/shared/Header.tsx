@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { LayoutGrid, Sparkles } from "lucide-react";
 import { useMemo } from "react";
 
@@ -13,9 +13,7 @@ const navLinks = [
 
 export function Header() {
   const pathname = usePathname();
-  const search = useSearchParams();
   const router = useRouter();
-  const query = search?.toString();
   const isBeta = pathname.startsWith("/beta");
 
   const mappedLinks = useMemo(() => {
@@ -27,7 +25,10 @@ export function Header() {
   }, [isBeta, pathname]);
 
   const handleToggle = () => {
-    const searchSuffix = query ? `?${query}` : "";
+    const searchSuffix =
+      typeof window !== "undefined" && window.location.search
+        ? window.location.search
+        : "";
     if (isBeta) {
       const target = pathname.replace(/^\/beta/, "") || "/";
       router.push(`${target}${searchSuffix}`);
