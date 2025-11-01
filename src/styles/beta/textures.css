@@ -1,0 +1,26 @@
+.paper-texture-light {
+  position: relative;
+}
+
+.paper-texture-light::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/textures/paper-light.png");
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.paper-texture-vintage {
+  position: relative;
+}
+
+.paper-texture-vintage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/textures/paper-vintage.png");
+  opacity: 0.06;
+  pointer-events: none;
+}
