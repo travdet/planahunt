@@ -4,13 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run process-data && next build && npx --yes @opennextjs/cloudflare@latest build",
-    "cloudflare:build": "npm run build",
+    "build": "npm run process-data && next build",
     "start": "next start",
     "lint": "next lint",
-    "pages:build": "npm run build",
-    "preview": "npm run build && npx --yes @opennextjs/cloudflare@latest preview",
-    "deploy": "npm run build && npx --yes @opennextjs/cloudflare@latest deploy",
     "process-data": "node scripts/process-geojson.js"
   },
   "dependencies": {
