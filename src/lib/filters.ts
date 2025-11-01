@@ -1,19 +1,33 @@
 import type { FilterState, WMA, SeasonRule } from "./types";
 import { overlap, isDateWithin } from "./util";
 
+export type Row = SeasonRule | WMA;
+export interface JoinedRow {
+  wma: WMA;
+  rule: SeasonRule;
+}
+
 // Determines if a rule matches filter selections
 function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
-  if (f.species.length && !f.species.includes(rule.species.toLowerCase())) return false;
-  if (f.weapons.length && !f.weapons.includes(String(rule.weapon).toLowerCase())) return false;
+  const normalizedSpecies = rule.species.toLowerCase();
+  const normalizedWeapon = String(rule.weapon).toLowerCase();
+
+  if (f.species.length && !f.species.some((s) => s.toLowerCase() === normalizedSpecies)) {
+    return false;
+  }
+  if (f.weapons.length && !f.weapons.some((w) => w.toLowerCase() === normalizedWeapon)) {
+    return false;
+  }
   if (f.accessType !== "any") {
     const isQuota = !!rule.quota_required;
     if (f.accessType === "quota" && !isQuota) return false;
     if (f.accessType === "general" && isQuota) return false;
   }
   if (f.sex !== "any") {
-    if (f.sex === "buck" && rule.buck_only !== "yes") return false;
-    if (f.sex === "either" && rule.buck_only === "yes") return false;
-    // (doe-only rarely exists; would be represented by notes or tag)
+    const buckOnly = !!rule.buck_only;
+    if (f.sex === "buck" && !buckOnly) return false;
+    if (f.sex === "either" && buckOnly) return false;
+    if (f.sex === "doe" && buckOnly) return false;
   }
   if (f.date) {
     if (!isDateWithin(f.date, rule.start_date, rule.end_date)) return false;
@@ -26,7 +40,7 @@ function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
 }
 
 export function applyFilters(
-  rows: { wma: WMA; rule: SeasonRule }[],
+  rows: JoinedRow[],
   f: FilterState,
   home?: { lat: number|null; lng: number|null },
   maxDistanceMi?: number | null
@@ -41,14 +55,14 @@ export function applyFilters(
   }
   if (f.tags.length) {
     filtered = filtered.filter(({ wma, rule }) => {
-      const wTags = new Set([...(wma.tags||[]), ...(rule.tags||[])].map(t => t.toLowerCase()));
+      const wTags = new Set([...(wma.tags || []), ...(rule.tags || [])].map((t) => t.toLowerCase()));
       return f.tags.every(t => wTags.has(t.toLowerCase()));
     });
   }
   if (f.query.trim()) {
     const q = f.query.trim().toLowerCase();
     filtered = filtered.filter(({ wma, rule }) =>
-      (wma.name + " " + (wma.tract_name||"") + " " + rule.species + " " + rule.weapon)
+      ((wma.name ?? "") + " " + (wma.tract_name ?? "") + " " + rule.species + " " + rule.weapon)
       .toLowerCase().includes(q)
     );
   }
