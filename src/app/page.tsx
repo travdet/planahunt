@@ -50,7 +50,8 @@ export default function Page() {
   }, []);
 
   const filtered = useMemo(()=>{
-    return applyFilters(rows, filters, { lat: home.lat, lng: home.lng }, filters.maxDistanceMi || null);
+    const homeCoords = (home.lat != null && home.lng != null) ? { lat: home.lat, lng: home.lng } : undefined;
+    return applyFilters(rows, filters, homeCoords, filters.maxDistanceMi || null);
   }, [rows, filters, home.lat, home.lng]);
 
   const grouped = useMemo(()=>{

@@ -46,22 +46,22 @@ export default function Filters({ value, onChange, wmas, rules }:{ value: Filter
 
       <div className="hcard p-3 grid grid-cols-2 gap-3">
         <div>
-          <div className="label mb-1">Quota</div>
-          <select value={value.quota} onChange={e=>onChange({...value, quota: e.target.value as any})}
+          <div className="label mb-1">Access Type</div>
+          <select value={value.accessType} onChange={e=>onChange({...value, accessType: e.target.value as any})}
                   className="w-full rounded-md border px-2 py-1">
-            {["any","non-quota","quota"].map(o => <option key={o} value={o}>{o}</option>)}
+            {["any","general","quota"].map(o => <option key={o} value={o}>{o}</option>)}
           </select>
         </div>
         <div>
-          <div className="label mb-1">Buck-only</div>
-          <select value={value.buckOnly} onChange={e=>onChange({...value, buckOnly: e.target.value as any})}
+          <div className="label mb-1">Sex</div>
+          <select value={value.sex} onChange={e=>onChange({...value, sex: e.target.value as any})}
                   className="w-full rounded-md border px-2 py-1">
-            {["any","yes","no"].map(o => <option key={o} value={o}>{o}</option>)}
+            {["any","buck","either","doe"].map(o => <option key={o} value={o}>{o}</option>)}
           </select>
         </div>
         <div className="col-span-2">
           <div className="label mb-1">Open on date</div>
-          <input type="date" value={value.openOn||""} onChange={e=>onChange({...value, openOn: e.target.value||null})}
+          <input type="date" value={value.date||""} onChange={e=>onChange({...value, date: e.target.value||null})}
                  className="w-full rounded-md border px-2 py-1"/>
         </div>
       </div>
@@ -108,8 +108,8 @@ export default function Filters({ value, onChange, wmas, rules }:{ value: Filter
         </div>
         <input type="number" placeholder="Max miles"
           className="rounded-md border px-2 py-1"
-          value={value.distanceMi ?? ""}
-          onChange={e=>onChange({...value, distanceMi: e.target.value? parseFloat(e.target.value): null})}/>
+          value={value.maxDistanceMi ?? ""}
+          onChange={e=>onChange({...value, maxDistanceMi: e.target.value? parseFloat(e.target.value): null})}/>
       </div>
     </aside>
   );
