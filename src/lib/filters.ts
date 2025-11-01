@@ -1,6 +1,8 @@
 import type { FilterState, WMA, SeasonRule } from "./types";
 import { overlap, isDateWithin } from "./util";
 
+export type Row = { wma: WMA; rule: SeasonRule };
+
 // Determines if a rule matches filter selections
 function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
   if (f.species.length && !f.species.includes(rule.species.toLowerCase())) return false;
