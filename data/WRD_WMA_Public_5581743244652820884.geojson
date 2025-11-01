@@ -1,0 +1,28 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-84.6, 33.6],
+            [-84.4, 33.6],
+            [-84.4, 33.8],
+            [-84.6, 33.8],
+            [-84.6, 33.6]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 1,
+        "GM_Region": "Region 3",
+        "PropName": "Pine Hills WMA",
+        "Name": "Pine Hills",
+        "Acres": 1240,
+        "ManagedBy": "GA DNR"
+      }
+    }
+  ]
+}

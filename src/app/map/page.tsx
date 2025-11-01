@@ -7,34 +7,65 @@ import type { FilterState, SeasonRule, WMA } from "@/lib/types";
 import { applyFilters, type Row } from "@/lib/filters";
 import { resolveStatewide } from "@/lib/rules";
 import Filters from "@/components/Filters";
-import Mapbox from "@/components/Mapbox";
+import Mapbox, { type MapPoint } from "@/components/Mapbox";
 import WMAModal from "@/components/WMAModal";
 
 export default function MapPage(){
   const [filters, setFilters] = useState<FilterState>({
-    query: "", species: [], weapons: [], quota: "any", buckOnly: "any",
-    regions: [], counties: [], openOn: null, distanceMi: null, home: null, tags: []
+    query: "",
+    date: null,
+    dateRange: null,
+    accessType: "any",
+    sex: "any",
+    weapons: [],
+    species: [],
+    counties: [],
+    regions: [],
+    tags: [],
+    quota: "any",
+    buckOnly: "any",
+    maxDistanceMi: null,
+    home: null,
+    homeAddress: null,
+    homeLat: null,
+    homeLng: null
   });
   const [open, setOpen] = useState<WMA|null>(null);
 
   const rows: Row[] = useMemo(()=>{
     const byId = new Map((wmas as WMA[]).map(w=>[w.id, w]));
-    return (rulesData as SeasonRule[]).map(r => {
-      const resolved = resolveStatewide(r, statewide);
-      return { wma: byId.get(r.wma_id)!, rule: resolved };
-    }).filter(x=>!!x.wma);
+    return (rulesData as SeasonRule[])
+      .map((rule) => {
+        const wma = byId.get(rule.wma_id) || null;
+        if (!wma) return null;
+        const resolved = resolveStatewide(rule, statewide);
+        return { wma, rule: resolved } as Row;
+      })
+      .filter((entry): entry is Row => entry !== null);
   }, []);
 
-  const filtered = useMemo(()=> applyFilters(rows, filters), [rows, filters]);
+  const filtered = useMemo(
+    () => applyFilters(rows, filters, filters.home ?? null, filters.maxDistanceMi),
+    [rows, filters]
+  );
 
-  const points = useMemo(()=>{
+  const points: MapPoint[] = useMemo(()=>{
     const m = new Map<string, {wma:WMA, count:number}>();
     for (const row of filtered) {
-      const id = row.wma.id;
-      if (!m.has(id)) m.set(id, { wma: row.wma, count: 0 });
+      const wma = row?.wma;
+      if (!wma) continue;
+      const id = wma.id;
+      if (!m.has(id)) m.set(id, { wma, count: 0 });
       m.get(id)!.count += 1;
     }
-    return Array.from(m.values()).map(({wma, count}) => ({...wma, count}));
+    return Array.from(m.values())
+      .filter(({ wma }) => typeof wma?.lat === "number" && typeof wma?.lng === "number")
+      .map(({ wma }) => ({
+        id: wma.id,
+        name: wma.name ?? "Unknown WMA",
+        lat: wma.lat as number,
+        lng: wma.lng as number
+      }));
   }, [filtered]);
 
   const pick = (id: string) => {
@@ -48,7 +79,13 @@ export default function MapPage(){
       <div>
         <Mapbox points={points} onPick={pick}/>
       </div>
-      <WMAModal wma={open} rules={open? (rulesData as SeasonRule[]).filter(r => r.wma_id===open.id) : []} onClose={()=>setOpen(null)}/>
+      {open && (
+        <WMAModal
+          wma={open}
+          rules={(rulesData as SeasonRule[]).filter(r => r.wma_id===open.id)}
+          onClose={()=>setOpen(null)}
+        />
+      )}
     </div>
   );
 }

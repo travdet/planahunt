@@ -5,9 +5,9 @@ import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-type Point = { id: string; name: string; lng: number; lat: number };
+export type MapPoint = { id: string; name?: string | null; lng: number; lat: number };
 type Props = {
-  points: Point[];
+  points: MapPoint[];
   onPick?: (id: string) => void;
   token?: string;
 };
@@ -39,7 +39,9 @@ export default function Mapbox({ points, onPick, token }: Props) {
     points.forEach((p) => {
       const m = new mapboxgl.Marker()
         .setLngLat([p.lng, p.lat])
-        .setPopup(new mapboxgl.Popup({ closeOnClick: true }).setText(p.name))
+        .setPopup(
+          new mapboxgl.Popup({ closeOnClick: true }).setText(p.name ?? "Unknown WMA")
+        )
         .addTo(map);
 
       m.getElement().addEventListener("click", () => onPick?.(p.id));

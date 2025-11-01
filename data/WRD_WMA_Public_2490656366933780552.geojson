@@ -1,0 +1,28 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-83.1, 31.1],
+            [-82.9, 31.1],
+            [-82.9, 31.3],
+            [-83.1, 31.3],
+            [-83.1, 31.1]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 2,
+        "GM_Region": "Region 6",
+        "PropName": "Riverbend WMA",
+        "Name": "Riverbend",
+        "Acres": 25200,
+        "ManagedBy": "GA DNR"
+      }
+    }
+  ]
+}

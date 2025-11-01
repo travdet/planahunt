@@ -26,7 +26,13 @@ export default function Page() {
     counties: [],
     regions: [],
     tags: [],
-    maxDistanceMi: null
+    quota: "any",
+    buckOnly: "any",
+    maxDistanceMi: null,
+    home: null,
+    homeAddress: null,
+    homeLat: null,
+    homeLng: null
   });
 
   const [home, setHome] = useState<HomeLoc>({ address: "", lat: null, lng: null });

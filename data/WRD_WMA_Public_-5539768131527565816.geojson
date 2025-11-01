@@ -1,0 +1,28 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-84.0, 34.0],
+            [-83.8, 34.0],
+            [-83.8, 34.2],
+            [-84.0, 34.2],
+            [-84.0, 34.0]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 4,
+        "GM_Region": "Region 1",
+        "PropName": "Summit Ridge WMA",
+        "Name": "Summit Ridge",
+        "Acres": 8400,
+        "ManagedBy": "GA DNR"
+      }
+    }
+  ]
+}

@@ -61,7 +61,7 @@ export default function Filters({ value, onChange, wmas, rules }:{ value: Filter
         </div>
         <div className="col-span-2">
           <div className="label mb-1">Open on date</div>
-          <input type="date" value={value.openOn||""} onChange={e=>onChange({...value, openOn: e.target.value||null})}
+          <input type="date" value={value.date||""} onChange={e=>onChange({...value, date: e.target.value||null})}
                  className="w-full rounded-md border px-2 py-1"/>
         </div>
       </div>
@@ -108,8 +108,8 @@ export default function Filters({ value, onChange, wmas, rules }:{ value: Filter
         </div>
         <input type="number" placeholder="Max miles"
           className="rounded-md border px-2 py-1"
-          value={value.distanceMi ?? ""}
-          onChange={e=>onChange({...value, distanceMi: e.target.value? parseFloat(e.target.value): null})}/>
+          value={value.maxDistanceMi ?? ""}
+          onChange={e=>onChange({...value, maxDistanceMi: e.target.value? parseFloat(e.target.value): null})}/>
       </div>
     </aside>
   );

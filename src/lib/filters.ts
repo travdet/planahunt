@@ -1,20 +1,32 @@
-import type { FilterState, WMA, SeasonRule } from "./types";
-import { overlap, isDateWithin } from "./util";
+import type { FilterState, WMA, SeasonRule, Coordinates } from "./types";
+import { overlap, isDateWithin, haversineMi } from "./util";
+import { isOpenOn } from "./rules";
+
+export type Row = { wma: WMA; rule: SeasonRule };
 
 // Determines if a rule matches filter selections
 function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
-  if (f.species.length && !f.species.includes(rule.species.toLowerCase())) return false;
-  if (f.weapons.length && !f.weapons.includes(String(rule.weapon).toLowerCase())) return false;
+  const speciesFilters = f.species.map(s => s.toLowerCase());
+  if (speciesFilters.length && !speciesFilters.includes(rule.species.toLowerCase())) return false;
+
+  const weaponFilters = f.weapons.map(w => w.toLowerCase());
+  if (weaponFilters.length && !weaponFilters.includes(String(rule.weapon).toLowerCase())) return false;
+
+  if (f.quota === "quota" && !rule.quota_required) return false;
+  if (f.quota === "non-quota" && rule.quota_required) return false;
   if (f.accessType !== "any") {
     const isQuota = !!rule.quota_required;
     if (f.accessType === "quota" && !isQuota) return false;
     if (f.accessType === "general" && isQuota) return false;
   }
   if (f.sex !== "any") {
-    if (f.sex === "buck" && rule.buck_only !== "yes") return false;
-    if (f.sex === "either" && rule.buck_only === "yes") return false;
+    if (f.sex === "buck" && !rule.buck_only) return false;
+    if (f.sex === "either" && rule.buck_only) return false;
+    if (f.sex === "doe" && rule.buck_only) return false;
     // (doe-only rarely exists; would be represented by notes or tag)
   }
+  if (f.buckOnly === "yes" && !rule.buck_only) return false;
+  if (f.buckOnly === "no" && rule.buck_only) return false;
   if (f.date) {
     if (!isDateWithin(f.date, rule.start_date, rule.end_date)) return false;
   }
@@ -22,13 +34,14 @@ function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
     const { start, end } = f.dateRange;
     if (!overlap(rule.start_date, rule.end_date, start, end)) return false;
   }
+  if (f.date && !isOpenOn(rule, f.date)) return false;
   return true;
 }
 
 export function applyFilters(
-  rows: { wma: WMA; rule: SeasonRule }[],
+  rows: Row[],
   f: FilterState,
-  home?: { lat: number|null; lng: number|null },
+  home?: Coordinates | null,
   maxDistanceMi?: number | null
 ) {
   let filtered = rows.filter(({ rule }) => ruleMatchesFilters(rule, f));
@@ -47,19 +60,41 @@ export function applyFilters(
   }
   if (f.query.trim()) {
     const q = f.query.trim().toLowerCase();
-    filtered = filtered.filter(({ wma, rule }) =>
-      (wma.name + " " + (wma.tract_name||"") + " " + rule.species + " " + rule.weapon)
-      .toLowerCase().includes(q)
-    );
+    filtered = filtered.filter(({ wma, rule }) => {
+      const wmaName = wma?.name ?? "";
+      const tract = wma?.tract_name ?? "";
+      return (
+        `${wmaName} ${tract} ${rule.species} ${rule.weapon}`
+          .toLowerCase()
+          .includes(q)
+      );
+    });
   }
 
-  if (home?.lat && home?.lng && maxDistanceMi) {
+  const effectiveHome: Coordinates | null = (() => {
+    if (home) return home;
+    if (f.home) return f.home;
+    if (f.homeLat != null && f.homeLng != null) {
+      return { lat: f.homeLat, lng: f.homeLng };
+    }
+    return null;
+  })();
+
+  const effectiveMaxDistance = maxDistanceMi ?? f.maxDistanceMi ?? null;
+
+  if (
+    effectiveHome &&
+    effectiveHome.lat != null &&
+    effectiveHome.lng != null &&
+    effectiveMaxDistance != null
+  ) {
     filtered = filtered.filter(({ wma }) => {
       if (wma.lat == null || wma.lng == null) return false;
-      const dx = wma.lat - home.lat!;
-      const dy = wma.lng - home.lng!;
-      // cheap bounding box ~ ignore if too far (quick cull)
-      return Math.abs(dx) < 5 && Math.abs(dy) < 5; // ~ ok
+      const distance = haversineMi(
+        { lat: effectiveHome.lat, lng: effectiveHome.lng },
+        { lat: wma.lat, lng: wma.lng }
+      );
+      return distance <= effectiveMaxDistance;
     });
   }
 

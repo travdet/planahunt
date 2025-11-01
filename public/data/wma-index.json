@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "region": "Region 3",
+    "propertyName": "Pine Hills WMA",
+    "name": "Pine Hills",
+    "acres": 1240,
+    "managedBy": "GA DNR"
+  },
+  {
+    "id": 2,
+    "region": "Region 6",
+    "propertyName": "Riverbend WMA",
+    "name": "Riverbend",
+    "acres": 25200,
+    "managedBy": "GA DNR"
+  },
+  {
+    "id": 3,
+    "region": "Region 7",
+    "propertyName": "Oak Ridge WMA",
+    "name": "Oak Ridge",
+    "acres": 5100,
+    "managedBy": "GA DNR"
+  },
+  {
+    "id": 4,
+    "region": "Region 1",
+    "propertyName": "Summit Ridge WMA",
+    "name": "Summit Ridge",
+    "acres": 8400,
+    "managedBy": "GA DNR"
+  }
+]
