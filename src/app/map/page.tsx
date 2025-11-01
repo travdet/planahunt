@@ -81,11 +81,13 @@ export default function MapPage(){
       <div>
         <Mapbox points={points} onPick={pick}/>
       </div>
-      <WMAModal
-        wma={open}
-        rules={open ? (rulesData as SeasonRule[]).filter(r => r.wma_id === open.id) : []}
-        onClose={() => setOpen(null)}
-      />
+      {open && (
+        <WMAModal
+          wma={open}
+          rules={(rulesData as SeasonRule[]).filter(r => r.wma_id === open.id)}
+          onClose={() => setOpen(null)}
+        />
+      )}
     </div>
   );
 }
