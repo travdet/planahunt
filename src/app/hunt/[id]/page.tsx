@@ -4,6 +4,12 @@ import type { SeasonRule, WMA } from "@/lib/types";
 import { fmtMDY } from "@/lib/util";
 import AccessCalendar from "@/components/AccessCalendar";
 
+export async function generateStaticParams() {
+  return (wmas as WMA[]).map((wma) => ({
+    id: wma.id,
+  }));
+}
+
 export default function HuntDetail({ params }: { params: { id: string } }) {
   const id = decodeURIComponent(params.id);
   const wma = (wmas as WMA[]).find(w => w.id === id);

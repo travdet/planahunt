@@ -12,8 +12,8 @@ import WMAModal from "@/components/WMAModal";
 
 export default function MapPage(){
   const [filters, setFilters] = useState<FilterState>({
-    query: "", species: [], weapons: [], quota: "any", buckOnly: "any",
-    regions: [], counties: [], openOn: null, distanceMi: null, home: null, tags: []
+    query: "", species: [], weapons: [], accessType: "any", sex: "any",
+    regions: [], counties: [], tags: [], date: null, maxDistanceMi: null
   });
   const [open, setOpen] = useState<WMA|null>(null);
 
@@ -34,7 +34,9 @@ export default function MapPage(){
       if (!m.has(id)) m.set(id, { wma: row.wma, count: 0 });
       m.get(id)!.count += 1;
     }
-    return Array.from(m.values()).map(({wma, count}) => ({...wma, count}));
+    return Array.from(m.values())
+      .filter(({wma}) => wma.lat != null && wma.lng != null)
+      .map(({wma, count}) => ({...wma, lat: wma.lat!, lng: wma.lng!, count}));
   }, [filtered]);
 
   const pick = (id: string) => {
@@ -48,7 +50,7 @@ export default function MapPage(){
       <div>
         <Mapbox points={points} onPick={pick}/>
       </div>
-      <WMAModal wma={open} rules={open? (rulesData as SeasonRule[]).filter(r => r.wma_id===open.id) : []} onClose={()=>setOpen(null)}/>
+      {open && <WMAModal wma={open} rules={(rulesData as SeasonRule[]).filter(r => r.wma_id===open.id)} onClose={()=>setOpen(null)}/>}
     </div>
   );
 }

@@ -14,7 +14,7 @@ export type SeasonRule = {
   follows_statewide?: boolean;
   quota_required?: boolean;
   notes_short?: string;
-  buck_only?: "yes" | "no";
+  buck_only?: "yes" | "no" | boolean;
   either_sex_last_day?: boolean;
   last_two_days_either_sex?: boolean;
   tags?: string[];
@@ -48,6 +48,15 @@ export type FilterState = {
   regions: string[];              // chosen DNR regions
   tags: string[];                 // misc tags (archery-only area, MI hunts, bird range, etc)
   maxDistanceMi?: number | null;  // from home
+  homeAddress?: string | null;
+  homeLat?: number | null;
+  homeLng?: number | null;
+  // Legacy field names (for compatibility)
+  quota?: string;
+  buckOnly?: string;
+  openOn?: string | null;
+  distanceMi?: number | null;
+  home?: { lat: number | null; lng: number | null } | null;
 };
 
 export type HomeLoc = {
