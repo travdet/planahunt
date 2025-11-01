@@ -6,10 +6,11 @@ import AccessCalendar from "./AccessCalendar";
 export default function WMAModal({
   wma, rules, onClose
 }:{
-  wma: WMA;
+  wma: WMA | null;
   rules: SeasonRule[];
   onClose: ()=>void;
 }) {
+  if (!wma) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 p-4">
       <div className="mt-10 w-full max-w-3xl rounded-2xl bg-white p-6 shadow-xl">

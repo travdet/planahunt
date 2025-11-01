@@ -60,10 +60,15 @@ export function applyFilters(
   }
   if (f.query.trim()) {
     const q = f.query.trim().toLowerCase();
-    filtered = filtered.filter(({ wma, rule }) =>
-      (wma.name + " " + (wma.tract_name||"") + " " + rule.species + " " + rule.weapon)
-      .toLowerCase().includes(q)
-    );
+    filtered = filtered.filter(({ wma, rule }) => {
+      const wmaName = wma?.name ?? "";
+      const tract = wma?.tract_name ?? "";
+      return (
+        `${wmaName} ${tract} ${rule.species} ${rule.weapon}`
+          .toLowerCase()
+          .includes(q)
+      );
+    });
   }
 
   const effectiveHome: Coordinates | null = (() => {
