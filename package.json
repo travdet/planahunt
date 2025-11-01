@@ -5,12 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "cloudflare:build": "npm run process-data && npx --yes @opennextjs/cloudflare@latest build",
+    "cloudflare:build": "npm run process-data && next build && npx --yes @opennextjs/cloudflare@latest build",
     "start": "next start",
     "lint": "next lint",
-    "pages:build": "npm run process-data && npx --yes @opennextjs/cloudflare@latest build",
-    "preview": "npm run process-data && npx --yes @opennextjs/cloudflare@latest build && npx --yes @opennextjs/cloudflare@latest preview",
-    "deploy": "npm run process-data && npx --yes @opennextjs/cloudflare@latest build && npx --yes @opennextjs/cloudflare@latest deploy",
+    "pages:build": "npm run process-data && next build && npx --yes @opennextjs/cloudflare@latest build",
+    "preview": "npm run process-data && next build && npx --yes @opennextjs/cloudflare@latest build && npx --yes @opennextjs/cloudflare@latest preview",
+    "deploy": "npm run process-data && next build && npx --yes @opennextjs/cloudflare@latest build && npx --yes @opennextjs/cloudflare@latest deploy",
     "process-data": "node scripts/process-geojson.js"
   },
   "dependencies": {
