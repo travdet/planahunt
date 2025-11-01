@@ -1,0 +1,46 @@
+:root {
+  --classic-primary: #0f9e76;
+  --classic-primary-dark: #047857;
+  --classic-primary-light: #34d399;
+
+  --forest-primary: #2c5f2d;
+  --forest-light: #4a7c59;
+  --forest-dark: #1b3a1f;
+
+  --clay-orange: #c17334;
+  --clay-light: #d4935a;
+  --clay-dark: #8b5424;
+
+  --stone-50: #f8f7f5;
+  --stone-100: #e8e6e1;
+  --stone-200: #d1cec7;
+  --stone-300: #c4c0b8;
+  --stone-500: #6b6962;
+  --stone-600: #4e4b46;
+  --stone-700: #3d3a35;
+  --stone-900: #1c1b18;
+
+  --sky-blue: #5b8ba6;
+  --moss-green: #7a8b5e;
+  --amber-gold: #d4a574;
+  --rust-red: #a84c3d;
+
+  --beta-access-general: #7a8b5e;
+  --beta-access-general-bg: #e8ede0;
+  --beta-access-quota: #c17334;
+  --beta-access-quota-bg: #f5e6d3;
+}
+
+.theme-classic {
+  --primary: var(--classic-primary);
+  --primary-dark: var(--classic-primary-dark);
+  --primary-light: var(--classic-primary-light);
+}
+
+.theme-beta {
+  --primary: var(--forest-primary);
+  --primary-dark: var(--forest-dark);
+  --primary-light: var(--forest-light);
+  --accent: var(--clay-orange);
+  --accent-light: var(--clay-light);
+}

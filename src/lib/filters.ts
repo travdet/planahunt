@@ -1,67 +1,162 @@
-import type { FilterState, WMA, SeasonRule } from "./types";
-import { overlap, isDateWithin } from "./util";
+import type { FilterState, SeasonWithMeta, WMAWithRules } from "./types";
+import { overlap, isDateWithin, haversineMi } from "./util";
+import { AVERAGE_DRIVE_SPEED_MPH } from "./constants";
 
-// Determines if a rule matches filter selections
-function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
-  if (f.species.length && !f.species.includes(rule.species.toLowerCase())) return false;
-  if (f.weapons.length && !f.weapons.includes(String(rule.weapon).toLowerCase())) return false;
-  if (f.accessType !== "any") {
-    const isQuota = !!rule.quota_required;
-    if (f.accessType === "quota" && !isQuota) return false;
-    if (f.accessType === "general" && isQuota) return false;
-  }
-  if (f.sex !== "any") {
-    if (f.sex === "buck" && rule.buck_only !== "yes") return false;
-    if (f.sex === "either" && rule.buck_only === "yes") return false;
-    // (doe-only rarely exists; would be represented by notes or tag)
-  }
-  if (f.date) {
-    if (!isDateWithin(f.date, rule.start_date, rule.end_date)) return false;
-  }
-  if (f.dateRange) {
-    const { start, end } = f.dateRange;
-    if (!overlap(rule.start_date, rule.end_date, start, end)) return false;
+export type FilteredArea = {
+  wma: WMAWithRules["wma"];
+  matchingRules: SeasonWithMeta[];
+  allRules: SeasonWithMeta[];
+  distanceMi: number | null;
+  driveMinutes: number | null;
+};
+
+function isRuleActiveOnDay(rule: SeasonWithMeta, target: string) {
+  if (!isDateWithin(target, rule.start_date, rule.end_date)) return false;
+  if (rule.weekdaysNormalized?.length) {
+    const day = new Date(`${target}T00:00:00`).getDay();
+    if (!rule.weekdaysNormalized.includes(day)) return false;
   }
   return true;
 }
 
-export function applyFilters(
-  rows: { wma: WMA; rule: SeasonRule }[],
-  f: FilterState,
-  home?: { lat: number|null; lng: number|null },
+function ruleMatches(rule: SeasonWithMeta, filters: FilterState) {
+  if (filters.species.length && !filters.species.includes(rule.speciesKey)) return false;
+  if (filters.weapons.length && !filters.weapons.includes(rule.weaponKey)) return false;
+  if (filters.weaponSubcategories.length) {
+    const subcategory = (rule.weapon_subcategory || "").toLowerCase();
+    if (!subcategory || !filters.weaponSubcategories.includes(subcategory)) return false;
+  }
+  if (filters.activityTypes.length) {
+    const activity = (rule.activity_type || "Hunting").toLowerCase();
+    if (!filters.activityTypes.includes(activity)) return false;
+  }
+  if (filters.accessType !== "any" && rule.access !== filters.accessType) return false;
+  if (filters.sex !== "any" && rule.sexRule !== filters.sex) return false;
+
+  const explicitDates: string[] = [];
+  if (filters.date) explicitDates.push(filters.date);
+  if (filters.dates?.length) explicitDates.push(...filters.dates);
+
+  if (explicitDates.length) {
+    const match = explicitDates.some((value) => isRuleActiveOnDay(rule, value));
+    if (!match) return false;
+  }
+
+  if (filters.dateRange?.start && filters.dateRange?.end) {
+    if (!overlap(rule.start_date, rule.end_date, filters.dateRange.start, filters.dateRange.end)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function wmaMatchesFilters(area: WMAWithRules, filters: FilterState, matchingRules: SeasonWithMeta[]) {
+  const { wma } = area;
+  const categoryValue = (wma.area_category || "WMA").toLowerCase();
+  if (filters.areaCategories.length && !filters.areaCategories.includes(categoryValue)) {
+    return false;
+  }
+  if (filters.campingAllowed !== null && !!wma.camping_allowed !== filters.campingAllowed) {
+    return false;
+  }
+  if (filters.atvAllowed !== null && !!wma.atv_allowed !== filters.atvAllowed) {
+    return false;
+  }
+  if (filters.counties.length && !wma.counties.some((c) => filters.counties.includes(c))) {
+    return false;
+  }
+  if (filters.regions.length) {
+    const regionValue = wma.region ?? "";
+    if (!filters.regions.includes(regionValue)) {
+      return false;
+    }
+  }
+
+  if (filters.tags.length) {
+    const available = new Set<string>();
+    (wma.tags || []).forEach((tag) => available.add(tag.toLowerCase()));
+    matchingRules.forEach((rule) => (rule.tags || []).forEach((tag) => available.add(tag.toLowerCase())));
+    const needs = filters.tags.map((t) => t.toLowerCase());
+    if (!needs.every((tag) => available.has(tag))) {
+      return false;
+    }
+  }
+
+  if (filters.query.trim()) {
+    const q = filters.query.trim().toLowerCase();
+    const textParts = [
+      wma.name,
+      wma.tract_name || "",
+      wma.counties.join(" "),
+      wma.region || "",
+      ...(wma.tags || [])
+    ];
+    matchingRules.forEach((rule) => {
+      textParts.push(rule.species);
+      textParts.push(String(rule.weapon));
+      (rule.tags || []).forEach((tag) => textParts.push(tag));
+    });
+    const haystack = textParts.join(" ").toLowerCase();
+    if (!haystack.includes(q)) return false;
+  }
+
+  return true;
+}
+
+function computeDistance(
+  wma: WMAWithRules["wma"],
+  home?: { lat: number | null; lng: number | null },
   maxDistanceMi?: number | null
 ) {
-  let filtered = rows.filter(({ rule }) => ruleMatchesFilters(rule, f));
+  if (!home?.lat || !home?.lng) return { miles: null, minutes: null };
+  const lat = wma.lat;
+  const lng = wma.lng;
+  if (typeof lat !== "number" || typeof lng !== "number") {
+    return { miles: null, minutes: null };
+  }
+  const miles = haversineMi({ lat: home.lat, lng: home.lng }, { lat, lng });
+  if (maxDistanceMi != null && miles > maxDistanceMi) {
+    return { miles: Infinity, minutes: null };
+  }
+  const minutes = Math.round((miles / AVERAGE_DRIVE_SPEED_MPH) * 60);
+  return { miles, minutes };
+}
 
-  if (f.counties.length) {
-    filtered = filtered.filter(({ wma }) => wma.counties.some(c => f.counties.includes(c)));
-  }
-  if (f.regions.length) {
-    filtered = filtered.filter(({ wma }) => (wma.region && f.regions.includes(wma.region)));
-  }
-  if (f.tags.length) {
-    filtered = filtered.filter(({ wma, rule }) => {
-      const wTags = new Set([...(wma.tags||[]), ...(rule.tags||[])].map(t => t.toLowerCase()));
-      return f.tags.every(t => wTags.has(t.toLowerCase()));
+export function filterAreas(
+  areas: WMAWithRules[],
+  filters: FilterState,
+  home?: { lat: number | null; lng: number | null },
+  maxDistanceMi?: number | null
+): FilteredArea[] {
+  const results: FilteredArea[] = [];
+
+  for (const area of areas) {
+    const matchingRules = area.rules.filter((rule) => ruleMatches(rule, filters));
+    if (!matchingRules.length) continue;
+    if (!wmaMatchesFilters(area, filters, matchingRules)) continue;
+
+    const { miles, minutes } = computeDistance(area.wma, home, maxDistanceMi ?? undefined);
+    if (miles === Infinity) continue; // outside radius
+
+    results.push({
+      wma: area.wma,
+      matchingRules,
+      allRules: area.rules,
+      distanceMi: miles === null ? null : Number(miles.toFixed(1)),
+      driveMinutes: minutes
     });
   }
-  if (f.query.trim()) {
-    const q = f.query.trim().toLowerCase();
-    filtered = filtered.filter(({ wma, rule }) =>
-      (wma.name + " " + (wma.tract_name||"") + " " + rule.species + " " + rule.weapon)
-      .toLowerCase().includes(q)
-    );
-  }
 
-  if (home?.lat && home?.lng && maxDistanceMi) {
-    filtered = filtered.filter(({ wma }) => {
-      if (wma.lat == null || wma.lng == null) return false;
-      const dx = wma.lat - home.lat!;
-      const dy = wma.lng - home.lng!;
-      // cheap bounding box ~ ignore if too far (quick cull)
-      return Math.abs(dx) < 5 && Math.abs(dy) < 5; // ~ ok
-    });
-  }
+  results.sort((a, b) => {
+    if (a.distanceMi != null && b.distanceMi != null) {
+      if (a.distanceMi !== b.distanceMi) return a.distanceMi - b.distanceMi;
+      return a.wma.name.localeCompare(b.wma.name);
+    }
+    if (a.distanceMi != null) return -1;
+    if (b.distanceMi != null) return 1;
+    return a.wma.name.localeCompare(b.wma.name);
+  });
 
-  return filtered;
+  return results;
 }

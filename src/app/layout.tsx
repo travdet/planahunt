@@ -1,23 +1,21 @@
 import "./globals.css";
 import type { ReactNode } from "react";
+import { Suspense } from "react";
+import { Header } from "@/components/shared/Header";
 
-export const metadata = { title: "Plan A Hunt (GA)", description: "Georgia Public Land Planner" };
+export const metadata = {
+  title: "Plan A Hunt (GA)",
+  description: "Georgia Wildlife Management Area planner"
+};
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>
-        <header className="bg-parkGreen text-parkPaper">
-          <div className="mx-auto max-w-7xl px-4 py-4 flex items-center gap-3">
-            <img src="/logo.svg" alt="Plan A Hunt" className="h-8 w-auto"/>
-            <nav className="ml-6 flex gap-4 text-parkPaper/90">
-              <a href="/" className="hover:underline">Browse</a>
-              <a href="/map" className="hover:underline">Map</a>
-            </nav>
-            <div className="ml-auto text-sm opacity-80">Georgia Public Land Planner</div>
-          </div>
-        </header>
-        <main className="mx-auto max-w-7xl px-4 py-6">{children}</main>
+      <body className="theme-classic min-h-screen bg-slate-100 text-slate-900">
+        <Suspense fallback={<div className="h-16" />}>
+          <Header />
+        </Suspense>
+        <main>{children}</main>
       </body>
     </html>
   );
