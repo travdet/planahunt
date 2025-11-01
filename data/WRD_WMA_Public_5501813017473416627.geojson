@@ -1,0 +1,28 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-82.3, 33.4],
+            [-82.1, 33.4],
+            [-82.1, 33.6],
+            [-82.3, 33.6],
+            [-82.3, 33.4]
+          ]
+        ]
+      },
+      "properties": {
+        "OBJECTID": 3,
+        "GM_Region": "Region 7",
+        "PropName": "Oak Ridge WMA",
+        "Name": "Oak Ridge",
+        "Acres": 5100,
+        "ManagedBy": "GA DNR"
+      }
+    }
+  ]
+}

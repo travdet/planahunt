@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "process-data": "node scripts/process-geojson.js",
     "dev": "next dev -p 3000",
-    "build": "next build",
+    "build": "npm run process-data && next build",
     "start": "next start -p 3000",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cloudflare:build": "npm run process-data && opennextjs-cloudflare build"
   },
   "dependencies": {
     "next": "14.2.3",

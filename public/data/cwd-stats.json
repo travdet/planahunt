@@ -1,0 +1,74 @@
+[
+  {
+    "county": "Barrow",
+    "region": "Region 2",
+    "totalTests": 1,
+    "positiveTests": 0,
+    "negativeTests": 1,
+    "bySex": {
+      "male": 1,
+      "female": 0,
+      "unknown": 0
+    },
+    "byAge": {
+      "3.5+": 1
+    },
+    "recentTests": [
+      {
+        "date": "2024-10-02",
+        "sex": "Male",
+        "age": "3.5+",
+        "result": "Not Detected"
+      }
+    ],
+    "positiveRate": 0
+  },
+  {
+    "county": "Berrien",
+    "region": "Region 6",
+    "totalTests": 1,
+    "positiveTests": 0,
+    "negativeTests": 1,
+    "bySex": {
+      "male": 0,
+      "female": 1,
+      "unknown": 0
+    },
+    "byAge": {
+      "1.5": 1
+    },
+    "recentTests": [
+      {
+        "date": "2024-11-10",
+        "sex": "Female",
+        "age": "1.5",
+        "result": "Not Detected"
+      }
+    ],
+    "positiveRate": 0
+  },
+  {
+    "county": "Lanier",
+    "region": "Region 6",
+    "totalTests": 1,
+    "positiveTests": 1,
+    "negativeTests": 0,
+    "bySex": {
+      "male": 1,
+      "female": 0,
+      "unknown": 0
+    },
+    "byAge": {
+      "2.5+": 1
+    },
+    "recentTests": [
+      {
+        "date": "2024-11-15",
+        "sex": "Male",
+        "age": "2.5+",
+        "result": "Detected"
+      }
+    ],
+    "positiveRate": 100
+  }
+]
