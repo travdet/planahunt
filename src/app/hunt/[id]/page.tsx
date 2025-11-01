@@ -4,9 +4,6 @@ import type { SeasonRule, WMA } from "@/lib/types";
 import { fmtMDY } from "@/lib/util";
 import AccessCalendar from "@/components/AccessCalendar";
 
-// Enable edge runtime for Cloudflare deployment
-export const runtime = 'edge';
-
 export default function HuntDetail({ params }: { params: { id: string } }) {
   const id = decodeURIComponent(params.id);
   const wma = (wmas as WMA[]).find(w => w.id === id);
