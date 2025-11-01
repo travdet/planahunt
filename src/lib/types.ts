@@ -4,22 +4,18 @@ export type Weapon = "archery" | "primitive" | "firearms" | "shotgun" | "muzzlel
 
 export type DateRange = { start: string; end: string }; // yyyy-mm-dd
 
-export type SeasonRule = {
+export interface SeasonRule {
   id: string;
   wma_id: string;
-  species: string;          // "Deer" | "Turkey" | "Dove" | etc
-  weapon: Weapon | string;  // keep string to tolerate raw data
-  start_date: string;       // yyyy-mm-dd
-  end_date: string;         // yyyy-mm-dd
-  follows_statewide?: boolean;
-  quota_required?: boolean;
-  notes_short?: string;
-  buck_only?: "yes" | "no";
-  either_sex_last_day?: boolean;
-  last_two_days_either_sex?: boolean;
-  tags?: string[];
-  // optional future fields
-};
+  species: string;
+  weapon: string;
+  start_date: string;
+  end_date: string;
+  quota_required: boolean;
+  buck_only: boolean;
+  tags: string[];
+  notes_short: string;
+}
 
 export type WMA = {
   id: string;               // slug
