@@ -10,6 +10,7 @@ export function isOpenOn(rule: SeasonRule, dateISO: string){
 // Placeholder statewide resolver (extend with real per-species windows if needed)
 export function resolveStatewide(rule: SeasonRule, statewide: any){
   if (!rule.follows_statewide) return rule;
+  if (!rule.species) return rule; // Safety check for null/undefined species
   const key = rule.species.toLowerCase().includes("turkey") ? "Turkey" : "Deer Archery";
   const sw = statewide[key];
   if (!sw) return rule;
