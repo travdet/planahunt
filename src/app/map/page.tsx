@@ -39,7 +39,6 @@ export default function MapPage(){
   }, []);
 
   const rows: Row[] = useMemo(()=>{
-    if (!mounted) return [];
     const byId = new Map((wmas as WMA[]).map(w=>[w.id, w]));
     return (rulesData as SeasonRule[])
       .map(r => {
@@ -49,15 +48,11 @@ export default function MapPage(){
         return { wma, rule: resolved };
       })
       .filter((x): x is Row => x !== null);
-  }, [mounted]);
+  }, []);
 
-  const filtered = useMemo(()=> {
-    if (!mounted) return [];
-    return applyFilters(rows, filters);
-  }, [mounted, rows, filters]);
+  const filtered = useMemo(()=> applyFilters(rows, filters), [rows, filters]);
 
   const points = useMemo(()=>{
-    if (!mounted) return [];
     const m = new Map<string, {wma:WMA, count:number}>();
     for (const row of filtered) {
       const id = row.wma.id;
@@ -67,7 +62,7 @@ export default function MapPage(){
     return Array.from(m.values())
       .filter(({wma}) => wma.lat != null && wma.lng != null)
       .map(({wma, count}) => ({...wma, count, lat: wma.lat!, lng: wma.lng!}));
-  }, [mounted, filtered]);
+  }, [filtered]);
 
   const pick = (id: string) => {
     const w = (wmas as WMA[]).find(x=>x.id===id) || null;
@@ -75,7 +70,11 @@ export default function MapPage(){
   };
 
   if (!mounted) {
-    return <div className="p-6">Loading...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-lg">Loading...</p>
+      </div>
+    );
   }
 
   return (
