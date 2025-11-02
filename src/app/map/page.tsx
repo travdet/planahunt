@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import dynamic from 'next/dynamic';
 import wmas from "@/data/wmas.json";
 import rulesData from "@/data/seasons.json";
@@ -33,14 +33,18 @@ export default function MapPage(){
     tags: []
   });
   const [open, setOpen] = useState<WMA|null>(null);
+  const [points, setPoints] = useState<any[]>([]);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const rows: Row[] = useMemo(()=>{
+  useEffect(() => {
+    if (!mounted) return;
+    
+    // Build rows
     const byId = new Map((wmas as WMA[]).map(w=>[w.id, w]));
-    return (rulesData as SeasonRule[])
+    const rows: Row[] = (rulesData as SeasonRule[])
       .map(r => {
         const wma = byId.get(r.wma_id);
         if (!wma) return null;
@@ -48,21 +52,23 @@ export default function MapPage(){
         return { wma, rule: resolved };
       })
       .filter((x): x is Row => x !== null);
-  }, []);
 
-  const filtered = useMemo(()=> applyFilters(rows, filters), [rows, filters]);
+    // Apply filters
+    const filtered = applyFilters(rows, filters);
 
-  const points = useMemo(()=>{
+    // Build points
     const m = new Map<string, {wma:WMA, count:number}>();
     for (const row of filtered) {
       const id = row.wma.id;
       if (!m.has(id)) m.set(id, { wma: row.wma, count: 0 });
       m.get(id)!.count += 1;
     }
-    return Array.from(m.values())
+    const newPoints = Array.from(m.values())
       .filter(({wma}) => wma.lat != null && wma.lng != null)
       .map(({wma, count}) => ({...wma, count, lat: wma.lat!, lng: wma.lng!}));
-  }, [filtered]);
+    
+    setPoints(newPoints);
+  }, [mounted, filters]);
 
   const pick = (id: string) => {
     const w = (wmas as WMA[]).find(x=>x.id===id) || null;
