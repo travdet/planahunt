@@ -35,6 +35,7 @@ export function applyFilters(
   maxDistanceMi?: number | null
 ) {
   let filtered = rows.filter(({ rule }) => ruleMatchesFilters(rule, f));
+
   if (f.counties.length) {
     filtered = filtered.filter(({ wma }) => wma.counties.some(c => f.counties.includes(c)));
   }
@@ -54,6 +55,7 @@ export function applyFilters(
       .toLowerCase().includes(q)
     );
   }
+
   if (home?.lat && home?.lng && maxDistanceMi) {
     filtered = filtered.filter(({ wma }) => {
       if (wma.lat == null || wma.lng == null) return false;
@@ -63,5 +65,6 @@ export function applyFilters(
       return Math.abs(dx) < 5 && Math.abs(dy) < 5; // ~ ok
     });
   }
+
   return filtered;
 }
