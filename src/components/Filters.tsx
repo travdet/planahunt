@@ -7,8 +7,8 @@ export default function Filters({ value, onChange, wmas, rules }:{ value: Filter
   const regions = useMemo(()=> Array.from(new Set(wmas.map(w=>w.region).filter(r => r != null))).sort(), [wmas]);
   const counties = useMemo(()=> Array.from(new Set(wmas.flatMap(w=>w.counties))).sort(), [wmas]);
   const tags = useMemo(()=> Array.from(new Set([...(wmas.flatMap(w=>w.tags||[])), ...(rules.flatMap(r=>r.tags||[]))])).sort(), [wmas, rules]);
-  const speciesOptions = useMemo(()=> Array.from(new Set(rules.map(r=>r.species))).sort(), [rules]);
-  const weaponOptions = useMemo(()=> Array.from(new Set(rules.map(r=>r.weapon))).sort(), [rules]);
+  const speciesOptions = useMemo(()=> Array.from(new Set(rules.map(r=>String(r.species)).filter(s => s))).sort(), [rules]);
+  const weaponOptions = useMemo(()=> Array.from(new Set(rules.map(r=>String(r.weapon)).filter(w => w))).sort(), [rules]);
 
   const toggle = (arr: string[], item: string) => {
     const set = new Set(arr||[]);
