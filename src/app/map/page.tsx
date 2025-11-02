@@ -1,16 +1,21 @@
 "use client";
 import { useMemo, useState } from "react";
+import dynamic from 'next/dynamic';
 import wmas from "@/data/wmas.json";
 import rulesData from "@/data/seasons.json";
 import statewide from "@/data/statewide.json";
 import type { FilterState, SeasonRule, WMA } from "@/lib/types";
 import { applyFilters, type Row } from "@/lib/filters";
 import { resolveStatewide } from "@/lib/rules";
-import Filters from "@/components/Filters";
-import Mapbox from "@/components/Mapbox";
 import WMAModal from "@/components/WMAModal";
 
-export const dynamic = 'force-dynamic';
+const Filters = dynamic(() => import('@/components/Filters'), { ssr: false });
+const Mapbox = dynamic(() => import('@/components/Mapbox'), { 
+  ssr: false,
+  loading: () => <div className="h-[400px] w-full rounded-xl overflow-hidden border border-slate-200 flex items-center justify-center bg-slate-50">
+    <p className="text-slate-500">Loading map...</p>
+  </div>
+});
 
 export default function MapPage(){
   const [filters, setFilters] = useState<FilterState>({
