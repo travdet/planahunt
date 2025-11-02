@@ -12,8 +12,17 @@ import WMAModal from "@/components/WMAModal";
 
 export default function MapPage(){
   const [filters, setFilters] = useState<FilterState>({
-    query: "", species: [], weapons: [], quota: "any", buckOnly: "any",
-    regions: [], counties: [], openOn: null, distanceMi: null, home: null, tags: []
+    query: "",
+    species: [],
+    weapons: [],
+    accessType: "any",
+    sex: "any",
+    regions: [],
+    counties: [],
+    date: null,
+    dateRange: null,
+    maxDistanceMi: null,
+    tags: []
   });
   const [open, setOpen] = useState<WMA|null>(null);
 
