@@ -43,7 +43,9 @@ export default function MapPage(){
       if (!m.has(id)) m.set(id, { wma: row.wma, count: 0 });
       m.get(id)!.count += 1;
     }
-    return Array.from(m.values()).map(({wma, count}) => ({...wma, count}));
+    return Array.from(m.values())
+      .filter(({wma}) => wma.lat != null && wma.lng != null)
+      .map(({wma, count}) => ({...wma, count, lat: wma.lat!, lng: wma.lng!}));
   }, [filtered]);
 
   const pick = (id: string) => {
