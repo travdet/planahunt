@@ -1,9 +1,7 @@
 export type AccessType = "general" | "quota";
 export type SexFilter = "any" | "either" | "buck" | "doe";
 export type Weapon = "archery" | "primitive" | "firearms" | "shotgun" | "muzzleloader";
-
 export type DateRange = { start: string; end: string }; // yyyy-mm-dd
-
 export type SeasonRule = {
   id: string;
   wma_id: string;
@@ -14,13 +12,12 @@ export type SeasonRule = {
   follows_statewide?: boolean;
   quota_required?: boolean;
   notes_short?: string;
-  buck_only?: "yes" | "no";
+  buck_only?: boolean;
   either_sex_last_day?: boolean;
   last_two_days_either_sex?: boolean;
   tags?: string[];
   // optional future fields
 };
-
 export type WMA = {
   id: string;               // slug
   name: string;
@@ -35,7 +32,6 @@ export type WMA = {
   source_url?: string;
   tags?: string[];
 };
-
 export type FilterState = {
   query: string;
   date?: string | null;           // yyyy-mm-dd (single day)
@@ -49,7 +45,6 @@ export type FilterState = {
   tags: string[];                 // misc tags (archery-only area, MI hunts, bird range, etc)
   maxDistanceMi?: number | null;  // from home
 };
-
 export type HomeLoc = {
   address: string;
   lat: number | null;
