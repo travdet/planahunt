@@ -1,6 +1,9 @@
 import type { FilterState, WMA, SeasonRule } from "./types";
 import { overlap, isDateWithin } from "./util";
 
+// Export the Row type that map/page.tsx needs
+export type Row = { wma: WMA; rule: SeasonRule };
+
 // Determines if a rule matches filter selections
 function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
   if (f.species.length && !f.species.includes(rule.species.toLowerCase())) return false;
@@ -11,8 +14,8 @@ function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
     if (f.accessType === "general" && isQuota) return false;
   }
   if (f.sex !== "any") {
-    if (f.sex === "buck" && rule.buck_only !== "yes") return false;
-    if (f.sex === "either" && rule.buck_only === "yes") return false;
+    if (f.sex === "buck" && rule.buck_only !== true) return false;
+    if (f.sex === "either" && rule.buck_only === true) return false;
     // (doe-only rarely exists; would be represented by notes or tag)
   }
   if (f.date) {
@@ -26,13 +29,12 @@ function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
 }
 
 export function applyFilters(
-  rows: { wma: WMA; rule: SeasonRule }[],
+  rows: Row[],
   f: FilterState,
   home?: { lat: number|null; lng: number|null },
   maxDistanceMi?: number | null
 ) {
   let filtered = rows.filter(({ rule }) => ruleMatchesFilters(rule, f));
-
   if (f.counties.length) {
     filtered = filtered.filter(({ wma }) => wma.counties.some(c => f.counties.includes(c)));
   }
@@ -52,7 +54,6 @@ export function applyFilters(
       .toLowerCase().includes(q)
     );
   }
-
   if (home?.lat && home?.lng && maxDistanceMi) {
     filtered = filtered.filter(({ wma }) => {
       if (wma.lat == null || wma.lng == null) return false;
@@ -62,6 +63,5 @@ export function applyFilters(
       return Math.abs(dx) < 5 && Math.abs(dy) < 5; // ~ ok
     });
   }
-
   return filtered;
 }
