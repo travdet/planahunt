@@ -28,10 +28,14 @@ export default function MapPage(){
 
   const rows: Row[] = useMemo(()=>{
     const byId = new Map((wmas as WMA[]).map(w=>[w.id, w]));
-    return (rulesData as SeasonRule[]).map(r => {
-      const resolved = resolveStatewide(r, statewide);
-      return { wma: byId.get(r.wma_id)!, rule: resolved };
-    }).filter(x=>!!x.wma);
+    return (rulesData as SeasonRule[])
+      .map(r => {
+        const wma = byId.get(r.wma_id);
+        if (!wma) return null;
+        const resolved = resolveStatewide(r, statewide);
+        return { wma, rule: resolved };
+      })
+      .filter((x): x is Row => x !== null);
   }, []);
 
   const filtered = useMemo(()=> applyFilters(rows, filters), [rows, filters]);
