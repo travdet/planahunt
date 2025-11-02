@@ -1,17 +1,16 @@
 // src/components/AddressField.tsx
 "use client";
-
 import { useEffect, useRef, useState } from "react";
 import { geocodeAddress } from "@/lib/map";
-import type { FilterState } from "@/lib/types";
+import type { HomeLoc } from "@/lib/types";
 
 type Props = {
-  value: Pick<FilterState, "homeAddress" | "homeLat" | "homeLng">;
-  onChange: (next: Partial<FilterState>) => void;
+  value: HomeLoc;
+  onChange: (next: HomeLoc) => void;
 };
 
 export default function AddressField({ value, onChange }: Props) {
-  const [q, setQ] = useState(value.homeAddress ?? "");
+  const [q, setQ] = useState(value.address ?? "");
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<{place_name:string; lat:number; lng:number;}[]>([]);
   const boxRef = useRef<HTMLDivElement>(null);
@@ -37,7 +36,7 @@ export default function AddressField({ value, onChange }: Props) {
   }
 
   function select(hit: {place_name:string; lat:number; lng:number}) {
-    onChange({ homeAddress: hit.place_name, homeLat: hit.lat, homeLng: hit.lng });
+    onChange({ address: hit.place_name, lat: hit.lat, lng: hit.lng });
     setQ(hit.place_name);
     setResults([]);
   }
@@ -62,7 +61,6 @@ export default function AddressField({ value, onChange }: Props) {
           {loading ? "…" : "Set"}
         </button>
       </div>
-
       {results.length > 0 && (
         <div className="absolute z-20 mt-1 w-full rounded border border-slate-300 bg-white shadow">
           {results.map((r, i) => (
@@ -76,10 +74,9 @@ export default function AddressField({ value, onChange }: Props) {
           ))}
         </div>
       )}
-
-      {value.homeAddress && (
+      {value.address && (
         <p className="mt-1 text-[11px] text-slate-500">
-          Saved: {value.homeAddress}
+          Saved: {value.address}
         </p>
       )}
     </div>
