@@ -4,7 +4,7 @@ import type { FilterState, WMA, SeasonRule } from "@/lib/types";
 
 export default function Filters({ value, onChange, wmas, rules }:{ value: FilterState, onChange:(v:FilterState)=>void, wmas: WMA[], rules: SeasonRule[] }){
   const [q, setQ] = useState(value.query||"");
-  const regions = useMemo(()=> Array.from(new Set(wmas.map(w=>w.region))).sort(), [wmas]);
+  const regions = useMemo(()=> Array.from(new Set(wmas.map(w=>w.region).filter(r => r != null))).sort(), [wmas]);
   const counties = useMemo(()=> Array.from(new Set(wmas.flatMap(w=>w.counties))).sort(), [wmas]);
   const tags = useMemo(()=> Array.from(new Set([...(wmas.flatMap(w=>w.tags||[])), ...(rules.flatMap(r=>r.tags||[]))])).sort(), [wmas, rules]);
   const speciesOptions = useMemo(()=> Array.from(new Set(rules.map(r=>r.species))).sort(), [rules]);
