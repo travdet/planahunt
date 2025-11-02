@@ -39,8 +39,12 @@ export default function Page() {
     const byWma = new Map<string, WMA>();
     (wmas as WMA[]).forEach(w => byWma.set(w.id, w));
     return (rulesRaw as SeasonRule[])
-      .map(r => ({ wma: byWma.get(r.wma_id)! , rule: r }))
-      .filter(x => !!x.wma);
+      .map(r => {
+        const wma = byWma.get(r.wma_id);
+        if (!wma) return null;
+        return { wma, rule: r };
+      })
+      .filter((x): x is { wma: WMA; rule: SeasonRule } => x !== null);
   }, []);
 
   const allCounties = useMemo(()=>{
