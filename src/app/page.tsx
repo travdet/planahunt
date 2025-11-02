@@ -4,14 +4,23 @@ import type { FilterState, HomeLoc, SeasonRule, WMA } from "@/lib/types";
 import { applyFilters } from "@/lib/filters";
 import { fmtMDY } from "@/lib/util";
 import { useState, useMemo } from "react";
+import dynamic from "next/dynamic";
 import WMACard from "@/components/WMACard";
 import WMAModal from "@/components/WMAModal";
 import FilterBar from "@/components/FilterBar";
 import HomeLocation from "@/components/HomeLocation";
-import Mapbox from "@/components/Mapbox";
 
 import wmas from "@/data/wmas.json";
 import rulesRaw from "@/data/seasons.json";
+
+const Mapbox = dynamic(() => import("@/components/Mapbox"), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[500px] w-full rounded-xl overflow-hidden border border-slate-200 flex items-center justify-center bg-slate-50">
+      <p className="text-slate-500">Loading map...</p>
+    </div>
+  ),
+});
 
 export default function Page() {
   // initial filters
@@ -66,11 +75,23 @@ export default function Page() {
     return Array.from(m.values()).sort((a,b)=>a.wma.name.localeCompare(b.wma.name));
   }, [filtered]);
 
+  const points = useMemo(() => {
+    return grouped
+      .filter(({ wma }) => wma.lat != null && wma.lng != null && wma.name)
+      .map(({ wma, rules }) => ({
+        id: wma.id,
+        name: wma.name,
+        lat: wma.lat!,
+        lng: wma.lng!,
+        count: rules.length,
+      }));
+  }, [grouped]);
+
   const selected = useMemo(()=> grouped.find(g => g.wma.id === openId) || null, [grouped, openId]);
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-6">
-      {/* Top green header without search input per your direction */}
+      {/* Top green header */}
       <div className="mb-6 rounded-2xl bg-emerald-700 px-6 py-4 text-white">
         <h1 className="text-2xl font-semibold">Plan A Hunt (Georgia)</h1>
         <p className="text-sm opacity-90">Filter WMAs by date, access type, species, and more.</p>
@@ -99,23 +120,30 @@ export default function Page() {
           />
         </div>
 
-        {/* Results */}
-        <div className="space-y-4">
+        {/* Right side: Map and Results */}
+        <div className="space-y-6">
+          {/* Results count and selected date */}
           <div className="flex items-center justify-between">
             <div className="text-sm text-slate-600">{grouped.length} areas</div>
             {filters.date && <div className="text-sm text-slate-700">Hunt date: <span className="font-medium">{fmtMDY(filters.date)}</span></div>}
           </div>
 
-          {grouped.map(({ wma, rules })=>(
-            <WMACard
-              key={wma.id}
-              wma={wma}
-              rules={rules}
-              date={filters.date || null}
-              home={{ lat: home.lat, lng: home.lng }}
-              onOpen={()=>setOpenId(wma.id)}
-            />
-          ))}
+          {/* Map */}
+          <Mapbox points={points} onPick={(id) => setOpenId(id)} />
+
+          {/* WMA Cards */}
+          <div className="space-y-4">
+            {grouped.map(({ wma, rules })=>(
+              <WMACard
+                key={wma.id}
+                wma={wma}
+                rules={rules}
+                date={filters.date || null}
+                home={{ lat: home.lat, lng: home.lng }}
+                onOpen={()=>setOpenId(wma.id)}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
