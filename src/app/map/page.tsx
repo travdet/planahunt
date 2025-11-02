@@ -10,6 +10,8 @@ import Filters from "@/components/Filters";
 import Mapbox from "@/components/Mapbox";
 import WMAModal from "@/components/WMAModal";
 
+export const dynamic = 'force-dynamic';
+
 export default function MapPage(){
   const [filters, setFilters] = useState<FilterState>({
     query: "",
