@@ -1,57 +1,70 @@
-export type AccessType = "general" | "quota";
-export type SexFilter = "any" | "either" | "buck" | "doe";
-export type Weapon = "archery" | "primitive" | "firearms" | "shotgun" | "muzzleloader";
+import wmas from "@/data/wmas.json";
+import rulesRaw from "@/data/seasons.json";
+import type { SeasonRule, WMA } from "@/lib/types";
+import { fmtMDY } from "@/lib/util";
+import AccessCalendar from "@/components/AccessCalendar";
+import statewide from "@/data/statewide.json";
+import { resolveStatewide } from "@/lib/rules";
 
-export type DateRange = { start: string; end: string }; // yyyy-mm-dd
+export default function HuntDetail({ params }: { params: { id: string } }) {
+  const id = decodeURIComponent(params.id);
+  const wma = (wmas as WMA[]).find(w => w.wma_id === id);
+  
+  if (!wma) {
+    return (
+      <main className="mx-auto max-w-5xl px-4 py-6">
+        <div className="p-6 text-center">WMA not found.</div>
+      </main>
+    );
+  }
+  
+  const rules = (rulesRaw as SeasonRule[])
+    .filter(r => r.wma_id === id)
+    .map(r => resolveStatewide(r, wma, statewide));
 
-export type SeasonRule = {
-  id: string;
-  wma_id: string;
-  species: string;          // "Deer" | "Turkey" | "Dove" | etc
-  weapon: Weapon | string;  // keep string to tolerate raw data
-  start_date: string;       // yyyy-mm-dd
-  end_date: string;         // yyyy-mm-dd
-  follows_statewide?: boolean;
-  quota_required?: boolean;
-  notes_short?: string;
-  buck_only?: boolean;
-  either_sex_last_day?: boolean;
-  last_two_days_either_sex?: boolean;
-  tags?: string[];
-  // optional future fields
-};
+  return (
+    <main className="mx-auto max-w-5xl px-4 py-6">
+      <div className="mb-6 rounded-2xl bg-emerald-700 px-6 py-4 text-white">
+        <h1 className="text-2xl font-semibold">{wma.name}</h1>
+        <p className="text-sm opacity-90">
+          {wma.county}
+          {wma.acreage ? ` • ${wma.acreage.toLocaleString()} ac` : ""}
+          {wma.phone ? ` • ${wma.phone}` : ""}
+        </p>
+      </div>
 
-export type WMA = {
-  id: string;               // slug
-  name: string;
-  tract_name?: string;
-  area_type?: string;       // "WMA"
-  acreage?: number;
-  phone?: string;
-  counties: string[];
-  region?: string;
-  lat?: number | null;
-  lng?: number | null;
-  source_url?: string;
-  tags?: string[];
-};
+      <div className="grid gap-6 md:grid-cols-2">
+        <div>
+          <h2 className="mb-2 text-lg font-semibold">Seasons</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="text-left text-slate-500">
+                  <th className="py-1 pr-2">Species</th>
+                  <th className="py-1 pr-2">Weapon</th>
+                  <th className="py-1 pr-2">Access</th>
+                  <th className="py-1">Dates</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rules.map((r, i) =>(
+                  <tr key={i} className="border-t">
+                    <td className="py-1 pr-2">{r.species}</td>
+                    <td className="py-1 pr-2">{r.hunt_type}</td>
+                    <td className="py-1 pr-2">{r.quota_details ? "Quota" : "General"}</td>
+                    <td className="py-1">{r.start_date && r.end_date ? `${fmtMDY(r.start_date)} – ${fmtMDY(r.end_date)}` : r.dates}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-export type FilterState = {
-  query: string;
-  date?: string | null;           // yyyy-mm-dd (single day)
-  dateRange?: DateRange | null;   // for future range picker
-  accessType: "any" | AccessType;
-  sex: SexFilter;
-  weapons: string[];              // chosen weapons
-  species: string[];              // chosen species
-  counties: string[];             // chosen counties
-  regions: string[];              // chosen DNR regions
-  tags: string[];                 // misc tags (archery-only area, MI hunts, bird range, etc)
-  maxDistanceMi?: number | null;  // from home
-};
-
-export type HomeLoc = {
-  address: string;
-  lat: number | null;
-  lng: number | null;
-};
+        <div>
+          <h2 className="mb-2 text-lg font-semibold">Calendar</h2>
+          <AccessCalendar rules={rules} />
+        </div>
+      </div>
+    </main>
+  );
+}
