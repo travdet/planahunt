@@ -1,6 +1,6 @@
 [
   {
-    "id": "ALAPAHA-RIVER",
+    "wma_wma_id": "ALAPAHA-RIVER",
     "name": "Alapaha River WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -19,7 +19,7 @@
     ]
   },
   {
-    "id": "ALBANY-NURSERY",
+    "wma_id": "ALBANY-NURSERY",
     "name": "Albany Nursery WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -38,7 +38,7 @@
     ]
   },
   {
-    "id": "ALEXANDER",
+    "wma_id": "ALEXANDER",
     "name": "Alexander WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -54,7 +54,7 @@
     "tags": []
   },
   {
-    "id": "ALLATOONA",
+    "wma_id": "ALLATOONA",
     "name": "Allatoona WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -73,7 +73,7 @@
     ]
   },
   {
-    "id": "ALLIGATOR-CREEK",
+    "wma_id": "ALLIGATOR-CREEK",
     "name": "Alligator Creek WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -89,7 +89,7 @@
     "tags": []
   },
   {
-    "id": "ALTAMA-PLANTATION",
+    "wma_id": "ALTAMA-PLANTATION",
     "name": "Altama Plantation WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -107,7 +107,7 @@
     ]
   },
   {
-    "id": "ALTAMAHA-WMA-WMA",
+    "wma_id": "ALTAMAHA-WMA-WMA",
     "name": "Altamaha WMA \u2014 Waterfowl Management Area",
     "tract_name": "",
     "area_type": "WMA",
@@ -127,7 +127,7 @@
     ]
   },
   {
-    "id": "ARROWHEAD",
+    "wma_id": "ARROWHEAD",
     "name": "Arrowhead WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -146,7 +146,7 @@
     ]
   },
   {
-    "id": "BF-GRANT",
+    "wma_id": "BF-GRANT",
     "name": "B. F. Grant WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -166,7 +166,7 @@
     ]
   },
   {
-    "id": "BARTRAM-FOREST",
+    "wma_id": "BARTRAM-FOREST",
     "name": "Bartram Forest WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -184,7 +184,7 @@
     ]
   },
   {
-    "id": "BEAVERDAM",
+    "wma_id": "BEAVERDAM",
     "name": "Beaverdam WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -203,7 +203,7 @@
     ]
   },
   {
-    "id": "BERRY-COLLEGE",
+    "wma_id": "BERRY-COLLEGE",
     "name": "Berry College WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -223,7 +223,7 @@
     ]
   },
   {
-    "id": "BIG-DUKES-POND",
+    "wma_id": "BIG-DUKES-POND",
     "name": "Big Dukes Pond WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -240,7 +240,7 @@
     "tags": []
   },
   {
-    "id": "BIG-HAMMOCK",
+    "wma_id": "BIG-HAMMOCK",
     "name": "Big Hammock WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -256,7 +256,7 @@
     "tags": []
   },
   {
-    "id": "BIG-LAZER",
+    "wma_id": "BIG-LAZER",
     "name": "Big Lazer Creek WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -277,7 +277,7 @@
     ]
   },
   {
-    "id": "BLANTON-CREEK",
+    "wma_id": "BLANTON-CREEK",
     "name": "Blanton Creek WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -297,8 +297,8 @@
     ]
   },
   {
-    "id": "BLUE-RIDGE",
-    "name": "Blue Ridge WMA",
+    "wma_id": "BLUE-Rwma_idGE",
+    "name": "Blue Rwma_idge WMA",
     "tract_name": "",
     "area_type": "WMA",
     "acreage": 20900,
@@ -316,7 +316,7 @@
     ]
   },
   {
-    "id": "BROAD-RIVER",
+    "wma_id": "BROAD-RIVER",
     "name": "Broad River WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -332,7 +332,7 @@
     "tags": []
   },
   {
-    "id": "BUCK-SHOALS",
+    "wma_id": "BUCK-SHOALS",
     "name": "Buck Shoals WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -351,7 +351,7 @@
     ]
   },
   {
-    "id": "BULLARD-CREEK",
+    "wma_id": "BULLARD-CREEK",
     "name": "Bullard Creek WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -372,7 +372,7 @@
     ]
   },
   {
-    "id": "CANOOCH",
+    "wma_id": "CANOOCH",
     "name": "Canoochee Sandhills WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -389,7 +389,7 @@
     "tags": []
   },
   {
-    "id": "CARTERS-LAKE",
+    "wma_id": "CARTERS-LAKE",
     "name": "Carters Lake WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -410,7 +410,7 @@
     ]
   },
   {
-    "id": "CEDAR-CREEK",
+    "wma_id": "CEDAR-CREEK",
     "name": "Cedar Creek WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -432,7 +432,7 @@
     ]
   },
   {
-    "id": "CEYLON",
+    "wma_id": "CEYLON",
     "name": "Ceylon WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -451,7 +451,7 @@
     ]
   },
   {
-    "id": "CHATTAHOOCHEE",
+    "wma_id": "CHATTAHOOCHEE",
     "name": "Chattahoochee WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -471,7 +471,7 @@
     ]
   },
   {
-    "id": "CHESTATEE",
+    "wma_id": "CHESTATEE",
     "name": "Chestatee WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -491,7 +491,7 @@
     ]
   },
   {
-    "id": "CHICKASAWHATCHEE",
+    "wma_id": "CHICKASAWHATCHEE",
     "name": "Chickasawhatchee WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -512,7 +512,7 @@
     ]
   },
   {
-    "id": "CLARKS-HILL-EAST",
+    "wma_id": "CLARKS-HILL-EAST",
     "name": "Clarks Hill WMA \u2014 East",
     "tract_name": "",
     "area_type": "WMA",
@@ -531,7 +531,7 @@
     ]
   },
   {
-    "id": "CLARKS-HILL-WEST",
+    "wma_id": "CLARKS-HILL-WEST",
     "name": "Clarks Hill WMA \u2014 West",
     "tract_name": "",
     "area_type": "WMA",
@@ -547,7 +547,7 @@
     "tags": []
   },
   {
-    "id": "CLAYHOLE-SWAMP",
+    "wma_id": "CLAYHOLE-SWAMP",
     "name": "Clayhole Swamp WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -567,7 +567,7 @@
     ]
   },
   {
-    "id": "CLYBEL",
+    "wma_id": "CLYBEL",
     "name": "Clybel WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -589,7 +589,7 @@
     ]
   },
   {
-    "id": "COCHRANS-CREEK",
+    "wma_id": "COCHRANS-CREEK",
     "name": "Cochrans Creek WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -608,7 +608,7 @@
     ]
   },
   {
-    "id": "COHUTTA",
+    "wma_id": "COHUTTA",
     "name": "Cohutta WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -628,7 +628,7 @@
     ]
   },
   {
-    "id": "CONASAUGA-RIVER",
+    "wma_id": "CONASAUGA-RIVER",
     "name": "Conasauga River WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -648,7 +648,7 @@
     ]
   },
   {
-    "id": "COOPERS-CREEK",
+    "wma_id": "COOPERS-CREEK",
     "name": "Coopers Creek WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -668,7 +668,7 @@
     ]
   },
   {
-    "id": "COOSAWATTEE",
+    "wma_id": "COOSAWATTEE",
     "name": "Coosawattee WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -689,7 +689,7 @@
     ]
   },
   {
-    "id": "CROCKFORD-PM",
+    "wma_id": "CROCKFORD-PM",
     "name": "Crockford\u2013Pigeon Mountain WMA",
     "tract_name": "",
     "area_type": "WMA",
