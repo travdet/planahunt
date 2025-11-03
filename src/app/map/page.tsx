@@ -15,6 +15,7 @@ const Mapbox = dynamic(() => import('@/components/Mapbox'), {
     <p className="text-slate-500">Loading map...</p>
   </div>
 });
+
 export default function MapPage(){
   const [mounted, setMounted] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
@@ -97,7 +98,7 @@ export default function MapPage(){
         />
       </aside>
       <section className="flex-1">
-        <Mapbox points={points} onMarkerClick={pick} />
+        <Mapbox points={points} onPick={pick} />
       </section>
     </main>
   )
