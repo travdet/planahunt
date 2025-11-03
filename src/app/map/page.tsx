@@ -31,6 +31,7 @@ export default function MapPage(){
     tags: []
   });
   const [openWma, setOpenWma] = useState<WMA | null>(null);
+  
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -42,6 +43,14 @@ export default function MapPage(){
     });
     return Array.from(set).sort();
   }, []);
+  
+  const openWmaRules = useMemo(() => {
+    if (!openWma) return [];
+    return (rulesData as SeasonRule[])
+      .filter(r => r.wma_id === openWma.wma_id)
+      .map(r => resolveStatewide(r, openWma, statewide));
+  }, [openWma]);
+  
   const points = useMemo(() => {
     if (!mounted) return [];
     
@@ -70,10 +79,12 @@ export default function MapPage(){
       })
       .filter((p): p is any => p !== null);
   }, [mounted, filters]);
+  
   const pick = (id: string) => {
     const w = (wmas as WMA[]).find(x => x.wma_id === id) || null;
     setOpenWma(w);
   };
+  
   if (!mounted) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -81,9 +92,10 @@ export default function MapPage(){
       </div>
     );
   }
+  
   return (
     <main className="flex h-screen max-h-screen">
-      {openWma && <WMAModal wma={openWma} onClose={()=>setOpenWma(null)} />}
+      {openWma && <WMAModal wma={openWma} rules={openWmaRules} onClose={()=>setOpenWma(null)} />}
       <aside className="w-[350px] bg-slate-50 p-4 overflow-y-auto">
         <Filters filters={filters} setFilters={setFilters} counties={allCounties} />
       </aside>
