@@ -36,14 +36,6 @@ export default function MapPage(){
     setMounted(true);
   }, []);
   
-  const allCounties = useMemo(()=>{
-    const set = new Set<string>();
-    (wmas as WMA[]).forEach(w => {
-      if(w.counties) w.counties.forEach(c => set.add(c))
-    });
-    return Array.from(set).sort();
-  }, []);
-  
   const openWmaRules = useMemo(() => {
     if (!openWma) return [];
     return (rulesData as SeasonRule[])
@@ -97,7 +89,12 @@ export default function MapPage(){
     <main className="flex h-screen max-h-screen">
       {openWma && <WMAModal wma={openWma} rules={openWmaRules} onClose={()=>setOpenWma(null)} />}
       <aside className="w-[350px] bg-slate-50 p-4 overflow-y-auto">
-        <Filters filters={filters} setFilters={setFilters} counties={allCounties} />
+        <Filters 
+          value={filters} 
+          onChange={setFilters} 
+          wmas={wmas as WMA[]} 
+          rules={rulesData as SeasonRule[]} 
+        />
       </aside>
       <section className="flex-1">
         <Mapbox points={points} onMarkerClick={pick} />
