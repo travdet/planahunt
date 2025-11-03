@@ -1,5 +1,4 @@
 "use client";
-// 1. IMPORT THE CORRECTED FUNCTION NAME
 import { fmtMmmDd, haversineMi, minutesAt } from "@/lib/util";
 import type { SeasonRule, WMA, HomeLocation } from "@/lib/types";
 import { useMemo } from "react";
@@ -19,9 +18,8 @@ const Pill = ({ text, className = "" }: { text: string, className?: string }) =>
   </span>
 );
 
-// NEW: Helper to format date ranges into "Sep 13 - Oct 1"
+// Helper to format date ranges into "Sep 13 - Oct 1"
 function formatHuntRange(start: string, end: string) {
-  // 2. USE THE CORRECTED FUNCTION NAME
   const startDate = fmtMmmDd(start);
   const endDate = fmtMmmDd(end);
   if (startDate === endDate) return startDate; // Single day hunt
@@ -147,7 +145,8 @@ export default function WMACard({
           <AlertTriangle className="h-4 w-4 flex-shrink-0" />
           <p>
             This WMA spans multiple counties with different rules. Details may vary by location.
-          </all-files>
+            {/* THIS IS WHERE THE BAD TAG WAS. IT IS NOW REMOVED. */}
+          </p>
         </div>
       )}
 
@@ -157,7 +156,6 @@ export default function WMACard({
           <div className="space-y-1">
             <div>
               <span className="rounded-full bg-emerald-600 px-2 py-0.5 text-xs text-white">
-                {/* 3. USE THE CORRECTED FUNCTION NAME */}
                 Open {today ? fmtMmmDd(today) : ""}
               </span>
               <span className="ml-2 text-slate-700">
@@ -172,7 +170,6 @@ export default function WMACard({
           </div>
         ) : today ? (
           <div className="text-slate-700">
-            {/* 3. USE THE CORRECTED FUNCTION NAME */}
             Not open on selected date: {fmtMmmDd(today)}
           </div>
         ) : (
