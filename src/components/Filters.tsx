@@ -1,8 +1,3 @@
-Here is the entire corrected file for **`src/components/Filters.tsx`**.
-
-The *only* change from the last version I gave you is the removal of that single stray `_` character that was causing your build to fail.
-
-```tsx
 "use client";
 import { useMemo } from "react";
 import type { FilterState, WMA, SeasonRule } from "@/lib/types";
@@ -171,7 +166,7 @@ export default function Filters({
             }
             className="w-full rounded-md border px-2 py-1"
           >
-            <option value="any">any</Doption>
+            <option value="any">any</option>
             <option value="either">either</option>
             <option value="buck">buck</option>
             {/* <option value="doe">doe</option> */}
@@ -234,7 +229,6 @@ export default function Filters({
               onClick={() =>
                 onChange({ ...value, counties: toggle(value.counties, c) })
               }
-              // THIS IS WHERE THE TYPO WAS. The underscore is now GONE.
             >
               {c}
             </button>
@@ -285,4 +279,3 @@ export default function Filters({
     </aside>
   );
 }
-```
