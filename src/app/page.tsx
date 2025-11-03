@@ -1,5 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import wmas from "@/data/wmas.json";
 import rulesData from "@/data/seasons.json";
 import statewide from "@/data/statewide.json";
@@ -12,6 +13,12 @@ import FilterBar from "@/components/FilterBar";
 import AddressField from "@/components/AddressField";
 import WMAModal from "@/components/WMAModal";
 
+// Dynamically import Mapbox
+const Mapbox = dynamic(() => import("@/components/Mapbox"), {
+  ssr: false,
+  loading: () => <div className="h-full w-full flex items-center justify-center bg-slate-50 rounded-xl border"><p className="text-slate-500">Loading map...</p></div>
+});
+
 const defaultFilters: FilterState = {
   query: "",
   accessType: "any",
@@ -22,7 +29,7 @@ const defaultFilters: FilterState = {
   regions: [],
   tags: [],
   maxDistanceMi: null,
-  dateRange: null, // Use new dateRange property
+  dateRange: null, 
 };
 
 export default function HomePage() {
@@ -33,27 +40,21 @@ export default function HomePage() {
   // Rows: The master list of every single hunt, with statewide rules resolved
   const rows: Row[] = useMemo(() => {
     const byId = new Map((wmas as WMA[]).map((w) => [w.wma_id, w]));
-    
-    // Use flatMap to handle resolveStatewide returning an array
     return (rulesData as SeasonRule[]).flatMap((rule) => {
       const wma = byId.get(rule.wma_id);
-      if (!wma) return []; // Return empty array to be filtered out
-
-      // This now returns SeasonRule[]
+      if (!wma) return []; 
       const resolvedRules = resolveStatewide(rule, wma, statewide);
-
-      // Create a Row for each resolved rule
       return resolvedRules.map((resolvedRule) => ({
         wma,
         rule: resolvedRule,
       }));
     });
-  }, []); // This runs only once
+  }, []); 
 
   // Dynamic lists for filters, derived from the resolved rows
   const allCounties = useMemo(
     () => Array.from(new Set((wmas as WMA[]).flatMap((w) => w.counties))).sort(),
-    [] // wmas is static
+    []
   );
   const allSpecies = useMemo(
     () =>
@@ -94,22 +95,39 @@ export default function HomePage() {
     }
     return Array.from(map.values());
   }, [filteredRows]);
+  
+  // NEW: Create points for the map from the *filtered* WMAs
+  const mapPoints = useMemo(() => {
+    return groupedByWma
+      .map(({ wma }) => {
+        if (wma.lat == null || wma.lng == null) return null;
+        return {
+          id: wma.wma_id,
+          name: wma.name,
+          lat: wma.lat,
+          lng: wma.lng,
+        };
+      })
+      .filter((p): p is { id: string; name: string; lat: number; lng: number } => p !== null);
+  }, [groupedByWma]);
 
   // WMA Rules for Modal
   const openWmaRules = useMemo(() => {
     if (!openWma) return [];
-    // We must re-resolve the rules for the *selected* WMA
-    // to show *all* its rules, not just the filtered ones
     return (rulesData as SeasonRule[])
       .filter((r) => r.wma_id === openWma.wma_id)
       .flatMap((rule) => resolveStatewide(rule, openWma, statewide));
   }, [openWma]);
   
-  // Single-day string (YYYY-MM-DD) for WMACard
-  // We use the start of the range. If range is null, pass null.
   const selectedDate = useMemo(() => {
     return filters.dateRange ? toISO(filters.dateRange.start) : null;
   }, [filters.dateRange]);
+  
+  // NEW: Function to open modal from map click
+  const pickWma = (id: string) => {
+    const w = (wmas as WMA[]).find((x) => x.wma_id === id) || null;
+    setOpenWma(w);
+  };
 
   return (
     <>
@@ -120,8 +138,9 @@ export default function HomePage() {
           onClose={() => setOpenWma(null)}
         />
       )}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4">
-        <aside className="h-fit md:sticky md:top-6 md:col-span-1">
+      {/* UPDATED: New 3-column grid layout */}
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
+        <aside className="h-fit md:sticky md:top-6 md:col-span-4 lg:col-span-3">
           <div className="mb-4 rounded-xl border bg-white p-4 shadow-sm">
             <AddressField
               value={home || { address: "", lat: null, lng: null }}
@@ -138,7 +157,12 @@ export default function HomePage() {
           />
         </aside>
 
-        <section className="md:col-span-2 lg:col-span-3">
+        {/* UPDATED: Right side is now split between map and cards */}
+        <section className="md:col-span-8 lg:col-span-9 space-y-4">
+          <div className="h-[400px] w-full rounded-xl border shadow-sm overflow-hidden">
+            <Mapbox points={mapPoints} onPick={pickWma} />
+          </div>
+
           <div className="mb-4 text-sm text-slate-600">
             Showing **{groupedByWma.length}** WMAs matching filters.
           </div>
