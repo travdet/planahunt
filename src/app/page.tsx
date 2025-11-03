@@ -126,7 +126,7 @@ export default function Page() {
           <Mapbox points={points} onPick={(id) => setOpenId(id)} />
           <div className="space-y-4">
             {grouped.map(({ wma, rules }) => (
-              <WMACard key={wma.wma_id} wma={wma} rules={rules} home={home} />
+              <WMACard key={wma.wma_id} wma={wma} rules={rules} home={home} onOpen={() => setOpenId(wma.wma_id)} />
             ))}
           </div>
         </div>
