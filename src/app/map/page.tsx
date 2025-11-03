@@ -8,7 +8,6 @@ import type { FilterState, SeasonRule, WMA } from "@/lib/types";
 import { applyFilters, type Row } from "@/lib/filters";
 import { resolveStatewide } from "@/lib/rules";
 import WMAModal from "@/components/WMAModal";
-
 const Filters = dynamic(() => import('@/components/Filters'), { ssr: false });
 const Mapbox = dynamic(() => import('@/components/Mapbox'), { 
   ssr: false,
@@ -16,7 +15,6 @@ const Mapbox = dynamic(() => import('@/components/Mapbox'), {
     <p className="text-slate-500">Loading map...</p>
   </div>
 });
-
 export default function MapPage(){
   const [mounted, setMounted] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
@@ -33,7 +31,6 @@ export default function MapPage(){
     tags: []
   });
   const [openWma, setOpenWma] = useState<WMA | null>(null);
-
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -41,11 +38,10 @@ export default function MapPage(){
   const allCounties = useMemo(()=>{
     const set = new Set<string>();
     (wmas as WMA[]).forEach(w => {
-      if(w.county) set.add(w.county)
+      if(w.counties) w.counties.forEach(c => set.add(c))
     });
     return Array.from(set).sort();
   }, []);
-
   const points = useMemo(() => {
     if (!mounted) return [];
     
@@ -58,9 +54,7 @@ export default function MapPage(){
         return { wma, rule: resolved };
       })
       .filter((x): x is Row => x !== null);
-
     const filtered = applyFilters(rows, filters);
-
     const m = new Map<string, {wma:WMA, count:number}>();
     for (const row of filtered) {
       const id = row.wma.wma_id;
@@ -76,12 +70,10 @@ export default function MapPage(){
       })
       .filter((p): p is any => p !== null);
   }, [mounted, filters]);
-
   const pick = (id: string) => {
     const w = (wmas as WMA[]).find(x => x.wma_id === id) || null;
     setOpenWma(w);
   };
-
   if (!mounted) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -89,7 +81,6 @@ export default function MapPage(){
       </div>
     );
   }
-
   return (
     <main className="flex h-screen max-h-screen">
       {openWma && <WMAModal wma={openWma} onClose={()=>setOpenWma(null)} />}
