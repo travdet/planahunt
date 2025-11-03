@@ -123,7 +123,7 @@ export default function Page() {
           <HomeLocation value={home} onChange={setHome} />
         </div>
         <div className="lg:col-span-2 space-y-6">
-          <Mapbox points={points} onPick={(id) => setOpenId(id)} home={home} />
+          <Mapbox points={points} onPick={(id) => setOpenId(id)} />
           <div className="space-y-4">
             {grouped.map(({ wma, rules }) => (
               <WMACard key={wma.wma_id} wma={wma} rules={rules} home={home} />
