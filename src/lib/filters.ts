@@ -1,13 +1,15 @@
-import type { FilterState, WMA, SeasonRule } from "./types";
-import { overlap, isDateWithin } from "./util";
+import type { FilterState, WMA, SeasonRule, HomeLocation } from "./types";
+import { overlap, isDateWithin, toISO, haversineMi } from "./util";
 
 // Export the Row type that map/page.tsx needs
 export type Row = { wma: WMA; rule: SeasonRule };
 
 // Determines if a rule matches filter selections
 function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
-  if (f.species.length && !f.species.includes(rule.species.toLowerCase())) return false;
-  if (f.weapons.length && !f.weapons.includes(String(rule.weapon).toLowerCase())) return false;
+  if (f.species.length && !f.species.includes(rule.species.toLowerCase()))
+    return false;
+  if (f.weapons.length && !f.weapons.includes(String(rule.weapon).toLowerCase()))
+    return false;
   if (f.accessType !== "any") {
     const isQuota = !!rule.quota_required;
     if (f.accessType === "quota" && !isQuota) return false;
@@ -18,12 +20,14 @@ function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
     if (f.sex === "either" && rule.buck_only === true) return false;
     // (doe-only rarely exists; would be represented by notes or tag)
   }
-  if (f.date) {
-    if (!isDateWithin(f.date, rule.start_date, rule.end_date)) return false;
-  }
+  
+  // UPDATED: This now uses the new single dateRange object
   if (f.dateRange) {
-    const { start, end } = f.dateRange;
-    if (!overlap(rule.start_date, rule.end_date, start, end)) return false;
+    // Convert Date objects to 'YYYY-MM-DD' strings for comparison
+    const rangeStart = toISO(f.dateRange.start);
+    const rangeEnd = toISO(f.dateRange.end);
+    if (!overlap(rule.start_date, rule.end_date, rangeStart, rangeEnd))
+      return false;
   }
   return true;
 }
@@ -31,38 +35,57 @@ function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
 export function applyFilters(
   rows: Row[],
   f: FilterState,
-  home?: { lat: number|null; lng: number|null },
-  maxDistanceMi?: number | null
+  // UPDATED: This now uses the HomeLocation type and maxDistanceMi from 'f'
+  home: HomeLocation | null 
 ) {
   let filtered = rows.filter(({ rule }) => ruleMatchesFilters(rule, f));
 
   if (f.counties.length) {
-    filtered = filtered.filter(({ wma }) => wma.counties.some(c => f.counties.includes(c)));
+    filtered = filtered.filter(({ wma }) =>
+      wma.counties.some((c) => f.counties.includes(c))
+    );
   }
   if (f.regions.length) {
-    filtered = filtered.filter(({ wma }) => (wma.region && f.regions.includes(wma.region)));
+    filtered = filtered.filter(
+      ({ wma }) => wma.region && f.regions.includes(wma.region)
+    );
   }
   if (f.tags.length) {
     filtered = filtered.filter(({ wma, rule }) => {
-      const wTags = new Set([...(wma.tags||[]), ...(rule.tags||[])].map(t => t.toLowerCase()));
-      return f.tags.every(t => wTags.has(t.toLowerCase()));
+      const wTags = new Set(
+        [...(wma.tags || []), ...(rule.tags || [])].map((t) => t.toLowerCase())
+      );
+      return f.tags.every((t) => wTags.has(t.toLowerCase()));
     });
   }
   if (f.query.trim()) {
     const q = f.query.trim().toLowerCase();
-    filtered = filtered.filter(({ wma, rule }) =>
-      (wma.name + " " + (wma.tract_name||"") + " " + rule.species + " " + rule.weapon)
-      .toLowerCase().includes(q)
+    filtered = filtered.filter(
+      ({ wma, rule }) =>
+        (
+          wma.name +
+          " " +
+          (wma.tract_name || "") +
+          " " +
+          rule.species +
+          " " +
+          rule.weapon
+        )
+          .toLowerCase()
+          .includes(q)
     );
   }
 
-  if (home?.lat && home?.lng && maxDistanceMi) {
+  // UPDATED: This now uses the real haversine distance filter
+  const maxDistance = f.maxDistanceMi;
+  if (home?.lat && home?.lng && maxDistance) {
+    const homeCoords = { lat: home.lat, lng: home.lng };
     filtered = filtered.filter(({ wma }) => {
       if (wma.lat == null || wma.lng == null) return false;
-      const dx = wma.lat - home.lat!;
-      const dy = wma.lng - home.lng!;
-      // cheap bounding box ~ ignore if too far (quick cull)
-      return Math.abs(dx) < 5 && Math.abs(dy) < 5; // ~ ok
+      const wmaCoords = { lat: wma.lat, lng: wma.lng };
+      
+      const distance = haversineMi(homeCoords, wmaCoords);
+      return distance <= maxDistance;
     });
   }
 
