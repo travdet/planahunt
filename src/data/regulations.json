@@ -1,0 +1,485 @@
+{
+  "licenses": [
+    {
+      "category": "COMBO HUNTING & FISHING LICENSES",
+      "name": "Combo Hunting & Fishing License",
+      "term": "Annual",
+      "resident": "$30.00",
+      "nonresident": "$150.00",
+      "options": [
+        {
+          "term": "One-Day",
+          "resident": "$5.00",
+          "nonresident": "$30.00"
+        },
+        {
+          "term": "+ Additional Day",
+          "resident": "$1.00",
+          "nonresident": "$10.00"
+        }
+      ]
+    },
+    {
+      "category": "COMBO HUNTING & FISHING LICENSES",
+      "name": "Apprentice Hunting & Fishing License",
+      "term": "One-Day",
+      "resident": "$5.00",
+      "nonresident": "$30.00",
+      "options": [
+        {
+          "term": "+ Additional Day",
+          "resident": "$1.00",
+          "nonresident": "$10.00"
+        }
+      ]
+    },
+    {
+      "category": "HUNTING LICENSES",
+      "name": "Hunting License (Residents 16-64; All non-residents)",
+      "term": "Annual",
+      "resident": "$15.00",
+      "nonresident": "$100.00",
+      "options": [
+        {
+          "term": "One-Day",
+          "resident": "see combo",
+          "nonresident": "$20.00"
+        },
+        {
+          "term": "+ Additional Day",
+          "resident": "see combo",
+          "nonresident": "$6.00"
+        }
+      ]
+    },
+    {
+      "category": "HUNTING LICENSES",
+      "name": "Senior Sportsman's License (65+); also see lifetime licenses",
+      "term": "Annual",
+      "resident": "$7.00",
+      "nonresident": "Not Offered",
+      "options": []
+    },
+    {
+      "category": "HUNTING LICENSES",
+      "name": "Big Game License",
+      "term": "Annual",
+      "resident": "$25.00",
+      "nonresident": "$225.00",
+      "options": [
+        {
+          "term": "One-Day + Additional Day",
+          "resident": "$10.00 $2.00",
+          "nonresident": "$130.00 $8.00"
+        }
+      ]
+    },
+    {
+      "category": "HUNTING LICENSES",
+      "name": "Harvest Record - Alligator, Bear, Deer & Turkey",
+      "term": "Annual (Mar. - Feb.)",
+      "resident": "FREE",
+      "nonresident": "FREE",
+      "options": []
+    },
+    {
+      "category": "HUNTING LICENSES",
+      "name": "Quota Alligator Harvest Permit",
+      "term": "Seasonal",
+      "resident": "$75.00",
+      "nonresident": "$250.00",
+      "options": []
+    },
+    {
+      "category": "HUNTING LICENSES",
+      "name": "Trapping License",
+      "term": "Seasonal",
+      "resident": "$40.00",
+      "nonresident": "$325.00",
+      "options": []
+    },
+    {
+      "category": "HUNTING LICENSES",
+      "name": "Shooting Preserve License",
+      "term": "Two-Year",
+      "resident": "$12.00",
+      "nonresident": "$12.00",
+      "options": []
+    },
+    {
+      "category": "HUNTING LICENSES",
+      "name": "GA Waterfowl and Migratory Bird License",
+      "term": "Annual (Mar. Feb.)",
+      "resident": "$5.00",
+      "nonresident": "$5.00",
+      "options": []
+    },
+    {
+      "category": "HUNTING LICENSES",
+      "name": "Disability Hunting License",
+      "term": "Annual",
+      "resident": "$3.00",
+      "nonresident": "Not Offered",
+      "options": [
+        {
+          "term": "Three-Year",
+          "resident": "$9.00",
+          "nonresident": "Not Offered"
+        }
+      ]
+    },
+    {
+      "category": "FISHING LICENSES",
+      "name": "Fishing License (Residents 16-64; All non-residents)",
+      "term": "Annual One-Day",
+      "resident": "$15.00 see combo",
+      "nonresident": "$50.00 $10.00",
+      "options": [
+        {
+          "term": "+ Additional Day",
+          "resident": "see combo",
+          "nonresident": "$3.50"
+        }
+      ]
+    },
+    {
+      "category": "FISHING LICENSES",
+      "name": "Optional Youth Fishing License (12-15)",
+      "term": "MultiYear-",
+      "resident": "$10.00",
+      "nonresident": "Not Offered",
+      "options": []
+    },
+    {
+      "category": "FISHING LICENSES",
+      "name": "Senior Sportsman's License (65+); also see lifetime licenses",
+      "term": "Annual",
+      "resident": "$7.00",
+      "nonresident": "Not Offered",
+      "options": []
+    },
+    {
+      "category": "FISHING LICENSES",
+      "name": "Trout License (must additionally have a Fishing License)",
+      "term": "Annual",
+      "resident": "$10.00",
+      "nonresident": "$25.00",
+      "options": [
+        {
+          "term": "One-Day",
+          "resident": "$5.00",
+          "nonresident": "$10.00"
+        },
+        {
+          "term": "Additional Day +",
+          "resident": "$1.00",
+          "nonresident": "$2.00"
+        }
+      ]
+    },
+    {
+      "category": "FISHING LICENSES",
+      "name": "Saltwater Information Permit (SIP) (see page 72)",
+      "term": "Annual",
+      "resident": "FREE",
+      "nonresident": "FREE",
+      "options": []
+    },
+    {
+      "category": "FISHING LICENSES",
+      "name": "Commercial Fishing License",
+      "term": "Seasonal",
+      "resident": "$20.00",
+      "nonresident": "$200.00",
+      "options": []
+    },
+    {
+      "category": "FISHING LICENSES",
+      "name": "Disability Fishing License",
+      "term": "Annual",
+      "resident": "$3.00",
+      "nonresident": "Not Offered",
+      "options": [
+        {
+          "term": "Three-Year",
+          "resident": "$9.00",
+          "nonresident": "Not Offered"
+        }
+      ]
+    },
+    {
+      "category": "PUBLIC LAND ACCESS",
+      "name": "Georgia Lands Pass",
+      "term": "Annual",
+      "resident": "$30",
+      "nonresident": "$60",
+      "options": []
+    },
+    {
+      "category": "SPORTSMAN'S LICENSES",
+      "name": "Sportsman's License (Residents 16-64; All non-residents)",
+      "term": "Annual",
+      "resident": "$65.00",
+      "nonresident": "$400.00",
+      "options": [
+        {
+          "term": "One-Day",
+          "resident": "$25.00",
+          "nonresident": "$170.00"
+        },
+        {
+          "term": "+ Additional Day",
+          "resident": "$3.00",
+          "nonresident": "$20.00"
+        }
+      ]
+    },
+    {
+      "category": "SPORTSMAN'S LICENSES",
+      "name": "Optional Youth Sportsman's License (Residents 15 and under)",
+      "term": "Multi-Year",
+      "resident": "$15.00",
+      "nonresident": "Not Offered",
+      "options": []
+    },
+    {
+      "category": "SPORTSMAN'S LICENSES",
+      "name": "Non-resident Youth Sportsman's License (Nonresidents 15 and under)",
+      "term": "Annual",
+      "resident": null,
+      "nonresident": "$50.00",
+      "options": []
+    },
+    {
+      "category": "SPORTSMAN'S LICENSES",
+      "name": "Senior Sportsman's License (Residents 65+); also see lifetime licenses",
+      "term": "Annual",
+      "resident": "$7.00",
+      "nonresident": "Not Offered",
+      "options": []
+    },
+    {
+      "category": "SPORTSMAN'S LICENSES",
+      "name": "One-Time Honorary Veteran's License",
+      "term": "OneYear-",
+      "resident": "FREE",
+      "nonresident": "Not Offered",
+      "options": []
+    },
+    {
+      "category": "SPORTSMAN'S LICENSES",
+      "name": "Disability Sportsman's License",
+      "term": "Annual",
+      "resident": "$5.00",
+      "nonresident": "Not Offered",
+      "options": [
+        {
+          "term": "Three-Year",
+          "resident": "$15.00",
+          "nonresident": "Not Offered"
+        }
+      ]
+    },
+    {
+      "category": "LIFETIME LICENSES",
+      "name": "Infant Lifetime Sportsman's License",
+      "term": "Lifetime",
+      "resident": "$500.00",
+      "nonresident": "$500.00",
+      "options": []
+    },
+    {
+      "category": "LIFETIME LICENSES",
+      "name": "Youth Lifetime Sportsman's License",
+      "term": "Lifetime",
+      "resident": "$600.00",
+      "nonresident": "Not Offered",
+      "options": []
+    },
+    {
+      "category": "LIFETIME LICENSES",
+      "name": "Adult Lifetime Sportsman's License",
+      "term": "Lifetime",
+      "resident": "$750.00",
+      "nonresident": "Not Offered",
+      "options": []
+    },
+    {
+      "category": "LIFETIME LICENSES",
+      "name": "Older Adult Lifetime Sportsman's License",
+      "term": "Lifetime",
+      "resident": "$375.00",
+      "nonresident": "Not Offered",
+      "options": []
+    },
+    {
+      "category": "LIFETIME LICENSES",
+      "name": "Senior Discount Lifetime Sportsman's License",
+      "term": "Lifetime",
+      "resident": "$315.00",
+      "nonresident": "Not Offered",
+      "options": []
+    },
+    {
+      "category": "LIFETIME LICENSES",
+      "name": "Senior Lifetime Sportsman's License",
+      "term": "Lifetime",
+      "resident": "$70.00",
+      "nonresident": "Not Offered",
+      "options": []
+    },
+    {
+      "category": "LIFETIME LICENSES",
+      "name": "Senior Lifetime Hunting License",
+      "term": "Lifetime",
+      "resident": "$35.00",
+      "nonresident": "Not Offered",
+      "options": []
+    },
+    {
+      "category": "LIFETIME LICENSES",
+      "name": "Senior Lifetime Fishing License",
+      "term": "Lifetime",
+      "resident": "$35.00",
+      "nonresident": "Not Offered",
+      "options": []
+    },
+    {
+      "category": "LIFETIME LICENSES",
+      "name": "Free Senior Lifetime Sportsman's License (born on or before June 30, 1952)",
+      "term": "Lifetime",
+      "resident": "FREE",
+      "nonresident": "Not Offered",
+      "options": []
+    },
+    {
+      "category": "LIFETIME LICENSES",
+      "name": "Military and Veterans Lifetime Sportsman's License",
+      "term": "Lifetime",
+      "resident": "$600.00",
+      "nonresident": "Not Offered",
+      "options": []
+    },
+    {
+      "category": "LIFETIME LICENSES",
+      "name": "Non-resident Grandchild Lifetime Sportsman's License",
+      "term": "Lifetime",
+      "resident": null,
+      "nonresident": "$1,500.00",
+      "options": []
+    },
+    {
+      "category": "LIFETIME LICENSES",
+      "name": "Shooting Preserve Lifetime License",
+      "term": "Lifetime",
+      "resident": "$75.00",
+      "nonresident": "$75.00",
+      "options": []
+    }
+  ],
+  "legal_equipment": {
+    "restrictions": [
+      "Convicted felons may not possess any firearm or muzzleloading firearm while hunting unless that individual's right to carry has been restored (O.C.G.A. \u00a7 16-11-131).",
+      "This does not apply to archery equipment, air bows or air rifles.",
+      "Loaded Weapon: A firearm is considered loaded if a shell is in the chamber or magazine, a percussion cap is on the nipple, or powder is present on the frizzen pan.",
+      "A crossbow is considered loaded if it is cocked.",
+      "Plugged Shotguns: For hunting migratory game birds, shotguns shall be limited to a capacity of not more than 3 shells in the magazine and chamber combined.",
+      "If a plug is necessary to so limit the capacity, the plug shall be of 1 piece and incapable of being removed from the loading end of the magazine.",
+      "Suppressors: Lawfully possessed suppressors may be used for hunting, unless otherwise specified.",
+      "Permission of the landowner is required on private land."
+    ],
+    "archery": "Crossbows (including torsion spring models), longbows, recurve bows, and compound bows are allowed for hunting any game or feral hog. Arrows for hunting deer, bear or feral hog must be broadhead type. Draw weight, let-off, bolt/arrow-length, recovery devices, and sights are not restricted. See the Summary of Bowhunting Equipment Regulations at https://georgiawildlife.com/hunting/ hunter-resources for more details.",
+    "primitive_weapons": "Archery equipment, air bows, .30-cal. or larger air rifles and muzzleloaders or muzzleloading shotguns are legal during primitive weapons season. Scopes are legal.",
+    "firearms": {
+      "deer_and_bear": [
+        "Modern Rifles and Handguns: Centerfire only, 22-cal. or larger with expanding bullets. There is no restriction on magazine capacity for rifles.",
+        "Shotguns: 20-gauge or larger loaded with slugs or buckshot.",
+        "Muzzleloaders: 30-cal. or larger, or muzzleloading shotguns 20 gauge or larger. Scopes are legal.",
+        "Air Guns: Any air rifle of at least.30 caliber or air bow utilizing unignited compressed gas or air is legal during primitive weapons and firearms seasons."
+      ],
+      "turkey": "Shotguns with No. 2 or smaller shot, any muzzleloading firearm, any air rifle of at least 30 caliber or air bow utilizing unignited compressed gas or air. Hunters are not required to plug shotguns for turkey.",
+      "small_game_and_furbearer": [
+        "Rifles and Handguns: Any 22-cal. or smaller rimfire, any muzzleloading firearm, or any caliber air rifle or air gun.",
+        "For fox & bobcat, centerfire firearms of .17 caliber and larger may be used (see WMA Restrictions on page 20).",
+        "There is no restriction on magazine capacity for rifles.",
+        "Shotguns: Any having shot shell size 3.5 inches or smaller in length with No. 2 or smaller shot.",
+        "Shotguns (Waterfowl): Any 10-gauge or smaller loaded with federally approved nontoxic shot of size \"F\" or smaller.",
+        "Lead shot may not be in possession while hunting waterfowl."
+      ]
+    }
+  },
+  "unlawful_activities": [
+    "Hunting without landowners' permission, including power line, gas line, railroad and other rights-of-way.",
+    "Written permission must be obtained if land is so posted. Hunting while under the influence of drugs or alcohol.",
+    "Holding, possessing, releasing, or importing wildlife without a permit from the DNR.",
+    "Concealing the taking or possession of wildlife (or parts) which the person in possession reasonably should have known was obtained illegally.",
+    "Killing or crippling game without reasonable efforts to retrieve.",
+    "Hunt, shoot, kill, or wound any farmed deer (e.g. elk, red deer, fallow deer, sika deer, or axis deer) or exotic wild animal (e.g. farmed deer, mouflon sheep, Barbary sheep [aoudad], antelope, etc.) held under a wild animal license for enjoyment, gain, amusement, or sport.",
+    "Hunting or shooting from or across a public road. Hunting from a vehicle, plane, or boat under power.",
+    "Selling or purchasing any game species or parts thereof, except antlers, hides, and tails of legally taken deer, tails of legally taken squirrels, hides of legally trapped furbearers, and legally taken alligator products.",
+    "Use of a computer or any other device to remotely discharge a firearm for the purpose of hunting.",
+    "Use of drugs, poisons, chemicals, smoke, gas, explosives, or electronically-amplified sounds to hunt any game species, except that electronic calls may be used to hunt bobcats, crows, and foxes.",
+    "Use of any pitfall, deadfall, snare, catch, net, live decoy, or baited hook to take game species.",
+    "Use of electronic communications equipment to aid in the pursuit of game.",
+    "Disturbing wildlife dens, holes, or homes, or driving wildlife from their dens, holes, or homes.",
+    "Discharging a firearm within 50 yards of a public road. Blinding wildlife with lights."
+  ],
+  "definitions": [
+    {
+      "term": "ARTIFICIAL LURE",
+      "definition": "Any lure made completely of natural or colored wood, cork, feathers, hair, rubber, metal, plastic, tinsel, styrofoam, sponge, string, or any combination of such materials, in imitation of or as a substitute for natural bait. This does not include any item sprayed with or containing scented or chemical attractants."
+    },
+    {
+      "term": "BAITING",
+      "definition": "Bait: corn, wheat, other grains, salts, apples, and other feed that has been placed, exposed, deposited, distributed, or scattered so as to constitute a lure, attraction, or enticement to game animals or game birds."
+    },
+    {
+      "term": "IT IS UNLAWFUL FOR ANY PERSON TO:",
+      "definition": "\u2022 Hunt any game animal (except as noted below) or game bird upon, over, around, or within 200 yards of bait. \u2022 Hunt any area for a period of 10 days following complete removal of all bait. \u2022 Hunt any game or feral hog over bait, or place bait, on any State or Federal managed lands. \u2022 Place bait in a manner that will cause hunting on an adjacent property to be prohibited. Taking of any big game, other than deer, over bait is subject to a fine of $5,000 and/ or imprisonment up to 12 months."
+    },
+    {
+      "term": "EXCEPTIONS FOR DEER AND FERAL HOGS:",
+      "definition": "\u2022 Deer and feral hogs may be hunted over or near any bait on private lands in all counties, provided the hunter has written permission from the landowner. It is unlawful to hunt deer over bait, or place bait, on any state or federally managed lands. \u2022 Placing bait for deer or hogs may make a property (or portion of a property) un-huntable for other species, such as turkeys. Hunters are urged to communicate with others who may hunt other species on or near an area where baiting for deer or hogs is being considered."
+    },
+    {
+      "term": "BIG GAME",
+      "definition": "Bear, deer, and wild turkey. All other game animals (including alligators, furbearers, migratory game birds, and upland game birds) are considered \"small game\" for regulatory purposes."
+    },
+    {
+      "term": "DAILY LIMIT",
+      "definition": "The number of fish or game animals that may be taken, caught, or killed during any one day."
+    },
+    {
+      "term": "HUNTING",
+      "definition": "\"Hunting\" means pursuing, shooting, killing, taking, or capturing wildlife or feral hogs. This term also includes acts such as placing, setting, drawing, or using any device used to take wildlife or feral hogs, whether any such act results in taking or not, and includes every act of assistance to any person in taking or attempting to take such wildlife or feral hogs."
+    },
+    {
+      "term": "FISHING",
+      "definition": "Catching, capturing, taking, or killing fish, mussels and all seafood and includes all lesser acts such as attempting to catch, capture, or kill by any device or method and directly assisting any person in catching or attempting to catch fish or seafood."
+    },
+    {
+      "term": "GAME FISH",
+      "definition": "Fish that are listed under Daily Limits (see pages 55 and 74)."
+    },
+    {
+      "term": "IMMEDIATE FAMILY",
+      "definition": "All persons living in one household under one head of household and bearing a blood or dependent relationship to the head of household."
+    },
+    {
+      "term": "MOUNTAIN TROUT",
+      "definition": "Brook, Brown, and Rainbow trout and any hybrids of these species. Referred to in this Guide as \"Trout.\""
+    },
+    {
+      "term": "NONGAME FISH",
+      "definition": "Any fish not designated as game fish under Daily Limits (see pages 55 and 74)."
+    },
+    {
+      "term": "PUBLIC FISHING AREA",
+      "definition": "Designated areas owned and/or operated by the Department of Natural Resources, Wildlife Resources Division, Fisheries Section for the primary purpose of fishing and are open to the public. These are listed on pages 59-61."
+    },
+    {
+      "term": "RESIDENT",
+      "definition": "Resident means any person who has been domiciled within the State of Georgia (declared Georgia the only state of legal residence) for a period of at least three months. A valid Georgia driver's license or Georgia ID is required to show residency. Nonresident full time Georgia college students with a valid college ID living in Georgia, and nonresident active duty military personnel with a valid U.S. DOD Common Access Card with Uniformed Services affiliation and the dependents of such military personnel may obtain resident hunting and fishing licenses other than resident lifetime, disability and honorary licenses. Nonresident landowners must purchase a nonresident license."
+    }
+  ]
+}
