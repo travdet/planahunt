@@ -1,11 +1,12 @@
 "use client";
 import type { FilterState } from "@/lib/types";
 import clsx from "clsx";
+import CountyFilter from "./CountyFilter"; // 1. IMPORT THE NEW COMPONENT
 
 const tan = "bg-amber-100 text-amber-900 border-amber-200";
 const green = "bg-emerald-600 text-white border-emerald-700";
 
-// Props are updated to receive dynamic lists
+// ... (props are the same)
 export default function FilterBar({
   filters,
   onChange,
@@ -22,6 +23,7 @@ export default function FilterBar({
   allTags: string[];
 }) {
   function toggleArr(key: keyof FilterState, value: string) {
+    // ... (this function is the same)
     const arr = new Set((filters[key] as string[]) || []);
     if (arr.has(value)) {
       arr.delete(value);
@@ -31,31 +33,31 @@ export default function FilterBar({
     onChange({ [key]: Array.from(arr) });
   }
 
-  // NEW: Handler for date range
   function onDateChange(part: "start" | "end", dateStr: string) {
-    const newStart = part === "start" ? dateStr : filters.dateRange?.start;
-    const newEnd = part === "end" ? dateStr : filters.dateRange?.end;
+    // ... (this function is the same)
+    const newStartStr = part === "start" ? dateStr : getISODate(filters.dateRange?.start);
+    const newEndStr = part === "end" ? dateStr : getISODate(filters.dateRange?.end);
 
-    if (newStart && newEnd) {
-      // Create new Date objects
+    if (newStartStr && newEndStr) {
       onChange({
-        dateRange: { start: new Date(newStart), end: new Date(newEnd) },
+        dateRange: { start: new Date(newStartStr), end: new Date(newEndStr) },
       });
-    } else if (newStart) {
-      // If only start exists, set range to just that day
+    } else if (newStartStr) {
       onChange({
-        dateRange: { start: new Date(newStart), end: new Date(newStart) },
+        dateRange: { start: new Date(newStartStr), end: new Date(newStartStr) },
       });
     } else {
       onChange({ dateRange: null });
     }
   }
 
-  // Helper to get string value from Date object for the input
-  const getISODate = (date?: Date) => {
+  const getISODate = (date?: Date): string => {
+    // ... (this function is the same)
     if (!date) return "";
     try {
-      return date.toISOString().split("T")[0];
+      const d = new Date(date);
+      const userTimezoneOffset = d.getTimezoneOffset() * 60000;
+      return new Date(d.getTime() - userTimezoneOffset).toISOString().split("T")[0];
     } catch (e) {
       return "";
     }
@@ -66,6 +68,7 @@ export default function FilterBar({
 
   return (
     <aside className="rounded-xl border bg-white p-4 shadow-sm space-y-4">
+      {/* ... (Search, Date, Access, Buck/Doe are the same) ... */}
       <div>
         <label className="text-sm font-medium">Search</label>
         <input
@@ -76,7 +79,6 @@ export default function FilterBar({
         />
       </div>
 
-      {/* UPDATED: Date Range Inputs */}
       <div className="space-y-2">
         <label className="text-sm font-medium">Hunt Date(s)</label>
         <div className="grid grid-cols-2 gap-2">
@@ -85,12 +87,14 @@ export default function FilterBar({
             className="w-full rounded-md border px-3 py-2"
             value={startDateStr}
             onChange={(e) => onDateChange("start", e.target.value)}
+            placeholder="Start Date"
           />
           <input
             type="date"
             className="w-full rounded-md border px-3 py-2"
             value={endDateStr}
             onChange={(e) => onDateChange("end", e.target.value)}
+            placeholder="End Date"
           />
         </div>
         <p className="text-xs text-slate-600">
@@ -122,11 +126,10 @@ export default function FilterBar({
           <option value="any">Any</option>
           <option value="either">Either Sex</option>
           <option value="buck">Buck Only</option>
-          {/* <option value="doe">Doe Only</option> */}
         </select>
       </div>
 
-      {/* UPDATED: Dynamic Weapons */}
+      {/* ... (Weapons, Species, Tags are the same) ... */}
       <div className="space-y-2">
         <label className="text-sm font-medium">Weapons</label>
         <div className="flex flex-wrap gap-2">
@@ -149,7 +152,6 @@ export default function FilterBar({
         </div>
       </div>
 
-      {/* UPDATED: Dynamic Species */}
       <div className="space-y-2">
         <label className="text-sm font-medium">Species</label>
         <div className="flex flex-wrap gap-2">
@@ -172,7 +174,6 @@ export default function FilterBar({
         </div>
       </div>
 
-      {/* NEW: Dynamic Tags */}
       <div className="space-y-2">
         <label className="text-sm font-medium">Tags</label>
         <div className="flex flex-wrap gap-2">
@@ -195,26 +196,13 @@ export default function FilterBar({
         </div>
       </div>
 
+      {/* 2. REPLACE THE OLD COUNTY FILTER */}
       <div className="space-y-2">
-        <label className="text-sm font-medium">Counties</label>
-        <select
-          multiple
-          className="w-full rounded-md border px-3 py-2 h-28"
-          value={filters.counties}
-          onChange={(e) => {
-            const opts = Array.from(e.target.selectedOptions).map(
-              (o) => o.value
-            );
-            onChange({ counties: opts });
-          }}
-        >
-          {allCounties.map((c) => (
-            <option key={c} value={c}>
-              {c}
-            </option>
-          ))}
-        </select>
-        <p className="text-xs text-slate-600">Hold Cmd/Ctrl to multi-select.</p>
+        <CountyFilter
+          allCounties={allCounties}
+          selectedCounties={filters.counties}
+          onChange={(counties) => onChange({ counties })}
+        />
       </div>
     </aside>
   );
