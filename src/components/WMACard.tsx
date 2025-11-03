@@ -1,31 +1,60 @@
 "use client";
 import { fmtMDY, haversineMi, minutesAt } from "@/lib/util";
-import type { SeasonRule, WMA } from "@/lib/types";
+import type { SeasonRule, WMA, HomeLocation } from "@/lib/types";
 import { useMemo } from "react";
-import { MapPin } from "lucide-react";
+import { MapPin, AlertTriangle } from "lucide-react";
+import { isOpenOn } from "@/lib/rules"; // Import our helper
 
 export default function WMACard({
-  wma, rules, date, home, onOpen
+  wma,
+  rules,
+  date,
+  home,
+  onOpen,
 }: {
   wma: WMA;
   rules: SeasonRule[];
-  date?: string | null;
-  home?: { lat: number|null, lng: number|null } | null;
-  onOpen: ()=>void;
+  date?: string | null; // This is now a 'YYYY-MM-DD' string or null
+  home?: HomeLocation | null;
+  onOpen: () => void;
 }) {
   const today = date || null;
 
-  const summary = useMemo(()=>{
-    // fold rules into “today open?” & next/active windows
-    let openNow: null | { access: "general"|"quota"; weapons: string[]; species: string[] } = null;
-    const windows: { access:"general"|"quota"; start:string; end:string; weapon:string; species:string }[] = [];
+  const summary = useMemo(() => {
+    let openNow: null | { access: "general" | "quota"; weapons: string[]; species: string[] } = null;
+    const windows: {
+      access: "general" | "quota";
+      start: string;
+      end: string;
+      weapon: string;
+      species: string;
+    }[] = [];
 
-    rules.forEach(r => {
+    // Check for multi-county rules
+    const notes = rules.map(r => r.notes_short);
+    const hasMultipleRuleSources = 
+        notes.some(n => n?.includes("Statewide Season")) && // Is a statewide rule
+        new Set(notes).size > 1; // Has more than one unique note
+
+    rules.forEach((r) => {
       const access = r.quota_required ? "quota" : "general";
-      windows.push({ access, start: r.start_date, end: r.end_date, weapon: String(r.weapon), species: r.species });
-      if (today && today >= r.start_date && today <= r.end_date) {
-        if (!openNow) openNow = { access, weapons:[String(r.weapon)], species:[r.species] };
-        else {
+      windows.push({
+        access,
+        start: r.start_date,
+        end: r.end_date,
+        weapon: String(r.weapon),
+        species: r.species,
+      });
+      
+      // UPDATED: Use isOpenOn with the 'today' string
+      if (today && isOpenOn(r, today)) {
+        if (!openNow) {
+          openNow = {
+            access,
+            weapons: [String(r.weapon)],
+            species: [r.species],
+          };
+        } else {
           openNow.weapons.push(String(r.weapon));
           openNow.species.push(r.species);
         }
@@ -37,21 +66,28 @@ export default function WMACard({
       openNow.weapons = Array.from(new Set(openNow.weapons));
       openNow.species = Array.from(new Set(openNow.species));
     }
-    return { openNow, windows };
+    return { openNow, windows, hasMultipleRuleSources };
   }, [rules, today]);
 
-  const dist = useMemo(()=>{
+  const dist = useMemo(() => {
+    // UPDATED: Correctly use the 'home' prop
     if (!home?.lat || !home?.lng || !wma.lat || !wma.lng) return null;
-    const miles = haversineMi({lat: home.lat, lng: home.lng}, {lat: wma.lat, lng: wma.lng});
+    const miles = haversineMi(
+      { lat: home.lat, lng: home.lng },
+      { lat: wma.lat, lng: wma.lng }
+    );
     const mins = minutesAt(43, miles); // rough GA avg MPH for rural trip
-    return { miles: Math.round(miles*10)/10, mins };
+    return { miles: Math.round(miles * 10) / 10, mins };
   }, [home, wma.lat, wma.lng]);
 
   return (
     <div className="rounded-2xl border bg-white p-4 shadow-sm">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h3 className="text-lg font-semibold">{wma.name}{wma.tract_name ? ` — ${wma.tract_name}` : ""}</h3>
+          <h3 className="text-lg font-semibold">
+            {wma.name}
+            {wma.tract_name ? ` — ${wma.tract_name}` : ""}
+          </h3>
           <p className="text-sm text-slate-600">
             {wma.counties.join(", ")}
             {wma.acreage ? ` • ${wma.acreage.toLocaleString()} ac` : ""}
@@ -72,29 +108,50 @@ export default function WMACard({
         </p>
       )}
 
+      {/* NEW: Multi-county warning */}
+      {summary.hasMultipleRuleSources && (
+        <div className="mt-3 flex items-center gap-2 rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
+          <AlertTriangle className="h-4 w-4 flex-shrink-0" />
+          <p>
+            This WMA spans multiple counties with different rules. Details may vary by location.
+          </p>
+        </div>
+      )}
+
       <div className="mt-3 rounded-lg bg-slate-50 p-3 text-sm">
         {summary.openNow ? (
           <div className="space-y-1">
             <div>
-              <span className="rounded-full bg-emerald-600 px-2 py-0.5 text-xs text-white">Open today</span>
+              <span className="rounded-full bg-emerald-600 px-2 py-0.5 text-xs text-white">
+                Open {today ? fmtMDY(today) : ""}
+              </span>
               <span className="ml-2 text-slate-700">
-                {summary.openNow.access === "general" ? "General access" : "Quota only"}
+                {summary.openNow.access === "general"
+                  ? "General access"
+                  : "Quota only"}
               </span>
             </div>
             <div className="text-slate-700">
-              Weapons: {summary.openNow.weapons.join(", ")} • Species: {summary.openNow.species.join(", ")}
+              Weapons: {summary.openNow.weapons.join(", ")} • Species:{" "}
+              {summary.openNow.species.join(", ")}
             </div>
           </div>
         ) : (
-          <div className="text-slate-700">Not open on selected date.</div>
+          <div className="text-slate-700">
+            Not open on selected date.
+          </div>
         )}
       </div>
 
       <div className="mt-3 text-xs text-slate-500">
         Next windows:{" "}
-        {summary.windows.slice(0,3).map((w,i)=>(
+        {summary.windows.slice(0, 3).map((w, i) => (
           <span key={i} className="mr-2">
-            <span className={w.access==="general" ? "text-emerald-700" : "text-amber-700"}>
+            <span
+              className={
+                w.access === "general" ? "text-emerald-700" : "text-amber-700"
+              }
+            >
               {w.access === "general" ? "General" : "Quota"}
             </span>{" "}
             {fmtMDY(w.start)}–{fmtMDY(w.end)} ({w.weapon})
