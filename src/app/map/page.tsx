@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import dynamic from 'next/dynamic';
 import wmas from "@/data/wmas.json";
 import rulesData from "@/data/seasons.json";
@@ -12,7 +12,7 @@ import WMAModal from "@/components/WMAModal";
 const Filters = dynamic(() => import('@/components/Filters'), { ssr: false });
 const Mapbox = dynamic(() => import('@/components/Mapbox'), { 
   ssr: false,
-  loading: () => <div className="h-[400px] w-full rounded-xl overflow-hidden border border-slate-200 flex items-center justify-center bg-slate-50">
+  loading: () => <div className="h-full w-full flex items-center justify-center bg-slate-50">
     <p className="text-slate-500">Loading map...</p>
   </div>
 });
@@ -32,47 +32,54 @@ export default function MapPage(){
     maxDistanceMi: null,
     tags: []
   });
-  const [open, setOpen] = useState<WMA|null>(null);
-  const [points, setPoints] = useState<any[]>([]);
+  const [openWma, setOpenWma] = useState<WMA | null>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+  
+  const allCounties = useMemo(()=>{
+    const set = new Set<string>();
+    (wmas as WMA[]).forEach(w => {
+      if(w.county) set.add(w.county)
+    });
+    return Array.from(set).sort();
+  }, []);
 
-  useEffect(() => {
-    if (!mounted) return;
+  const points = useMemo(() => {
+    if (!mounted) return [];
     
-    // Build rows
-    const byId = new Map((wmas as WMA[]).map(w=>[w.id, w]));
+    const byId = new Map((wmas as WMA[]).map(w => [w.wma_id, w]));
     const rows: Row[] = (rulesData as SeasonRule[])
       .map(r => {
         const wma = byId.get(r.wma_id);
         if (!wma) return null;
-        const resolved = resolveStatewide(r, statewide);
+        const resolved = resolveStatewide(r, wma, statewide);
         return { wma, rule: resolved };
       })
       .filter((x): x is Row => x !== null);
 
-    // Apply filters
     const filtered = applyFilters(rows, filters);
 
-    // Build points
     const m = new Map<string, {wma:WMA, count:number}>();
     for (const row of filtered) {
-      const id = row.wma.id;
+      const id = row.wma.wma_id;
       if (!m.has(id)) m.set(id, { wma: row.wma, count: 0 });
       m.get(id)!.count += 1;
     }
-    const newPoints = Array.from(m.values())
-      .filter(({wma}) => wma.lat != null && wma.lng != null)
-      .map(({wma, count}) => ({...wma, count, lat: wma.lat!, lng: wma.lng!}));
     
-    setPoints(newPoints);
+    return Array.from(m.values())
+      .map(({wma, count}) => {
+        const coords = wma.map_points?.check_stations?.[0]?.coords;
+        if (!coords) return null;
+        return { id: wma.wma_id, name: wma.name, count, lat: coords[1], lng: coords[0] };
+      })
+      .filter((p): p is any => p !== null);
   }, [mounted, filters]);
 
   const pick = (id: string) => {
-    const w = (wmas as WMA[]).find(x=>x.id===id) || null;
-    setOpen(w);
+    const w = (wmas as WMA[]).find(x => x.wma_id === id) || null;
+    setOpenWma(w);
   };
 
   if (!mounted) {
@@ -84,12 +91,14 @@ export default function MapPage(){
   }
 
   return (
-    <div className="grid gap-6 md:grid-cols-[340px,1fr]">
-      <Filters value={filters} onChange={setFilters} wmas={wmas as WMA[]} rules={rulesData as SeasonRule[]}/>
-      <div>
-        <Mapbox points={points} onPick={pick}/>
-      </div>
-      <WMAModal wma={open} rules={open? (rulesData as SeasonRule[]).filter(r => r.wma_id===open.id) : []} onClose={()=>setOpen(null)}/>
-    </div>
-  );
+    <main className="flex h-screen max-h-screen">
+      {openWma && <WMAModal wma={openWma} onClose={()=>setOpenWma(null)} />}
+      <aside className="w-[350px] bg-slate-50 p-4 overflow-y-auto">
+        <Filters filters={filters} setFilters={setFilters} counties={allCounties} />
+      </aside>
+      <section className="flex-1">
+        <Mapbox points={points} onMarkerClick={pick} />
+      </section>
+    </main>
+  )
 }
