@@ -2,7 +2,6 @@
 
 import type { FilterState, HomeLoc, SeasonRule, WMA } from "@/lib/types";
 import { applyFilters } from "@/lib/filters";
-import { fmtMDY } from "@/lib/util";
 import { useState, useMemo } from "react";
 import dynamic from "next/dynamic";
 import WMACard from "@/components/WMACard";
@@ -10,8 +9,11 @@ import WMAModal from "@/components/WMAModal";
 import FilterBar from "@/components/FilterBar";
 import HomeLocation from "@/components/HomeLocation";
 
+// Import the new data files
 import wmas from "@/data/wmas.json";
 import rulesRaw from "@/data/seasons.json";
+import statewide from "@/data/statewide.json";
+import { resolveStatewide } from "@/lib/rules";
 
 const Mapbox = dynamic(() => import("@/components/Mapbox"), {
   ssr: false,
@@ -46,20 +48,25 @@ export default function Page() {
   // Data joins
   const rows = useMemo(()=>{
     const byWma = new Map<string, WMA>();
-    (wmas as WMA[]).forEach(w => byWma.set(w.id, w));
+    (wmas as WMA[]).forEach(w => byWma.set(w.wma_id, w));
+
     return (rulesRaw as SeasonRule[])
       .map(r => {
         const wma = byWma.get(r.wma_id);
-        if (!wma) return null;
-        return { wma, rule: r };
+        if (!wma) return null; // Defensive check
+        
+        const resolvedRule = resolveStatewide(r, wma, statewide);
+        return { wma, rule: resolvedRule };
       })
       .filter((x): x is { wma: WMA; rule: SeasonRule } => x !== null);
   }, []);
 
   const allCounties = useMemo(()=>{
     const set = new Set<string>();
-    (wmas as WMA[]).forEach(w => w.counties.forEach(c => set.add(c)));
-    return Array.from(set);
+    (wmas as WMA[]).forEach(w => {
+      if(w.county) set.add(w.county)
+    });
+    return Array.from(set).sort();
   }, []);
 
   const filtered = useMemo(()=>{
@@ -69,91 +76,54 @@ export default function Page() {
   const grouped = useMemo(()=>{
     const m = new Map<string, { wma: WMA; rules: SeasonRule[] }>();
     filtered.forEach(({ wma, rule }) => {
-      if (!m.has(wma.id)) m.set(wma.id, { wma, rules: [] });
-      m.get(wma.id)!.rules.push(rule);
+      if (!m.has(wma.wma_id)) m.set(wma.wma_id, { wma, rules: [] });
+      m.get(wma.wma_id)!.rules.push(rule);
     });
     return Array.from(m.values()).sort((a,b)=>a.wma.name.localeCompare(b.wma.name));
   }, [filtered]);
 
   const points = useMemo(() => {
     return grouped
-      .filter(({ wma }) => wma.lat != null && wma.lng != null && wma.name)
-      .map(({ wma, rules }) => ({
-        id: wma.id,
-        name: wma.name,
-        lat: wma.lat!,
-        lng: wma.lng!,
-        count: rules.length,
-      }));
+      .map(({ wma, rules }) => {
+        // Use new map_points object for coordinates
+        const coords = wma.map_points?.check_stations?.[0]?.coords;
+        if (!coords) return null;
+        return {
+          id: wma.wma_id,
+          name: wma.name,
+          lat: coords[1], // Assuming coords are [lng, lat]
+          lng: coords[0],
+          count: rules.length,
+        };
+      })
+      .filter((p): p is {id:string; name:string; lat:number; lng:number; count:number} => p !== null);
   }, [grouped]);
-
-  const selected = useMemo(()=> grouped.find(g => g.wma.id === openId) || null, [grouped, openId]);
+  
+  const openWma = useMemo(()=>openId ? wmas.find(w=>w.wma_id === openId) : null, [openId]);
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-6">
-      {/* Top green header */}
-      <div className="mb-6 rounded-2xl bg-emerald-700 px-6 py-4 text-white">
-        <h1 className="text-2xl font-semibold">Plan A Hunt (Georgia)</h1>
-        <p className="text-sm opacity-90">Filter WMAs by date, access type, species, and more.</p>
+    <main className="container mx-auto px-4 py-8">
+      {openWma && <WMAModal wma={openWma} onClose={() => setOpenId(null)} />}
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold mb-2">Plan A Hunt</h1>
+        <p className="text-slate-600">
+          Find hunting seasons for Georgia Wildlife Management Areas (WMAs).
+        </p>
       </div>
-
-      <div className="grid gap-6 md:grid-cols-[320px,1fr]">
-        {/* Left filter column */}
-        <div className="space-y-6">
-          <HomeLocation value={home} onChange={setHome} />
-          <div>
-            <label className="text-sm font-medium">Max Distance (mi)</label>
-            <input
-              type="number"
-              className="mt-1 w-full rounded-md border px-3 py-2"
-              placeholder="e.g. 60"
-              value={filters.maxDistanceMi ?? ""}
-              onChange={(e)=>setFilters(prev=>({...prev, maxDistanceMi: e.target.value ? Number(e.target.value) : null}))}
-            />
-            <p className="mt-1 text-xs text-slate-600">Straight-line distance for now. Driving ETA shows approx on cards.</p>
-          </div>
-
-          <FilterBar
-            filters={filters}
-            onChange={(f)=>setFilters(prev=>({ ...prev, ...f }))}
-            allCounties={allCounties}
-          />
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <div className="lg:col-span-1 space-y-6">
+          <FilterBar filters={filters} setFilters={setFilters} counties={allCounties} />
+          <HomeLocation home={home} setHome={setHome} />
         </div>
-
-        {/* Right side: Map and Results */}
-        <div className="space-y-6">
-          {/* Results count and selected date */}
-          <div className="flex items-center justify-between">
-            <div className="text-sm text-slate-600">{grouped.length} areas</div>
-            {filters.date && <div className="text-sm text-slate-700">Hunt date: <span className="font-medium">{fmtMDY(filters.date)}</span></div>}
-          </div>
-
-          {/* Map */}
-          <Mapbox points={points} onPick={(id) => setOpenId(id)} />
-
-          {/* WMA Cards */}
+        <div className="lg:col-span-2 space-y-6">
+          <Mapbox points={points} onMarkerClick={(id) => setOpenId(id)} home={home} />
           <div className="space-y-4">
-            {grouped.map(({ wma, rules })=>(
-              <WMACard
-                key={wma.id}
-                wma={wma}
-                rules={rules}
-                date={filters.date || null}
-                home={{ lat: home.lat, lng: home.lng }}
-                onOpen={()=>setOpenId(wma.id)}
-              />
+            {grouped.map(({ wma, rules }) => (
+              <WMACard key={wma.wma_id} wma={wma} rules={rules} home={home} />
             ))}
           </div>
         </div>
       </div>
-
-      {selected && (
-        <WMAModal
-          wma={selected.wma}
-          rules={selected.rules}
-          onClose={()=>setOpenId(null)}
-        />
-      )}
     </main>
   );
 }
