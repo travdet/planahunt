@@ -8,8 +8,8 @@ import { resolveStatewide } from "@/lib/rules";
 
 export default function HuntDetail({ params }: { params: { id: string } }) {
   const id = decodeURIComponent(params.id);
-  const wma = (wmas as WMA[]).find(w => w.wma_id === id);
-  
+  const wma = (wmas as WMA[]).find((w) => w.wma_id === id);
+
   if (!wma) {
     return (
       <main className="mx-auto max-w-5xl px-4 py-6">
@@ -17,10 +17,13 @@ export default function HuntDetail({ params }: { params: { id: string } }) {
       </main>
     );
   }
-  
+
   const rules = (rulesRaw as SeasonRule[])
-    .filter(r => r.wma_id === id)
-    .map(r => resolveStatewide(r, wma, statewide));
+    .filter((r) => r.wma_id === id)
+    //
+    // 1. THIS IS THE FIX: Changed .map() to .flatMap()
+    //
+    .flatMap((r) => resolveStatewide(r, wma, statewide));
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-6">
@@ -47,12 +50,17 @@ export default function HuntDetail({ params }: { params: { id: string } }) {
                 </tr>
               </thead>
               <tbody>
+                {/* This .map() will now work, as 'rules' is SeasonRule[] */}
                 {rules.map((r, i) => (
-                  <tr key={i} className="border-t">
+                  <tr key={r.id || i} className="border-t"> {/* Use r.id for a more stable key */}
                     <td className="py-1 pr-2">{r.species}</td>
                     <td className="py-1 pr-2">{r.weapon}</td>
-                    <td className="py-1 pr-2">{r.quota_required ? "Quota" : "General"}</td>
-                    <td className="py-1">{`${fmtMDY(r.start_date)} – ${fmtMDY(r.end_date)}`}</td>
+                    <td className="py-1 pr-2">
+                      {r.quota_required ? "Quota" : "General"}
+                    </td>
+                    <td className="py-1">{`${fmtMDY(r.start_date)} – ${fmtMDY(
+                      r.end_date
+                    )}`}</td>
                   </tr>
                 ))}
               </tbody>
@@ -62,6 +70,7 @@ export default function HuntDetail({ params }: { params: { id: string } }) {
 
         <div>
           <h2 className="mb-2 text-lg font-semibold">Calendar</h2>
+          {/* This will also work now */}
           <AccessCalendar rules={rules} />
         </div>
       </div>
