@@ -1,6 +1,6 @@
 "use client";
-// 1. IMPORT THE NEW DATE FORMATTER
-import { fmtMMM DD, haversineMi, minutesAt } from "@/lib/util";
+// 1. IMPORT THE CORRECTED FUNCTION NAME
+import { fmtMmmDd, haversineMi, minutesAt } from "@/lib/util";
 import type { SeasonRule, WMA, HomeLocation } from "@/lib/types";
 import { useMemo } from "react";
 import { MapPin, AlertTriangle } from "lucide-react";
@@ -21,8 +21,9 @@ const Pill = ({ text, className = "" }: { text: string, className?: string }) =>
 
 // NEW: Helper to format date ranges into "Sep 13 - Oct 1"
 function formatHuntRange(start: string, end: string) {
-  const startDate = fmtMMM DD(start);
-  const endDate = fmtMMM DD(end);
+  // 2. USE THE CORRECTED FUNCTION NAME
+  const startDate = fmtMmmDd(start);
+  const endDate = fmtMmmDd(end);
   if (startDate === endDate) return startDate; // Single day hunt
   return `${startDate} – ${endDate}`;
 }
@@ -146,7 +147,7 @@ export default function WMACard({
           <AlertTriangle className="h-4 w-4 flex-shrink-0" />
           <p>
             This WMA spans multiple counties with different rules. Details may vary by location.
-          </p>
+          </all-files>
         </div>
       )}
 
@@ -156,7 +157,8 @@ export default function WMACard({
           <div className="space-y-1">
             <div>
               <span className="rounded-full bg-emerald-600 px-2 py-0.5 text-xs text-white">
-                Open {today ? fmtMMM DD(today) : ""}
+                {/* 3. USE THE CORRECTED FUNCTION NAME */}
+                Open {today ? fmtMmmDd(today) : ""}
               </span>
               <span className="ml-2 text-slate-700">
                 {summary.openNow.access === "general"
@@ -170,7 +172,8 @@ export default function WMACard({
           </div>
         ) : today ? (
           <div className="text-slate-700">
-            Not open on selected date: {fmtMMM DD(today)}
+            {/* 3. USE THE CORRECTED FUNCTION NAME */}
+            Not open on selected date: {fmtMmmDd(today)}
           </div>
         ) : (
           <div className="text-slate-700">
@@ -225,8 +228,8 @@ export default function WMACard({
             
             {/* List of dates */}
             <div className="space-y-1">
-              {group.windows.map(w => (
-                <div key={`${w.start}-${w.end}`} className="text-sm text-slate-800 font-medium">
+              {group.windows.map((w, i) => (
+                <div key={i} className="text-sm text-slate-800 font-medium">
                   {formatHuntRange(w.start, w.end)}
                 </div>
               ))}
