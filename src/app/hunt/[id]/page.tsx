@@ -27,7 +27,7 @@ export default function HuntDetail({ params }: { params: { id: string } }) {
       <div className="mb-6 rounded-2xl bg-emerald-700 px-6 py-4 text-white">
         <h1 className="text-2xl font-semibold">{wma.name}</h1>
         <p className="text-sm opacity-90">
-          {wma.county}
+          {wma.counties?.join(", ")}
           {wma.acreage ? ` • ${wma.acreage.toLocaleString()} ac` : ""}
           {wma.phone ? ` • ${wma.phone}` : ""}
         </p>
@@ -47,12 +47,12 @@ export default function HuntDetail({ params }: { params: { id: string } }) {
                 </tr>
               </thead>
               <tbody>
-                {rules.map((r, i) =>(
+                {rules.map((r, i) => (
                   <tr key={i} className="border-t">
                     <td className="py-1 pr-2">{r.species}</td>
-                    <td className="py-1 pr-2">{r.hunt_type}</td>
-                    <td className="py-1 pr-2">{r.quota_details ? "Quota" : "General"}</td>
-                    <td className="py-1">{r.start_date && r.end_date ? `${fmtMDY(r.start_date)} – ${fmtMDY(r.end_date)}` : r.dates}</td>
+                    <td className="py-1 pr-2">{r.weapon}</td>
+                    <td className="py-1 pr-2">{r.quota_required ? "Quota" : "General"}</td>
+                    <td className="py-1">{`${fmtMDY(r.start_date)} – ${fmtMDY(r.end_date)}`}</td>
                   </tr>
                 ))}
               </tbody>
