@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { geocodeAddress } from "@/lib/map";
 import type { HomeLocation } from "@/lib/types";
+import { MapPin } from "lucide-react"; // 1. Import location icon
 
 type Props = {
   value: HomeLocation;
@@ -17,7 +18,7 @@ export default function AddressField({ value, onChange }: Props) {
   >([]);
   const boxRef = useRef<HTMLDivElement>(null);
 
-  // Click-away listener to close results
+  // Click-away listener
   useEffect(() => {
     function onClick(e: MouseEvent) {
       if (!boxRef.current) return;
@@ -29,14 +30,12 @@ export default function AddressField({ value, onChange }: Props) {
     return () => window.removeEventListener("click", onClick);
   }, []);
 
-  // NEW: Debounced search effect (searches as you type)
+  // Debounced search effect
   useEffect(() => {
-    // Clear results if query is empty or matches the selected address
     if (!q.trim() || q === value.address) {
       setResults([]);
       return;
     }
-
     setLoading(true);
     const timer = setTimeout(() => {
       async function search() {
@@ -53,7 +52,6 @@ export default function AddressField({ value, onChange }: Props) {
       }
       search();
     }, 300); // 300ms debounce
-
     return () => clearTimeout(timer);
   }, [q, value.address]);
 
@@ -61,6 +59,32 @@ export default function AddressField({ value, onChange }: Props) {
     onChange({ address: hit.place_name, lat: hit.lat, lng: hit.lng });
     setQ(hit.place_name);
     setResults([]);
+  }
+
+  // 2. NEW: "Use My Location" function
+  function getMyLocation() {
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser.");
+      return;
+    }
+    setLoading(true);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        // Simple reverse geocode to get a "place name"
+        const hit = {
+          place_name: `My Location (${latitude.toFixed(3)}, ${longitude.toFixed(3)})`,
+          lat: latitude,
+          lng: longitude,
+        };
+        select(hit);
+        setLoading(false);
+      },
+      () => {
+        alert("Unable to retrieve your location.");
+        setLoading(false);
+      }
+    );
   }
 
   return (
@@ -75,7 +99,15 @@ export default function AddressField({ value, onChange }: Props) {
           placeholder="123 Main St, City, GA"
           className="w-full rounded border border-slate-300 px-2 py-1 text-sm"
         />
-        {/* "Set" button removed, search is automatic */}
+        {/* 3. NEW: "Use My Location" button */}
+        <button
+          type="button"
+          onClick={getMyLocation}
+          className="p-1 rounded border border-slate-300 bg-white hover:bg-slate-50"
+          title="Use my location"
+        >
+          <MapPin size={18} className="text-slate-600" />
+        </button>
         {loading && <span className="p-1">...</span>}
       </div>
       {results.length > 0 && (
