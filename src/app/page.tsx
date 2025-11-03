@@ -120,7 +120,7 @@ export default function Page() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         <div className="lg:col-span-1 space-y-6">
           <FilterBar filters={filters} onChange={(f) => setFilters(prev => ({...prev, ...f}))} allCounties={allCounties} />
-          <HomeLocation home={home} setHome={setHome} />
+          <HomeLocation value={home} onChange={setHome} />
         </div>
         <div className="lg:col-span-2 space-y-6">
           <Mapbox points={points} onPick={(id) => setOpenId(id)} home={home} />
