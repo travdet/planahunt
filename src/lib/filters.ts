@@ -1,7 +1,6 @@
 import type { FilterState, WMA, SeasonRule, HomeLocation } from "./types";
-import { overlap, isDateWithin, toISO, haversineMi } from "./util";
+import { overlap, toISO, haversineMi } from "./util";
 
-// Export the Row type that map/page.tsx needs
 export type Row = { wma: WMA; rule: SeasonRule };
 
 // Determines if a rule matches filter selections
@@ -18,12 +17,9 @@ function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
   if (f.sex !== "any") {
     if (f.sex === "buck" && rule.buck_only !== true) return false;
     if (f.sex === "either" && rule.buck_only === true) return false;
-    // (doe-only rarely exists; would be represented by notes or tag)
   }
   
-  // UPDATED: This now uses the new single dateRange object
   if (f.dateRange) {
-    // Convert Date objects to 'YYYY-MM-DD' strings for comparison
     const rangeStart = toISO(f.dateRange.start);
     const rangeEnd = toISO(f.dateRange.end);
     if (!overlap(rule.start_date, rule.end_date, rangeStart, rangeEnd))
@@ -35,10 +31,21 @@ function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
 export function applyFilters(
   rows: Row[],
   f: FilterState,
-  // UPDATED: This now uses the HomeLocation type and maxDistanceMi from 'f'
-  home: HomeLocation | null 
+  home: HomeLocation | null,
+  favorites: string[] // <-- 1. ADD 'favorites' as an argument
 ) {
-  let filtered = rows.filter(({ rule }) => ruleMatchesFilters(rule, f));
+  let filtered = rows;
+
+  // --- 2. NEW: FAVORITES FILTER ---
+  // If showFavorites is on, filter by the favorites list first
+  if (f.showFavorites) {
+    const favSet = new Set(favorites);
+    filtered = filtered.filter(({ wma }) => favSet.has(wma.wma_id));
+  }
+  // --- END NEW ---
+
+  // Run the rest of the filters on the (potentially) reduced list
+  filtered = filtered.filter(({ rule }) => ruleMatchesFilters(rule, f));
 
   if (f.counties.length) {
     filtered = filtered.filter(({ wma }) =>
@@ -76,7 +83,6 @@ export function applyFilters(
     );
   }
 
-  // UPDATED: This now uses the real haversine distance filter
   const maxDistance = f.maxDistanceMi;
   if (home?.lat && home?.lng && maxDistance) {
     const homeCoords = { lat: home.lat, lng: home.lng };
