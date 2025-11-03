@@ -45,7 +45,6 @@ export interface SeasonRule {
   notes_short: string;
 }
 
-// This is the new, simplified dateRange type
 export type DateRange = {
   start: Date;
   end: Date;
@@ -53,7 +52,7 @@ export type DateRange = {
 
 export interface FilterState {
   query: string;
-  dateRange: DateRange; // Replaces 'date' and the old 'dateRange'
+  dateRange: DateRange;
   accessType: "any" | "quota" | "general";
   sex: "any" | "either" | "buck";
   weapons: string[];
@@ -62,6 +61,7 @@ export interface FilterState {
   regions: string[];
   tags: string[];
   maxDistanceMi: number | null;
+  showFavorites: boolean; // <-- ADD THIS LINE
 }
 
 export interface HomeLocation {
