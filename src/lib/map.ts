@@ -33,5 +33,9 @@ export async function drivingStats(from: {lat:number; lng:number}, to: {lat:numb
   if (!route) return null;
   const meters = route.distance as number;
   const seconds = route.duration as number;
-  return { miles: meters / 1609.344, minutes: seconds / 60 };
+  // Return miles (rounded) and minutes (rounded)
+  return { 
+    miles: Math.round((meters / 1609.344) * 10) / 10, 
+    minutes: Math.round(seconds / 60) 
+  };
 }
