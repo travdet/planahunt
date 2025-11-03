@@ -2,40 +2,62 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { geocodeAddress } from "@/lib/map";
-import type { HomeLoc } from "@/lib/types";
+import type { HomeLocation } from "@/lib/types";
 
 type Props = {
-  value: HomeLoc;
-  onChange: (next: HomeLoc) => void;
+  value: HomeLocation;
+  onChange: (next: HomeLocation) => void;
 };
 
 export default function AddressField({ value, onChange }: Props) {
   const [q, setQ] = useState(value.address ?? "");
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState<{place_name:string; lat:number; lng:number;}[]>([]);
+  const [results, setResults] = useState<
+    { place_name: string; lat: number; lng: number }[]
+  >([]);
   const boxRef = useRef<HTMLDivElement>(null);
 
+  // Click-away listener to close results
   useEffect(() => {
     function onClick(e: MouseEvent) {
       if (!boxRef.current) return;
-      if (!boxRef.current.contains(e.target as Node)) setResults([]);
+      if (!boxRef.current.contains(e.target as Node)) {
+        setResults([]);
+      }
     }
     window.addEventListener("click", onClick);
     return () => window.removeEventListener("click", onClick);
   }, []);
 
-  async function search() {
-    if (!q.trim()) return;
-    setLoading(true);
-    try {
-      const hits = await geocodeAddress(q.trim());
-      setResults(hits);
-    } finally {
-      setLoading(false);
+  // NEW: Debounced search effect (searches as you type)
+  useEffect(() => {
+    // Clear results if query is empty or matches the selected address
+    if (!q.trim() || q === value.address) {
+      setResults([]);
+      return;
     }
-  }
 
-  function select(hit: {place_name:string; lat:number; lng:number}) {
+    setLoading(true);
+    const timer = setTimeout(() => {
+      async function search() {
+        if (!q.trim()) return;
+        try {
+          const hits = await geocodeAddress(q.trim());
+          setResults(hits);
+        } catch (e) {
+          console.error(e);
+          setResults([]);
+        } finally {
+          setLoading(false);
+        }
+      }
+      search();
+    }, 300); // 300ms debounce
+
+    return () => clearTimeout(timer);
+  }, [q, value.address]);
+
+  function select(hit: { place_name: string; lat: number; lng: number }) {
     onChange({ address: hit.place_name, lat: hit.lat, lng: hit.lng });
     setQ(hit.place_name);
     setResults([]);
@@ -53,19 +75,15 @@ export default function AddressField({ value, onChange }: Props) {
           placeholder="123 Main St, City, GA"
           className="w-full rounded border border-slate-300 px-2 py-1 text-sm"
         />
-        <button
-          type="button"
-          onClick={search}
-          className="px-3 py-1 rounded bg-slate-900 text-white text-sm"
-        >
-          {loading ? "…" : "Set"}
-        </button>
+        {/* "Set" button removed, search is automatic */}
+        {loading && <span className="p-1">...</span>}
       </div>
       {results.length > 0 && (
-        <div className="absolute z-20 mt-1 w-full rounded border border-slate-300 bg-white shadow">
+        <div className="absolute z-20 mt-1 w-full rounded border border-slate-300 bg-white shadow max-h-48 overflow-auto">
           {results.map((r, i) => (
             <button
               key={i}
+              type="button"
               className="block w-full text-left px-2 py-1 text-sm hover:bg-slate-50"
               onClick={() => select(r)}
             >
@@ -74,7 +92,7 @@ export default function AddressField({ value, onChange }: Props) {
           ))}
         </div>
       )}
-      {value.address && (
+      {value.address && !results.length && (
         <p className="mt-1 text-[11px] text-slate-500">
           Saved: {value.address}
         </p>
