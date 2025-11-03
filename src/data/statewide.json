@@ -1,10 +1,161 @@
 {
-  "Deer Archery": {
-    "start_date": "2025-09-13",
-    "end_date": "2026-01-11"
+  "year": "2025-2026",
+
+  "deer": {
+    "season_limits": {
+      "total": 12,
+      "antlerless_max": 10,
+      "antlered_max": 2,
+      "antler_quality": {
+        "points_requirement": ">=4 points, >=1 inch",
+        "alternative_spread": ">=15 inch outside spread"
+      }
+    },
+
+    "archery": {
+      "start": "2025-09-13",
+      "end": "2025-10-10"
+    },
+    "primitive_weapons": {
+      "start": "2025-10-11",
+      "end": "2025-10-17"
+    },
+    "firearms": {
+      "default": {
+        "start": "2025-10-18",
+        "end": "2026-01-11"
+      },
+      "extended_counties": [
+        "Baker",
+        "Decatur",
+        "Calhoun",
+        "Early",
+        "Grady",
+        "Miller",
+        "Mitchell",
+        "Seminole",
+        "Thomas"
+      ],
+      "extended_end": "2026-01-15"
+    },
+
+    "buck_only_archery_first_two_weeks": [
+      "Baker", "Calhoun", "Decatur", "Early", "Grady",
+      "Miller", "Mitchell", "Seminole", "Thomas"
+    ],
+
+    "firearms_prohibited_counties": [
+      "Clayton",
+      "Cobb",
+      "DeKalb",
+      "Fulton",
+      "Glynn:Jekyll Island"
+    ],
+
+    "special_firearms_restrictions": {
+      "Forsyth": "South of GA Hwy 20 — Shotgun & muzzleloader only"
+    },
+
+    "county_to_deer_zone": {
+      "Appling": 6, "Atkinson": 6, "Bacon": 6, "Baker": 4,
+      "Baldwin": 3, "Banks": 2, "Barrow": 2, "Bartow": 1,
+      "Ben Hill": 5, "Berrien": 6, "Bibb": 3, "Bleckley": 5,
+      "Brantley": 6, "Brooks": 6, "Bryan": 6, "Bulloch": 6,
+      "Burke": 4, "Butts": 3, "Calhoun": 4, "Camden": 6,
+      "Candler": 6, "Carroll": 2, "Catoosa": 1, "Charlton": 6,
+      "Chatham": 6, "Chattahoochee": 5, "Chattooga": 1,
+      "Cherokee": 2, "Clarke": 2, "Clay": 5, "Clayton": 2,
+      "Clinch": 6, "Cobb": 2, "Coffee": 6, "Colquitt": 6,
+      "Columbia": 3, "Cook": 6, "Coweta": 2, "Crawford": 3,
+      "Crisp": 5, "Dade": 1, "Dawson": 2, "Decatur": 6,
+      "DeKalb": 2, "Dodge": 5, "Dooly": 5, "Dougherty": 5,
+      "Douglas": 2, "Early": 5, "Echols": 6, "Effingham": 6,
+      "Elbert": 2, "Emanuel": 6, "Evans": 6, "Fannin": 1,
+      "Fayette": 2, "Floyd": 1, "Forsyth": 2, "Franklin": 2,
+      "Fulton": 2, "Gilmer": 1, "Glascock": 3, "Glynn": 6,
+      "Gordon": 1, "Grady": 6, "Greene": 3, "Gwinnett": 2,
+      "Habersham": 2, "Hall": 2, "Hancock": 3, "Haralson": 1,
+      "Harris": 5, "Hart": 2, "Heard": 2, "Henry": 3,
+      "Houston": 5, "Irwin": 6, "Jackson": 2, "Jasper": 3,
+      "Jeff Davis": 6, "Jefferson": 3, "Jenkins": 6,
+      "Johnson": 5, "Jones": 3, "Lamar": 3, "Lanier": 6,
+      "Laurens": 5, "Lee": 5, "Liberty": 6, "Lincoln": 3,
+      "Long": 6, "Lowndes": 6, "Lumpkin": 2, "McDuffie": 3,
+      "McIntosh": 6, "Macon": 5, "Madison": 2, "Marion": 5,
+      "Meriwether": 2, "Miller": 5, "Mitchell": 5, "Monroe": 3,
+      "Montgomery": 5, "Morgan": 3, "Murray": 1, "Muscogee": 5,
+      "Newton": 3, "Oconee": 2, "Oglethorpe": 2, "Paulding": 1,
+      "Peach": 3, "Pickens": 1, "Pierce": 6, "Pike": 2,
+      "Polk": 1, "Pulaski": 5, "Putnam": 3, "Quitman": 5,
+      "Rabun": 1, "Randolph": 5, "Richmond": 3, "Rockdale": 3,
+      "Schley": 5, "Screven": 6, "Seminole": 6, "Spalding": 2,
+      "Stephens": 2, "Stewart": 5, "Sumter": 5, "Talbot": 5,
+      "Taliaferro": 3, "Tattnall": 6, "Taylor": 5, "Telfair": 5,
+      "Terrell": 5, "Thomas": 6, "Tift": 6, "Toombs": 5,
+      "Towns": 1, "Treutlen": 5, "Troup": 2, "Turner": 6,
+      "Twiggs": 3, "Union": 1, "Upson": 3, "Walker": 1,
+      "Walton": 2, "Ware": 6, "Warren": 3, "Washington": 3,
+      "Wayne": 6, "Webster": 5, "Wheeler": 5, "White": 1,
+      "Whitfield": 1, "Wilcox": 5, "Wilkes": 3, "Wilkinson": 3,
+      "Worth": 6
+    }
   },
-  "Turkey": {
-    "start_date": "2026-04-04",
-    "end_date": "2026-05-15"
+
+  "bear": {
+    "northern_zone": {
+      "archery": { "start": "2025-09-13", "end": "2025-10-10" },
+      "primitive_weapons": { "start": "2025-10-11", "end": "2025-10-17" },
+      "firearms": { "start": "2025-10-18", "end": "2026-01-11" }
+    },
+
+    "central_zone": {
+      "firearms": ["2025-12-20"]
+    },
+
+    "southern_zone": {
+      "firearms_hunts": [
+        { "start": "2025-09-18", "end": "2025-09-20" },
+        { "start": "2025-09-25", "end": "2025-09-27" },
+        { "start": "2025-10-02", "end": "2025-10-04" },
+        { "start": "2025-10-09", "end": "2025-10-11" }
+      ]
+    },
+
+    "season_limit": {
+      "total": 2,
+      "max_from_central_or_southern": 1
+    },
+
+    "county_to_bear_zone": {
+      "North": [
+        "Fannin", "Union", "Towns", "Rabun", "Lumpkin",
+        "White", "Habersham", "Stephens", "Dawson"
+      ],
+      "Central": [
+        "Bleckley", "Twiggs", "Houston", "Bibb",
+        "Peach", "Crawford", "Monroe",
+        "Jones (South of HWY 22)", 
+        "Hancock (South of HWY 16)"
+      ],
+      "South": "All counties south of the Fall Line"
+    }
+  },
+
+  "turkey": {
+    "special_opportunity": { "start": "2026-03-21", "end": "2026-03-22" },
+
+    "public_land": {
+      "start": "2026-04-04",
+      "end": "2026-05-15",
+      "limit_per_area_per_person": 1
+    },
+
+    "private_land": {
+      "start": "2026-03-28",
+      "end": "2026-05-15"
+    },
+
+    "season_limit": 2,
+    "daily_limit": 1
   }
 }
