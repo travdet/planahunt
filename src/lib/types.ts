@@ -15,22 +15,25 @@ export interface WMA {
   wma_id: string;
   name: string;
   tract_name?: string;
-  county: string;
+  area_type?: string;
+  counties: string[];
   region: string;
   acreage: number;
   phone?: string;
   map_points?: {
     check_stations?: CheckStation[];
-    boat_ramps?: any[]; // Define if needed
-    other_access?: any[]; // Define if needed
+    boat_ramps?: any[];
+    other_access?: any[];
   };
   map_lines?: {
     roads?: Road[];
-    trails?: any[]; // Define if needed
-    boundaries?: any[]; // Define if needed
+    trails?: any[];
+    boundaries?: any[];
   };
-  lat?: number;
-  lng?: number;
+  lat?: number | null;
+  lng?: number | null;
+  source_url?: string | null;
+  tags?: string[];
 }
 
 export interface SeasonRule {
