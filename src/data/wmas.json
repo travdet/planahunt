@@ -1,6 +1,6 @@
 [
   {
-    "wma_wma_id": "ALAPAHA-RIVER",
+    "wma_id": "ALAPAHA-RIVER",
     "name": "Alapaha River WMA",
     "tract_name": "",
     "area_type": "WMA",
@@ -297,7 +297,7 @@
     ]
   },
   {
-    "wma_id": "BLUE-Rwma_idGE",
+    "wma_id": "BLUE-RIDGE",
     "name": "Blue Rwma_idge WMA",
     "tract_name": "",
     "area_type": "WMA",
