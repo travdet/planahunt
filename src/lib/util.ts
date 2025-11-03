@@ -1,5 +1,6 @@
 // NEW FUNCTION: "2025-09-13" -> "Sep 13"
-export function fmtMMM DD(iso: string) {
+// Renamed to fmtMmmDd (no space)
+export function fmtMmmDd(iso: string) {
   try {
     const d = new Date(iso);
     // Add time to correct for timezone issues
