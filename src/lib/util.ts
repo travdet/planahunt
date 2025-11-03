@@ -1,11 +1,37 @@
+// NEW FUNCTION: "2025-09-13" -> "Sep 13"
+export function fmtMMM DD(iso: string) {
+  try {
+    const d = new Date(iso);
+    // Add time to correct for timezone issues
+    const dLocal = new Date(d.getTime() + d.getTimezoneOffset() * 60000);
+    return dLocal.toLocaleDateString(undefined, {
+      month: "short",
+      day: "numeric",
+    });
+  } catch (e) {
+    return iso;
+  }
+}
+
 export function fmtMDY(iso: string) {
-  // input yyyy-mm-dd -> MM-DD-YYYY
-  const [y, m, d] = iso.split("-");
-  return `${m}-${d}-${y}`;
+  try {
+    // input yyyy-mm-dd -> MM-DD-YYYY
+    const [y, m, d] = iso.split("-");
+    return `${m}-${d}-${y}`;
+  } catch (e) {
+    return iso;
+  }
 }
 
 export function toISO(date: Date) {
-  return date.toISOString().slice(0,10);
+  try {
+    // Add time an local timezone to prevent off-by-one day errors
+    const d = new Date(date);
+    const userTimezoneOffset = d.getTimezoneOffset() * 60000;
+    return new Date(d.getTime() - userTimezoneOffset).toISOString().split("T")[0];
+  } catch (e) {
+    return "";
+  }
 }
 
 export function overlap(aStart: string, aEnd: string, bStart: string, bEnd: string) {
