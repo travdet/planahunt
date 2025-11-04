@@ -32,12 +32,11 @@ export function applyFilters(
   rows: Row[],
   f: FilterState,
   home: HomeLocation | null,
-  favorites: string[] // <-- 1. ADD 'favorites' as an argument
+  favorites: string[] // <-- ADD 'favorites' as an argument
 ) {
   let filtered = rows;
 
-  // --- 2. NEW: FAVORITES FILTER ---
-  // If showFavorites is on, filter by the favorites list first
+  // --- NEW: FAVORITES FILTER ---
   if (f.showFavorites) {
     const favSet = new Set(favorites);
     filtered = filtered.filter(({ wma }) => favSet.has(wma.wma_id));
