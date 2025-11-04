@@ -4,14 +4,15 @@ import dynamic from "next/dynamic";
 import wmas from "@/data/wmas.json";
 import rulesData from "@/data/seasons.json";
 import statewide from "@/data/statewide.json";
-import type { WMA, SeasonRule, FilterState, HomeLocation } from "@/lib/types";
+import type { WMA, SeasonRule, FilterState, HomeLocation, SpeciesGroup } from "@/lib/types";
 import { resolveStatewide } from "@/lib/rules";
-import { applyFilters, type Row } from "@/lib/filters";
+// NEW: Import the species group summary function
+import { applyFilters, groupRulesBySpecies, type Row } from "@/lib/filters";
 import { toISO } from "@/lib/util";
 import WMACard from "@/components/WMACard";
 import FilterBar from "@/components/FilterBar";
 import AddressField from "@/components/AddressField";
-import WMAModal from "@/components/WMAModal";
+// We no longer need WMAModal
 
 const Mapbox = dynamic(() => import("@/components/Mapbox"), {
   ssr: false,
@@ -34,12 +35,16 @@ const defaultFilters: FilterState = {
 
 const FAVORITES_KEY = "planahunt_favorites";
 
+// NEW TYPE for the data passed to the WMACard
+type WmaCardData = {
+  wma: WMA;
+  speciesGroups: SpeciesGroup[]; // The "species-centric" summary
+  filteredRules: SeasonRule[]; // The raw rules for the "Open Today" check
+};
+
 export default function HomePage() {
   const [filters, setFilters] = useState<FilterState>(defaultFilters);
   const [home, setHome] = useState<HomeLocation | null>(null);
-  const [openWma, setOpenWma] = useState<WMA | null>(null);
-  
-  // FAVORITES STATE & STORAGE
   const [favorites, setFavorites] = useState<string[]>([]);
   
   useEffect(() => {
@@ -48,9 +53,7 @@ export default function HomePage() {
       if (stored) {
         setFavorites(JSON.parse(stored));
       }
-    } catch (e) {
-      console.error("Could not load favorites", e);
-    }
+    } catch (e) { console.error("Could not load favorites", e); }
   }, []);
 
   const toggleFavorite = (wma_id: string) => {
@@ -64,19 +67,12 @@ export default function HomePage() {
       const favArray = Array.from(newFavorites);
       try {
         localStorage.setItem(FAVORITES_KEY, JSON.stringify(favArray));
-      } catch (e) {
-        console.error("Could not save favorites", e);
-      }
+      } catch (e) { console.error("Could not save favorites", e); }
       return favArray;
     });
   };
 
-  const handleApplyFilter = (newFilters: Partial<FilterState>) => {
-      setFilters(prev => ({ ...prev, ...newFilters }));
-      setOpenWma(null); // Close the modal after applying the filter
-  }
-  // END FAVORITES LOGIC
-
+  // --- Main Data Processing Pipeline ---
   const rows: Row[] = useMemo(() => {
     const byId = new Map((wmas as WMA[]).map((w) => [w.wma_id, w]));
     return (rulesData as SeasonRule[]).flatMap((rule) => {
@@ -90,6 +86,7 @@ export default function HomePage() {
     });
   }, []); 
 
+  // --- Dynamic Filter Options ---
   const allCounties = useMemo(
     () => Array.from(new Set((wmas as WMA[]).flatMap((w) => w.counties))).sort(),
     []
@@ -117,11 +114,13 @@ export default function HomePage() {
     [rows]
   );
 
+  // --- Filtered Data for Display ---
   const filteredRows = useMemo(() => {
     return applyFilters(rows, filters, home, favorites);
   }, [rows, filters, home, favorites]);
 
-  const groupedByWma = useMemo(() => {
+  // NEW: Group by WMA and create the "species-centric" summary
+  const wmaCardData: WmaCardData[] = useMemo(() => {
     const map = new Map<string, { wma: WMA; rules: SeasonRule[] }>();
     for (const { wma, rule } of filteredRows) {
       if (!map.has(wma.wma_id)) {
@@ -129,11 +128,18 @@ export default function HomePage() {
       }
       map.get(wma.wma_id)!.rules.push(rule);
     }
-    return Array.from(map.values());
+    
+    // Now, create the card-specific data
+    return Array.from(map.values()).map(({ wma, rules }) => ({
+      wma,
+      filteredRules: rules, // Pass the raw filtered rules for "Open Today"
+      speciesGroups: groupRulesBySpecies(rules), // Create the new summary
+    }));
   }, [filteredRows]);
   
+  // Create map points from the filtered WMAs
   const mapPoints = useMemo(() => {
-    return groupedByWma
+    return wmaCardData
       .map(({ wma }) => {
         if (wma.lat == null || wma.lng == null) return null;
         return {
@@ -144,38 +150,18 @@ export default function HomePage() {
         };
       })
       .filter((p): p is { id: string; name: string; lat: number; lng: number } => p !== null);
-  }, [groupedByWma]);
+  }, [wmaCardData]);
 
-  const openWmaRules = useMemo(() => {
-    if (!openWma) return [];
-    return (rulesData as SeasonRule[])
-      .filter((r) => r.wma_id === openWma.wma_id)
-      .flatMap((rule) => resolveStatewide(rule, openWma, statewide));
-  }, [openWma]);
-  
+  // Get the selected date as a string (or null)
   const selectedDate = useMemo(() => {
     return filters.dateRange ? toISO(filters.dateRange.start) : null;
   }, [filters.dateRange]);
-  
-  const pickWma = (id: string) => {
-    const w = (wmas as WMA[]).find((x) => x.wma_id === id) || null;
-    setOpenWma(w);
-  };
   
   const favoriteSet = useMemo(() => new Set(favorites), [favorites]);
 
   return (
     <>
-      {openWma && (
-        <WMAModal
-          wma={openWma}
-          rules={openWmaRules}
-          onClose={() => setOpenWma(null)}
-          onToggleFavorite={() => toggleFavorite(openWma.wma_id)}
-          isFavorite={favoriteSet.has(openWma.wma_id)}
-          onApplyFilter={handleApplyFilter} // Pass new function here
-        />
-      )}
+      {/* Modal is GONE */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
         <aside className="h-fit md:sticky md:top-6 md:col-span-4 lg:col-span-3">
           <div className="mb-4 rounded-xl border bg-white p-4 shadow-sm">
@@ -196,21 +182,22 @@ export default function HomePage() {
 
         <section className="md:col-span-8 lg:col-span-9 space-y-4">
           <div className="h-[400px] w-full rounded-xl border shadow-sm overflow-hidden">
-            <Mapbox points={mapPoints} onPick={pickWma} />
+            {/* Map no longer needs onPick, as we navigate on card click */}
+            <Mapbox points={mapPoints} />
           </div>
 
           <div className="mb-4 text-sm text-slate-600">
-            Showing **{groupedByWma.length}** WMAs matching filters.
+            Showing **{wmaCardData.length}** WMAs matching filters.
           </div>
           <div className="space-y-4">
-            {groupedByWma.map(({ wma, rules }) => (
+            {wmaCardData.map(({ wma, filteredRules, speciesGroups }) => (
               <WMACard
                 key={wma.wma_id}
                 wma={wma}
-                rules={rules}
+                speciesGroups={speciesGroups}
+                filteredRules={filteredRules}
                 date={selectedDate} 
                 home={home}
-                onOpen={() => setOpenWma(wma)}
                 isFavorite={favoriteSet.has(wma.wma_id)}
                 onToggleFavorite={() => toggleFavorite(wma.wma_id)}
               />
