@@ -1,9 +1,9 @@
 "use client";
 import { useMemo } from "react";
 import type { FilterState, WMA, SeasonRule } from "@/lib/types";
-import Accordion from "./Accordion"; // <-- IMPORT ACCORDION
-import CountyFilter from "./CountyFilter"; // <-- IMPORT COUNTYFILTER
-import { Star } from "lucide-react"; // <-- IMPORT STAR ICON
+import Accordion from "./Accordion";
+import CountyFilter from "./CountyFilter";
+import { Star } from "lucide-react";
 import clsx from "clsx";
 
 const tan = "bg-amber-100 text-amber-900 border-amber-200";
@@ -89,7 +89,6 @@ export default function Filters({
   const endDateStr = getISODate(value.dateRange?.end);
 
   return (
-    // WRAP FILTERS IN A SCROLLABLE CONTAINER
     <aside className="space-y-4 md:max-h-[90vh] md:overflow-y-auto">
       <div className="space-y-2">
         {/* --- FAVORITES TOGGLE --- */}
@@ -147,46 +146,15 @@ export default function Filters({
         </Accordion>
 
         <Accordion title="Hunt Details" defaultOpen={true}>
-          <div className="hcard p-3 grid grid-cols-2 gap-3">
-            <div>
-              <div className="label mb-1">Access Type</div>
-              <select
-                value={value.accessType}
-                onChange={(e) =>
-                  onChange({ ...value, accessType: e.target.value as any })
-                }
-                className="w-full rounded-md border px-2 py-1"
-              >
-                <option value="any">any</option>
-                <option value="general">general</option>
-                <option value="quota">quota</option>
-              </select>
-            </div>
-            <div>
-              <div className="label mb-1">Buck/Doe</div>
-              <select
-                value={value.sex}
-                onChange={(e) =>
-                  onChange({ ...value, sex: e.target.value as any })
-                }
-                className="w-full rounded-md border px-2 py-1"
-              >
-                <option value="any">any</option>
-                <option value="either">either</option>
-                <option value="buck">buck</option>
-              </select>
-            </div>
-            <div className="col-span-2">
-              <div className="label mb-1">Open on date (Start)</div>
+          <div className="space-y-2">
+            <div className="label mb-1">Hunt Date(s)</div>
+            <div className="grid grid-cols-2 gap-2">
               <input
                 type="date"
                 value={startDateStr}
                 onChange={(e) => onDateChange("start", e.target.value)}
                 className="w-full rounded-md border px-2 py-1"
               />
-            </div>
-            <div className="col-span-2">
-              <div className="label mb-1">Open on date (End)</div>
               <input
                 type="date"
                 value={endDateStr}
@@ -195,30 +163,37 @@ export default function Filters({
               />
             </div>
           </div>
+          <div className="space-y-2">
+            <div className="label mb-1">Access Type</div>
+            <select
+              value={value.accessType}
+              onChange={(e) =>
+                onChange({ ...value, accessType: e.target.value as any })
+              }
+              className="w-full rounded-md border px-2 py-1"
+            >
+              <option value="any">any</option>
+              <option value="general">general</option>
+              <option value="quota">quota</option>
+            </select>
+          </div>
+          <div className="space-y-2">
+            <div className="label mb-1">Buck/Doe</div>
+            <select
+              value={value.sex}
+              onChange={(e) =>
+                onChange({ ...value, sex: e.target.value as any })
+              }
+              className="w-full rounded-md border px-2 py-1"
+            >
+              <option value="any">any</option>
+              <option value="either">either</option>
+              <option value="buck">buck</option>
+            </select>
+          </div>
         </Accordion>
 
         <Accordion title="Hunt Type">
-          <div className="space-y-2">
-            <div className="label mb-2">Species</div>
-            <div className="flex flex-wrap gap-2">
-              {speciesOptions.map((s) => (
-                <button
-                  key={s}
-                  className={
-                    "pill " +
-                    (value.species.includes(s)
-                      ? "bg-parkGreen text-parkPaper border-parkGreen"
-                      : "")
-                  }
-                  onClick={() =>
-                    onChange({ ...value, species: toggle(value.species, s) })
-                  }
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-          </div>
           <div className="space-y-2">
             <div className="label mb-2">Weapons</div>
             <div className="flex flex-wrap gap-2">
@@ -236,6 +211,27 @@ export default function Filters({
                   }
                 >
                   {w}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="space-y-2">
+            <div className="label mb-2">Species</div>
+            <div className="flex flex-wrap gap-2">
+              {speciesOptions.map((s) => (
+                <button
+                  key={s}
+                  className={
+                    "pill " +
+                    (value.species.includes(s)
+                      ? "bg-parkGreen text-parkPaper border-parkGreen"
+                      : "")
+                  }
+                  onClick={() =>
+                    onChange({ ...value, species: toggle(value.species, s) })
+                  }
+                >
+                  {s}
                 </button>
               ))}
             </div>
