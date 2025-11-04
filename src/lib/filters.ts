@@ -1,4 +1,4 @@
-import type { FilterState, WMA, SeasonRule, HomeLocation } from "./types";
+import type { FilterState, WMA, SeasonRule, HomeLocation, SpeciesGroup } from "./types";
 import { overlap, toISO, haversineMi } from "./util";
 
 export type Row = { wma: WMA; rule: SeasonRule };
@@ -28,15 +28,16 @@ function ruleMatchesFilters(rule: SeasonRule, f: FilterState) {
   return true;
 }
 
+// This function takes all hunts and filters them down
 export function applyFilters(
   rows: Row[],
   f: FilterState,
   home: HomeLocation | null,
-  favorites: string[] // <-- ADD 'favorites' as an argument
+  favorites: string[]
 ) {
   let filtered = rows;
 
-  // --- NEW: FAVORITES FILTER ---
+  // --- FAVORITES FILTER ---
   if (f.showFavorites) {
     const favSet = new Set(favorites);
     filtered = filtered.filter(({ wma }) => favSet.has(wma.wma_id));
@@ -95,4 +96,28 @@ export function applyFilters(
   }
 
   return filtered;
+}
+
+// NEW FUNCTION for the "Species-Centric" card
+// This takes a WMA's *already filtered* rules and summarizes them.
+export function groupRulesBySpecies(rules: SeasonRule[]): SpeciesGroup[] {
+  const groups = new Map<string, SpeciesGroup>();
+
+  for (const rule of rules) {
+    const species = rule.species;
+    if (!groups.has(species)) {
+      groups.set(species, { species, tags: new Set() });
+    }
+    const group = groups.get(species)!;
+
+    // Add tags
+    if (rule.quota_required) {
+      group.tags.add("Quota");
+    } else {
+      group.tags.add("General");
+    }
+    rule.tags.forEach(tag => group.tags.add(tag));
+  }
+
+  return Array.from(groups.values());
 }
