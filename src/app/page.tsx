@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import wmas from "@/data/wmas.json";
 import rulesData from "@/data/seasons.json";
@@ -13,7 +13,6 @@ import FilterBar from "@/components/FilterBar";
 import AddressField from "@/components/AddressField";
 import WMAModal from "@/components/WMAModal";
 
-// Dynamically import Mapbox
 const Mapbox = dynamic(() => import("@/components/Mapbox"), {
   ssr: false,
   loading: () => <div className="h-full w-full flex items-center justify-center bg-slate-50 rounded-xl border"><p className="text-slate-500">Loading map...</p></div>
@@ -30,14 +29,50 @@ const defaultFilters: FilterState = {
   tags: [],
   maxDistanceMi: null,
   dateRange: null, 
+  showFavorites: false, // Initial state for the new filter
 };
+
+const FAVORITES_KEY = "planahunt_favorites";
 
 export default function HomePage() {
   const [filters, setFilters] = useState<FilterState>(defaultFilters);
   const [home, setHome] = useState<HomeLocation | null>(null);
   const [openWma, setOpenWma] = useState<WMA | null>(null);
+  
+  // 1. FAVORITES STATE & STORAGE
+  const [favorites, setFavorites] = useState<string[]>([]);
+  
+  useEffect(() => {
+    // Load favorites from local storage on mount
+    try {
+      const stored = localStorage.getItem(FAVORITES_KEY);
+      if (stored) {
+        setFavorites(JSON.parse(stored));
+      }
+    } catch (e) {
+      console.error("Could not load favorites", e);
+    }
+  }, []);
 
-  // Rows: The master list of every single hunt, with statewide rules resolved
+  const toggleFavorite = (wma_id: string) => {
+    setFavorites(prev => {
+      const newFavorites = new Set(prev);
+      if (newFavorites.has(wma_id)) {
+        newFavorites.delete(wma_id);
+      } else {
+        newFavorites.add(wma_id);
+      }
+      const favArray = Array.from(newFavorites);
+      try {
+        localStorage.setItem(FAVORITES_KEY, JSON.stringify(favArray));
+      } catch (e) {
+        console.error("Could not save favorites", e);
+      }
+      return favArray;
+    });
+  };
+  // END FAVORITES LOGIC
+
   const rows: Row[] = useMemo(() => {
     const byId = new Map((wmas as WMA[]).map((w) => [w.wma_id, w]));
     return (rulesData as SeasonRule[]).flatMap((rule) => {
@@ -51,7 +86,6 @@ export default function HomePage() {
     });
   }, []); 
 
-  // Dynamic lists for filters, derived from the resolved rows
   const allCounties = useMemo(
     () => Array.from(new Set((wmas as WMA[]).flatMap((w) => w.counties))).sort(),
     []
@@ -79,12 +113,11 @@ export default function HomePage() {
     [rows]
   );
 
-  // Filtered Rows: The list of hunts that match the user's filters
+  // 2. PASS FAVORITES TO FILTER FUNCTION
   const filteredRows = useMemo(() => {
-    return applyFilters(rows, filters, home);
-  }, [rows, filters, home]);
+    return applyFilters(rows, filters, home, favorites);
+  }, [rows, filters, home, favorites]);
 
-  // Grouped: Filtered hunts, grouped by WMA for display
   const groupedByWma = useMemo(() => {
     const map = new Map<string, { wma: WMA; rules: SeasonRule[] }>();
     for (const { wma, rule } of filteredRows) {
@@ -96,7 +129,6 @@ export default function HomePage() {
     return Array.from(map.values());
   }, [filteredRows]);
   
-  // NEW: Create points for the map from the *filtered* WMAs
   const mapPoints = useMemo(() => {
     return groupedByWma
       .map(({ wma }) => {
@@ -111,7 +143,6 @@ export default function HomePage() {
       .filter((p): p is { id: string; name: string; lat: number; lng: number } => p !== null);
   }, [groupedByWma]);
 
-  // WMA Rules for Modal
   const openWmaRules = useMemo(() => {
     if (!openWma) return [];
     return (rulesData as SeasonRule[])
@@ -123,11 +154,12 @@ export default function HomePage() {
     return filters.dateRange ? toISO(filters.dateRange.start) : null;
   }, [filters.dateRange]);
   
-  // NEW: Function to open modal from map click
   const pickWma = (id: string) => {
     const w = (wmas as WMA[]).find((x) => x.wma_id === id) || null;
     setOpenWma(w);
   };
+  
+  const favoriteSet = useMemo(() => new Set(favorites), [favorites]);
 
   return (
     <>
@@ -138,7 +170,6 @@ export default function HomePage() {
           onClose={() => setOpenWma(null)}
         />
       )}
-      {/* UPDATED: New 3-column grid layout */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
         <aside className="h-fit md:sticky md:top-6 md:col-span-4 lg:col-span-3">
           <div className="mb-4 rounded-xl border bg-white p-4 shadow-sm">
@@ -157,7 +188,6 @@ export default function HomePage() {
           />
         </aside>
 
-        {/* UPDATED: Right side is now split between map and cards */}
         <section className="md:col-span-8 lg:col-span-9 space-y-4">
           <div className="h-[400px] w-full rounded-xl border shadow-sm overflow-hidden">
             <Mapbox points={mapPoints} onPick={pickWma} />
@@ -172,9 +202,11 @@ export default function HomePage() {
                 key={wma.wma_id}
                 wma={wma}
                 rules={rules}
-                date={selectedDate}
+                date={selectedDate} 
                 home={home}
                 onOpen={() => setOpenWma(wma)}
+                isFavorite={favoriteSet.has(wma.wma_id)} // 3. Pass favorite status
+                onToggleFavorite={() => toggleFavorite(wma.wma_id)} // 4. Pass toggle function
               />
             ))}
           </div>
