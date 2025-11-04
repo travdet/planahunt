@@ -61,11 +61,17 @@ export interface FilterState {
   regions: string[];
   tags: string[];
   maxDistanceMi: number | null;
-  showFavorites: boolean; // <-- ADD THIS LINE
+  showFavorites: boolean;
 }
 
 export interface HomeLocation {
   address: string;
   lat: number | null;
   lng: number | null;
+}
+
+// NEW TYPE FOR THE "SPECIES-CENTRIC" CARD
+export interface SpeciesGroup {
+  species: string;
+  tags: Set<string>; // (e.g., "General", "Quota", "Bonus")
 }
