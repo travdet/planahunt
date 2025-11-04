@@ -33,28 +33,29 @@ export default function WMACard({
   date,
   home,
   onOpen,
-  isFavorite, // 1. ADD isFavorite PROP
-  onToggleFavorite, // 2. ADD onToggleFavorite PROP
+  isFavorite, // ADD isFavorite PROP
+  onToggleFavorite, // ADD onToggleFavorite PROP
 }: {
   wma: WMA;
   rules: SeasonRule[];
   date?: string | null;
   home?: HomeLocation | null;
   onOpen: () => void;
-  isFavorite: boolean; // 1. ADD isFavorite PROP
-  onToggleFavorite: () => void; // 2. ADD onToggleFavorite PROP
+  isFavorite: boolean; // ADD isFavorite PROP
+  onToggleFavorite: () => void; // ADD onToggleFavorite PROP
 }) {
   const today = date || null;
   const [driving, setDriving] = useState<{ miles: number; minutes: number } | null>(null);
   const [drivingLoading, setDrivingLoading] = useState(false);
 
-  // ... (summary logic is the same) ...
   const summary = useMemo(() => {
     let openNow: null | { access: "general" | "quota"; weapons: string[] } = null;
+    
     const notes = rules.map(r => r.notes_short);
     const hasMultipleRuleSources = 
         notes.some(n => n?.includes("Statewide Season")) &&
         new Set(notes).size > 1;
+
     const groups = new Map<string, {
       species: string;
       weapon: string;
@@ -149,7 +150,7 @@ export default function WMACard({
           </p>
         </div>
         <div className="flex-shrink-0 flex gap-2">
-          {/* 3. FAVORITE BUTTON */}
+          {/* FAVORITE BUTTON */}
           <button
             type="button"
             onClick={onToggleFavorite}
