@@ -11,14 +11,14 @@ const green = "bg-emerald-600 text-white border-emerald-700";
 export default function FilterBar({
   filters,
   onChange,
-  allCounties,
+  allCounties, // <-- 1. FIX: Was "allCountIES"
   allSpecies,
   allWeapons,
   allTags,
 }: {
   filters: FilterState;
   onChange: (f: Partial<FilterState>) => void;
-  allCountIES: string[];
+  allCounties: string[]; // <-- 2. FIX: Was "allCountIES"
   allSpecies: string[];
   allWeapons: string[];
   allTags: string[];
