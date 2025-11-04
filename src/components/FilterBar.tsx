@@ -1,9 +1,9 @@
 "use client";
 import type { FilterState } from "@/lib/types";
 import clsx from "clsx";
-import CountyFilter from "./CountyFilter"; // 1. IMPORT COUNTYFILTER
-import Accordion from "./Accordion"; // 2. IMPORT ACCORDION
-import { Star } from "lucide-react"; // 3. IMPORT STAR ICON
+import CountyFilter from "./CountyFilter";
+import Accordion from "./Accordion";
+import { Star } from "lucide-react";
 
 const tan = "bg-amber-100 text-amber-900 border-amber-200";
 const green = "bg-emerald-600 text-white border-emerald-700";
@@ -65,7 +65,7 @@ export default function FilterBar({
   const endDateStr = getISODate(filters.dateRange?.end);
 
   return (
-    // 4. WRAP FILTERS IN A SCROLLABLE CONTAINER
+    // WRAP FILTERS IN A SCROLLABLE CONTAINER
     <aside className="rounded-xl border bg-white p-4 shadow-sm md:sticky md:top-6 md:max-h-[90vh] md:overflow-y-auto">
       <div className="space-y-2">
         {/* --- FAVORITES TOGGLE --- */}
