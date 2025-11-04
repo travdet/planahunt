@@ -89,6 +89,7 @@ export default function Filters({
   const endDateStr = getISODate(value.dateRange?.end);
 
   return (
+    // WRAP FILTERS IN A SCROLLABLE CONTAINER
     <aside className="space-y-4 md:max-h-[90vh] md:overflow-y-auto">
       <div className="space-y-2">
         {/* --- FAVORITES TOGGLE --- */}
@@ -154,12 +155,14 @@ export default function Filters({
                 value={startDateStr}
                 onChange={(e) => onDateChange("start", e.target.value)}
                 className="w-full rounded-md border px-2 py-1"
+                placeholder="Start Date"
               />
               <input
                 type="date"
                 value={endDateStr}
                 onChange={(e) => onDateChange("end", e.target.value)}
                 className="w-full rounded-md border px-2 py-1"
+                placeholder="End Date"
               />
             </div>
           </div>
