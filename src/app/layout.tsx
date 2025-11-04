@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <img src="/logo.svg" alt="Plan A Hunt" className="h-8 w-auto"/>
             <nav className="ml-6 flex gap-4 text-parkPaper/90">
               <a href="/" className="hover:underline">Browse</a>
-              <a href="/map" className="hover:underline">Map</a>
+              {/* "Map" link removed */}
             </nav>
             <div className="ml-auto text-sm opacity-80">Georgia Public Land Planner</div>
           </div>
