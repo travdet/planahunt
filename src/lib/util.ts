@@ -1,5 +1,4 @@
 // NEW FUNCTION: "2025-09-13" -> "Sep 13"
-// Renamed to fmtMmmDd (no space)
 export function fmtMmmDd(iso: string) {
   try {
     const d = new Date(iso);
@@ -26,7 +25,7 @@ export function fmtMDY(iso: string) {
 
 export function toISO(date: Date) {
   try {
-    // Add time an local timezone to prevent off-by-one day errors
+    // Use local timezone to prevent off-by-one day errors
     const d = new Date(date);
     const userTimezoneOffset = d.getTimezoneOffset() * 60000;
     return new Date(d.getTime() - userTimezoneOffset).toISOString().split("T")[0];
