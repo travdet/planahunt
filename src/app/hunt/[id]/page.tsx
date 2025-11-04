@@ -4,14 +4,14 @@ import wmas from "@/data/wmas.json";
 import rulesRaw from "@/data/seasons.json";
 import type { SeasonRule, WMA } from "@/lib/types";
 import { fmtMmmDd } from "@/lib/util";
-import InteractiveCalendar from "@/components/InteractiveCalendar"; // <-- FIX: Use new calendar
+import InteractiveCalendar from "@/components/InteractiveCalendar"; // <-- Use new calendar
 import statewide from "@/data/statewide.json";
 import regulations from "@/data/regulations.json";
 import { resolveStatewide } from "@/lib/rules";
 import { AlertTriangle, Star } from "lucide-react";
 import clsx from "clsx";
 
-// --- ADDED HELPER COMPONENTS ---
+// --- HELPER COMPONENTS ---
 const Pill = ({ text, className = "" }: { text: string, className?: string }) => (
   <span
     className={clsx(
@@ -144,8 +144,9 @@ export default function HuntDetail({ params }: { params: { id: string } }) {
       summary: { huntGroups, hasMultipleRuleSources, zoneTags, antlerRules } 
     };
   }, [id, wma]);
-
-
+  
+  // --- THIS IS THE CORRECT ORDER ---
+  // 1. Check if WMA exists. If not, return the "Not Found" page.
   if (!wma || !summary) {
     return (
       <main className="mx-auto max-w-5xl px-4 py-6">
@@ -154,6 +155,8 @@ export default function HuntDetail({ params }: { params: { id: string } }) {
     );
   }
 
+  // 2. If the WMA *does* exist, return the full detail page.
+  // The error log showed this 'return' was happening *before* the 'if' block.
   return (
     <main className="mx-auto max-w-5xl px-4 py-6">
       {/* --- HEADER --- */}
@@ -203,7 +206,7 @@ export default function HuntDetail({ params }: { params: { id: string } }) {
             )}
             title={isFavorite ? "Remove from favorites" : "Add to favorites"}
           >
-            <Star size={20} className={clsx(isFavorite && "fill-amber-400")} />
+            <Star size={20} className={clsx(isFavorite && "fill-amber-4m00")} />
           </button>
         </div>
       </div>
@@ -225,3 +228,77 @@ export default function HuntDetail({ params }: { params: { id: string } }) {
         {/* --- "COMPRESSED" HUNT GROUPS --- */}
         <div className="space-y-2 pt-2">
           <h4 className="text-lg font-semibold mb-2">Available Hunt Groups</h4>
+          <div className="space-y-2 max-h-[60vh] overflow-auto pr-2">
+            {summary.huntGroups.map((group) => {
+              const equipmentInfo = findEquipmentInfo(group.weapon);
+              return (
+                <div key={`${group.species}-${group.weapon}`} className="rounded-lg border bg-slate-50 p-3 shadow-sm">
+                  {/* Header: Species, Weapon, Pills */}
+                  <div className="flex flex-wrap gap-2 items-center mb-2">
+                    <span className="font-semibold text-sm capitalize">{group.species}</span>
+                    <span className="text-sm capitalize text-slate-600">({group.weapon})</span>
+                    <Pill 
+                      text={group.isQuota ? "Quota" : "General"} 
+                      className={clsx(
+                        group.isQuota
+                          ? "bg-amber-100 text-amber-800"
+                          : "bg-emerald-100 text-emerald-800"
+                      )}
+                    />
+                    {Array.from(group.tags).map(tag => (
+                      <Pill key={tag} text={tag} />
+                    ))}
+                  </div>
+                  
+                  {/* List of dates */}
+                  <div className="space-y-1">
+                    {group.windows.map((w, i) => (
+                      <div key={i} className="text-sm text-slate-800 font-medium">
+                        {formatHuntRange(w.start, w.end)}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Show hunt-specific notes */}
+                  {group.notes.size > 0 && (
+                    <div className="mt-2 border-t pt-2">
+                      <h5 className="text-xs font-semibold text-slate-600">Notes:</h5>
+                      {Array.from(group.notes).map(note => (
+                        <p key={note} className="text-xs text-slate-600">{note}</p>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Show equipment info */}
+                  {equipmentInfo && (
+                    <div className="mt-2 border-t pt-2">
+                      <h5 className="text-xs font-semibold text-slate-600">Legal Equipment:</h5>
+                      <p className="text-xs text-slate-600">{equipmentInfo}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* --- CALENDAR & RULES --- */}
+        <div className="space-y-4">
+          <h4 className="mb-2 text-lg font-semibold">Calendar</h4>
+          <InteractiveCalendar rules={rules} />
+
+          <div className="space-y-2 pt-4">
+            <h4 className="text-lg font-semibold mb-2">Rules & Info</h4>
+            <div className="rounded-lg border bg-slate-50 p-3 shadow-sm">
+              <h5 className="font-semibold text-sm mb-1">Statewide Antler Rules (Deer)</h5>
+              <ul className="list-disc pl-5 text-sm text-slate-700">
+                <li>{summary.antlerRules.points_requirement}</li>
+                <li>{summary.antlerRules.alternative_spread}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
