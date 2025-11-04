@@ -39,7 +39,7 @@ export default function HomePage() {
   const [home, setHome] = useState<HomeLocation | null>(null);
   const [openWma, setOpenWma] = useState<WMA | null>(null);
   
-  // 1. FAVORITES STATE & STORAGE
+  // FAVORITES STATE & STORAGE
   const [favorites, setFavorites] = useState<string[]>([]);
   
   useEffect(() => {
@@ -113,7 +113,7 @@ export default function HomePage() {
     [rows]
   );
 
-  // 2. PASS FAVORITES TO FILTER FUNCTION
+  // PASS FAVORITES TO FILTER FUNCTION
   const filteredRows = useMemo(() => {
     return applyFilters(rows, filters, home, favorites);
   }, [rows, filters, home, favorites]);
@@ -205,8 +205,8 @@ export default function HomePage() {
                 date={selectedDate} 
                 home={home}
                 onOpen={() => setOpenWma(wma)}
-                isFavorite={favoriteSet.has(wma.wma_id)} // 3. Pass favorite status
-                onToggleFavorite={() => toggleFavorite(wma.wma_id)} // 4. Pass toggle function
+                isFavorite={favoriteSet.has(wma.wma_id)} // Pass favorite status
+                onToggleFavorite={() => toggleFavorite(wma.wma_id)} // Pass toggle function
               />
             ))}
           </div>
