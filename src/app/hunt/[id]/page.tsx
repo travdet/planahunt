@@ -1,16 +1,152 @@
+"use client";
+import { useState, useMemo, useEffect } from "react";
 import wmas from "@/data/wmas.json";
 import rulesRaw from "@/data/seasons.json";
 import type { SeasonRule, WMA } from "@/lib/types";
-import { fmtMDY } from "@/lib/util";
-import AccessCalendar from "@/components/AccessCalendar";
+import { fmtMmmDd } from "@/lib/util";
+import InteractiveCalendar from "@/components/InteractiveCalendar"; // <-- FIX: Use new calendar
 import statewide from "@/data/statewide.json";
+import regulations from "@/data/regulations.json";
 import { resolveStatewide } from "@/lib/rules";
+import { AlertTriangle, Star } from "lucide-react";
+import clsx from "clsx";
+
+// --- ADDED HELPER COMPONENTS ---
+const Pill = ({ text, className = "" }: { text: string, className?: string }) => (
+  <span
+    className={clsx(
+      "rounded-full px-2 py-0.5 text-xs font-medium",
+      className || "bg-slate-100 text-slate-700"
+    )}
+  >
+    {text}
+  </span>
+);
+
+function formatHuntRange(start: string, end: string) {
+  const startDate = fmtMmmDd(start);
+  const endDate = fmtMmmDd(end);
+  if (startDate === endDate) return startDate;
+  return `${startDate} – ${endDate}`;
+}
+
+function findEquipmentInfo(weapon: string): string | null {
+  const w = weapon.toLowerCase();
+  if (w.includes("archery")) return regulations.legal_equipment.archery;
+  if (w.includes("primitive")) return regulations.legal_equipment.primitive_weapons;
+  if (w.includes("firearms")) return regulations.legal_equipment.firearms.deer_and_bear.join(" ");
+  if (w.includes("turkey")) return regulations.legal_equipment.firearms.turkey;
+  return null;
+}
+
+function getZoneInfo(wma: WMA) {
+  const deerZones = new Set();
+  let bearZone: string | undefined;
+  wma.counties.forEach(county => {
+    const zoneNum = statewide.deer.county_to_deer_zone[county as keyof typeof statewide.deer.county_to_deer_zone];
+    if (zoneNum) deerZones.add(`Zone ${zoneNum}`);
+    if (statewide.bear.county_to_bear_zone.North.includes(county)) {
+      bearZone = "Northern";
+    } else if (statewide.bear.county_to_bear_zone.Central.includes(county)) {
+      bearZone = "Central";
+    }
+  });
+  const zoneTags = Array.from(deerZones).map(z => ({ text: z, type: 'deer' }));
+  if (bearZone) zoneTags.push({ text: `Bear: ${bearZone}`, type: 'bear' });
+  return { zoneTags };
+}
+// --- END HELPER COMPONENTS ---
+
+const FAVORITES_KEY = "planahunt_favorites";
 
 export default function HuntDetail({ params }: { params: { id: string } }) {
   const id = decodeURIComponent(params.id);
   const wma = (wmas as WMA[]).find((w) => w.wma_id === id);
 
-  if (!wma) {
+  // --- ADDED FAVORITES STATE ---
+  const [favorites, setFavorites] = useState<string[]>([]);
+  
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(FAVORITES_KEY);
+      if (stored) {
+        setFavorites(JSON.parse(stored));
+      }
+    } catch (e) { console.error("Could not load favorites", e); }
+  }, []);
+
+  const toggleFavorite = (wma_id: string) => {
+    setFavorites(prev => {
+      const newFavorites = new Set(prev);
+      if (newFavorites.has(wma_id)) {
+        newFavorites.delete(wma_id);
+      } else {
+        newFavorites.add(wma_id);
+      }
+      const favArray = Array.from(newFavorites);
+      try {
+        localStorage.setItem(FAVORITES_KEY, JSON.stringify(favArray));
+      } catch (e) { console.error("Could not save favorites", e); }
+      return favArray;
+    });
+  };
+  const isFavorite = useMemo(() => new Set(favorites).has(id), [favorites, id]);
+  // --- END FAVORITES STATE ---
+
+  const { rules, summary } = useMemo(() => {
+    if (!wma) return { rules: [], summary: null };
+
+    const resolvedRules = (rulesRaw as SeasonRule[])
+      .filter((r) => r.wma_id === id)
+      .flatMap((r) => resolveStatewide(r, wma, statewide));
+
+    const notes = resolvedRules.map((r) => r.notes_short);
+    const hasMultipleRuleSources =
+      notes.some((n) => n?.includes("Statewide Season")) &&
+      new Set(notes).size > 1;
+
+    const groups = new Map<string, {
+      species: string;
+      weapon: string;
+      windows: { start: string; end: string; }[];
+      tags: Set<string>;
+      isQuota: boolean;
+      notes: Set<string>;
+    }>();
+
+    resolvedRules.forEach((r) => {
+      const key = `${r.species}-${r.weapon}`;
+      if (!groups.has(key)) {
+        groups.set(key, {
+          species: r.species,
+          weapon: r.weapon,
+          windows: [],
+          tags: new Set(),
+          isQuota: false,
+          notes: new Set(),
+        });
+      }
+      const group = groups.get(key)!;
+      group.windows.push({ start: r.start_date, end: r.end_date });
+      if (r.quota_required) group.isQuota = true;
+      r.tags?.forEach(tag => group.tags.add(tag));
+      if (r.notes_short && !r.notes_short.includes("State seasons")) {
+        group.notes.add(r.notes_short);
+      }
+    });
+    
+    const huntGroups = Array.from(groups.values());
+    const { zoneTags } = getZoneInfo(wma);
+    const antlerRules = statewide.deer.season_limits.antler_quality;
+
+    return { 
+      rules: resolvedRules, 
+      summary: { huntGroups, hasMultipleRuleSources, zoneTags, antlerRules } 
+    };
+  }, [id, wma]);
+
+
+  if (!wma || !summary) {
     return (
       <main className="mx-auto max-w-5xl px-4 py-6">
         <div className="p-6 text-center">WMA not found.</div>
@@ -18,62 +154,74 @@ export default function HuntDetail({ params }: { params: { id: string } }) {
     );
   }
 
-  const rules = (rulesRaw as SeasonRule[])
-    .filter((r) => r.wma_id === id)
-    //
-    // 1. THIS IS THE FIX: Changed .map() to .flatMap()
-    //
-    .flatMap((r) => resolveStatewide(r, wma, statewide));
-
   return (
     <main className="mx-auto max-w-5xl px-4 py-6">
-      <div className="mb-6 rounded-2xl bg-emerald-700 px-6 py-4 text-white">
-        <h1 className="text-2xl font-semibold">{wma.name}</h1>
-        <p className="text-sm opacity-90">
-          {wma.counties?.join(", ")}
-          {wma.acreage ? ` • ${wma.acreage.toLocaleString()} ac` : ""}
-          {wma.phone ? ` • ${wma.phone}` : ""}
-        </p>
+      {/* --- HEADER --- */}
+      <div className="flex items-start justify-between gap-4">
+        <div className="space-y-3 flex-grow pr-4">
+          <h1 className="text-2xl font-semibold">{wma.name}</h1>
+          <p className="text-sm text-slate-600">
+            {wma.counties?.join(", ")}
+            {wma.acreage ? ` • ${wma.acreage.toLocaleString()} ac` : ""}
+            {wma.phone ? ` • ${wma.phone}` : ""}
+          </p>
+          {/* WMA TAGS */}
+          {wma.tags && wma.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {wma.tags.map(tag => (
+                <Pill 
+                  key={tag} 
+                  text={tag} 
+                  className={clsx(
+                    tag === "Quota" && "bg-amber-100 text-amber-800",
+                    tag === "Bonus" && "bg-blue-100 text-blue-800",
+                    (tag.includes("Archery") || tag.includes("Primitive")) && "bg-red-100 text-red-800"
+                  )} 
+                />
+              ))}
+              {/* ZONE TAGS */}
+              {summary.zoneTags.map(tag => (
+                <Pill 
+                  key={tag.text} 
+                  text={tag.text} 
+                  className={tag.type === 'deer' ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+        {/* FAVORITE BUTTON */}
+        <div className="flex-shrink-0">
+          <button
+            type="button"
+            onClick={() => toggleFavorite(wma.wma_id)}
+            className={clsx(
+              "rounded-md border p-2 h-10 w-10",
+              isFavorite
+                ? "border-amber-400 bg-amber-50 text-amber-500"
+                : "border-slate-300 bg-white text-slate-400 hover:bg-slate-50"
+            )}
+            title={isFavorite ? "Remove from favorites" : "Add to favorites"}
+          >
+            <Star size={20} className={clsx(isFavorite && "fill-amber-400")} />
+          </button>
+        </div>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <div>
-          <h2 className="mb-2 text-lg font-semibold">Seasons</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="text-left text-slate-500">
-                  <th className="py-1 pr-2">Species</th>
-                  <th className="py-1 pr-2">Weapon</th>
-                  <th className="py-1 pr-2">Access</th>
-                  <th className="py-1">Dates</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* This .map() will now work, as 'rules' is SeasonRule[] */}
-                {rules.map((r, i) => (
-                  <tr key={r.id || i} className="border-t"> {/* Use r.id for a more stable key */}
-                    <td className="py-1 pr-2">{r.species}</td>
-                    <td className="py-1 pr-2">{r.weapon}</td>
-                    <td className="py-1 pr-2">
-                      {r.quota_required ? "Quota" : "General"}
-                    </td>
-                    <td className="py-1">{`${fmtMDY(r.start_date)} – ${fmtMDY(
-                      r.end_date
-                    )}`}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+      {/* --- MULTI-COUNTY WARNING --- */}
+      {summary.hasMultipleRuleSources && (
+        <div className="mt-4 flex items-center gap-2 rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
+          <AlertTriangle className="h-4 w-4 flex-shrink-0" />
+          <p>
+            **Rule Warning:** This WMA spans multiple counties with
+            different rules (e.g., extended seasons, bear zones). The
+            list below shows all possible rules; check county before hunting.
+          </p>
         </div>
+      )}
 
-        <div>
-          <h2 className="mb-2 text-lg font-semibold">Calendar</h2>
-          {/* This will also work now */}
-          <AccessCalendar rules={rules} />
-        </div>
-      </div>
-    </main>
-  );
-}
+      {/* --- PAGE CONTENT --- */}
+      <div className="mt-6 grid gap-6 md:grid-cols-2">
+        {/* --- "COMPRESSED" HUNT GROUPS --- */}
+        <div className="space-y-2 pt-2">
+          <h4 className="text-lg font-semibold mb-2">Available Hunt Groups</h4>
