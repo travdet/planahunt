@@ -1,15 +1,16 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation"; // 1. IMPORT THE ROUTER
 import wmas from "@/data/wmas.json";
 import rulesData from "@/data/seasons.json";
 import statewide from "@/data/statewide.json";
 import type { FilterState, SeasonRule, WMA, HomeLocation } from "@/lib/types";
 import { applyFilters, type Row } from "@/lib/filters";
 import { resolveStatewide } from "@/lib/rules";
-import WMAModal from "@/components/WMAModal";
-import AddressField from "@/components/AddressField";
-import { toISO } from "@/lib/util";
+// We no longer need WMAModal or AddressField here
+// import WMAModal from "@/components/WMAModal";
+// import AddressField from "@/components/AddressField";
 
 const Filters = dynamic(() => import("@/components/Filters"), { ssr: false });
 const Mapbox = dynamic(() => import("@/components/Mapbox"), {
@@ -32,19 +33,18 @@ const defaultFilters: FilterState = {
   dateRange: null,
   maxDistanceMi: null,
   tags: [],
-  showFavorites: false, // Added this missing property
+  showFavorites: false,
 };
 
-// 1. ADDED FAVORITES KEY
 const FAVORITES_KEY = "planahunt_favorites";
 
 export default function MapPage() {
   const [mounted, setMounted] = useState(false);
   const [filters, setFilters] = useState<FilterState>(defaultFilters);
-  const [home, setHome] = useState<HomeLocation | null>(null);
-  const [openWma, setOpenWma] = useState<WMA | null>(null);
+  const [home, setHome] = useState<HomeLocation | null>(null); // Kept for distance filtering
+  const router = useRouter(); // 2. INITIALIZE THE ROUTER
 
-  // 2. ADDED FAVORITES STATE & LOGIC
+  // 3. ADD FAVORITES STATE & LOGIC
   const [favorites, setFavorites] = useState<string[]>([]);
   
   useEffect(() => {
@@ -55,41 +55,11 @@ export default function MapPage() {
       }
     } catch (e) { console.error("Could not load favorites", e); }
   }, []);
-
-  const toggleFavorite = (wma_id: string) => {
-    setFavorites(prev => {
-      const newFavorites = new Set(prev);
-      if (newFavorites.has(wma_id)) {
-        newFavorites.delete(wma_id);
-      } else {
-        newFavorites.add(wma_id);
-      }
-      const favArray = Array.from(newFavorites);
-      try {
-        localStorage.setItem(FAVORITES_KEY, JSON.stringify(favArray));
-      } catch (e) { console.error("Could not save favorites", e); }
-      return favArray;
-    });
-  };
-
-  const handleApplyFilter = (newFilters: Partial<FilterState>) => {
-      setFilters(prev => ({ ...prev, ...newFilters }));
-      setOpenWma(null); 
-  }
   // --- END FAVORITES LOGIC ---
-  
-  const favoriteSet = useMemo(() => new Set(favorites), [favorites]);
 
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  const openWmaRules = useMemo(() => {
-    if (!openWma) return [];
-    return (rulesData as SeasonRule[])
-      .filter((r) => r.wma_id === openWma.wma_id)
-      .flatMap((rule) => resolveStatewide(rule, openWma, statewide));
-  }, [openWma]);
 
   const mapPoints = useMemo(() => {
     if (!mounted) return [];
@@ -107,7 +77,7 @@ export default function MapPage() {
       }));
     });
     
-    // 3. PASS 'favorites' TO applyFilters
+    // 4. PASS 'favorites' TO applyFilters
     const filtered = applyFilters(rows, filters, home, favorites); 
     
     const m = new Map<string, { wma: WMA; count: number }>();
@@ -133,9 +103,9 @@ export default function MapPage() {
       .filter((p): p is any => p !== null);
   }, [mounted, filters, home, favorites]);
 
+  // 5. UPDATE onPick TO NAVIGATE TO THE NEW PAGE
   const pick = (id: string) => {
-    const w = (wmas as WMA[]).find((x) => x.wma_id === id) || null;
-    setOpenWma(w);
+    router.push(`/hunt/${id}`);
   };
 
   if (!mounted) {
@@ -148,25 +118,9 @@ export default function MapPage() {
 
   return (
     <main className="flex h-screen max-h-screen">
-      {openWma && (
-        // 4. ADDED ALL REQUIRED PROPS TO THE MODAL
-        <WMAModal
-          wma={openWma}
-          rules={openWmaRules}
-          onClose={() => setOpenWma(null)}
-          onToggleFavorite={() => toggleFavorite(openWma.wma_id)}
-          isFavorite={favoriteSet.has(openWma.wma_id)}
-          onApplyFilter={handleApplyFilter}
-        />
-      )}
+      {/* Modal is GONE */}
       <aside className="w-[350px] bg-slate-50 p-4 overflow-y-auto">
-        {/* We'll add the AddressField to the map page later if you want it */}
-        {/* <div className="mb-4 rounded-xl border bg-white p-4 shadow-sm">
-            <AddressField
-              value={home || { address: "", lat: null, lng: null }}
-              onChange={setHome}
-            />
-          </div> */}
+        {/* We can add AddressField here later if needed */}
         <Filters
           value={filters}
           onChange={setFilters}
