@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { geocodeAddress } from "@/lib/map";
 import type { HomeLocation } from "@/lib/types";
-import { MapPin } from "lucide-react"; // 1. Import location icon
+import { MapPin, Target } from "lucide-react"; // <-- Import Target icon
 
 type Props = {
   value: HomeLocation;
@@ -61,7 +61,7 @@ export default function AddressField({ value, onChange }: Props) {
     setResults([]);
   }
 
-  // 2. NEW: "Use My Location" function
+  // NEW: "Use My Location" function
   function getMyLocation() {
     if (!navigator.geolocation) {
       alert("Geolocation is not supported by your browser.");
@@ -99,14 +99,14 @@ export default function AddressField({ value, onChange }: Props) {
           placeholder="123 Main St, City, GA"
           className="w-full rounded border border-slate-300 px-2 py-1 text-sm"
         />
-        {/* 3. NEW: "Use My Location" button */}
+        {/* NEW: "Use My Location" button */}
         <button
           type="button"
           onClick={getMyLocation}
           className="p-1 rounded border border-slate-300 bg-white hover:bg-slate-50"
-          title="Use my location"
+          title="Use my current GPS location"
         >
-          <MapPin size={18} className="text-slate-600" />
+          <Target size={18} className="text-slate-600" />
         </button>
         {loading && <span className="p-1">...</span>}
       </div>
