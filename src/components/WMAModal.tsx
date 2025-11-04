@@ -40,7 +40,11 @@ function findEquipmentInfo(weapon: string): string | null {
 
 // NEW: Helper to find Zone info (since WMAs can span counties)
 function getZoneInfo(wma: WMA) {
-  const deerZones = new Set();
+  // --- THIS IS THE FIX ---
+  // We explicitly tell TypeScript this is a Set of strings.
+  const deerZones = new Set<string>();
+  // --- END THE FIX ---
+  
   let bearZone: string | undefined;
 
   wma.counties.forEach(county => {
@@ -252,7 +256,6 @@ export default function WMAModal({
                       {group.windows.map((w, i) => (
                         <div key={i} className="text-sm text-slate-800 font-medium">
                           {formatHuntRange(w.start, w.end)}
-                          {/* We don't display notes here to keep it clean, but they are tracked in the group object */}
                         </div>
                       ))}
                     </div>
