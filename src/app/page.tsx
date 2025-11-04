@@ -29,7 +29,7 @@ const defaultFilters: FilterState = {
   tags: [],
   maxDistanceMi: null,
   dateRange: null, 
-  showFavorites: false, // Initial state for the new filter
+  showFavorites: false,
 };
 
 const FAVORITES_KEY = "planahunt_favorites";
@@ -43,7 +43,6 @@ export default function HomePage() {
   const [favorites, setFavorites] = useState<string[]>([]);
   
   useEffect(() => {
-    // Load favorites from local storage on mount
     try {
       const stored = localStorage.getItem(FAVORITES_KEY);
       if (stored) {
@@ -71,6 +70,11 @@ export default function HomePage() {
       return favArray;
     });
   };
+
+  const handleApplyFilter = (newFilters: Partial<FilterState>) => {
+      setFilters(prev => ({ ...prev, ...newFilters }));
+      setOpenWma(null); // Close the modal after applying the filter
+  }
   // END FAVORITES LOGIC
 
   const rows: Row[] = useMemo(() => {
@@ -113,7 +117,6 @@ export default function HomePage() {
     [rows]
   );
 
-  // PASS FAVORITES TO FILTER FUNCTION
   const filteredRows = useMemo(() => {
     return applyFilters(rows, filters, home, favorites);
   }, [rows, filters, home, favorites]);
@@ -168,6 +171,9 @@ export default function HomePage() {
           wma={openWma}
           rules={openWmaRules}
           onClose={() => setOpenWma(null)}
+          onToggleFavorite={() => toggleFavorite(openWma.wma_id)}
+          isFavorite={favoriteSet.has(openWma.wma_id)}
+          onApplyFilter={handleApplyFilter} // Pass new function here
         />
       )}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
@@ -205,8 +211,8 @@ export default function HomePage() {
                 date={selectedDate} 
                 home={home}
                 onOpen={() => setOpenWma(wma)}
-                isFavorite={favoriteSet.has(wma.wma_id)} // Pass favorite status
-                onToggleFavorite={() => toggleFavorite(wma.wma_id)} // Pass toggle function
+                isFavorite={favoriteSet.has(wma.wma_id)}
+                onToggleFavorite={() => toggleFavorite(wma.wma_id)}
               />
             ))}
           </div>
