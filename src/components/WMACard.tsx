@@ -45,7 +45,7 @@ export default function WMACard({
   date?: string | null;
   home?: HomeLocation | null;
   isFavorite: boolean;
-  onToggleFavorite: ()_> void;
+  onToggleFavorite: () => void;
 }) {
   const today = date || null;
   const [driving, setDriving] = useState<{ miles: number; minutes: number } | null>(null);
