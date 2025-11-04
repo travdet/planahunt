@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { geocodeAddress } from "@/lib/map";
 import type { HomeLocation } from "@/lib/types";
-import { MapPin, Target } from "lucide-react"; // <-- Import Target icon
+import { Target } from "lucide-react"; // <-- Import Target icon
 
 type Props = {
   value: HomeLocation;
