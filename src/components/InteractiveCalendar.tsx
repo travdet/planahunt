@@ -211,12 +211,7 @@ export default function InteractiveCalendar({ rules }: { rules: SeasonRule[] }) 
               row.map(event => {
                 const isGeneral = event.access === "general";
                 
-                // --- THIS IS THE FIX ---
-                // Find the index of the true start date in the grid
                 const startIndex = gridDays.findIndex(d => isSameDay(d.date, event.start));
-                // --- END THE FIX ---
-
-                // If the true start date isn't in this view, we can't get the row
                 if (startIndex === -1) return null;
 
                 // Calculate the visual row (1-6)
@@ -228,11 +223,13 @@ export default function InteractiveCalendar({ rules }: { rules: SeasonRule[] }) 
                     className={clsx(
                       "rounded p-1 overflow-hidden text-xs text-white",
                       "pointer-events-auto cursor-pointer shadow-sm",
-                      isGeneral ? "bg-emerald-600" : "bg-amber-600",
-                      // Add specific weapon colors
+                      // Specific weapon colors
                       event.weaponType.includes("archery") && "bg-red-600",
                       event.weaponType.includes("primitive") && "bg-yellow-600",
                       event.weaponType.includes("firearms") && "bg-blue-600",
+                      // Fallback colors
+                      !event.weaponType.includes("archery") && !event.weaponType.includes("primitive") && !event.weaponType.includes("firearms") &&
+                      (isGeneral ? "bg-emerald-600" : "bg-amber-600")
                     )}
                     style={{
                       gridRowStart: rowStart,
