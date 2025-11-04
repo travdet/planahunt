@@ -8,6 +8,9 @@ import type { FilterState, SeasonRule, WMA, HomeLocation } from "@/lib/types";
 import { applyFilters, type Row } from "@/lib/filters";
 import { resolveStatewide } from "@/lib/rules";
 import WMAModal from "@/components/WMAModal";
+import AddressField from "@/components/AddressField";
+import { toISO } from "@/lib/util";
+
 const Filters = dynamic(() => import("@/components/Filters"), { ssr: false });
 const Mapbox = dynamic(() => import("@/components/Mapbox"), {
   ssr: false,
@@ -26,42 +29,44 @@ const defaultFilters: FilterState = {
   sex: "any",
   regions: [],
   counties: [],
-  dateRange: null, // Use new dateRange property
+  dateRange: null,
   maxDistanceMi: null,
   tags: [],
+  showFavorites: false, // <-- FIX: Added missing required property
 };
+
+// NOTE: You will still need to manage the 'favorites' state on this page
+// and pass it to applyFilters, but this fixes the immediate build issue.
 
 export default function MapPage() {
   const [mounted, setMounted] = useState(false);
   const [filters, setFilters] = useState<FilterState>(defaultFilters);
-  // Add home state (required for applyFilters)
   const [home, setHome] = useState<HomeLocation | null>(null);
   const [openWma, setOpenWma] = useState<WMA | null>(null);
+
+  // We are skipping the full Favorites setup here for simplicity,
+  // but you should implement it like in src/app/page.tsx for full functionality.
+  const favorites: string[] = []; 
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // WMA Rules for Modal
   const openWmaRules = useMemo(() => {
     if (!openWma) return [];
-    // Must re-resolve all rules for the selected WMA
-    // Use flatMap to handle array-based logic
     return (rulesData as SeasonRule[])
       .filter((r) => r.wma_id === openWma.wma_id)
       .flatMap((rule) => resolveStatewide(rule, openWma, statewide));
   }, [openWma]);
 
-  // Data for the map points
   const mapPoints = useMemo(() => {
     if (!mounted) return [];
 
     const byId = new Map((wmas as WMA[]).map((w) => [w.wma_id, w]));
     
-    // Use flatMap to handle resolveStatewide returning an array
     const rows: Row[] = (rulesData as SeasonRule[]).flatMap((rule) => {
       const wma = byId.get(rule.wma_id);
-      if (!wma) return []; // Return empty array to be filtered out
+      if (!wma) return [];
 
       const resolvedRules = resolveStatewide(rule, wma, statewide);
       return resolvedRules.map((resolvedRule) => ({
@@ -70,10 +75,9 @@ export default function MapPage() {
       }));
     });
     
-    // Pass 'home' to applyFilters
-    const filtered = applyFilters(rows, filters, home);
+    // FIX: Passing empty array for favorites here, assuming full logic is managed elsewhere.
+    const filtered = applyFilters(rows, filters, home, favorites); 
     
-    // Group by WMA
     const m = new Map<string, { wma: WMA; count: number }>();
     for (const row of filtered) {
       const id = row.wma.wma_id;
@@ -83,7 +87,6 @@ export default function MapPage() {
 
     return Array.from(m.values())
       .map(({ wma, count }) => {
-        // UPDATED: Use wma.lat and wma.lng for more reliable coordinates
         if (wma.lat == null || wma.lng == null) {
           return null;
         }
@@ -96,7 +99,7 @@ export default function MapPage() {
         };
       })
       .filter((p): p is any => p !== null);
-  }, [mounted, filters, home]);
+  }, [mounted, filters, home, favorites]);
 
   const pick = (id: string) => {
     const w = (wmas as WMA[]).find((x) => x.wma_id === id) || null;
@@ -121,6 +124,12 @@ export default function MapPage() {
         />
       )}
       <aside className="w-[350px] bg-slate-50 p-4 overflow-y-auto">
+        <div className="mb-4 rounded-xl border bg-white p-4 shadow-sm">
+            <AddressField
+              value={home || { address: "", lat: null, lng: null }}
+              onChange={setHome}
+            />
+          </div>
         <Filters
           value={filters}
           onChange={setFilters}
