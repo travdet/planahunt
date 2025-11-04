@@ -32,11 +32,11 @@ const defaultFilters: FilterState = {
   dateRange: null,
   maxDistanceMi: null,
   tags: [],
-  showFavorites: false, // <-- FIX: Added missing required property
+  showFavorites: false, // Added this missing property
 };
 
-// NOTE: You will still need to manage the 'favorites' state on this page
-// and pass it to applyFilters, but this fixes the immediate build issue.
+// 1. ADDED FAVORITES KEY
+const FAVORITES_KEY = "planahunt_favorites";
 
 export default function MapPage() {
   const [mounted, setMounted] = useState(false);
@@ -44,9 +44,41 @@ export default function MapPage() {
   const [home, setHome] = useState<HomeLocation | null>(null);
   const [openWma, setOpenWma] = useState<WMA | null>(null);
 
-  // We are skipping the full Favorites setup here for simplicity,
-  // but you should implement it like in src/app/page.tsx for full functionality.
-  const favorites: string[] = []; 
+  // 2. ADDED FAVORITES STATE & LOGIC
+  const [favorites, setFavorites] = useState<string[]>([]);
+  
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(FAVORITES_KEY);
+      if (stored) {
+        setFavorites(JSON.parse(stored));
+      }
+    } catch (e) { console.error("Could not load favorites", e); }
+  }, []);
+
+  const toggleFavorite = (wma_id: string) => {
+    setFavorites(prev => {
+      const newFavorites = new Set(prev);
+      if (newFavorites.has(wma_id)) {
+        newFavorites.delete(wma_id);
+      } else {
+        newFavorites.add(wma_id);
+      }
+      const favArray = Array.from(newFavorites);
+      try {
+        localStorage.setItem(FAVORITES_KEY, JSON.stringify(favArray));
+      } catch (e) { console.error("Could not save favorites", e); }
+      return favArray;
+    });
+  };
+
+  const handleApplyFilter = (newFilters: Partial<FilterState>) => {
+      setFilters(prev => ({ ...prev, ...newFilters }));
+      setOpenWma(null); 
+  }
+  // --- END FAVORITES LOGIC ---
+  
+  const favoriteSet = useMemo(() => new Set(favorites), [favorites]);
 
   useEffect(() => {
     setMounted(true);
@@ -75,7 +107,7 @@ export default function MapPage() {
       }));
     });
     
-    // FIX: Passing empty array for favorites here, assuming full logic is managed elsewhere.
+    // 3. PASS 'favorites' TO applyFilters
     const filtered = applyFilters(rows, filters, home, favorites); 
     
     const m = new Map<string, { wma: WMA; count: number }>();
@@ -117,19 +149,24 @@ export default function MapPage() {
   return (
     <main className="flex h-screen max-h-screen">
       {openWma && (
+        // 4. ADDED ALL REQUIRED PROPS TO THE MODAL
         <WMAModal
           wma={openWma}
           rules={openWmaRules}
           onClose={() => setOpenWma(null)}
+          onToggleFavorite={() => toggleFavorite(openWma.wma_id)}
+          isFavorite={favoriteSet.has(openWma.wma_id)}
+          onApplyFilter={handleApplyFilter}
         />
       )}
       <aside className="w-[350px] bg-slate-50 p-4 overflow-y-auto">
-        <div className="mb-4 rounded-xl border bg-white p-4 shadow-sm">
+        {/* We'll add the AddressField to the map page later if you want it */}
+        {/* <div className="mb-4 rounded-xl border bg-white p-4 shadow-sm">
             <AddressField
               value={home || { address: "", lat: null, lng: null }}
               onChange={setHome}
             />
-          </div>
+          </div> */}
         <Filters
           value={filters}
           onChange={setFilters}
