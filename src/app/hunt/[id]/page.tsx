@@ -4,7 +4,7 @@ import wmas from "@/data/wmas.json";
 import rulesRaw from "@/data/seasons.json";
 import type { SeasonRule, WMA } from "@/lib/types";
 import { fmtMmmDd } from "@/lib/util";
-import InteractiveCalendar from "@/components/InteractiveCalendar"; // <-- Use new calendar
+import InteractiveCalendar from "@/components/InteractiveCalendar";
 import statewide from "@/data/statewide.json";
 import regulations from "@/data/regulations.json";
 import { resolveStatewide } from "@/lib/rules";
@@ -40,7 +40,11 @@ function findEquipmentInfo(weapon: string): string | null {
 }
 
 function getZoneInfo(wma: WMA) {
-  const deerZones = new Set();
+  // --- THIS IS THE FIX ---
+  // We explicitly tell TypeScript this is a Set of strings.
+  const deerZones = new Set<string>();
+  // --- END THE FIX ---
+  
   let bearZone: string | undefined;
   wma.counties.forEach(county => {
     const zoneNum = statewide.deer.county_to_deer_zone[county as keyof typeof statewide.deer.county_to_deer_zone];
@@ -145,8 +149,6 @@ export default function HuntDetail({ params }: { params: { id: string } }) {
     };
   }, [id, wma]);
   
-  // --- THIS IS THE CORRECT ORDER ---
-  // 1. Check if WMA exists. If not, return the "Not Found" page.
   if (!wma || !summary) {
     return (
       <main className="mx-auto max-w-5xl px-4 py-6">
@@ -155,8 +157,6 @@ export default function HuntDetail({ params }: { params: { id: string } }) {
     );
   }
 
-  // 2. If the WMA *does* exist, return the full detail page.
-  // The error log showed this 'return' was happening *before* the 'if' block.
   return (
     <main className="mx-auto max-w-5xl px-4 py-6">
       {/* --- HEADER --- */}
@@ -206,7 +206,7 @@ export default function HuntDetail({ params }: { params: { id: string } }) {
             )}
             title={isFavorite ? "Remove from favorites" : "Add to favorites"}
           >
-            <Star size={20} className={clsx(isFavorite && "fill-amber-4m00")} />
+            <Star size={20} className={clsx(isFavorite && "fill-amber-400")} />
           </button>
         </div>
       </div>
