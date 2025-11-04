@@ -1,8 +1,9 @@
 import type { SeasonRule, WMA } from "./types";
-import { isDateWithin } from "./util";
+import { isDateWithin } from "./util"; // Import isDateWithin
 
 /**
  * Checks if a given ISO date string is within a rule's start and end date.
+ * This is used by the "Open Today" status box.
  */
 export function isOpenOn(rule: SeasonRule, dateISO: string) {
   if (!rule.start_date || !rule.end_date) return false;
@@ -13,8 +14,7 @@ export function isOpenOn(rule: SeasonRule, dateISO: string) {
  * Resolves a "Statewide Season" rule into one or more specific rules
  * based on the WMA's counties and the rules in statewide.json.
  *
- * This function returns an ARRAY of rules to handle per-county accuracy
- * (e.g., different bear zones, extended deer seasons).
+ * This function returns an ARRAY of rules to handle per-county accuracy.
  */
 export function resolveStatewide(
   rule: SeasonRule,
@@ -71,10 +71,8 @@ export function resolveStatewide(
 
       if (zones.North.includes(county)) bearZone = "North";
       else if (zones.Central.includes(county)) bearZone = "Central";
-      // The "South" zone is just a string description, so we assume
-      // any other county is in the South. This may need refinement.
+      // This is a simplified assumption
       else bearZone = "South"; 
-      // A more robust check would be needed if counties can be in no zone.
 
       if (bearZone === "North") {
         const baseDates = statewide.bear.northern_zone?.[weapon];
@@ -127,6 +125,11 @@ export function resolveStatewide(
       });
     }
   });
+
+  // If no specific rules were derived (e.g., non-existent weapon), return original
+  if (derivedRules.length === 0) {
+    return [rule];
+  }
 
   return derivedRules;
 }
