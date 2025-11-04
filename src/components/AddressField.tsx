@@ -1,9 +1,8 @@
-// src/components/AddressField.tsx
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { geocodeAddress } from "@/lib/map";
 import type { HomeLocation } from "@/lib/types";
-import { Target } from "lucide-react"; // <-- Import Target icon
+import { Target } from "lucide-react"; // Import Target icon
 
 type Props = {
   value: HomeLocation;
@@ -61,7 +60,7 @@ export default function AddressField({ value, onChange }: Props) {
     setResults([]);
   }
 
-  // NEW: "Use My Location" function
+  // "Use My Location" function
   function getMyLocation() {
     if (!navigator.geolocation) {
       alert("Geolocation is not supported by your browser.");
@@ -71,7 +70,6 @@ export default function AddressField({ value, onChange }: Props) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        // Simple reverse geocode to get a "place name"
         const hit = {
           place_name: `My Location (${latitude.toFixed(3)}, ${longitude.toFixed(3)})`,
           lat: latitude,
@@ -99,7 +97,7 @@ export default function AddressField({ value, onChange }: Props) {
           placeholder="123 Main St, City, GA"
           className="w-full rounded border border-slate-300 px-2 py-1 text-sm"
         />
-        {/* NEW: "Use My Location" button */}
+        {/* "Use My Location" button */}
         <button
           type="button"
           onClick={getMyLocation}
