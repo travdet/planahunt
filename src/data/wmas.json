@@ -1,2770 +1,711 @@
 [
   {
+    "wma_id": "ALAPAHA-RIVER",
     "name": "Alapaha River WMA",
-    "wma_id": "alapaha-river-wma",
-    "symbols_raw": "Q b",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 6870,
-    "phone": "229.426.5267",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": true,
-      "youth_hunt": false,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Archery\nSept. 13-Oct. 19\nFirearms\nOct. 25-26, Nov. 26-30, Dec. 16-21\nb Nov. 13-15"
-      },
-      {
-        "species": "Turkey",
-        "details": "Q15: Apr. 4-10\nApr. 11-May 15"
-      },
-      {
-        "species": "Dove",
-        "details": "Q50 s Sept. 6\nSept. 13, 20, 27, Oct. 4, 11, Nov. 22-Nov. 30, Dec. 19-Jan. 31"
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16 - 31"
-      }
+    "phone": "229-426-5267",
+    "counties": [
+      "Irwin",
+      "Tift"
     ],
-    "notes": [],
-    "directions": "From Ocilla: Take Hwy 319 West towards Tifton for 10 miles. Entrance on left.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "ALAPAHA RIVER WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [],
-      "gates": [],
-      "dovefields": [
-        {
-          "name": "Alapaha River WMA Dove Field",
-          "coords": [
-            -83.33777551899998,
-            31.54351061900003
-          ]
-        }
-      ],
-      "check_stations": []
-    }
+    "region": "Region 6",
+    "lat": 31.49,
+    "lng": -83.56,
+    "source_url": null,
+    "tags": [
+      "Bonus"
+    ]
   },
   {
+    "wma_id": "ALBANY-NURSERY",
     "name": "Albany Nursery WMA",
-    "wma_id": "albany-nursery-wma",
-    "symbols_raw": "Q W C B",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 300,
-    "phone": "229.430.4254",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": false,
-      "youth_hunt": true,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": true,
-      "bird_dog_training": true,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Archery\nSept. 13-28, Oct. 6-23, Dec. 7-Jan. 11\nShotgun Only\nW Oct. 30-Nov. 2, Nov. 27-Nov. 30"
-      },
-      {
-        "species": "Turkey",
-        "details": "W Q1 Mobility Impaired: Apr. 11-15, Apr. 25-29\nC Q1 Apr. 4-8, Apr. 18-22"
-      },
-      {
-        "species": "Quail",
-        "details": "Maximum 3 persons per party.\nDaily bag limit: 3/person. Quail hunting on designated dates only. Hunting party must report harvest at kiosk or online; one survey per party.\nC Q1 s Nov. 15, Dec. 6\nQ1 s Dec. 20, Jan. 17, Jan. 20"
-      },
-      {
-        "species": "Dove",
-        "details": "Quota on designated fields only. All other areas open to the public.\nQ35 s Sept. 6\nSept. 13-Oct. 12, Nov. 22-Nov. 30, Dec. 19-Jan. 31"
-      },
-      {
-        "species": "Coyote",
-        "details": "No May 16-31 season."
-      }
+    "phone": "229-430-4254",
+    "counties": [
+      "Dougherty"
     ],
-    "notes": [
-      "See quota hunt application instructions. No camping. Dog training in designated area only."
-    ],
-    "directions": "Take GA Hwy 234 west 11 miles; turn right on Tallahassee Rd.; go 1.2 miles to entrance on right.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "ALBANY NURSERY WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [
-        {
-          "name": "Albany Nursery WMA Parking",
-          "coords": [
-            -84.34185703299997,
-            31.621573031000032
-          ]
-        },
-        {
-          "name": "Albany Nursery WMA Parking",
-          "coords": [
-            -84.34053894299997,
-            31.620138250000025
-          ]
-        }
-      ],
-      "gates": [
-        {
-          "name": "Gate",
-          "coords": [
-            -84.34179373999998,
-            31.621532158000028
-          ]
-        }
-      ],
-      "dovefields": [
-        {
-          "name": "Albany Nursery WMA Dove Field",
-          "coords": [
-            -84.34091642299998,
-            31.62080034600005
-          ]
-        }
-      ],
-      "check_stations": []
-    }
+    "region": "Region 6",
+    "lat": 31.53,
+    "lng": -84.1,
+    "source_url": null,
+    "tags": [
+      "Youth",
+      "Mobility-Impaired"
+    ]
   },
   {
+    "wma_id": "ALEXANDER",
     "name": "Alexander WMA",
-    "wma_id": "alexander-wma",
-    "symbols_raw": "Q B F",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 1300,
-    "phone": "706.595.4222",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": false,
-      "youth_hunt": false,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": true,
-      "furbearer_dog_training": true,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Archery\nSept. 13-Oct. 17, Dec. 1-Jan. 11\nFirearms\nOct. 18-Nov. 30"
-      },
-      {
-        "species": "Turkey",
-        "details": "Apr. 4-May 15"
-      },
-      {
-        "species": "Dove",
-        "details": "No dove hunting outside of dove field.\nQ50 s Sept. 6.\ns Sept. 13, 20, 27, Oct. 4, 11, Nov. 22-30, Dec. 19-Jan. 31."
-      },
-      {
-        "species": "Quail",
-        "details": "Daily bag limit: 3/person. Hunting on designated dates only. Hunting party must report harvest at kiosk or online; complete one survey per party.\nSaturdays and Tuesdays from Nov. 15- Feb. 14."
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16 - 31"
-      }
+    "phone": "706-595-4222",
+    "counties": [
+      "Burke"
     ],
-    "notes": [
-      "No camping. Bird dog training allowed year round in designated areas."
-    ],
-    "directions": "From Waynesboro: Take GA HWY 24 east 6 miles; turn right on Harrison Rd.; go 1.5 miles to stop sign; turn left on Lovett Rd for 0.6 mile; Sign-In board is on the left.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "ALEXANDER WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [],
-      "gates": [],
-      "dovefields": [
-        {
-          "name": "Alexander WMA Dove Field",
-          "coords": [
-            -81.87247345099998,
-            33.06421379900003
-          ]
-        }
-      ],
-      "check_stations": []
-    }
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": []
   },
   {
+    "wma_id": "ALLATOONA",
     "name": "Allatoona WMA",
-    "wma_id": "allatoona-wma",
-    "symbols_raw": "C HC",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 6818,
-    "phone": "706.295.6041",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": false,
-      "youth_hunt": true,
-      "quota_hunt": false,
-      "archery_only_area": false,
-      "specialty_hunt": true,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer & Bear",
-        "details": "Archery\nSept. 13-Oct. 17\nFirearms\nHC Oct. 18-31\nNov. 1-Jan. 1"
-      },
-      {
-        "species": "Turkey",
-        "details": "Apr. 4-May 15"
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31"
-      }
+    "phone": "706-295-6041",
+    "counties": [
+      "Bartow",
+      "Cherokee"
     ],
-    "notes": [
-      "Firearms prohibited in U.S. Corps of Engineers developed campsites. Horse and bicycle trails & areas are closed all day during Firearms Specialty Hunt and before 10 am EST during other deer and turkey seasons. No ATVs. No camping."
-    ],
-    "directions": "From Cartersville Take HWY 20 east from I-75, 5.5 miles to check station.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "ALLATOONA WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [
-        {
-          "name": "Parking Area",
-          "coords": [
-            -84.72153549999998,
-            34.16104953900003
-          ]
-        },
-        {
-          "name": "Parking Area",
-          "coords": [
-            -84.71969485,
-            34.16315570900007
-          ]
-        }
-      ],
-      "gates": [
-        {
-          "name": "Gate",
-          "coords": [
-            -84.72149593199998,
-            34.16110191500003
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -84.72251347099996,
-            34.16246342500003
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -84.71966524199998,
-            34.16319808800004
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -84.71716307599995,
-            34.16543110900006
-          ]
-        }
-      ],
-      "dovefields": [],
-      "check_stations": []
-    }
+    "region": "Region 1",
+    "lat": 34.13,
+    "lng": -84.67,
+    "source_url": null,
+    "tags": [
+      "Specialty"
+    ]
   },
   {
+    "wma_id": "ALLIGATOR-CREEK",
     "name": "Alligator Creek WMA",
-    "wma_id": "alligator-creek-wma",
-    "symbols_raw": "",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 3086,
-    "phone": "229.426.5267",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": false,
-      "youth_hunt": false,
-      "quota_hunt": false,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "State seasons."
-      },
-      {
-        "species": "Turkey",
-        "details": "Apr. 4-May 15"
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31. Feral hogs may be hunted and taken with dogs."
-      }
+    "phone": "229-426-5267",
+    "counties": [
+      "Wheeler"
     ],
-    "notes": [],
-    "directions": "From Lumber City: Take Hwy 19 north towards Glenwood for 2 miles. Entrance on left.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "ALLIGATOR CREEK WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [],
-      "gates": [],
-      "dovefields": [],
-      "check_stations": []
-    }
+    "region": "Region 6",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": []
   },
   {
+    "wma_id": "ALTAMA-PLANTATION",
     "name": "Altama Plantation WMA",
-    "wma_id": "altama-plantation-wma",
-    "symbols_raw": "Q",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 4612,
-    "phone": "912.262.3173",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": false,
-      "youth_hunt": false,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Archery\nSept. 13-Nov. 12, Jan. 4-Jan. 11\nFirearms\nQ50 Nov. 13-15, Dec. 4-6\nJan. 1-3"
-      },
-      {
-        "species": "Turkey",
-        "details": "Apr. 4-May 15"
-      },
-      {
-        "species": "Small Game",
-        "details": "No furbearer hunting."
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31"
-      }
+    "phone": "912-262-3173",
+    "counties": [
+      "Glynn"
     ],
-    "notes": [],
-    "directions": "From Brunswick: Take I-95 north approx. 6.5 miles to Exit 42 (GA Hwy 99). Turn left (southwest) on Hwy 99 crossing back over I-95 toward Sterling and proceed approx. 0.5 mile to entrance on right.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "ALTAMA PLANTATION WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [],
-      "gates": [
-        {
-          "name": "Gate",
-          "coords": [
-            -81.65484838699997,
-            31.33479018100004
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -81.65342890299998,
-            31.332308709000036
-          ]
-        }
-      ],
-      "dovefields": [],
-      "check_stations": []
-    }
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota"
+    ]
   },
   {
-    "name": "Altamaha WMA—Buffalo Swamp, Lewis Island, and McGowan Lake Tracts",
-    "wma_id": "altamaha-wma—buffalo-swamp-lewis-island-and-mcgowan-lake-tracts",
-    "symbols_raw": "",
-    "acreage": 20167,
-    "phone": "912.262.3173",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": false,
-      "youth_hunt": false,
-      "quota_hunt": false,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "State seasons."
-      },
-      {
-        "species": "Turkey",
-        "details": "Apr. 4-May 15"
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31. Feral hogs may be hunted with dogs."
-      }
-    ],
-    "notes": [
-      "Area includes Altamaha WMA lands west of Butler & Champney Islands."
-    ],
-    "directions": "Buffalo Swamp from Darien: Take HWY 251/Cox Rd west 8 miles to Cox. Left onto Possum Point Rd. Sign In box is 1.5 miles on left. McGowan Lake from Darien: Take HWY 251/Cox Rd west 8 miles to Cox. Left onto Barrington Rd. Entrance is 2.2 miles on left. You may also sign in at Altamaha Regional Park, Champney Island Boat Ramp, and Darien City Docks.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "ALTAMAHA WMA",
-    "map_points": {
-      "campgrounds": [
-        {
-          "name": "Altamaha WMA Campground",
-          "coords": [
-            -81.61118671,
-            31.39175416000006
-          ]
-        },
-        {
-          "name": "Lewis Island Campground",
-          "coords": [
-            -81.612051664,
-            31.39088691500003
-          ]
-        }
-      ],
-      "parking": [
-        {
-          "name": "Parking Area",
-          "coords": [
-            -81.543415174,
-            31.37340003200005
-          ]
-        },
-        {
-          "name": "Parking Area",
-          "coords": [
-            -81.536967026,
-            31.37126132900003
-          ]
-        },
-        {
-          "name": "Parking Area",
-          "coords": [
-            -81.56515869499997,
-            31.42377319900007
-          ]
-        },
-        {
-          "name": "Parking Area",
-          "coords": [
-            -81.60945922399998,
-            31.39343725100003
-          ]
-        }
-      ],
-      "gates": [
-        {
-          "name": "Gate",
-          "coords": [
-            -81.533250785,
-            31.36932470700004
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -81.543419356,
-            31.373434199000036
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -81.53699401,
-            31.37129532800003
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -81.53232629499997,
-            31.37253509200005
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -81.532298625,
-            31.37248557900003
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -81.56517865299998,
-            31.42379561000004
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -81.56631853,
-            31.42417688100006
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -81.60950346799998,
-            31.39347895400005
-          ]
-        }
-      ],
-      "dovefields": [],
-      "check_stations": [
-        {
-          "name": "Altamaha WMA Check Station",
-          "coords": [
-            -81.60965215899998,
-            31.39339965000003
-          ]
-        }
-      ]
-    }
-  },
-  {
-    "name": "Altamaha WMA—Waterfowl Management Area",
-    "wma_id": "altamaha-wma—waterfowl-management-area",
-    "symbols_raw": "Q C",
+    "wma_id": "ALTAMAHA-WMA-WMA",
+    "name": "Altamaha WMA \u2014 Waterfowl Management Area",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 11402,
-    "phone": "912.262.3173",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": false,
-      "youth_hunt": true,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Archery\nSept. 13-Nov. 15"
-      },
-      {
-        "species": "Small Game",
-        "details": "Butler Island opens after the last Saturday of waterfowl season.\nAug. 15-Nov. 15, Feb. 1- Feb. 28. No furbearer season."
-      },
-      {
-        "species": "Rabbit",
-        "details": "Daily bag Limit: 6/person. C Archery Only, Butler Refuge Area: Jan. 17-18."
-      },
-      {
-        "species": "Dove",
-        "details": "Sept. 6-7, 13-14, 20-21, 27-28"
-      },
-      {
-        "species": "Waterfowl",
-        "details": "Shooting hours end at noon, except last day of season when shooting hours end at sunset.\nRhett’s Island: Wed., Sat., Sun., & State Holidays during statewide season.\nQ20 Butler Island: Saturday only; see Quota Hunts.\nQ20 Champney Island: Saturday & Sunday Only; see Quota Hunts. First hunt open only to youth and veterans to apply (other 2 party members don’t have to be youth or veteran). No stand-by hunters allowed. Max. 3 persons per quota party."
-      },
-      {
-        "species": "Coyote",
-        "details": "Mar. 1-May 31. Small game weapons only. Feral hogs may be hunted with dogs."
-      }
+    "phone": "912-262-3173",
+    "counties": [
+      "McIntosh",
+      "Glynn"
     ],
-    "notes": [
-      "Area includes Broughton, Butler, Champney, and Rhetts Islands.",
-      "Butler Refuge (east of Hwy 17 on Butler Island) and Ansley Hodges MARSH Project (west of Hwy 17 on Champney Island) are always closed to firearms but archery equipment may be used during open dates listed above to take deer, hog, and rabbits after the last Saturday of waterfowl season. Airboats are banned in managed waterfowl impoundments. Access to Rhetts Island is limited to designated crossover sites, with boats restricted to a 25hp motor or less. Fishing, shrimping, and crabbing are prohibited on Rhetts Island during early teal and statewide waterfowl season. Butler Island ponds and impoundments west of HWY 17 are closed to cast netting. Drone use, including launching and landing, is prohibited."
-    ],
-    "directions": "From Darien: Take U.S. HWY 17 south 1.5 miles; check station is on the right.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "ALTAMAHA WMA-BUTLER ISLAND",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [],
-      "gates": [],
-      "dovefields": [],
-      "check_stations": []
-    }
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Youth"
+    ]
   },
   {
+    "wma_id": "ARROWHEAD",
     "name": "Arrowhead WMA",
-    "wma_id": "arrowhead-wma",
-    "symbols_raw": "C W",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 337,
-    "phone": "706.295.6041",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": false,
-      "youth_hunt": true,
-      "quota_hunt": false,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": true,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer & Bear",
-        "details": "Archery\nHC Sept. 13-Oct. 31\nW Nov. 1-15\nNov. 16-Jan. 11"
-      },
-      {
-        "species": "Turkey",
-        "details": "W Apr. 4-10\nHC Apr. 11-17\nApr. 18-May 15"
-      },
-      {
-        "species": "Small Game",
-        "details": "Aug. 15-Sept. 12\nC Jan. 12- Feb. 28; quail, rabbit"
-      },
-      {
-        "species": "Waterfowl",
-        "details": "Saturdays during statewide season."
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31; small game weapons only."
-      }
+    "phone": "706-295-6041",
+    "counties": [
+      "Floyd"
     ],
-    "notes": [
-      "No ATVs except mobility impaired hunters during mobility impaired hunt. No camping."
-    ],
-    "directions": "From Rome: Take U.S. Hwy 27 north 9 miles to GA HWY 156; turn right (east) and go 2.3 miles to Floyd Springs Rd; turn left and go 2 miles to area.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "ARROWHEAD WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [],
-      "gates": [
-        {
-          "name": "Gate",
-          "coords": [
-            -85.15003612599998,
-            34.39462723300004
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -85.14725514099996,
-            34.394429532000055
-          ]
-        }
-      ],
-      "dovefields": [],
-      "check_stations": []
-    }
+    "region": "Region 1",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Mobility-Impaired",
+      "Specialty"
+    ]
   },
   {
+    "wma_id": "BF-GRANT",
     "name": "B. F. Grant WMA",
-    "wma_id": "b-f-grant-wma",
-    "symbols_raw": "C Q Q b",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 11400,
-    "phone": "706.595.4222",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": true,
-      "youth_hunt": true,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": true,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Only bucks with at least 4 points (1-inch or longer) on either antler or a minimum 15-inch outside antler spread are legal.\nArchery\nSept. 13-Oct. 5, Nov. 23-Dec. 7\nPrimitive\nDec. 18-21\nFirearms\nQ300 b Nov. 6-8, 20-22"
-      },
-      {
-        "species": "Turkey",
-        "details": "C Apr. 4-10\nQ80 Apr. 11-17\nApr. 18-May 15"
-      },
-      {
-        "species": "Dove",
-        "details": "Sept. 6, 13, 20, 27, Oct. 4-12, Nov. 23-30, Dec. 19-Jan. 31"
-      },
-      {
-        "species": "Waterfowl",
-        "details": "MARSH Pond\nYouth Only: Q3 Nov. 15\nYouth & Adult: Q3 Nov. 29\nQ3 Dec. 13, Jan. 17\nNo waterfowl hunting on MARSH Ponds outside of quota hunts. State season during small game dates for rest of WMA. Shooting hours end at noon."
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31"
-      }
+    "phone": "706-595-4222",
+    "counties": [
+      "Putnam"
     ],
-    "notes": [
-      "No hunting on or access through pastures."
-    ],
-    "directions": "From Eatonton: Take HWY 16 west 0.7 miles; turn right on HWY 441 Bypass; go 1.5 miles to Godfrey Rd at the flashing traffic light; turn left and go 6 miles to Check-In station.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "B F GRANT WMA",
-    "map_points": {
-      "campgrounds": [
-        {
-          "name": "B.F. Grant WMA Campground",
-          "coords": [
-            -83.52496229199998,
-            33.37799175700005
-          ]
-        }
-      ],
-      "parking": [
-        {
-          "name": "B.F. Grant Parking",
-          "coords": [
-            -83.52528761199998,
-            33.37805149300004
-          ]
-        },
-        {
-          "name": "B.F. Grant Parking",
-          "coords": [
-            -83.518600101,
-            33.40078869100007
-          ]
-        },
-        {
-          "name": "B.F. Grant Parking",
-          "coords": [
-            -83.50424076799997,
-            33.39956429900005
-          ]
-        },
-        {
-          "name": "B.F. Grant Parking",
-          "coords": [
-            -83.500595305,
-            33.38883624800006
-          ]
-        },
-        {
-          "name": "B.F. Grant Parking",
-          "coords": [
-            -83.50158866599997,
-            33.38531238900005
-          ]
-        },
-        {
-          "name": "B.F. Grant Parking",
-          "coords": [
-            -83.50917714899998,
-            33.38541294800007
-          ]
-        }
-      ],
-      "gates": [
-        {
-          "name": "B.F. Grant Gate",
-          "coords": [
-            -83.52554605999997,
-            33.37827806500006
-          ]
-        },
-        {
-          "name": "B.F. Grant Gate",
-          "coords": [
-            -83.50074256299997,
-            33.38891167400002
-          ]
-        },
-        {
-          "name": "B.F. Grant Gate",
-          "coords": [
-            -83.501170757,
-            33.38799496600003
-          ]
-        },
-        {
-          "name": "B.F. Grant Gate",
-          "coords": [
-            -83.501625902,
-            33.38536130900006
-          ]
-        },
-        {
-          "name": "B.F. Grant Gate",
-          "coords": [
-            -83.509012658,
-            33.38545801400007
-          ]
-        },
-        {
-          "name": "B.F. Grant Gate",
-          "coords": [
-            -83.51888066599997,
-            33.40097721800006
-          ]
-        },
-        {
-          "name": "B.F. Grant Gate",
-          "coords": [
-            -83.50427845399998,
-            33.39947997900003
-          ]
-        },
-        {
-          "name": "B.F. Grant Gate",
-          "coords": [
-            -83.51374526,
-            33.36442657800004
-          ]
-        }
-      ],
-      "dovefields": [],
-      "check_stations": []
-    }
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Bonus",
+      "Youth"
+    ]
   },
   {
+    "wma_id": "BARTRAM-FOREST",
     "name": "Bartram Forest WMA",
-    "wma_id": "bartram-forest-wma",
-    "symbols_raw": "a Archery Only Area",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 1343,
-    "phone": "706.595.4222",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": false,
-      "youth_hunt": false,
-      "quota_hunt": false,
-      "archery_only_area": true,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Sept. 13-Jan. 11"
-      },
-      {
-        "species": "Turkey",
-        "details": "Apr. 4-May 15"
-      },
-      {
-        "species": "Waterfowl",
-        "details": "Statewide season. Shooting hours end at noon."
-      },
-      {
-        "species": "Coyote",
-        "details": "No May 16-31 coyote & hog season."
-      }
+    "phone": "706-595-4222",
+    "counties": [
+      "Baldwin"
     ],
-    "notes": [
-      "Bartram Forest is a multi-use forest; other users may be present during open hunting seasons. Gates may be open/closed at the discretion of Georgia Forestry Commission. Please see WMA maps for safety zones. No camping.",
-      "No firearms hunting is allowed. No camping."
-    ],
-    "directions": "From Milledgeville: Take US 441 south 3.1 miles, turn left; continue 2.9 miles on US 441/GA29 and make U-turn to return north; go 0.1 miles to 1st pull-in on right. Kiosk is just down that road.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "BARTRAM FOREST WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [
-        {
-          "name": "Bartram Forest Parking",
-          "coords": [
-            -83.20815339699998,
-            32.99026210000006
-          ]
-        }
-      ],
-      "gates": [
-        {
-          "name": "Gate",
-          "coords": [
-            -83.21147071199995,
-            33.00169315500005
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -83.21094033399998,
-            33.00030526300006
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -83.20786938999996,
-            32.99042358800004
-          ]
-        }
-      ],
-      "dovefields": [],
-      "check_stations": []
-    }
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Archery-Only"
+    ]
   },
   {
+    "wma_id": "BEAVERDAM",
     "name": "Beaverdam WMA",
-    "wma_id": "beaverdam-wma",
-    "symbols_raw": "HC b B S",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 5500,
-    "phone": "229.426.5267",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": true,
-      "youth_hunt": false,
-      "quota_hunt": false,
-      "archery_only_area": false,
-      "specialty_hunt": true,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": true,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": true
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Archery\nSept. 13-19, Sept. 27-Oct. 17\nFirearms\nHC Sept. 20-26\nb Oct. 30-Nov. 1\nNov. 27-29, Dec. 17-20"
-      },
-      {
-        "species": "Turkey",
-        "details": "Apr. 4-May 15"
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31. Feral hogs may be hunted and taken with dogs."
-      }
+    "phone": "229-426-5267",
+    "counties": [
+      "Laurens"
     ],
-    "notes": [],
-    "directions": "From Dublin: Take U.S. 441 north 4.5 miles; turn right on Old Toomsboro Rd., go 7.5 miles to WMA sign; turn right on Oconee Church Rd., turn at WMA sign.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "BEAVERDAM WMA",
-    "map_points": {
-      "campgrounds": [
-        {
-          "name": "Beaverdam Creek WMA Campground",
-          "coords": [
-            -82.99127814399997,
-            32.61058778400007
-          ]
-        }
-      ],
-      "parking": [],
-      "gates": [],
-      "dovefields": [],
-      "check_stations": [
-        {
-          "name": "Beaverdam WMA Check Station",
-          "coords": [
-            -82.99083861299998,
-            32.61026074200004
-          ]
-        }
-      ]
-    }
+    "region": "Region 6",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Specialty",
+      "Bonus"
+    ]
   },
   {
+    "wma_id": "BERRY-COLLEGE",
     "name": "Berry College WMA",
-    "wma_id": "berry-college-wma",
-    "symbols_raw": "Q HC b B R",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 15605,
-    "phone": "706.295.6041",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": true,
-      "youth_hunt": false,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": true,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": true,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": true,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer & bear",
-        "details": "Archery\nSept. 13-Oct. 28, Nov. 2-14\nFirearms\nQ1000 b Either-Sex Deer Last Day: Oct. 29-Nov. 1\nQ1000 b Dec. 3-6\nHC b Jan. 3-4"
-      },
-      {
-        "species": "Turkey",
-        "details": "Apr. 4-May 15"
-      },
-      {
-        "species": "bird & rabbit dog training",
-        "details": "Aug. 15-Mar. 19, except during firearms deer hunts."
-      },
-      {
-        "species": "Dove",
-        "details": "Sept. 6, 13, 20, 27, Oct. 4, 11-12, Nov. 22-30, Dec. 19-Jan. 2, Jan. 5-31"
-      },
-      {
-        "species": "Coyote",
-        "details": "No May 16-31 coyote & hog season."
-      }
+    "phone": "706-295-6041",
+    "counties": [
+      "Floyd"
     ],
-    "notes": [
-      "Possession of firearms and archery equipment and all hunting are prohibited on the Berry College campus and refuge. Hunters cannot use the campus to access the WMA. No ATVs allowed. Foot trails, bicycle, and horse areas are closed all day during firearms deer season and before 10:00 a.m. during deer archery and turkey season. Night hunting small game is prohibited on the WMA."
-    ],
-    "directions": "From Rome: Take U.S. 27 north to jct of Old Summerville Rd.; turn left on Old Summerville Rd and go 1.5 miles to jct with CCC Rd at check station.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "BERRY COLLEGE WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [
-        {
-          "name": "Berry College WMA Parking",
-          "coords": [
-            -85.22105152099998,
-            34.30159045800004
-          ]
-        }
-      ],
-      "gates": [
-        {
-          "name": "Gate",
-          "coords": [
-            -85.22123961199998,
-            34.30159045800004
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -85.22415177099997,
-            34.30058963500006
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -85.23233860099997,
-            34.31422792600007
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -85.21526685499997,
-            34.32185521900004
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -85.212712394,
-            34.32404557900004
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -85.210617544,
-            34.32626084900004
-          ]
-        }
-      ],
-      "dovefields": [],
-      "check_stations": []
-    }
+    "region": "Region 1",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Specialty",
+      "Bonus"
+    ]
   },
   {
+    "wma_id": "BIG-DUKES-POND",
     "name": "Big Dukes Pond WMA",
-    "wma_id": "big-dukes-pond-wma",
-    "symbols_raw": "",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 1692,
-    "phone": "706.595.4222",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": false,
-      "youth_hunt": false,
-      "quota_hunt": false,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Archery\nSept. 13-Oct. 10, Dec. 1-Jan. 11\nPRIMITIVE WEAPONS\nOct. 11-17\nFirearms\nOct. 18-Nov. 30"
-      },
-      {
-        "species": "Turkey",
-        "details": "Apr. 4-May 15"
-      },
-      {
-        "species": "Waterfowl",
-        "details": "Wed. & Sat. only during state waterfowl season; legal shooting hours end at noon."
-      }
+    "phone": "706-595-4222",
+    "counties": [
+      "Emanuel",
+      "Jenkins"
     ],
-    "notes": [
-      "Camping, ATVs & horses prohibited. Note Safety Zone on map - access prohibited between Feb. 1-July 15."
-    ],
-    "directions": "From Millen: Take HWY 17 North 0.9 miles; turn right on Old Louisville Rd. Go 7.9 miles to entrance on left.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "BIG DUKES POND WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [],
-      "gates": [],
-      "dovefields": [],
-      "check_stations": []
-    }
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": []
   },
   {
+    "wma_id": "BIG-HAMMOCK",
     "name": "Big Hammock WMA",
-    "wma_id": "big-hammock-wma",
-    "symbols_raw": "",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 7315,
-    "phone": "229.426.5267",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": false,
-      "youth_hunt": false,
-      "quota_hunt": false,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Archery\nSept. 13-Oct. 8, Oct. 12-24, Nov. 10-Jan. 11\nPrimitive\nOct. 9-11\nFirearms\nOct. 25-Nov. 9"
-      },
-      {
-        "species": "Turkey",
-        "details": "Apr. 4-May 15"
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31. Feral hogs may be hunted and taken with dogs."
-      }
+    "phone": "229-426-5267",
+    "counties": [
+      "Tattnall"
     ],
-    "notes": [
-      "If the river is 9 feet or higher at the Doctortown Gauge, the gates will be closed. After the river drops below 9 feet, the gates will stay closed for 7-10 days to dry out. No deer hunting within 50 feet of the nature trail off Mack Phillips Rd"
-    ],
-    "directions": "From Glennville: Take HWY 144 south 12 miles to Altamaha River. Area lies on both sides of HWY 144.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "BIG HAMMOCK WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [],
-      "gates": [
-        {
-          "name": "Gate",
-          "coords": [
-            -81.99616892599998,
-            31.84920251800004
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -82.00845347299997,
-            31.84439077200006
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -82.01228229999998,
-            31.83915124400003
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -82.01297594999996,
-            31.84065662700007
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -82.01235123999998,
-            31.84221147800003
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -82.01287664499998,
-            31.844002677000075
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -82.01602528799998,
-            31.843795159000028
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -82.01633519899997,
-            31.841316521000046
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -82.01750247999997,
-            31.83888365100007
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -82.01831413899998,
-            31.83733220400005
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -82.01955375999998,
-            31.83733355200003
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -82.02029302699996,
-            31.83606775600003
-          ]
-        }
-      ],
-      "dovefields": [],
-      "check_stations": []
-    }
+    "region": "Region 6",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": []
   },
   {
+    "wma_id": "BIG-LAZER",
     "name": "Big Lazer Creek WMA",
-    "wma_id": "big-lazer-creek-wma",
-    "symbols_raw": "Q C HC Q b S",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 7200,
-    "phone": "229.430.4254",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": true,
-      "youth_hunt": true,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": true,
-      "hunt_and_learn": false,
-      "antler_restricted_area": true,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": true
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Only bucks with at least 4 points (1-inch or longer) on either antler or a minimum 15-inch outside antler spread are legal. Youth are exempt from antler restrictions.\nArchery\nSept. 13-Oct. 5, Oct. 26-Nov. 9\nFirearms\nC Oct. 11-12.\nOct. 23-25| b Nov. 13-15\nHC Nov. 21-23"
-      },
-      {
-        "species": "Turkey",
-        "details": "Q50 Apr. 4-10, Apr. 11-17,\nApr. 18-May 15"
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16 - 31"
-      },
-      {
-        "species": "Dove",
-        "details": "Sept. 6, 13, Sept. 20-Oct. 12, Nov. 23-30, Dec. 19-Jan. 31"
-      },
-      {
-        "species": "Waterfowl",
-        "details": "Legal hours end at noon. Big Lazer Creek PFA: Wed. & Sat. during small game dates concurrent with state season."
-      }
+    "phone": "229-430-4254",
+    "counties": [
+      "Talbot"
     ],
-    "notes": [],
-    "directions": "From Talbotton: Take U.S. 80 east 4 miles; turn left on Po Biddy Rd. go 6.5 miles; turn left on Bunkham Rd. and go 1.2 miles to check station.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "BIG LAZER CREEK WMA",
-    "map_points": {
-      "campgrounds": [
-        {
-          "name": "Big Lazer Creek WMA Primitive Campground",
-          "coords": [
-            -84.34182996199996,
-            32.74872121700004
-          ]
-        }
-      ],
-      "parking": [
-        {
-          "name": "Big Lazer Creek PFA Parking",
-          "coords": [
-            -84.33948197799997,
-            32.74677735300004
-          ]
-        },
-        {
-          "name": "Big Lazer Creek WMA Parking",
-          "coords": [
-            -84.34199990899998,
-            32.74868988600004
-          ]
-        }
-      ],
-      "gates": [
-        {
-          "name": "Gate",
-          "coords": [
-            -84.34149091899998,
-            32.74878546100007
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -84.35919424799996,
-            32.74962638800003
-          ]
-        }
-      ],
-      "dovefields": [],
-      "check_stations": [
-        {
-          "name": "Big Lazer Creek WMA Check Station",
-          "coords": [
-            -84.34185360099997,
-            32.748888038000075
-          ]
-        }
-      ]
-    }
+    "region": "Region 4",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Specialty",
+      "Bonus",
+      "Youth"
+    ]
   },
   {
+    "wma_id": "BLANTON-CREEK",
     "name": "Blanton Creek WMA",
-    "wma_id": "blanton-creek-wma",
-    "symbols_raw": "HC Q Q b",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 4800,
-    "phone": "229.430.4254",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": true,
-      "youth_hunt": false,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": true,
-      "hunt_and_learn": false,
-      "antler_restricted_area": true,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Only bucks with at least 4 points (1-inch or longer) on either antler or a minimum 15-inch outside antler spread are legal.\nArchery\nSept. 13-Oct. 9, 13-19, Nov. 23-30\nFirearms\nHC Oct. 11-12\nQ125 s Oct. 23-25, b Nov. 20-22"
-      },
-      {
-        "species": "Turkey",
-        "details": "Q35 Apr. 4-10, Apr. 11-17\nApr. 18-May 15"
-      },
-      {
-        "species": "Dove",
-        "details": "Q75 s Sept. 6\nSept. 13, Sept. 20-Oct. 12, Nov. 22-30, Dec. 19-Jan. 31"
-      },
-      {
-        "species": "Waterfowl",
-        "details": "State season. Legal hours end at noon. No hunting on MARSH Pond. No waterfowl scouting or hunting during quota hunt."
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31"
-      }
+    "phone": "229-430-4254",
+    "counties": [
+      "Harris"
     ],
-    "notes": [],
-    "directions": "From West Point: Take HWY 103 south 10 miles to mile marker 6, turn right to check station.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "BLANTON CREEK WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [
-        {
-          "name": "Blanton Creek WMA Parking",
-          "coords": [
-            -85.107380907,
-            32.76618778000006
-          ]
-        },
-        {
-          "name": "Blanton Creek WMA Parking",
-          "coords": [
-            -85.11029053899997,
-            32.76014493300003
-          ]
-        },
-        {
-          "name": "Blanton Creek WMA Parking",
-          "coords": [
-            -85.10915180499998,
-            32.75990212900007
-          ]
-        },
-        {
-          "name": "Blanton Creek WMA Parking",
-          "coords": [
-            -85.09705910999998,
-            32.75651586700003
-          ]
-        }
-      ],
-      "gates": [
-        {
-          "name": "Gate",
-          "coords": [
-            -85.10736170699998,
-            32.76632427400004
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -85.109279585,
-            32.76011746200004
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -85.110204965,
-            32.76011308300006
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -85.09714890299997,
-            32.75652579000003
-          ]
-        }
-      ],
-      "dovefields": [
-        {
-          "name": "Blanton Creek WMA Dove Field",
-          "coords": [
-            -85.10967000999997,
-            32.76017006800003
-          ]
-        }
-      ],
-      "check_stations": [
-        {
-          "name": "Blanton Creek WMA Check Station",
-          "coords": [
-            -85.10705869499996,
-            32.76569724100007
-          ]
-        }
-      ]
-    }
+    "region": "Region 4",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Specialty",
+      "Bonus"
+    ]
   },
   {
+    "wma_id": "BLUE-RIDGE",
     "name": "Blue Ridge WMA",
-    "wma_id": "blue-ridge-wma",
-    "symbols_raw": "b",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 20900,
-    "phone": "770.535.5700",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": true,
-      "youth_hunt": false,
-      "quota_hunt": false,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer & Bear",
-        "details": "Archery\nBuck Only: Sept. 13-26, Oct. 4-10\nFirearms\nBuck Only: b Dec. 3-6 | Nov. 12-15, Dec. 26-Jan. 1\nBear Only: Sept. 27-Oct. 3"
-      },
-      {
-        "species": "Turkey",
-        "details": "Apr. 4-May 15"
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31. Feral hogs may be hunted with dogs."
-      }
+    "phone": "770-535-5700",
+    "counties": [
+      "Fannin",
+      "Union"
     ],
-    "notes": [
-      "US Forest Service owned property. No ATVs or UTVs. Electric bicycles restricted to roads open for motor vehicles."
-    ],
-    "directions": "From Dahlonega take GA 60 north for 28 miles to jct. with USFS Road #69; turn left and go 1 mile to the check station.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "BLUE RIDGE WMA",
-    "map_points": {
-      "campgrounds": [
-        {
-          "name": "Blue Ridge WMA Campground",
-          "coords": [
-            -84.10303867099998,
-            34.70889989000004
-          ]
-        }
-      ],
-      "parking": [
-        {
-          "name": "Blue Ridge WMA Parking",
-          "coords": [
-            -84.103135061,
-            34.708889150000055
-          ]
-        }
-      ],
-      "gates": [
-        {
-          "name": "Gate",
-          "coords": [
-            -84.10310276699997,
-            34.70899011700003
-          ]
-        }
-      ],
-      "dovefields": [],
-      "check_stations": [
-        {
-          "name": "Blue Ridge WMA Check Station",
-          "coords": [
-            -84.10311099699998,
-            34.70878534500003
-          ]
-        }
-      ]
-    }
+    "region": "Region 2",
+    "lat": 34.77,
+    "lng": -84.12,
+    "source_url": null,
+    "tags": [
+      "Bonus"
+    ]
   },
   {
+    "wma_id": "BROAD-RIVER",
     "name": "Broad River WMA",
-    "wma_id": "broad-river-wma",
-    "symbols_raw": "",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 440,
-    "phone": "770.535.5700",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": false,
-      "youth_hunt": false,
-      "quota_hunt": false,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer & Bear",
-        "details": "Sept. 13-Nov. 29; archery only."
-      },
-      {
-        "species": "Turkey",
-        "details": "Apr. 4-May 15"
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31. Feral hogs may also be taken. No dogs allowed."
-      }
+    "phone": "770-535-5700",
+    "counties": [
+      "Madison"
     ],
-    "notes": [],
-    "directions": "From Danielsville: Go north on U.S. 29 for 2 miles; turn right on HWY 281; go 4 miles, cross Broad River; go 0.3 mile; area is on right.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "BROAD RIVER WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [
-        {
-          "name": "Broad River WMA Parking",
-          "coords": [
-            -83.15170366699998,
-            34.20573909100004
-          ]
-        },
-        {
-          "name": "Broad River WMA Parking",
-          "coords": [
-            -83.15104975299998,
-            34.20516701500006
-          ]
-        }
-      ],
-      "gates": [],
-      "dovefields": [],
-      "check_stations": []
-    }
+    "region": "Region 2",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": []
   },
   {
+    "wma_id": "BUCK-SHOALS",
     "name": "Buck Shoals WMA",
-    "wma_id": "buck-shoals-wma",
-    "symbols_raw": "Q C l b",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 582,
     "phone": "770-535-5700",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": true,
-      "youth_hunt": true,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": true,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer & Bear",
-        "details": "Firearms\nBag Limit: 1 deer\nQ12 l b Nov. 1-2\nQ12 C b Nov. 22-23, Dec. 6-7"
-      },
-      {
-        "species": "Turkey",
-        "details": "Q3 l Apr. 11-12\nQ5 C Apr. 18-19, May 2-3"
-      },
-      {
-        "species": "Small Game",
-        "details": "No night hunting.\nQ10 C Jan. 3-11, 17-25"
-      },
-      {
-        "species": "Dove",
-        "details": "Q25 C Sept. 6, 13"
-      },
-      {
-        "species": "Coyote",
-        "details": "No May 16-31 coyote & hog season."
-      }
+    "counties": [
+      "White"
     ],
-    "notes": [
-      "Day use access is available on River Rd. Access for scheduled events is available on Cloverleaf Dr. and Buck Shoals Dr."
-    ],
-    "directions": "From Cleveland: Take Hwy 115 east towards Clarkesville to Hwy 384 (Duncan Bridge Rd.), turn right, go 2.1 miles, entrance to area is on the left.\nFrom Baldwin: From Hwy 365, take Duncan Bridge Rd. (Hwy 384) towards Cleveland, go 5.4 miles, entrance to area is on the right.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "BUCK SHOALS WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [
-        {
-          "name": "Buck Shoals WMA Parking",
-          "coords": [
-            -83.659981442,
-            34.46979219300003
-          ]
-        },
-        {
-          "name": "Buck Shoals WMA Parking",
-          "coords": [
-            -83.66440268599997,
-            34.46747509800003
-          ]
-        }
-      ],
-      "gates": [
-        {
-          "name": "Gate",
-          "coords": [
-            -83.659957776,
-            34.46990393200003
-          ]
-        }
-      ],
-      "dovefields": [],
-      "check_stations": []
-    }
+    "region": "Region 2",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Youth"
+    ]
   },
   {
+    "wma_id": "BULLARD-CREEK",
     "name": "Bullard Creek WMA",
-    "wma_id": "bullard-creek-wma",
-    "symbols_raw": "HC Q b A S",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 15636,
-    "phone": "229.426.5267",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": true,
-      "youth_hunt": false,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": true,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": true,
-      "firearms_shooting_range": true
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Archery\nSept. 13-24, Sept. 28-Oct. 13\nPrimitive\nSept. 25-27\nFirearms\nb Oct. 23-25\nHC Oct. 31-Nov. 2\nNov. 27-30\nBuck Only: Dec. 18-20"
-      },
-      {
-        "species": "Turkey",
-        "details": "Q40 Apr. 4-10\nApril 11-May 15"
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31"
-      }
+    "phone": "229-426-5267",
+    "counties": [
+      "Jeff Davis",
+      "Appling"
     ],
-    "notes": [
-      "No firearms deer hunting within Towns Bluff archery only tract but legal firearms permitted for turkey and small game hunting."
-    ],
-    "directions": "From Hazlehurst: Take U.S. 221 north 7 miles; turn left at entrance sign; go to check station.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "BULLARD CREEK WMA",
-    "map_points": {
-      "campgrounds": [
-        {
-          "name": "Bullard Creek WMA Campground",
-          "coords": [
-            -82.72304918799997,
-            31.936098045000028
-          ]
-        },
-        {
-          "name": "Bullard Creek WMA Campground",
-          "coords": [
-            -82.72323049599997,
-            31.93600676400005
-          ]
-        }
-      ],
-      "parking": [
-        {
-          "name": "Bullard Creek WMA Parking",
-          "coords": [
-            -82.72302377399998,
-            31.93630605900005
-          ]
-        }
-      ],
-      "gates": [
-        {
-          "name": "Gate",
-          "coords": [
-            -82.72251025599998,
-            31.937213444000055
-          ]
-        }
-      ],
-      "dovefields": [
-        {
-          "name": "Bullard Creek WMA Dove Field",
-          "coords": [
-            -82.71965851699998,
-            31.933333333000067
-          ]
-        }
-      ],
-      "check_stations": [
-        {
-          "name": "Bullard Creek WMA Check Station",
-          "coords": [
-            -82.72314545599998,
-            31.93616654800003
-          ]
-        }
-      ]
-    }
+    "region": "Region 6",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Specialty",
+      "Bonus",
+      "Quota"
+    ]
   },
   {
-    "name": "Bullard Creek WMA—Bell Telephone, Montgomery, and Ocmulgee tracts",
-    "wma_id": "bullard-creek-wma—bell-telephone-montgomery-and-ocmulgee-tracts",
-    "symbols_raw": "Q",
-    "acreage": 1369,
-    "phone": "229.426.5267",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": false,
-      "youth_hunt": false,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": true,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Montgomery Tract: Only bucks with at least 4 points (1-inch or longer) on\neither antler or a minimum 15-inch outside antler spread are legal.\nState seasons; archery only."
-      },
-      {
-        "species": "Turkey",
-        "details": "Apr. 4-May 15"
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31"
-      }
-    ],
-    "notes": [
-      "No firearms deer hunting but legal firearms permitted for turkey and small game hunting. Montgomery Tract access is limited to foot or boat travel only"
-    ],
-    "directions": "This WMA consists of 3 separate tracts. Directions to and maps of the various tracts can be obtained from: Region 4 Game Management Office, 229-426-5267; and maps may be printed from gohuntgeorgia.com.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "BULLARD CREEK WMA",
-    "map_points": {
-      "campgrounds": [
-        {
-          "name": "Bullard Creek WMA Campground",
-          "coords": [
-            -82.72304918799997,
-            31.936098045000028
-          ]
-        },
-        {
-          "name": "Bullard Creek WMA Campground",
-          "coords": [
-            -82.72323049599997,
-            31.93600676400005
-          ]
-        }
-      ],
-      "parking": [
-        {
-          "name": "Bullard Creek WMA Parking",
-          "coords": [
-            -82.72302377399998,
-            31.93630605900005
-          ]
-        }
-      ],
-      "gates": [
-        {
-          "name": "Gate",
-          "coords": [
-            -82.72251025599998,
-            31.937213444000055
-          ]
-        }
-      ],
-      "dovefields": [
-        {
-          "name": "Bullard Creek WMA Dove Field",
-          "coords": [
-            -82.71965851699998,
-            31.933333333000067
-          ]
-        }
-      ],
-      "check_stations": [
-        {
-          "name": "Bullard Creek WMA Check Station",
-          "coords": [
-            -82.72314545599998,
-            31.93616654800003
-          ]
-        }
-      ]
-    }
-  },
-  {
+    "wma_id": "CANOOCHEE-SANDHILLS",
     "name": "Canoochee Sandhills WMA",
-    "wma_id": "canoochee-sandhills-wma",
-    "symbols_raw": "b",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 10224,
-    "phone": "229.426.5267",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": true,
-      "youth_hunt": false,
-      "quota_hunt": false,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Archery\nSept. 13-Oct. 11\nFirearms\nb Oct. 23-25, Nov. 6-8\nBuck Only: Dec. 18-20"
-      },
-      {
-        "species": "Turkey",
-        "details": "Apr. 4-May 15"
-      },
-      {
-        "species": "Dove",
-        "details": "Sept. 6, 13, 20, 27, Oct. 4, 11, Nov. 22-30, Dec. 19-Jan. 31"
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31"
-      }
+    "phone": "229-426-5267",
+    "counties": [
+      "Bulloch",
+      "Bryan"
     ],
-    "notes": [],
-    "directions": "From Claxton: Take U.S. Hwy 280 East 9.5 miles to Groveland. Turn left on Groveland-Nevils Road and travel 3.5 miles to kiosk on the left.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "CANOOCHEE SANDHILLS WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [],
-      "gates": [],
-      "dovefields": [],
-      "check_stations": []
-    }
+    "region": "Region 6",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": []
   },
   {
+    "wma_id": "CARTERS-LAKE",
     "name": "Carters Lake WMA",
-    "wma_id": "carters-lake-wma",
-    "symbols_raw": "R W C Q b A",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 3300,
-    "phone": "706.295.6041",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": true,
-      "youth_hunt": true,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": true,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": true,
-      "archery_range": true,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer & bear",
-        "details": "Archery\nSept. 13-Oct. 30, Nov. 3-7, Nov. 10-Jan. 1\nFirearms\nW b Oct. 31-Nov. 2\nQ20 C b Nov. 8-9"
-      },
-      {
-        "species": "Turkey",
-        "details": "Apr. 4-May 15"
-      },
-      {
-        "species": "Rabbit DOG TRAINING",
-        "details": "Wed/Fri/Sat from Nov.- Feb., except during firearms deer hunts."
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31; small game weapons only."
-      }
+    "phone": "706-295-6041",
+    "counties": [
+      "Murray",
+      "Gilmer"
     ],
-    "notes": [
-      "Mobility-impaired hunt participants must attend a pre-hunt meeting at noon at the check station on the day before the hunt. Selected quota youth hunters must attend a pre-hunt meeting at 7 p.m. at the Carter’s Lake Nature Center the evening before the hunt. Sign-In for both the mobility-impaired and quota youth hunts available only at pre-hunt meetings. Youth firearms deer hunting prohibited in Doll Mountain and Woodring Branch Campgrounds. No ATV’s except by mobility-impaired hunters during the mobility-impaired hunt. No camping except by reservation only in U.S. Army Corps of Engineers designated campgrounds."
-    ],
-    "directions": "From Chatsworth: Go 11 miles south on old U.S. 411; turn left at Carters Lake Powerhouse sign; go 1 mile to check station.\nFrom Ellijay: Take HWY 282 west to old U.S. 411; go south 3.8 miles; turn left at Carters Lake Powerhouse sign; go 1 mile to check station.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "CARTERS LAKE WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [
-        {
-          "name": "Parking Area",
-          "coords": [
-            -84.66444086699998,
-            34.61647460900004
-          ]
-        }
-      ],
-      "gates": [],
-      "dovefields": [],
-      "check_stations": [
-        {
-          "name": "Carters Lake WMA Check Station",
-          "coords": [
-            -84.66258830299997,
-            34.61587847100006
-          ]
-        }
-      ]
-    }
+    "region": "Region 1",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Youth",
+      "Mobility-Impaired"
+    ]
   },
   {
+    "wma_id": "CEDAR-CREEK",
     "name": "Cedar Creek WMA",
-    "wma_id": "cedar-creek-wma",
-    "symbols_raw": "HC b Q S",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 41000,
-    "phone": "706.595.4222",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": true,
-      "youth_hunt": false,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": true,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": true
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Archery\nSept. 13-Oct. 22, Oct. 26-Nov. 12, 16-23, Dec. 15-Jan. 1\nFirearms\nEither-sex Last Day: b Oct. 23-25\nEither Sex: b Nov. 13-15\nHC Nov. 24-30\nBuck Only: Dec. 1-14"
-      },
-      {
-        "species": "Turkey",
-        "details": "Q100 Apr. 4-10\nApr. 11-May 15"
-      },
-      {
-        "species": "Dove",
-        "details": "Sept. 6, 13, 20, 27, Oct. 4-12, Nov. 22-23, Dec. 19-Jan. 31"
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31"
-      }
+    "phone": "706-595-4222",
+    "counties": [
+      "Jasper",
+      "Putnam",
+      "Jones"
     ],
-    "notes": [
-      "Legal hours for waterfowl end at noon. ATVs prohibited."
-    ],
-    "directions": "From Monticello: Take HWY 16 east 3/4 mile; take right fork on HWY 212; go 12 miles to check station sign on the right; follow arrow 0.5 mile to check station.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "CEDAR CREEK WMA",
-    "map_points": {
-      "campgrounds": [
-        {
-          "name": "Cedar Creek WMA Campground",
-          "coords": [
-            -83.47935261399998,
-            33.27210137500006
-          ]
-        },
-        {
-          "name": "Cedar Creek WMA Campground",
-          "coords": [
-            -83.479201502,
-            33.27170197700004
-          ]
-        },
-        {
-          "name": "Cedar Creek WMA Campground",
-          "coords": [
-            -83.56015509999998,
-            33.26252989500004
-          ]
-        }
-      ],
-      "parking": [
-        {
-          "name": "Cedar Creek WMA Parking",
-          "coords": [
-            -83.47900898599998,
-            33.27181044400006
-          ]
-        },
-        {
-          "name": "Cedar Creek WMA Parking",
-          "coords": [
-            -83.47915998799998,
-            32.27209375500003
-          ]
-        },
-        {
-          "name": "Cedar Creek WMA Parking",
-          "coords": [
-            -83.56003789599998,
-            33.26261543700004
-          ]
-        },
-        {
-          "name": "Cedar Creek WMA Parking",
-          "coords": [
-            -83.54133406399997,
-            33.25055271800004
-          ]
-        }
-      ],
-      "gates": [
-        {
-          "name": "Gate",
-          "coords": [
-            -83.478816823,
-            33.27181602400006
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -83.479075352,
-            33.27187122100005
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -83.479100187,
-            33.27211116200002
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -83.54128919,
-            33.25064483700005
-          ]
-        }
-      ],
-      "dovefields": [
-        {
-          "name": "Cedar Creek WMA Dove Field",
-          "coords": [
-            -83.561133333,
-            33.26194444400004
-          ]
-        }
-      ],
-      "check_stations": [
-        {
-          "name": "Cedar Creek WMA Check Station",
-          "coords": [
-            -83.478983942,
-            33.27192778800005
-          ]
-        }
-      ]
-    }
+    "region": "Region 7",
+    "lat": 33.23,
+    "lng": -83.53,
+    "source_url": null,
+    "tags": [
+      "Specialty",
+      "Bonus",
+      "Quota"
+    ]
   },
   {
+    "wma_id": "CEYLON",
     "name": "Ceylon WMA",
-    "wma_id": "ceylon-wma",
-    "symbols_raw": "Q Q b B",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 16000,
-    "phone": "912.262.3173",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": true,
-      "youth_hunt": false,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": true,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": true,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Only bucks with at least 4 points (1-inch or longer) on either antler or a minimum 15-inch outside antler spread are legal.\nArchery\nSept. 13-Oct. 12, Dec. 7-28\nPrimitive\nQ100 Oct. 16-18\nFirearms\nQ100 b Nov. 6-8, Dec. 4-6"
-      },
-      {
-        "species": "Turkey",
-        "details": "Q25 Apr. 4-10, Apr. 18-24, May 2-8,"
-      },
-      {
-        "species": "Bird dog training",
-        "details": "Intersection of Boat House & Ceylon Roads, see area map."
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16 - 31"
-      }
+    "phone": "912-262-3173",
+    "counties": [
+      "Camden"
     ],
-    "notes": [
-      "This area includes Black Point Tract and Grover Island. Black Point is accessible from Harriet’s Bluff Rd. Access to Grover Island is by river only."
-    ],
-    "directions": "From Brunswick: Take I-95 South to Exit 14 (GA Hwy 25; Woodbine). Turn left onto Lang Road and go 1 mile to WMA entrance on left.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "CEYLON WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [],
-      "gates": [
-        {
-          "name": "Gate",
-          "coords": [
-            -81.65215017099998,
-            30.98808119000004
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -81.650634288,
-            30.98774775200003
-          ]
-        },
-        {
-          "name": "Gate",
-          "coords": [
-            -81.650577717,
-            30.98835825300007
-          ]
-        }
-      ],
-      "dovefields": [],
-      "check_stations": []
-    }
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Bonus"
+    ]
   },
   {
+    "wma_id": "CHATTAHOOCHEE",
     "name": "Chattahoochee WMA",
-    "wma_id": "chattahoochee-wma",
-    "symbols_raw": "Q b",
+    "tract_name": "",
+    "area_type": "WMA",
     "acreage": 25150,
-    "phone": "770.535.5700",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": true,
-      "youth_hunt": false,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": false,
-      "antler_restricted_area": false,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer & Bear",
-        "details": "Archery\nBuck Only: Sept. 13-26, Oct. 13-21, 26-31\nFirearms\nBuck Only: Oct. 22-Oct. 25, Nov. 22-29 | b Dec. 10-13"
-      },
-      {
-        "species": "Bear",
-        "details": "Firearms\nQ9 (Bag limit 2/person or 5/party) Dog/Bear: Oct. 4-Oct. 12\nSept. 27-Oct. 3"
-      },
-      {
-        "species": "Turkey",
-        "details": "Apr. 4-May 15"
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31. Feral hogs may be hunted with dogs."
-      }
+    "phone": "770-535-5700",
+    "counties": [
+      "White",
+      "Lumpkin"
     ],
-    "notes": [
-      "Dog-bear hunters must check in at the Chattahoochee WMA check station prior to hunting and are required to attend a pre-hunt meeting as directed in their notification email. US Forest Service property. No ATV’s/UTV’s.Electric bicycles restricted to roads open to motor vehicles."
-    ],
-    "directions": "The Chattahoochee WMA Check Station has moved to DNR-owned land near Smithgall Woods/Dukes Creek State Park at 34.6720932° N, -83.778786° W. From Cleveland, go north on Main Street (U.S. 129) for 3.5 miles, turn right onto GA Hwy 75A, and travel 4.2 miles towards Helen. The station driveway will be on the left, across from Duke’s Creek Baptist Church, before Asbestos Road.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "CHATTAHOOCHEE WMA",
-    "map_points": {
-      "campgrounds": [],
-      "parking": [
-        {
-          "name": "Chattahoochee WMA Parking",
-          "coords": [
-            -83.779261895,
-            34.67222830300004
-          ]
-        },
-        {
-          "name": "Chattahoochee WMA Parking",
-          "coords": [
-            -83.82424888299998,
-            34.72242136000004
-          ]
-        },
-        {
-          "name": "Chattahoochee WMA Parking",
-          "coords": [
-            -83.834041703,
-            34.72023588700005
-          ]
-        }
-      ],
-      "gates": [],
-      "dovefields": [],
-      "check_stations": [
-        {
-          "name": "Chattahoochee WMA Check Station",
-          "coords": [
-            -83.779146197,
-            34.67200583700004
-          ]
-        }
-      ]
-    }
+    "region": "Region 2",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Bonus",
+      "Quota"
+    ]
   },
   {
-    "name": "Chattahoochee Fall Line WMA—Almo, Ft. Perry, Hilliard",
-    "wma_id": "chattahoochee-fall-line-wma—almo-ft-perry-hilliard",
-    "symbols_raw": "Q Q b l",
-    "acreage": 20622,
-    "phone": "229.430.4254",
-    "amenities": {
-      "sign_in_required": false,
-      "bonus_deer_hunt": true,
-      "youth_hunt": false,
-      "quota_hunt": true,
-      "archery_only_area": false,
-      "specialty_hunt": false,
-      "hunt_and_learn": true,
-      "antler_restricted_area": true,
-      "mobility_impaired_hunt": false,
-      "bird_dog_training": false,
-      "furbearer_dog_training": false,
-      "rabbit_dog_training": false,
-      "archery_range": false,
-      "firearms_shooting_range": false
-    },
-    "seasons": [
-      {
-        "species": "Deer",
-        "details": "Only bucks with at least 4 points (1-inch or longer) on either antler or a minimum 15-inch outside antler spread are legal.\nArchery\nSept. 13-Oct. 9, Nov. 16-30\nFirearms\nC Oct. 10-12\nQ300 Oct. 30-Nov. 1, b Nov. 13-15\nHC Nov. 21-23\nl Dec. 5-7"
-      },
-      {
-        "species": "Dove",
-        "details": "Sept. 6, Sept. 13, Sept. 20-Oct. 9, Nov. 22-Nov. 30, Dec. 19-Jan. 31\nC Sept. 06, Sept. 13"
-      },
-      {
-        "species": "Turkey",
-        "details": "Q45 Apr. 11-Apr. 19, Apr. 25-May 1\nl Apr. 3-Apr. 5\nMay 4-15"
-      },
-      {
-        "species": "Quail",
-        "details": "Dec. 13, Dec. 27, Jan. 10, Jan. 22"
-      },
-      {
-        "species": "Coyote",
-        "details": "May 16-31"
-      }
+    "wma_id": "CHESTATEE",
+    "name": "Chestatee WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 27123,
+    "phone": "770-535-5700",
+    "counties": [
+      "Lumpkin",
+      "Dawson"
     ],
-    "notes": [
-      "No fox squirrel. Legal waterfowl hours end at noon. No ATVs, horses, or hog dogs."
+    "region": "Region 2",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Bonus",
+      "Quota"
+    ]
+  },
+  {
+    "wma_id": "CHICKASAWHATCHEE",
+    "name": "Chickasawhatchee WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 19700,
+    "phone": "229-430-4254",
+    "counties": [
+      "Baker",
+      "Calhoun"
     ],
-    "directions": "From Geneva travel south on Hwy 240 approximately 2.75 miles, the check station, kiosk and campground are 200 yards east of Hwy 240 on a WMA road.",
-    "county": null,
-    "statewide_deer_zone": null,
-    "geo_name": "CHATTAHOOCHEE FALL LINE WMA",
-    "map_points": {
-      "campgrounds": [
-        {
-          "name": "Chattahoochee Fall Line WMA Campground",
-          "coords": [
-            -84.607498703,
-            32.44855593800004
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Campground",
-          "coords": [
-            -84.607621459,
-            32.44837380100003
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Campground",
-          "coords": [
-            -84.607314945,
-            32.44813580400003
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Campground",
-          "coords": [
-            -84.607869688,
-            32.44804154400003
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Campground",
-          "coords": [
-            -84.607871317,
-            32.44782046400007
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Campground",
-          "coords": [
-            -84.608077582,
-            32.44773836700007
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Campground",
-          "coords": [
-            -84.608249673,
-            32.44773410100005
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Campground",
-          "coords": [
-            -84.608401309,
-            32.44778103100007
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Campground",
-          "coords": [
-            -84.60863071,
-            32.44795325800005
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Campground",
-          "coords": [
-            -84.608479075,
-            32.44820356500006
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Campground",
-          "coords": [
-            -84.608149845,
-            32.44816091400007
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Campground",
-          "coords": [
-            -84.60799732,
-            32.44827552900003
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Campground",
-          "coords": [
-            -84.607850021,
-            32.44840243800004
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Campground",
-          "coords": [
-            -84.607718041,
-            32.44852084600002
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Campground",
-          "coords": [
-            -84.607511776,
-            32.44837549400005
-          ]
-        }
-      ],
-      "parking": [
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.60847956,
-            32.44878482400007
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.608677685,
-            32.44858055600005
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.606764491,
-            32.44799002200005
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.584346761,
-            32.44426514700004
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.576856012,
-            32.45145892000004
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.56616616499998,
-            32.45339233300003
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.558359556,
-            32.46083861200004
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.559385077,
-            32.46306560900005
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.55169974599998,
-            32.46824967300003
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.54227917,
-            32.47352382100003
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.542875327,
-            32.47963364900004
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.54181284599998,
-            32.48398410100004
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.54269165799998,
-            32.49016149100005
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.55047817,
-            32.49500624600007
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.55627191199998,
-            32.49658742500004
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.55963953599998,
-            32.49216065100003
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.557404456,
-            32.48624128500007
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.56277054499998,
-            32.48390666000006
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.568471131,
-            32.48386376500003
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.568285526,
-            32.47898514900003
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.577242276,
-            32.48166946600003
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.582888126,
-            32.47849495000004
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.589832793,
-            32.47271810100003
-          ]
-        },
-        {
-          "name": "Chattahoochee Fall Line WMA Parking",
-          "coords": [
-            -84.59593259499998,
-            32.46377319900004
-          ]
-        },
-        {
-          "name":Access Denied
+    "region": "Region 4",
+    "lat": 31.35,
+    "lng": -84.46,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Youth",
+      "Bonus"
+    ]
+  },
+  {
+    "wma_id": "CLARKS-HILL-EAST",
+    "name": "Clarks Hill WMA \u2014 East",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 10224,
+    "phone": "706-595-4222",
+    "counties": [
+      "McDuffie",
+      "Wilkes"
+    ],
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota"
+    ]
+  },
+  {
+    "wma_id": "CLARKS-HILL-WEST",
+    "name": "Clarks Hill WMA \u2014 West",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 3067,
+    "phone": "706-595-4222",
+    "counties": [
+      "McDuffie"
+    ],
+    "region": "Region 7",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": []
+  },
+  {
+    "wma_id": "CLAYHOLE-SWAMP",
+    "name": "Clayhole Swamp WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 5242,
+    "phone": "912-262-3173",
+    "counties": [
+      "Glynn"
+    ],
+    "region": "Region 7",
+    "lat": 31.2,
+    "lng": -81.56,
+    "source_url": null,
+    "tags": [
+      "Youth",
+      "Bonus",
+      "Archery-Only Area"
+    ]
+  },
+  {
+    "wma_id": "CLYBEL",
+    "name": "Clybel WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 6700,
+    "phone": "706-595-4222",
+    "counties": [
+      "Newton",
+      "Jasper"
+    ],
+    "region": "Region 7",
+    "lat": 33.45,
+    "lng": -83.95,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Specialty",
+      "Youth",
+      "Hunt & Learn"
+    ]
+  },
+  {
+    "wma_id": "COCHRANS-CREEK",
+    "name": "Cochrans Creek WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 2057,
+    "phone": "770-535-5700",
+    "counties": [
+      "Dawson"
+    ],
+    "region": "Region 2",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Specialty",
+      "Bonus"
+    ]
+  },
+  {
+    "wma_id": "COHUTTA",
+    "name": "Cohutta WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 96583,
+    "phone": "706-295-6041",
+    "counties": [
+      "Murray",
+      "Fannin",
+      "Gilmer"
+    ],
+    "region": "Region 1",
+    "lat": 34.99,
+    "lng": -84.64,
+    "source_url": null,
+    "tags": [
+      "Bonus"
+    ]
+  },
+  {
+    "wma_id": "CONASAUGA-RIVER",
+    "name": "Conasauga River WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 338,
+    "phone": "706-295-6041",
+    "counties": [
+      "Whitfield",
+      "Murray"
+    ],
+    "region": "Region 1",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Youth"
+    ]
+  },
+  {
+    "wma_id": "COOPERS-CREEK",
+    "name": "Coopers Creek WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 30000,
+    "phone": "770-535-5700",
+    "counties": [
+      "Fannin",
+      "Union"
+    ],
+    "region": "Region 2",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Bonus",
+      "Specialty"
+    ]
+  },
+  {
+    "wma_id": "COOSAWATTEE",
+    "name": "Coosawattee WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 2040,
+    "phone": "706-295-6041",
+    "counties": [
+      "Murray",
+      "Gilmer"
+    ],
+    "region": "Region 1",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Quota",
+      "Specialty",
+      "Bonus"
+    ]
+  },
+  {
+    "wma_id": "CROCKFORD-PM",
+    "name": "Crockford\u2013Pigeon Mountain WMA",
+    "tract_name": "",
+    "area_type": "WMA",
+    "acreage": 20657,
+    "phone": "706-295-6041",
+    "counties": [
+      "Walker"
+    ],
+    "region": "Region 1",
+    "lat": null,
+    "lng": null,
+    "source_url": null,
+    "tags": [
+      "Specialty",
+      "Bonus",
+      "Quota"
+    ]
+  }
+]
