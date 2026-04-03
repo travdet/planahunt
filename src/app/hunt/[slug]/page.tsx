@@ -9,21 +9,18 @@ import {
   QUOTA_HUNTS,
   FISHING_REGULATIONS,
 } from '@/data/sample';
-import { HuntingSeason, PublicLand } from '@/lib/types';
+import { PublicLand, HuntingSeason } from '@/lib/types';
+import {
+  groupSeasons,
+  fmtShort,
+  fmtFull,
+  isSeasonOpen,
+  WEAPON_COLORS,
+  SPECIES_ICONS,
+  parseSemanticTags,
+} from '@/lib/seasonUtils';
 
 // ---------- helpers ----------
-
-function formatDate(dateStr: string): string {
-  const d = new Date(dateStr + 'T00:00:00');
-  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-}
-
-function isSeasonOpen(season: HuntingSeason): boolean {
-  const today = new Date();
-  const start = new Date(season.start_date);
-  const end = new Date(season.end_date);
-  return today >= start && today <= end;
-}
 
 function haversineDistance(
   lat1: number, lng1: number,
@@ -38,32 +35,32 @@ function haversineDistance(
   );
 }
 
-const WEAPON_COLORS: Record<string, string> = {
-  Archery: '#5a8e2d',
-  Rifle: '#8e2d2d',
-  Muzzleloader: '#8e6b2d',
-  Shotgun: '#2d5a8e',
-  Firearms: '#8e2d2d',
-};
-
-function parseSemanticTags(season: HuntingSeason): string[] {
-  const tags: string[] = [];
-  if (season.quota_required) tags.push('Quota');
-  if (season.buck_only === true) tags.push('Buck Only');
-  if (season.buck_only === false) tags.push('Either Sex');
-  const notes = (season.notes ?? '').toLowerCase();
-  if (notes.includes('bonus')) tags.push('Bonus');
-  if (notes.includes('specialty')) tags.push('Specialty');
-  if (notes.includes('youth')) tags.push('Youth');
-  if (notes.includes('mobility') || notes.includes('impaired')) tags.push('Mobility-Impaired');
-  return tags;
+/** Returns true if notes contain info beyond what semantic tags already convey */
+function hasExtraInfo(season: HuntingSeason): boolean {
+  if (!season.notes) return false;
+  const notes = season.notes.toLowerCase().trim();
+  // Strip out phrases already captured by semantic tags
+  let stripped = notes
+    .replace(/buck only\.?/gi, '')
+    .replace(/either sex\.?/gi, '')
+    .replace(/quota\.?/gi, '')
+    .replace(/bonus\.?/gi, '')
+    .replace(/youth\.?/gi, '')
+    .replace(/mobility[- ]impaired\.?/gi, '')
+    .trim();
+  // If nothing meaningful remains, skip
+  return stripped.length > 2;
 }
+
+type Tab = 'seasons' | 'quota' | 'fishing' | 'rules';
 
 // ---------- component ----------
 
 export default function HuntDetailPage() {
   const params = useParams<{ slug: string }>();
   const slug = params.slug;
+
+  const [activeTab, setActiveTab] = useState<Tab>('seasons');
 
   const [favorites, setFavorites] = useState<Set<string>>(() => {
     if (typeof window !== 'undefined') {
@@ -111,14 +108,7 @@ export default function HuntDetailPage() {
   const seasons = HUNTING_SEASONS.filter((s) => s.land_id === land.id);
   const quotaHunts = QUOTA_HUNTS.filter((q) => q.land_id === land.id);
   const fishingRegs = FISHING_REGULATIONS.filter((r) => r.state === land.state);
-
-  // Group seasons by species + weapon_type
-  const groupedSeasons = seasons.reduce<Record<string, HuntingSeason[]>>((acc, s) => {
-    const key = `${s.species} (${s.weapon_type})`;
-    if (!acc[key]) acc[key] = [];
-    acc[key].push(s);
-    return acc;
-  }, {});
+  const seasonGroups = groupSeasons(seasons);
 
   // Nearby lands
   const nearbyLands: (PublicLand & { distance: number })[] =
@@ -133,12 +123,19 @@ export default function HuntDetailPage() {
           .slice(0, 5)
       : [];
 
+  const tabs: { key: Tab; label: string; count: number }[] = [
+    { key: 'seasons', label: 'Seasons', count: seasons.length },
+    { key: 'quota', label: 'Quota', count: quotaHunts.length },
+    { key: 'fishing', label: 'Fishing', count: fishingRegs.length },
+    { key: 'rules', label: 'Rules & Info', count: 0 },
+  ];
+
   return (
     <div className="min-h-screen" style={{ background: '#1a1f16' }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
 
         {/* ---------- Header ---------- */}
-        <header className="mb-8">
+        <header className="mb-6">
           <Link
             href="/"
             className="inline-flex items-center gap-1 text-sm font-medium mb-4 transition-colors"
@@ -184,243 +181,291 @@ export default function HuntDetailPage() {
             </button>
           </div>
 
-          {/* Meta */}
-          <div className="flex flex-wrap gap-x-6 gap-y-1 mt-3">
+          {/* Stats line */}
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mt-3 text-sm" style={{ color: '#a8a490' }}>
             {land.region && (
-              <span className="text-sm" style={{ color: '#6e6b5e' }}>{land.region}</span>
+              <>
+                <span>{land.region}</span>
+                <span style={{ color: '#6e6b5e' }}>&middot;</span>
+              </>
             )}
             {land.counties.length > 0 && (
-              <span className="text-sm" style={{ color: '#a8a490' }}>
-                {land.counties.join(', ')} {land.counties.length === 1 ? 'County' : 'Counties'}
-              </span>
+              <>
+                <span>
+                  {land.counties.join(', ')} {land.counties.length === 1 ? 'County' : 'Counties'}
+                </span>
+                <span style={{ color: '#6e6b5e' }}>&middot;</span>
+              </>
             )}
             {land.acreage && (
-              <span className="text-sm font-semibold" style={{ color: '#e8e4d4' }}>
-                {land.acreage.toLocaleString()} acres
-              </span>
+              <>
+                <span className="font-semibold" style={{ color: '#e8e4d4' }}>
+                  {land.acreage.toLocaleString()} acres
+                </span>
+                {land.phone && <span style={{ color: '#6e6b5e' }}>&middot;</span>}
+              </>
             )}
-          </div>
-
-          {land.phone && (
-            <div className="mt-2">
-              <a href={`tel:${land.phone}`} className="text-sm font-medium" style={{ color: '#4d8542' }}>
+            {land.phone && (
+              <a href={`tel:${land.phone}`} className="font-medium" style={{ color: '#4d8542' }}>
                 {land.phone}
               </a>
-            </div>
-          )}
-
-          {/* Tags */}
-          {land.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 mt-4">
-              {land.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-xs px-2 py-0.5 rounded-full capitalize"
-                  style={{ background: '#252b21', color: '#6e6b5e', border: '1px solid #333830' }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
+            )}
+          </div>
         </header>
 
-        {/* ---------- Hunt Groups ---------- */}
-        {Object.keys(groupedSeasons).length > 0 && (
-          <section className="mb-8">
-            <h2 className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: '#a8a490' }}>
-              Hunting Seasons
-            </h2>
-            <div className="space-y-4">
-              {Object.entries(groupedSeasons).map(([groupKey, groupSeasons]) => {
-                const sample = groupSeasons[0];
-                const weaponColor = WEAPON_COLORS[sample.weapon_type] ?? '#3d6b35';
-                const semanticTags = parseSemanticTags(sample);
-
-                return (
-                  <div
-                    key={groupKey}
-                    className="rounded-xl overflow-hidden"
-                    style={{ background: '#252b21', border: '1px solid #2d342a' }}
+        {/* ---------- Tabs ---------- */}
+        <nav
+          className="flex gap-0 mb-6 overflow-x-auto"
+          style={{ borderBottom: '1px solid #2d342a' }}
+        >
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.key;
+            return (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className="relative px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors"
+                style={{
+                  color: isActive ? '#e8e4d4' : '#6e6b5e',
+                  background: 'transparent',
+                }}
+              >
+                {tab.label}
+                {tab.count > 0 && (
+                  <span
+                    className="ml-1.5 text-xs px-1.5 py-0.5 rounded-full"
+                    style={{
+                      background: isActive ? 'rgba(61,107,53,0.25)' : '#252b21',
+                      color: isActive ? '#5fad52' : '#6e6b5e',
+                    }}
                   >
-                    {/* Group header */}
-                    <div className="px-4 py-3 flex flex-wrap items-center gap-2" style={{ borderBottom: '1px solid #2d342a' }}>
-                      <span className="text-sm font-semibold" style={{ color: '#e8e4d4' }}>
-                        {groupKey}
-                      </span>
-                      {semanticTags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs px-2 py-0.5 rounded-full"
-                          style={{
-                            background: tag === 'Quota' ? 'rgba(196,146,58,0.15)' : `${weaponColor}22`,
-                            color: tag === 'Quota' ? '#c4923a' : weaponColor,
-                            border: `1px solid ${tag === 'Quota' ? 'rgba(196,146,58,0.3)' : `${weaponColor}44`}`,
-                          }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                    {tab.count}
+                  </span>
+                )}
+                {/* Underline indicator */}
+                {isActive && (
+                  <span
+                    className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full"
+                    style={{ background: '#5fad52' }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </nav>
 
-                    {/* Season rows */}
-                    <div className="divide-y" style={{ borderColor: '#2d342a' }}>
-                      {groupSeasons.map((season) => {
-                        const open = isSeasonOpen(season);
-                        return (
-                          <div key={season.id} className="px-4 py-3">
-                            <div className="flex items-center justify-between gap-2 mb-1">
-                              <p className="text-sm" style={{ color: '#a8a490' }}>
-                                {formatDate(season.start_date)} &ndash; {formatDate(season.end_date)}
-                              </p>
-                              {open && (
-                                <span className="flex items-center gap-1 text-xs" style={{ color: '#5fad52' }}>
-                                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse inline-block" />
-                                  Open Now
-                                </span>
-                              )}
-                            </div>
-                            {season.bag_limit && (
-                              <p className="text-xs mt-0.5" style={{ color: '#6e6b5e' }}>
-                                Bag limit: {season.bag_limit}
-                              </p>
-                            )}
-                            {season.notes && (
-                              <p className="text-xs mt-1" style={{ color: '#6e6b5e' }}>
-                                {season.notes}
-                              </p>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+        {/* ---------- Seasons Tab ---------- */}
+        {activeTab === 'seasons' && (
+          <section className="mb-8">
+            {seasonGroups.length === 0 ? (
+              <EmptyTab message="No hunting season data available for this property." />
+            ) : (
+              <div className="space-y-2">
+                {seasonGroups.map((group) => (
+                  <SpeciesAccordion key={group.species} group={group} />
+                ))}
+              </div>
+            )}
           </section>
         )}
 
-        {/* ---------- Quota Hunts ---------- */}
-        {quotaHunts.length > 0 && (
+        {/* ---------- Quota Hunts Tab ---------- */}
+        {activeTab === 'quota' && (
           <section className="mb-8">
-            <h2 className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: '#a8a490' }}>
-              Quota Hunts
-            </h2>
-            <div className="space-y-4">
-              {quotaHunts.map((hunt) => (
-                <div
-                  key={hunt.id}
-                  className="rounded-xl p-4"
-                  style={{ background: 'rgba(196,146,58,0.06)', border: '1px solid rgba(196,146,58,0.2)' }}
-                >
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <div>
+            {quotaHunts.length === 0 ? (
+              <EmptyTab message="No quota hunts listed for this property." />
+            ) : (
+              <div className="space-y-3">
+                {quotaHunts.map((hunt) => (
+                  <div
+                    key={hunt.id}
+                    className="rounded-xl p-4"
+                    style={{ background: 'rgba(196,146,58,0.06)', border: '1px solid rgba(196,146,58,0.2)' }}
+                  >
+                    <div className="flex items-start justify-between gap-2 mb-1">
                       <p className="text-sm font-semibold" style={{ color: '#e8e4d4' }}>
                         {hunt.species} &mdash; {hunt.hunt_type}
                       </p>
-                      {hunt.weapon_type && (
-                        <p className="text-xs mt-0.5" style={{ color: '#a8a490' }}>{hunt.weapon_type}</p>
+                      {hunt.quota_size && (
+                        <span className="text-xs px-2 py-0.5 rounded-full flex-shrink-0" style={{ background: 'rgba(196,146,58,0.2)', color: '#c4923a' }}>
+                          {hunt.quota_size} permits
+                        </span>
                       )}
                     </div>
-                    {hunt.quota_size && (
-                      <span className="text-xs px-2 py-0.5 rounded-full flex-shrink-0" style={{ background: 'rgba(196,146,58,0.2)', color: '#c4923a' }}>
-                        {hunt.quota_size} permits
-                      </span>
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style={{ color: '#a8a490' }}>
+                      {hunt.weapon_type && <span>{hunt.weapon_type}</span>}
+                      {hunt.dates && <span>{hunt.dates}</span>}
+                    </div>
+                    {hunt.application_deadline && (
+                      <p className="text-xs mt-2 font-medium" style={{ color: '#c4923a' }}>
+                        Deadline: {fmtFull(hunt.application_deadline)}
+                      </p>
+                    )}
+                    {hunt.notes && (
+                      <p className="text-xs mt-1" style={{ color: '#6e6b5e' }}>{hunt.notes}</p>
+                    )}
+                    {hunt.application_url && (
+                      <a
+                        href={hunt.application_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 mt-3 text-xs font-medium px-3 py-1.5 rounded-lg transition-colors"
+                        style={{ background: '#c4923a', color: '#1a1f16' }}
+                      >
+                        Apply
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </a>
                     )}
                   </div>
-                  {hunt.dates && (
-                    <p className="text-xs" style={{ color: '#a8a490' }}>{hunt.dates}</p>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* ---------- Fishing Tab ---------- */}
+        {activeTab === 'fishing' && (
+          <section className="mb-8">
+            {fishingRegs.length === 0 ? (
+              <EmptyTab message="No fishing regulation data available." />
+            ) : (
+              <>
+                {/* Statewide disclaimer */}
+                <div
+                  className="rounded-lg px-4 py-3 mb-4 flex items-start gap-2"
+                  style={{ background: 'rgba(45,90,142,0.08)', border: '1px solid rgba(45,90,142,0.2)' }}
+                >
+                  <svg className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: '#5a90c4' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <p className="text-xs" style={{ color: '#5a90c4' }}>
+                    Statewide {land.state} Fishing Regulations &mdash; these apply statewide, not just to this property.
+                  </p>
+                </div>
+
+                <div className="space-y-3">
+                  {fishingRegs.map((reg) => (
+                    <div
+                      key={reg.id}
+                      className="rounded-xl p-4"
+                      style={{ background: '#252b21', border: '1px solid #2d342a' }}
+                    >
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <p className="text-sm font-semibold" style={{ color: '#e8e4d4' }}>{reg.species}</p>
+                        <span
+                          className="text-xs px-2 py-0.5 rounded-full capitalize flex-shrink-0"
+                          style={{
+                            background: reg.water_type === 'saltwater' ? 'rgba(45,90,142,0.2)' : 'rgba(61,107,53,0.2)',
+                            color: reg.water_type === 'saltwater' ? '#5a90c4' : '#5fad52',
+                          }}
+                        >
+                          {reg.water_type}
+                        </span>
+                      </div>
+                      <div className="space-y-1">
+                        {reg.bag_limit && (
+                          <p className="text-xs" style={{ color: '#a8a490' }}>Bag limit: {reg.bag_limit}</p>
+                        )}
+                        {reg.size_limit && (
+                          <p className="text-xs" style={{ color: '#a8a490' }}>Size limit: {reg.size_limit}</p>
+                        )}
+                        {reg.season && (
+                          <p className="text-xs" style={{ color: '#a8a490' }}>Season: {reg.season}</p>
+                        )}
+                        {reg.notes && (
+                          <p className="text-xs mt-1" style={{ color: '#6e6b5e' }}>{reg.notes}</p>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+          </section>
+        )}
+
+        {/* ---------- Rules & Info Tab ---------- */}
+        {activeTab === 'rules' && (
+          <section className="mb-8 space-y-4">
+            {/* Special rules warning */}
+            {land.special_rules && (
+              <div className="px-4 py-3 rounded-xl" style={{ background: 'rgba(196,146,58,0.08)', border: '1px solid rgba(196,146,58,0.2)' }}>
+                <div className="flex items-center gap-2 mb-1.5">
+                  <svg className="w-4 h-4" style={{ color: '#c4923a' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                  <span className="text-sm font-semibold" style={{ color: '#c4923a' }}>Special Rules</span>
+                </div>
+                <p className="text-sm" style={{ color: '#a8a490' }}>{land.special_rules}</p>
+              </div>
+            )}
+
+            {/* Managing agency */}
+            {land.managing_agency && (
+              <div
+                className="rounded-xl p-4"
+                style={{ background: '#252b21', border: '1px solid #2d342a' }}
+              >
+                <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#6e6b5e' }}>
+                  Managing Agency
+                </p>
+                <p className="text-sm" style={{ color: '#e8e4d4' }}>{land.managing_agency}</p>
+              </div>
+            )}
+
+            {/* Contact info */}
+            {(land.phone || land.website) && (
+              <div
+                className="rounded-xl p-4"
+                style={{ background: '#252b21', border: '1px solid #2d342a' }}
+              >
+                <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#6e6b5e' }}>
+                  Contact
+                </p>
+                <div className="space-y-2">
+                  {land.phone && (
+                    <a href={`tel:${land.phone}`} className="flex items-center gap-2 text-sm font-medium" style={{ color: '#4d8542' }}>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                      {land.phone}
+                    </a>
                   )}
-                  {hunt.application_deadline && (
-                    <p className="text-xs mt-1" style={{ color: '#c4923a' }}>
-                      Deadline: {formatDate(hunt.application_deadline)}
-                    </p>
-                  )}
-                  {hunt.notes && (
-                    <p className="text-xs mt-1" style={{ color: '#6e6b5e' }}>{hunt.notes}</p>
-                  )}
-                  {hunt.application_url && (
+                  {land.website && (
                     <a
-                      href={hunt.application_url}
+                      href={land.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 mt-3 text-xs font-medium px-3 py-1.5 rounded-lg transition-colors"
-                      style={{ background: '#c4923a', color: '#1a1f16' }}
+                      className="flex items-center gap-2 text-sm font-medium"
+                      style={{ color: '#4d8542' }}
                     >
-                      Apply Now
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
+                      Official Website
                     </a>
                   )}
                 </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* ---------- Fishing Regulations ---------- */}
-        {fishingRegs.length > 0 && (
-          <section className="mb-8">
-            <h2 className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: '#a8a490' }}>
-              Fishing Regulations ({land.state})
-            </h2>
-            <div className="space-y-3">
-              {fishingRegs.map((reg) => (
-                <div
-                  key={reg.id}
-                  className="rounded-xl p-4"
-                  style={{ background: '#252b21', border: '1px solid #2d342a' }}
-                >
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <p className="text-sm font-semibold" style={{ color: '#e8e4d4' }}>{reg.species}</p>
-                    <span
-                      className="text-xs px-2 py-0.5 rounded-full capitalize flex-shrink-0"
-                      style={{
-                        background: reg.water_type === 'saltwater' ? 'rgba(45,90,142,0.2)' : 'rgba(61,107,53,0.2)',
-                        color: reg.water_type === 'saltwater' ? '#5a90c4' : '#5fad52',
-                      }}
-                    >
-                      {reg.water_type}
-                    </span>
-                  </div>
-                  <div className="space-y-1">
-                    {reg.bag_limit && (
-                      <p className="text-xs" style={{ color: '#a8a490' }}>Bag limit: {reg.bag_limit}</p>
-                    )}
-                    {reg.size_limit && (
-                      <p className="text-xs" style={{ color: '#a8a490' }}>Size limit: {reg.size_limit}</p>
-                    )}
-                    {reg.season && (
-                      <p className="text-xs" style={{ color: '#a8a490' }}>Season: {reg.season}</p>
-                    )}
-                    {reg.notes && (
-                      <p className="text-xs mt-1" style={{ color: '#6e6b5e' }}>{reg.notes}</p>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* ---------- Special Rules ---------- */}
-        {land.special_rules && (
-          <section className="mb-8">
-            <div className="px-4 py-3 rounded-xl" style={{ background: 'rgba(196,146,58,0.08)', border: '1px solid rgba(196,146,58,0.2)' }}>
-              <div className="flex items-center gap-2 mb-1.5">
-                <svg className="w-4 h-4" style={{ color: '#c4923a' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                </svg>
-                <span className="text-sm font-semibold" style={{ color: '#c4923a' }}>Special Rules</span>
               </div>
-              <p className="text-sm" style={{ color: '#a8a490' }}>{land.special_rules}</p>
+            )}
+
+            {/* Disclaimer */}
+            <div className="px-4 py-3 rounded-xl" style={{ background: '#1a1f16', border: '1px solid #252b21' }}>
+              <p className="text-xs" style={{ color: '#4a5046' }}>
+                Season data sourced from official state agency regulations (2025&ndash;2026). Dates and rules may change &mdash; always verify with your state wildlife agency before hunting.
+              </p>
             </div>
+
+            {/* Show something if no special rules, no agency, no contacts */}
+            {!land.special_rules && !land.managing_agency && !land.phone && !land.website && (
+              <EmptyTab message="No additional rules or property information available." />
+            )}
           </section>
         )}
 
-        {/* ---------- Nearby WMAs ---------- */}
+        {/* ---------- Nearby WMAs (always visible) ---------- */}
         {nearbyLands.length > 0 && (
           <section className="mb-8">
             <h2 className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: '#a8a490' }}>
@@ -451,14 +496,141 @@ export default function HuntDetailPage() {
             </div>
           </section>
         )}
-
-        {/* ---------- Disclaimer ---------- */}
-        <div className="px-4 py-3 rounded-xl mb-6" style={{ background: '#1a1f16', border: '1px solid #252b21' }}>
-          <p className="text-xs" style={{ color: '#4a5046' }}>
-            Season data sourced from official state agency regulations (2025&ndash;2026). Dates and rules may change &mdash; always verify with your state wildlife agency before hunting.
-          </p>
-        </div>
       </div>
+    </div>
+  );
+}
+
+// ---------- Sub-components ----------
+
+function EmptyTab({ message }: { message: string }) {
+  return (
+    <div
+      className="rounded-xl px-6 py-10 text-center"
+      style={{ background: '#252b21', border: '1px solid #2d342a' }}
+    >
+      <p className="text-sm" style={{ color: '#6e6b5e' }}>{message}</p>
+    </div>
+  );
+}
+
+function SpeciesAccordion({ group }: { group: ReturnType<typeof groupSeasons>[number] }) {
+  const [expanded, setExpanded] = useState(group.isOpen);
+
+  // Collect all unique weapon types for badge display
+  const weaponTypes = group.weapons.map((w) => w.weapon);
+
+  return (
+    <div
+      className="rounded-xl overflow-hidden"
+      style={{ background: '#252b21', border: '1px solid #2d342a' }}
+    >
+      {/* Accordion header */}
+      <button
+        onClick={() => setExpanded((prev) => !prev)}
+        className="w-full px-4 py-3 flex items-center gap-3 text-left"
+        style={{ background: expanded ? '#252b21' : 'transparent' }}
+      >
+        {/* Species icon + name */}
+        <span className="text-base">{SPECIES_ICONS[group.species] ?? '🎯'}</span>
+        <span className="text-sm font-semibold flex-1 min-w-0" style={{ color: '#e8e4d4' }}>
+          {group.species}
+        </span>
+
+        {/* Weapon badges */}
+        <div className="flex flex-wrap gap-1">
+          {weaponTypes.map((weapon) => {
+            const color = WEAPON_COLORS[weapon] ?? '#3d6b35';
+            return (
+              <span
+                key={weapon}
+                className="text-xs px-2 py-0.5 rounded-full"
+                style={{
+                  background: `${color}22`,
+                  color,
+                  border: `1px solid ${color}44`,
+                }}
+              >
+                {weapon}
+              </span>
+            );
+          })}
+        </div>
+
+        {/* Open/closed indicator */}
+        {group.isOpen ? (
+          <span className="flex items-center gap-1 text-xs flex-shrink-0" style={{ color: '#5fad52' }}>
+            <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: '#5fad52' }} />
+            Open
+          </span>
+        ) : (
+          <span className="text-xs flex-shrink-0" style={{ color: '#6e6b5e' }}>Closed</span>
+        )}
+
+        {/* Chevron */}
+        <svg
+          className="w-4 h-4 flex-shrink-0 transition-transform"
+          style={{ color: '#6e6b5e', transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
+          fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {/* Expanded content */}
+      {expanded && (
+        <div style={{ borderTop: '1px solid #2d342a' }}>
+          {group.weapons.map((weaponGroup) => (
+            <div key={weaponGroup.weapon} className="px-4 py-3" style={{ borderBottom: '1px solid #2d342a' }}>
+              <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: WEAPON_COLORS[weaponGroup.weapon] ?? '#a8a490' }}>
+                {weaponGroup.weapon}
+              </p>
+              <div className="space-y-1">
+                {weaponGroup.segments.map((season) => {
+                  const tags = parseSemanticTags(season);
+                  const open = isSeasonOpen(season);
+                  const showNotes = hasExtraInfo(season);
+
+                  return (
+                    <div key={season.id} className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-sm">
+                      {/* Date range */}
+                      <span style={{ color: open ? '#e8e4d4' : '#a8a490' }}>
+                        {fmtShort(season.start_date)} &ndash; {fmtShort(season.end_date)}
+                      </span>
+
+                      {/* Semantic tags */}
+                      {tags.map((tag) => (
+                        <span key={tag} className="text-xs" style={{ color: '#6e6b5e' }}>
+                          &middot; {tag}
+                        </span>
+                      ))}
+
+                      {/* Bag limit */}
+                      {season.bag_limit && (
+                        <span className="text-xs" style={{ color: '#6e6b5e' }}>
+                          &middot; Limit: {season.bag_limit}
+                        </span>
+                      )}
+
+                      {/* Extra notes (only if not redundant with tags) */}
+                      {showNotes && (
+                        <span className="text-xs" style={{ color: '#6e6b5e' }}>
+                          &middot; {season.notes}
+                        </span>
+                      )}
+
+                      {/* Open indicator */}
+                      {open && (
+                        <span className="w-1.5 h-1.5 rounded-full inline-block animate-pulse" style={{ background: '#5fad52' }} />
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
