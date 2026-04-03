@@ -36,6 +36,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# full-res GIS backups (simplified versions are in public/data/)
+public/data/_full/
+
+# claude worktrees
+.claude/worktrees/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
