@@ -72,12 +72,8 @@ export default function LandCard({
   const hasQuota = quotaHunts.length > 0;
 
   return (
-    <Link
-      href={`/hunt/${land.id}`}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick();
-      }}
+    <div
+      onClick={onClick}
       className="block group cursor-pointer rounded-xl transition-all duration-200 animate-slide-in-up"
       style={{
         background: isSelected ? '#2a3226' : '#222820',
@@ -191,16 +187,18 @@ export default function LandCard({
         )}
 
         {/* View Details link */}
-        <div
-          className="flex items-center gap-1 mt-3 pt-2 text-xs font-medium transition-colors group-hover:opacity-100 opacity-60"
+        <Link
+          href={`/hunt/${land.id}`}
+          onClick={(e) => e.stopPropagation()}
+          className="flex items-center gap-1 mt-3 pt-2 text-xs font-medium transition-colors hover:opacity-100 opacity-60"
           style={{ borderTop: '1px solid #2d342a', color: '#5fad52' }}
         >
-          View Details
+          View Full Details
           <svg className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
-        </div>
+        </Link>
       </div>
-    </Link>
+    </div>
   );
 }

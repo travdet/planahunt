@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { PublicLand, HuntingSeason, QuotaHunt, FishingRegulation } from '@/lib/types';
 
 interface DetailPanelProps {
@@ -98,6 +99,18 @@ export default function DetailPanel({
             </button>
           </div>
         </div>
+
+        {/* View full page link */}
+        <Link
+          href={`/hunt/${land.id}`}
+          className="inline-flex items-center gap-1.5 mt-3 text-xs font-medium px-3 py-1.5 rounded-lg transition-colors"
+          style={{ background: '#3d6b35', color: '#e8e4d4' }}
+        >
+          View Full Details
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </Link>
 
         {/* Quick stats */}
         <div className="flex flex-wrap gap-4 mt-3">
