@@ -9,7 +9,7 @@ import {
   QUOTA_HUNTS,
   FISHING_REGULATIONS,
 } from '@/data/sample';
-import { PublicLand, HuntingSeason } from '@/lib/types';
+import { PublicLand, HuntingSeason, FishingRegulation } from '@/lib/types';
 import {
   groupSeasons,
   fmtShort,
@@ -345,42 +345,7 @@ export default function HuntDetailPage() {
                   </p>
                 </div>
 
-                <div className="space-y-3">
-                  {fishingRegs.map((reg) => (
-                    <div
-                      key={reg.id}
-                      className="rounded-xl p-4"
-                      style={{ background: '#252b21', border: '1px solid #2d342a' }}
-                    >
-                      <div className="flex items-center justify-between gap-2 mb-2">
-                        <p className="text-sm font-semibold" style={{ color: '#e8e4d4' }}>{reg.species}</p>
-                        <span
-                          className="text-xs px-2 py-0.5 rounded-full capitalize flex-shrink-0"
-                          style={{
-                            background: reg.water_type === 'saltwater' ? 'rgba(45,90,142,0.2)' : 'rgba(61,107,53,0.2)',
-                            color: reg.water_type === 'saltwater' ? '#5a90c4' : '#5fad52',
-                          }}
-                        >
-                          {reg.water_type}
-                        </span>
-                      </div>
-                      <div className="space-y-1">
-                        {reg.bag_limit && (
-                          <p className="text-xs" style={{ color: '#a8a490' }}>Bag limit: {reg.bag_limit}</p>
-                        )}
-                        {reg.size_limit && (
-                          <p className="text-xs" style={{ color: '#a8a490' }}>Size limit: {reg.size_limit}</p>
-                        )}
-                        {reg.season && (
-                          <p className="text-xs" style={{ color: '#a8a490' }}>Season: {reg.season}</p>
-                        )}
-                        {reg.notes && (
-                          <p className="text-xs mt-1" style={{ color: '#6e6b5e' }}>{reg.notes}</p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <FishingAccordionList regs={fishingRegs} />
               </>
             )}
           </section>
@@ -629,6 +594,151 @@ function SpeciesAccordion({ group }: { group: ReturnType<typeof groupSeasons>[nu
               </div>
             </div>
           ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function FishingAccordionList({ regs }: { regs: FishingRegulation[] }) {
+  // Group by water type
+  const grouped = new Map<string, FishingRegulation[]>();
+  for (const reg of regs) {
+    const key = reg.water_type ?? 'other';
+    if (!grouped.has(key)) grouped.set(key, []);
+    grouped.get(key)!.push(reg);
+  }
+
+  const WATER_COLORS: Record<string, { bg: string; text: string }> = {
+    freshwater: { bg: 'rgba(61,107,53,0.2)', text: '#5fad52' },
+    saltwater: { bg: 'rgba(45,90,142,0.2)', text: '#5a90c4' },
+    other: { bg: '#252b21', text: '#a8a490' },
+  };
+
+  return (
+    <div className="space-y-2">
+      {[...grouped.entries()].map(([waterType, waterRegs]) => (
+        <FishingWaterGroup
+          key={waterType}
+          waterType={waterType}
+          regs={waterRegs}
+          colors={WATER_COLORS[waterType] ?? WATER_COLORS.other}
+        />
+      ))}
+    </div>
+  );
+}
+
+function FishingWaterGroup({
+  waterType,
+  regs,
+  colors,
+}: {
+  waterType: string;
+  regs: FishingRegulation[];
+  colors: { bg: string; text: string };
+}) {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <div
+      className="rounded-xl overflow-hidden"
+      style={{ background: '#252b21', border: '1px solid #2d342a' }}
+    >
+      {/* Group header — always visible */}
+      <button
+        onClick={() => setExpanded((prev) => !prev)}
+        className="w-full px-4 py-3 flex items-center gap-3 text-left"
+      >
+        <span className="text-base">{waterType === 'saltwater' ? '🌊' : '🐟'}</span>
+        <span className="text-sm font-semibold flex-1 capitalize" style={{ color: '#e8e4d4' }}>
+          {waterType}
+        </span>
+        <span
+          className="text-xs px-2 py-0.5 rounded-full"
+          style={{ background: colors.bg, color: colors.text }}
+        >
+          {regs.length} species
+        </span>
+        <svg
+          className="w-4 h-4 flex-shrink-0 transition-transform"
+          style={{ color: '#6e6b5e', transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
+          fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {/* Summary row when collapsed — show species names */}
+      {!expanded && (
+        <div className="px-4 pb-3 -mt-1">
+          <p className="text-xs" style={{ color: '#6e6b5e' }}>
+            {regs.map((r) => r.species).join(' · ')}
+          </p>
+        </div>
+      )}
+
+      {/* Expanded species list */}
+      {expanded && (
+        <div style={{ borderTop: '1px solid #2d342a' }}>
+          {regs.map((reg) => (
+            <FishingRow key={reg.id} reg={reg} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function FishingRow({ reg }: { reg: FishingRegulation }) {
+  const [open, setOpen] = useState(false);
+
+  // Build compact summary parts
+  const summaryParts: string[] = [];
+  if (reg.bag_limit) summaryParts.push(`Limit: ${reg.bag_limit}`);
+  if (reg.size_limit) summaryParts.push(`Size: ${reg.size_limit}`);
+
+  const hasDetails = !!(reg.season || reg.notes || reg.special_areas?.length);
+
+  return (
+    <div style={{ borderBottom: '1px solid #2d342a' }}>
+      <button
+        onClick={() => hasDetails && setOpen((prev) => !prev)}
+        className={`w-full px-4 py-2.5 flex items-center gap-2 text-left ${hasDetails ? 'cursor-pointer' : 'cursor-default'}`}
+      >
+        <span className="text-sm font-medium flex-1 min-w-0" style={{ color: '#e8e4d4' }}>
+          {reg.species}
+        </span>
+        {summaryParts.length > 0 && (
+          <span className="text-xs flex-shrink-0" style={{ color: '#a8a490' }}>
+            {summaryParts.join(' · ')}
+          </span>
+        )}
+        {hasDetails && (
+          <svg
+            className="w-3.5 h-3.5 flex-shrink-0 transition-transform"
+            style={{ color: '#6e6b5e', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
+            fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        )}
+      </button>
+
+      {/* Expanded details */}
+      {open && hasDetails && (
+        <div className="px-4 pb-3 space-y-1">
+          {reg.season && (
+            <p className="text-xs" style={{ color: '#a8a490' }}>Season: {reg.season}</p>
+          )}
+          {reg.special_areas && reg.special_areas.length > 0 && (
+            <p className="text-xs" style={{ color: '#a8a490' }}>
+              Special areas: {reg.special_areas.join(', ')}
+            </p>
+          )}
+          {reg.notes && (
+            <p className="text-xs" style={{ color: '#6e6b5e' }}>{reg.notes}</p>
+          )}
         </div>
       )}
     </div>
