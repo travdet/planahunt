@@ -8,6 +8,7 @@ import DetailPanel from '@/components/DetailPanel';
 import { FilterState, PublicLand, UserLocation } from '@/lib/types';
 import LayerToggle from '@/components/LayerToggle';
 import { LayerCategory } from '@/lib/mapLayers';
+import { filterFishingRegs } from '@/lib/seasonUtils';
 import {
   PUBLIC_LANDS,
   HUNTING_SEASONS,
@@ -244,7 +245,7 @@ export default function HomePage() {
   const selectedLand = selectedLandId ? PUBLIC_LANDS.find((l) => l.id === selectedLandId) : null;
   const selectedSeasons = selectedLandId ? HUNTING_SEASONS.filter((s) => s.land_id === selectedLandId) : [];
   const selectedQuotas = selectedLandId ? QUOTA_HUNTS.filter((q) => q.land_id === selectedLandId) : [];
-  const selectedFishing = selectedLandId ? FISHING_REGULATIONS.filter((f) => f.state === selectedLand?.state) : [];
+  const selectedFishing = selectedLandId && selectedLand ? filterFishingRegs(FISHING_REGULATIONS, selectedLand) : [];
 
   const todayHuntable = useMemo(() => {
     const today = new Date();

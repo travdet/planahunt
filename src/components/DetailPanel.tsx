@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { PublicLand, HuntingSeason, QuotaHunt, FishingRegulation } from '@/lib/types';
 import SeasonMatrix from '@/components/SeasonMatrix';
+import { filterFishingRegs } from '@/lib/seasonUtils';
 
 interface DetailPanelProps {
   land: PublicLand;
@@ -106,31 +107,88 @@ export default function DetailPanel({
       {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
 
-        {/* Season Matrix */}
-        {seasons.length > 0 && (
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#a8a490' }}>
-              Season Matrix
-            </h3>
+        {/* Season Matrix — always show */}
+        <div>
+          <h3 className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#a8a490' }}>
+            Hunting Seasons
+          </h3>
+          {seasons.length > 0 ? (
             <SeasonMatrix seasons={seasons} />
+          ) : (
+            <p className="text-xs px-3 py-2.5 rounded-lg" style={{ color: '#6e6b5e', background: '#252b21' }}>
+              No hunting seasons available for this property.
+            </p>
+          )}
+        </div>
+
+        {/* Quota Hunts Preview */}
+        {quotaHunts.length > 0 && (
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#c4923a' }}>
+              Quota Hunts ({quotaHunts.length})
+            </h3>
+            <div className="space-y-1.5">
+              {quotaHunts.map((hunt) => (
+                <div
+                  key={hunt.id}
+                  className="flex items-center justify-between gap-2 px-3 py-2 rounded-lg"
+                  style={{ background: 'rgba(196,146,58,0.06)', border: '1px solid rgba(196,146,58,0.15)' }}
+                >
+                  <div className="min-w-0">
+                    <p className="text-xs font-medium truncate" style={{ color: '#e8e4d4' }}>
+                      {hunt.species} — {hunt.hunt_type}
+                    </p>
+                    {hunt.dates && (
+                      <p className="text-xs truncate" style={{ color: '#a8a490' }}>{hunt.dates}</p>
+                    )}
+                  </div>
+                  {hunt.quota_size && (
+                    <span className="text-xs flex-shrink-0" style={{ color: '#c4923a' }}>
+                      {hunt.quota_size} permits
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
-        {/* Counts Section */}
-        {(quotaHunts.length > 0 || fishingRegs.length > 0) && (
-          <div className="space-y-1.5">
-            {quotaHunts.length > 0 && (
-              <p className="text-xs font-medium" style={{ color: '#c4923a' }}>
-                {quotaHunts.length} Quota Hunt{quotaHunts.length !== 1 ? 's' : ''} available
+        {/* Fishing Regs Preview — filtered for location, grouped by water type */}
+        {(() => {
+          const relevantRegs = filterFishingRegs(fishingRegs, land);
+          if (relevantRegs.length === 0) return null;
+          const byWater = new Map<string, FishingRegulation[]>();
+          for (const reg of relevantRegs) {
+            const key = reg.water_type ?? 'other';
+            if (!byWater.has(key)) byWater.set(key, []);
+            byWater.get(key)!.push(reg);
+          }
+          return (
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#5a90c4' }}>
+                Fishing Regulations ({relevantRegs.length})
+              </h3>
+              <p className="text-xs mb-2" style={{ color: '#6e6b5e' }}>
+                Statewide {land.state} regulations
               </p>
-            )}
-            {fishingRegs.length > 0 && (
-              <p className="text-xs font-medium" style={{ color: '#5a90c4' }}>
-                {fishingRegs.length} Statewide Fishing Regulation{fishingRegs.length !== 1 ? 's' : ''}
-              </p>
-            )}
-          </div>
-        )}
+              {[...byWater.entries()].map(([waterType, regs]) => (
+                <div key={waterType} className="mb-2">
+                  <div
+                    className="px-3 py-2 rounded-lg"
+                    style={{ background: '#252b21', border: '1px solid #2d342a' }}
+                  >
+                    <p className="text-xs font-medium capitalize mb-1" style={{ color: waterType === 'saltwater' ? '#5a90c4' : '#5fad52' }}>
+                      {waterType === 'saltwater' ? '🌊' : '🐟'} {waterType}
+                    </p>
+                    <p className="text-xs leading-relaxed" style={{ color: '#a8a490' }}>
+                      {regs.map((r) => r.species).join(' · ')}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          );
+        })()}
 
         {/* Special Rules */}
         {land.special_rules && (

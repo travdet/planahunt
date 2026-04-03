@@ -1,4 +1,4 @@
-import { HuntingSeason } from '@/lib/types';
+import { HuntingSeason, FishingRegulation, PublicLand } from '@/lib/types';
 
 // Format "2025-09-13" -> "Sep 13"
 export function fmtShort(dateStr: string): string {
@@ -133,6 +133,42 @@ export function buildSeasonMatrix(seasons: HuntingSeason[]): { rows: MatrixRow[]
   });
 
   return { rows, weapons };
+}
+
+/**
+ * Filter fishing regs relevant to a specific property.
+ * Saltwater regs only shown for coastal properties (within ~50mi of coast).
+ * Uses a simple longitude/latitude check per state's coastline.
+ */
+export function filterFishingRegs(regs: FishingRegulation[], land: PublicLand): FishingRegulation[] {
+  const stateRegs = regs.filter((r) => r.state === land.state);
+  if (!stateRegs.some((r) => r.water_type === 'saltwater')) return stateRegs;
+
+  // Check if this land is likely coastal
+  const isCoastal = checkCoastal(land);
+  if (isCoastal) return stateRegs;
+
+  // Inland property — only show freshwater
+  return stateRegs.filter((r) => r.water_type !== 'saltwater');
+}
+
+function checkCoastal(land: PublicLand): boolean {
+  if (!land.lat || !land.lng) return false;
+
+  // Rough coastal checks by state — is the property east/south enough to be near saltwater?
+  // These are generous boundaries (~50mi inland from coast)
+  const coastalChecks: Record<string, (lat: number, lng: number) => boolean> = {
+    GA: (lat, lng) => lng > -81.8 && lat < 32.2,        // GA coast is east of -81.8, south of 32.2
+    FL: (lat, lng) => lat < 28.0 || lng > -81.5 || lng < -86.5, // FL is mostly coastal
+    SC: (lat, lng) => lng > -80.5 && lat < 33.8,
+    NC: (lat, lng) => lng > -77.5 && lat < 35.5,
+    AL: (lat, lng) => lat < 31.0 && lng > -88.3,        // Mobile Bay area
+    LA: (lat, lng) => lat < 30.5,                         // Southern LA
+    MS: (lat, lng) => lat < 30.8 && lng > -89.5,         // Gulf coast
+  };
+
+  const check = coastalChecks[land.state];
+  return check ? check(land.lat, land.lng) : false;
 }
 
 export function parseSemanticTags(season: HuntingSeason): string[] {

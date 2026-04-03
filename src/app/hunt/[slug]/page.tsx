@@ -18,6 +18,7 @@ import {
   WEAPON_COLORS,
   SPECIES_ICONS,
   parseSemanticTags,
+  filterFishingRegs,
 } from '@/lib/seasonUtils';
 
 // ---------- helpers ----------
@@ -107,7 +108,7 @@ export default function HuntDetailPage() {
   // Data for this land
   const seasons = HUNTING_SEASONS.filter((s) => s.land_id === land.id);
   const quotaHunts = QUOTA_HUNTS.filter((q) => q.land_id === land.id);
-  const fishingRegs = FISHING_REGULATIONS.filter((r) => r.state === land.state);
+  const fishingRegs = filterFishingRegs(FISHING_REGULATIONS, land);
   const seasonGroups = groupSeasons(seasons);
 
   // Nearby lands
