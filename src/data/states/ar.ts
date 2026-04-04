@@ -960,6 +960,31 @@ export const AR_SEASONS: HuntingSeason[] = [
     tags: [],
     notes: 'Permit-only. Youth Hunt Oct 4-5; Regular Hunt 1 Oct 6-10; Youth Hunt 2 Oct 25-26; Regular Hunt 2 Oct 27-31. Buffalo National River area. Resident private land permit: $5. Non-resident: $300.',
   },
+
+  // ── STATEWIDE DEFAULT SEASONS (no land_id) ──────────────────────────────
+  // AR WMAs follow state seasons unless a specific zone/permit rule applies.
+  // Source: AGFC 2025-2026 Hunting Guide. Verify at agfc.com.
+
+  { id: 'ar-statewide-deer-archery', state: 'AR', species: 'Deer', weapon_type: 'Archery',
+    start_date: '2025-09-27', end_date: '2025-10-03', quota_required: false, bag_limit: '2 antlered, 2 antlerless/zone (varies)',
+    notes: 'Early archery Sep 27 – Oct 3. General archery Oct 1 – Feb 28. Check WMA zone restrictions.',
+    tags: ['deer', 'archery'] },
+  { id: 'ar-statewide-deer-muzzleloader', state: 'AR', species: 'Deer', weapon_type: 'Muzzleloader',
+    start_date: '2025-10-18', end_date: '2025-10-26', quota_required: false, bag_limit: '2 antlered/zone',
+    notes: 'Muzzleloader-only season Oct 18–26. Some WMAs restrict to quota hunts only.',
+    tags: ['deer', 'muzzleloader'] },
+  { id: 'ar-statewide-deer-modern-gun', state: 'AR', species: 'Deer', weapon_type: 'Rifle',
+    start_date: '2025-11-08', end_date: '2025-12-05', quota_required: false, bag_limit: '2 antlered/zone + antlerless as designated',
+    notes: 'Modern gun season Nov 8 – Dec 5 (core). Additional antlerless opportunities vary by zone and WMA. Antler restriction: bucks must have ≥3 points on one beam in some zones.',
+    tags: ['deer', 'rifle'] },
+  { id: 'ar-statewide-turkey-spring', state: 'AR', species: 'Turkey', weapon_type: 'Shotgun',
+    start_date: '2026-04-11', end_date: '2026-05-04', quota_required: false, bag_limit: '1 gobbler/day, 2/season',
+    notes: 'Spring gobbler season Apr 11 – May 4. Youth Apr 5–6. Legal methods: shotgun, archery, crossbow, muzzleloader.',
+    tags: ['turkey', 'spring'] },
+  { id: 'ar-statewide-small-game', state: 'AR', species: 'Small Game', weapon_type: 'Shotgun',
+    start_date: '2025-10-01', end_date: '2026-02-28', quota_required: false, bag_limit: 'Squirrel: 10/day; Rabbit: 10/day; Quail: 12/day',
+    notes: 'Squirrel, rabbit, quail, dove. Seasons vary by species — check AGFC guide.',
+    tags: ['small-game', 'squirrel', 'rabbit', 'quail'] },
 ];
 
 export const AR_QUOTA_HUNTS: QuotaHunt[] = [

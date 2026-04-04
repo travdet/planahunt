@@ -881,6 +881,27 @@ export const LA_SEASONS: HuntingSeason[] = [
     tags: [],
     notes: 'Spring season also available May 2-24 where open.',
   },
+
+  // ── STATEWIDE DEFAULT SEASONS (no land_id) ──────────────────────────────
+  // LA WMAs follow state seasons unless WMA-specific rules apply.
+  // Source: LDWF 2025-2026 Hunting Season Summary. Verify at wlf.louisiana.gov.
+
+  { id: 'la-statewide-deer-archery', state: 'LA', species: 'Deer', weapon_type: 'Archery',
+    start_date: '2025-10-04', end_date: '2026-01-18', quota_required: false, bag_limit: '6 deer/season (≥3 antlered)',
+    notes: 'Archery season varies by zone (Oct 4 or later). Antlered deer must have ≥3 points on one antler OR ≥13" spread in some zones. Check WMA-specific rules.',
+    tags: ['deer', 'archery'] },
+  { id: 'la-statewide-deer-firearms', state: 'LA', species: 'Deer', weapon_type: 'Rifle',
+    start_date: '2025-11-08', end_date: '2026-01-18', quota_required: false, bag_limit: '6 deer/season (≥3 antlered)',
+    notes: 'Firearms season varies by zone — generally Nov 8 through Jan. Antler restriction varies by parish/zone. Check WMA-specific rules and zone map.',
+    tags: ['deer', 'rifle'] },
+  { id: 'la-statewide-turkey-spring', state: 'LA', species: 'Turkey', weapon_type: 'Shotgun',
+    start_date: '2026-04-04', end_date: '2026-05-03', quota_required: false, bag_limit: '1 gobbler/day, 3/season',
+    notes: 'Spring gobbler season Apr 4 – May 3. Youth Mar 28-29. Gobblers or bearded birds only.',
+    tags: ['turkey', 'spring'] },
+  { id: 'la-statewide-small-game', state: 'LA', species: 'Small Game', weapon_type: 'Shotgun',
+    start_date: '2025-10-04', end_date: '2026-03-01', quota_required: false, bag_limit: 'Squirrel: 8/day; Rabbit: 8/day',
+    notes: 'Small game season varies by species. Squirrel, rabbit, quail, dove. Check LDWF guide.',
+    tags: ['small-game', 'squirrel', 'rabbit'] },
 ];
 
 export const LA_QUOTA_HUNTS: QuotaHunt[] = [

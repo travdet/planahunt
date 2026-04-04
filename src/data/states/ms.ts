@@ -959,6 +959,27 @@ export const MS_SEASONS: HuntingSeason[] = [
     tags: [],
     notes: 'Split 1: Nov 28-30. Split 2: Dec 6-Jan 31. Youth/Military: Feb 7-8. Species sub-limits apply.',
   },
+
+  // ── STATEWIDE DEFAULT SEASONS (no land_id) ──────────────────────────────
+  // MS WMAs and public lands follow state seasons unless WMA-specific rules apply.
+  // Source: MDWFP 2025-2026 Hunting Regulations. Verify at mdwfp.com.
+
+  { id: 'ms-statewide-deer-archery', state: 'MS', species: 'Deer', weapon_type: 'Archery',
+    start_date: '2025-10-01', end_date: '2026-02-15', quota_required: false, bag_limit: '3 antlered/season + antlerless as designated',
+    notes: 'Archery-only season (concurrent with and after firearms). Antler restriction: bucks must have ≥4 points on one antler (most zones). Check WMA zone map.',
+    tags: ['deer', 'archery'] },
+  { id: 'ms-statewide-deer-firearms', state: 'MS', species: 'Deer', weapon_type: 'Rifle',
+    start_date: '2025-11-01', end_date: '2026-01-31', quota_required: false, bag_limit: '3 antlered/season',
+    notes: 'Firearms season varies by zone — generally Nov 1 through Jan 31. Antler restriction (≥4 points one antler) applies statewide on WMAs. Either-sex days designated by WMA.',
+    tags: ['deer', 'rifle'] },
+  { id: 'ms-statewide-turkey-spring', state: 'MS', species: 'Turkey', weapon_type: 'Shotgun',
+    start_date: '2026-03-15', end_date: '2026-05-01', quota_required: false, bag_limit: '1 gobbler/day, 3/season',
+    notes: 'Spring gobbler season Mar 15 – May 1. Youth Mar 8-9. Gobblers only.',
+    tags: ['turkey', 'spring'] },
+  { id: 'ms-statewide-small-game', state: 'MS', species: 'Small Game', weapon_type: 'Shotgun',
+    start_date: '2025-10-01', end_date: '2026-02-28', quota_required: false, bag_limit: 'Squirrel: 10/day; Rabbit: 10/day',
+    notes: 'Squirrel, rabbit, quail, dove on WMAs. Seasons vary by species — check MDWFP guide.',
+    tags: ['small-game', 'squirrel', 'rabbit'] },
 ];
 
 export const MS_QUOTA_HUNTS: QuotaHunt[] = [

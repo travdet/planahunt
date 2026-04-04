@@ -1370,6 +1370,31 @@ export const FL_SEASONS: HuntingSeason[] = [
   { id: 'fl-avon-park-deer-muzzle', state: 'FL', land_id: 'fl-wma-avon-park', species: 'Deer', weapon_type: 'Muzzleloader', start_date: '2025-10-18', end_date: '2025-10-31', quota_required: false, bag_limit: '5/season', tags: ['deer', 'muzzleloader'] },
   { id: 'fl-avon-park-deer-gun', state: 'FL', land_id: 'fl-wma-avon-park', species: 'Deer', weapon_type: 'Rifle', start_date: '2025-11-01', end_date: '2026-01-18', quota_required: false, bag_limit: '5/season (2/day)', tags: ['deer', 'rifle'] },
   { id: 'fl-avon-park-turkey', state: 'FL', land_id: 'fl-wma-avon-park', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2026-03-07', end_date: '2026-04-12', quota_required: false, bag_limit: '2 gobblers/season', tags: ['turkey', 'spring'] },
+
+  // ── STATEWIDE DEFAULT SEASONS (no land_id) ──────────────────────────────
+  // FL WMAs use a compartment system — these represent typical windows.
+  // Always verify specific WMA regulation brochure at myfwc.com.
+
+  { id: 'fl-statewide-deer-archery', state: 'FL', species: 'Deer', weapon_type: 'Archery',
+    start_date: '2025-09-13', end_date: '2025-10-24', quota_required: false, bag_limit: '5/season (2/day)',
+    notes: 'Archery-only season. Crossbows legal with permit. Dates vary by WMA compartment — check myfwc.com WMA brochure.',
+    tags: ['deer', 'archery'] },
+  { id: 'fl-statewide-deer-muzzleloader', state: 'FL', species: 'Deer', weapon_type: 'Muzzleloader',
+    start_date: '2025-10-18', end_date: '2025-10-31', quota_required: false, bag_limit: '5/season (2/day)',
+    notes: 'Muzzleloader season varies by WMA compartment.',
+    tags: ['deer', 'muzzleloader'] },
+  { id: 'fl-statewide-deer-general', state: 'FL', species: 'Deer', weapon_type: 'Rifle',
+    start_date: '2025-11-01', end_date: '2026-01-18', quota_required: false, bag_limit: '5/season (2/day)',
+    notes: 'General gun season Nov 1 – Jan 18. Antler restriction: ≥3 points one antler OR ≥10" main beam. Quota hunts layer on top.',
+    tags: ['deer', 'rifle'] },
+  { id: 'fl-statewide-turkey-spring', state: 'FL', species: 'Turkey', weapon_type: 'Shotgun',
+    start_date: '2026-03-07', end_date: '2026-04-12', quota_required: false, bag_limit: '2 gobblers/season',
+    notes: 'Spring turkey Mar 7 – Apr 12. Osceola subspecies. Youth Feb 28 – Mar 1. Many WMAs use quota permits.',
+    tags: ['turkey', 'spring'] },
+  { id: 'fl-statewide-hog', state: 'FL', species: 'Feral Hog', weapon_type: 'Rifle',
+    start_date: '2025-07-01', end_date: '2026-06-30', quota_required: false, bag_limit: 'No limit',
+    notes: 'Feral hogs may be taken year-round during open seasons. No bag limit.',
+    tags: ['hog', 'rifle'] },
 ];
 
 export const FL_QUOTA_HUNTS: QuotaHunt[] = [

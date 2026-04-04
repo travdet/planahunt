@@ -108,18 +108,30 @@ export default function DetailPanel({
       <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
 
         {/* Season Matrix — always show */}
-        <div>
-          <h3 className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#a8a490' }}>
-            Hunting Seasons
-          </h3>
-          {seasons.length > 0 ? (
-            <SeasonMatrix seasons={seasons} />
-          ) : (
-            <p className="text-xs px-3 py-2.5 rounded-lg" style={{ color: '#6e6b5e', background: '#252b21' }}>
-              No hunting seasons available for this property.
-            </p>
-          )}
-        </div>
+        {(() => {
+          const isStatewideSeasons = seasons.length > 0 && seasons.every((s) => !s.land_id);
+          return (
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#a8a490' }}>
+                Hunting Seasons
+              </h3>
+              {isStatewideSeasons && (
+                <p className="text-xs mb-2" style={{ color: '#6e6b5e' }}>
+                  Statewide {land.state} seasons apply — zone/area rules in special rules below
+                </p>
+              )}
+              {seasons.length > 0 ? (
+                <SeasonMatrix seasons={seasons} />
+              ) : (
+                <p className="text-xs px-3 py-2.5 rounded-lg" style={{ color: '#6e6b5e', background: '#252b21' }}>
+                  {land.hunting_allowed === false
+                    ? 'Hunting not permitted on this property.'
+                    : 'No hunting season data available — check agency website.'}
+                </p>
+              )}
+            </div>
+          );
+        })()}
 
         {/* Quota Hunts Preview */}
         {quotaHunts.length > 0 && (

@@ -1464,6 +1464,55 @@ export const GA_SEASONS: HuntingSeason[] = [
   { id: 'ga-bond-swamp-deer', state: 'GA', land_id: 'ga-nwr-bond-swamp', species: 'Deer', weapon_type: 'Rifle', start_date: '2025-10-18', end_date: '2026-01-11', quota_required: true, buck_only: false, bag_limit: 'Per refuge regs', notes: 'Quota hunts via Recreation.gov. Refuge permit required. 6,980 acres open.', tags: ['deer', 'quota', 'rifle'] },
   { id: 'ga-bond-swamp-turkey', state: 'GA', land_id: 'ga-nwr-bond-swamp', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2026-04-04', end_date: '2026-05-15', quota_required: true, bag_limit: '1 gobbler per permit', notes: 'Spring turkey. Refuge permit required.', tags: ['turkey', 'quota', 'spring'] },
   { id: 'ga-bond-swamp-small-game', state: 'GA', land_id: 'ga-nwr-bond-swamp', species: 'Small Game', weapon_type: 'Shotgun', start_date: '2025-10-01', end_date: '2026-02-28', quota_required: true, bag_limit: 'Statewide limits', notes: 'Squirrel, rabbit, quail. Refuge permit required.', tags: ['squirrel', 'rabbit', 'quail'] },
+
+  // ── STATEWIDE DEFAULT SEASONS (no land_id) ──────────────────────────────
+  // These apply to all GA WMAs and public lands that follow standard state
+  // regulations (Zones 2–5). Zone 1 (North GA mountains) has more restricted
+  // dates — see each land's special_rules. WMAs may also have additional
+  // quota hunts layered on top of these general seasons.
+  // Source: GA DNR 2025-2026 Wildlife Management Area Regulations.
+
+  { id: 'ga-statewide-deer-archery',    state: 'GA', species: 'Deer', weapon_type: 'Archery',
+    start_date: '2025-09-13', end_date: '2025-10-10', quota_required: false,
+    buck_only: true, bag_limit: '2 antlered bucks/season statewide',
+    notes: 'Archery only. Antlered deer — bucks must meet local antler restrictions. Applies Zones 2–5; Zone 1 dates differ.',
+    tags: ['deer', 'archery'] },
+
+  { id: 'ga-statewide-deer-primitive',  state: 'GA', species: 'Deer', weapon_type: 'Muzzleloader',
+    start_date: '2025-10-11', end_date: '2025-10-17', quota_required: false,
+    buck_only: true, bag_limit: '2 antlered bucks/season statewide',
+    notes: 'Archery, air bows, muzzleloaders, and crossbows. Scopes legal on muzzleloaders. Buck only.',
+    tags: ['deer', 'muzzleloader', 'primitive'] },
+
+  { id: 'ga-statewide-deer-firearms',   state: 'GA', species: 'Deer', weapon_type: 'Rifle',
+    start_date: '2025-10-18', end_date: '2025-11-29', quota_required: false,
+    buck_only: true, bag_limit: '2 antlered bucks/season statewide',
+    notes: 'General firearms. Buck only. Antler restrictions vary by county/zone — check your WMA special rules. Either-sex days designated by individual WMAs.',
+    tags: ['deer', 'rifle', 'firearms'] },
+
+  { id: 'ga-statewide-deer-archery-late', state: 'GA', species: 'Deer', weapon_type: 'Archery',
+    start_date: '2025-12-01', end_date: '2026-01-11', quota_required: false,
+    buck_only: true, bag_limit: '2 antlered bucks/season statewide',
+    notes: 'Late archery season. Buck only. Some WMAs may have either-sex bonus hunts during this period.',
+    tags: ['deer', 'archery', 'late-season'] },
+
+  { id: 'ga-statewide-turkey-spring',   state: 'GA', species: 'Turkey', weapon_type: 'Shotgun',
+    start_date: '2026-04-04', end_date: '2026-05-15', quota_required: false,
+    bag_limit: '3 gobblers/season statewide (1 per area per trip)',
+    notes: 'Gobblers only. Shotgun, archery, or crossbow. Youth/mobility-impaired season Mar 22–23. Many WMAs require quota permit — check GoOutdoorsGeorgia.com.',
+    tags: ['turkey', 'spring', 'shotgun'] },
+
+  { id: 'ga-statewide-dove-early',      state: 'GA', species: 'Dove', weapon_type: 'Shotgun',
+    start_date: '2025-09-06', end_date: '2025-11-25', quota_required: false,
+    bag_limit: '15/day, 45 in possession',
+    notes: 'Early dove season (Sep 6 – Nov 25, selected dates). Mourning, white-winged, and Eurasian collared dove. Steel/non-toxic shot over planted fields.',
+    tags: ['dove', 'shotgun', 'migratory'] },
+
+  { id: 'ga-statewide-small-game',      state: 'GA', species: 'Small Game', weapon_type: 'Shotgun',
+    start_date: '2025-11-22', end_date: '2026-02-28', quota_required: false,
+    bag_limit: 'Squirrel: 12/day; Rabbit: 12/day; Quail: 12/day',
+    notes: 'Squirrel, rabbit, quail, raccoon, opossum. Quail hunting limited to WMAs with managed populations. Check individual WMA for quail availability.',
+    tags: ['small-game', 'squirrel', 'rabbit', 'quail', 'shotgun'] },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
