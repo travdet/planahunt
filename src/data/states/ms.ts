@@ -31,8 +31,8 @@ export const MS_LANDS: PublicLand[] = [
   // ── NATIONAL FORESTS ──────────────────────────────────────────────────────
   {
     id: 'ms-desoto-national-forest',
+    name: 'Desoto National Forest',
     state: 'MS',
-    name: 'De Soto National Forest',
     type: 'National Forest',
     acreage: 518587,
     counties: ['Perry', 'Stone', 'George', 'Harrison', 'Forrest', 'Jones', 'Wayne'],
@@ -47,8 +47,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-delta-national-forest',
+    name: 'Delta National Forest',
     state: 'MS',
-    name: 'Delta National Forest (Sunflower WMA)',
     type: 'National Forest',
     acreage: 59542,
     counties: ['Sharkey', 'Humphreys'],
@@ -64,8 +64,8 @@ export const MS_LANDS: PublicLand[] = [
   // ── NATIONAL WILDLIFE REFUGES ─────────────────────────────────────────────
   {
     id: 'ms-yazoo-nwr',
+    name: 'Yazoo NWR',
     state: 'MS',
-    name: 'Yazoo National Wildlife Refuge',
     type: 'National Wildlife Refuge',
     acreage: 13372,
     counties: ['Sharkey', 'Issaquena'],
@@ -80,8 +80,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-hillside-nwr',
+    name: 'Hillside NWR',
     state: 'MS',
-    name: 'Hillside National Wildlife Refuge',
     type: 'National Wildlife Refuge',
     acreage: 15597,
     counties: ['Holmes'],
@@ -96,8 +96,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-panther-swamp-nwr',
+    name: 'Panther Swamp NWR',
     state: 'MS',
-    name: 'Panther Swamp National Wildlife Refuge',
     type: 'National Wildlife Refuge',
     acreage: 38000,
     counties: ['Yazoo', 'Sharkey'],
@@ -112,8 +112,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-morgan-brake-nwr',
+    name: 'Morgan Brake NWR',
     state: 'MS',
-    name: 'Morgan Brake National Wildlife Refuge',
     type: 'National Wildlife Refuge',
     acreage: 7008,
     counties: ['Holmes'],
@@ -128,8 +128,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-tallahatchie-nwr',
+    name: 'Tallahatchie NWR',
     state: 'MS',
-    name: 'Tallahatchie National Wildlife Refuge',
     type: 'National Wildlife Refuge',
     acreage: 5810,
     counties: ['Tallahatchie'],
@@ -145,8 +145,8 @@ export const MS_LANDS: PublicLand[] = [
   // ── DELTA REGION WMAs ─────────────────────────────────────────────────────
   {
     id: 'ms-mahannah',
+    name: 'Mahannah',
     state: 'MS',
-    name: 'Mahannah WMA',
     type: 'WMA',
     acreage: 12675,
     counties: ['Warren', 'Issaquena'],
@@ -161,8 +161,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-phil-bryant',
+    name: 'Phil Bryant',
     state: 'MS',
-    name: 'Phil Bryant WMA',
     type: 'WMA',
     acreage: 17816,
     counties: ['Warren', 'Issaquena'],
@@ -177,8 +177,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-malmaison',
+    name: 'Malmaison',
     state: 'MS',
-    name: 'Malmaison WMA',
     type: 'WMA',
     acreage: 9696,
     counties: ['Grenada', 'Carroll', 'Leflore'],
@@ -193,8 +193,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-sunflower',
+    name: 'Sunflower',
     state: 'MS',
-    name: 'Sunflower WMA',
     type: 'WMA',
     acreage: 58480,
     counties: ['Sharkey'],
@@ -209,8 +209,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-lake-george',
+    name: 'Lake George',
     state: 'MS',
-    name: 'Lake George WMA',
     type: 'WMA',
     acreage: 8383,
     counties: ['Yazoo'],
@@ -225,8 +225,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-howard-miller',
+    name: 'Howard Miller',
     state: 'MS',
-    name: 'Howard Miller WMA',
     type: 'WMA',
     acreage: 2420,
     counties: ['Issaquena'],
@@ -241,8 +241,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-shipland',
+    name: 'Shipland',
     state: 'MS',
-    name: 'Shipland WMA',
     type: 'WMA',
     acreage: 3642,
     counties: ['Issaquena'],
@@ -257,8 +257,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-sky-lake',
+    name: 'Sky Lake',
     state: 'MS',
-    name: 'Sky Lake WMA',
     type: 'WMA',
     acreage: 4306,
     counties: ['Humphreys', 'Leflore'],
@@ -273,8 +273,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-twin-oaks',
+    name: 'Twin Oaks',
     state: 'MS',
-    name: 'Twin Oaks WMA',
     type: 'WMA',
     acreage: 5847,
     counties: ['Sharkey'],
@@ -289,8 +289,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-leroy-percy',
+    name: 'Leroy Percy',
     state: 'MS',
-    name: 'Leroy Percy WMA',
     type: 'WMA',
     acreage: 1642,
     counties: ['Washington'],
@@ -305,8 +305,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-charlie-capps',
+    name: 'Charlie Capps',
     state: 'MS',
-    name: 'Charlie Capps WMA',
     type: 'WMA',
     acreage: 600,
     counties: ['Bolivar'],
@@ -338,8 +338,8 @@ export const MS_LANDS: PublicLand[] = [
   // ── SOUTHWEST REGION WMAs ─────────────────────────────────────────────────
   {
     id: 'ms-copiah-county',
+    name: 'Copiah County',
     state: 'MS',
-    name: 'Copiah County WMA',
     type: 'WMA',
     acreage: 6810,
     counties: ['Copiah'],
@@ -354,8 +354,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-caston-creek',
+    name: 'Caston Creek',
     state: 'MS',
-    name: 'Caston Creek WMA',
     type: 'WMA',
     acreage: 29875,
     counties: ['Amite', 'Franklin'],
@@ -370,8 +370,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-sandy-creek',
+    name: 'Sandy Creek',
     state: 'MS',
-    name: 'Sandy Creek WMA',
     type: 'WMA',
     acreage: 16407,
     counties: ['Adams', 'Franklin'],
@@ -386,8 +386,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-bienville',
+    name: 'Bienville',
     state: 'MS',
-    name: 'Bienville WMA',
     type: 'WMA',
     acreage: 26136,
     counties: ['Scott'],
@@ -402,8 +402,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-caney-creek',
+    name: 'Caney Creek',
     state: 'MS',
-    name: 'Caney Creek WMA',
     type: 'WMA',
     acreage: 28000,
     counties: ['Smith', 'Scott'],
@@ -418,8 +418,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-marion-county',
+    name: 'Marion County',
     state: 'MS',
-    name: 'Marion County WMA',
     type: 'WMA',
     acreage: 7200,
     counties: ['Marion'],
@@ -434,8 +434,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-canemount',
+    name: 'Canemount',
     state: 'MS',
-    name: 'Canemount WMA',
     type: 'WMA',
     acreage: 3587,
     counties: ['Claiborne'],
@@ -450,8 +450,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-pearl-river-wma',
-    state: 'MS',
     name: 'Pearl River WMA',
+    state: 'MS',
     type: 'WMA',
     acreage: 6925,
     counties: ['Madison'],
@@ -467,8 +467,8 @@ export const MS_LANDS: PublicLand[] = [
   // ── SOUTHEAST REGION WMAs ─────────────────────────────────────────────────
   {
     id: 'ms-tallahala',
+    name: 'Tallahala',
     state: 'MS',
-    name: 'Tallahala WMA',
     type: 'WMA',
     acreage: 28120,
     counties: ['Newton', 'Scott', 'Smith', 'Jasper'],
@@ -483,8 +483,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-leaf-river',
+    name: 'Leaf River',
     state: 'MS',
-    name: 'Leaf River WMA',
     type: 'WMA',
     acreage: 42000,
     counties: ['Perry'],
@@ -499,8 +499,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-chickasawhay',
+    name: 'Chickasawhay',
     state: 'MS',
-    name: 'Chickasawhay WMA',
     type: 'WMA',
     acreage: 30000,
     counties: ['Jones'],
@@ -515,8 +515,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-pascagoula-river',
+    name: 'Pascagoula River',
     state: 'MS',
-    name: 'Pascagoula River WMA',
     type: 'WMA',
     acreage: 36549,
     counties: ['George', 'Jackson'],
@@ -531,8 +531,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-red-creek',
+    name: 'Red Creek',
     state: 'MS',
-    name: 'Red Creek WMA',
     type: 'WMA',
     acreage: 22789,
     counties: ['Stone', 'George', 'Jackson'],
@@ -547,8 +547,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-mason-creek',
+    name: 'Mason Creek',
     state: 'MS',
-    name: 'Mason Creek WMA',
     type: 'WMA',
     acreage: 28000,
     counties: ['Greene'],
@@ -563,8 +563,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-little-biloxi',
+    name: 'Little Biloxi',
     state: 'MS',
-    name: 'Little Biloxi WMA',
     type: 'WMA',
     acreage: 14540,
     counties: ['Stone', 'Harrison'],
@@ -579,8 +579,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-ward-bayou',
+    name: 'Ward Bayou',
     state: 'MS',
-    name: 'Ward Bayou WMA',
     type: 'WMA',
     acreage: 13234,
     counties: ['Jackson'],
@@ -595,8 +595,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-old-river',
+    name: 'Old River',
     state: 'MS',
-    name: 'Old River WMA',
     type: 'WMA',
     acreage: 14764,
     counties: ['Pearl River'],
@@ -611,8 +611,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-wolf-river',
+    name: 'Wolf River',
     state: 'MS',
-    name: 'Wolf River WMA',
     type: 'WMA',
     acreage: 10881,
     counties: ['Lamar', 'Pearl River'],
@@ -628,8 +628,8 @@ export const MS_LANDS: PublicLand[] = [
   // ── NORTHEAST REGION WMAs ─────────────────────────────────────────────────
   {
     id: 'ms-canal-section',
+    name: 'Canal Section',
     state: 'MS',
-    name: 'Canal Section WMA',
     type: 'WMA',
     acreage: 26000,
     counties: ['Itawamba', 'Monroe'],
@@ -644,8 +644,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-chickasaw',
+    name: 'Chickasaw',
     state: 'MS',
-    name: 'Chickasaw WMA',
     type: 'WMA',
     acreage: 27259,
     counties: ['Chickasaw'],
@@ -660,8 +660,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-divide-section',
+    name: 'Divide Section',
     state: 'MS',
-    name: 'Divide Section WMA',
     type: 'WMA',
     acreage: 15337,
     counties: ['Tishomingo', 'Prentiss'],
@@ -676,8 +676,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-tuscumbia',
+    name: 'Tuscumbia',
     state: 'MS',
-    name: 'Tuscumbia WMA',
     type: 'WMA',
     acreage: 2436,
     counties: ['Alcorn'],
@@ -693,8 +693,8 @@ export const MS_LANDS: PublicLand[] = [
   // ── NORTHWEST REGION WMAs ─────────────────────────────────────────────────
   {
     id: 'ms-upper-sardis',
+    name: 'Upper Sardis',
     state: 'MS',
-    name: 'Upper Sardis WMA',
     type: 'WMA',
     acreage: 42274,
     counties: ['Lafayette'],
@@ -709,8 +709,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-calhoun-county',
+    name: 'Calhoun County',
     state: 'MS',
-    name: 'Calhoun County WMA',
     type: 'WMA',
     acreage: 10900,
     counties: ['Calhoun'],
@@ -725,8 +725,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-sardis-waterfowl',
+    name: 'Sardis Waterfowl',
     state: 'MS',
-    name: 'Sardis Waterfowl WMA',
     type: 'WMA',
     acreage: 3700,
     counties: ['Lafayette'],
@@ -741,8 +741,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-graham-lake-waterfowl',
+    name: 'Graham Lake Waterfowl',
     state: 'MS',
-    name: 'Graham Lake Waterfowl WMA',
     type: 'WMA',
     acreage: 1400,
     counties: ['Lafayette'],
@@ -758,8 +758,8 @@ export const MS_LANDS: PublicLand[] = [
   // ── EAST-CENTRAL REGION WMAs ──────────────────────────────────────────────
   {
     id: 'ms-choctaw',
+    name: 'Choctaw',
     state: 'MS',
-    name: 'Choctaw WMA',
     type: 'WMA',
     acreage: 24314,
     counties: ['Choctaw', 'Winston'],
@@ -774,8 +774,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-nanih-waiya',
+    name: 'Nanih Waiya',
     state: 'MS',
-    name: 'Nanih Waiya WMA',
     type: 'WMA',
     acreage: 7655,
     counties: ['Neshoba', 'Winston'],
@@ -790,8 +790,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-john-w-starr',
+    name: 'John W Starr',
     state: 'MS',
-    name: 'John W. Starr WMA',
     type: 'WMA',
     acreage: 8244,
     counties: ['Oktibbeha', 'Winston'],
@@ -806,8 +806,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-okatibbee',
+    name: 'Okatibbee',
     state: 'MS',
-    name: 'Okatibbee WMA',
     type: 'WMA',
     acreage: 6883,
     counties: ['Lauderdale', 'Kemper'],
@@ -822,8 +822,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-black-prairie',
+    name: 'Black Prairie',
     state: 'MS',
-    name: 'Black Prairie WMA',
     type: 'WMA',
     acreage: 5673,
     counties: ['Lowndes'],
@@ -838,8 +838,8 @@ export const MS_LANDS: PublicLand[] = [
   },
   {
     id: 'ms-yockanookany',
+    name: 'Yockanookany',
     state: 'MS',
-    name: 'Yockanookany WMA',
     type: 'WMA',
     acreage: 2379,
     counties: ['Attala'],
@@ -854,6 +854,181 @@ export const MS_LANDS: PublicLand[] = [
   },
 ];
 
-export const MS_SEASONS: HuntingSeason[] = [];
-export const MS_QUOTA_HUNTS: QuotaHunt[] = [];
-export const MS_FISHING: FishingRegulation[] = [];
+export const MS_SEASONS: HuntingSeason[] = [
+  {
+    id: 'ms-deer-delta-archery',
+    land_id: 'ms-mahannah',
+    state: 'MS',
+    species: 'White-tailed Deer',
+    weapon_type: 'Archery',
+    start_date: '2025-10-01',
+    end_date: '2025-11-21',
+    bag_limit: '1/day; 3 bucks/season. Antler rule: 12" inside spread OR 15" main beam.',
+    quota_required: false,
+    tags: [],
+    notes: 'Early velvet archery: Sept 12-14 (special permit, legal bucks only). Delta Zone.',
+  },
+  {
+    id: 'ms-deer-delta-firearms',
+    land_id: 'ms-mahannah',
+    state: 'MS',
+    species: 'White-tailed Deer',
+    weapon_type: 'Firearms',
+    start_date: '2025-11-22',
+    end_date: '2026-01-21',
+    bag_limit: '1/day; season total varies by dates. Legal bucks only on public land.',
+    quota_required: false,
+    tags: [],
+    notes: 'Multiple splits with/without dogs. Either-sex on private land. Delta Zone.',
+  },
+  {
+    id: 'ms-deer-hills-archery',
+    land_id: 'ms-tallahala',
+    state: 'MS',
+    species: 'White-tailed Deer',
+    weapon_type: 'Archery',
+    start_date: '2025-10-01',
+    end_date: '2025-11-21',
+    bag_limit: '1/day; 3 bucks/season. Antler rule: 10" inside spread OR 13" main beam.',
+    quota_required: false,
+    tags: [],
+    notes: 'Hills Zone. Early velvet archery Sept 12-14 with special permit.',
+  },
+  {
+    id: 'ms-deer-hills-firearms',
+    land_id: 'ms-tallahala',
+    state: 'MS',
+    species: 'White-tailed Deer',
+    weapon_type: 'Firearms',
+    start_date: '2025-11-22',
+    end_date: '2026-01-31',
+    bag_limit: '1/day. Legal bucks only on public land.',
+    quota_required: false,
+    tags: [],
+    notes: 'Hills Zone. Multiple dog/no-dog splits through Jan 21; archery/PW only Jan 22-31.',
+  },
+  {
+    id: 'ms-deer-southeast-archery',
+    land_id: 'ms-leaf-river',
+    state: 'MS',
+    species: 'White-tailed Deer',
+    weapon_type: 'Archery',
+    start_date: '2025-10-01',
+    end_date: '2025-11-14',
+    bag_limit: '1/day; antler restriction on De Soto NF WMA units.',
+    quota_required: false,
+    tags: [],
+    notes: 'Southeast Zone. Within De Soto NF — antler restriction: 10" spread or 13" beam on WMA units.',
+  },
+  {
+    id: 'ms-turkey-spring',
+    land_id: 'ms-tallahala',
+    state: 'MS',
+    species: 'Wild Turkey',
+    weapon_type: 'All Legal Methods',
+    start_date: '2026-03-14',
+    end_date: '2026-05-01',
+    bag_limit: '1 adult gobbler or gobbler with 6"+ beard/day; 3/season.',
+    quota_required: false,
+    tags: [],
+    notes: 'Youth season March 7-13. New MS Wild Turkey Stamp required. Non-residents cannot hunt public land before April 1 without Non-resident Public Lands Turkey Permit.',
+  },
+  {
+    id: 'ms-dove',
+    land_id: 'ms-mahannah',
+    state: 'MS',
+    species: 'Mourning Dove',
+    weapon_type: 'Shotgun',
+    start_date: '2025-09-01',
+    end_date: '2025-09-30',
+    bag_limit: '15/day (mourning + white-winged combined)',
+    quota_required: false,
+    tags: [],
+    notes: 'Split 2: Oct 18-Nov 16. Split 3: Dec 27-Jan 25. Both zones same dates in 2025-26.',
+  },
+  {
+    id: 'ms-duck',
+    land_id: 'ms-mahannah',
+    state: 'MS',
+    species: 'Waterfowl / Ducks',
+    weapon_type: 'Shotgun',
+    start_date: '2025-11-28',
+    end_date: '2026-01-31',
+    bag_limit: '6 ducks/day. Early teal Sept 13-27.',
+    quota_required: false,
+    tags: [],
+    notes: 'Split 1: Nov 28-30. Split 2: Dec 6-Jan 31. Youth/Military: Feb 7-8. Species sub-limits apply.',
+  },
+];
+
+export const MS_QUOTA_HUNTS: QuotaHunt[] = [
+  {
+    id: 'ms-qh-velvet-buck',
+    land_id: 'ms-mahannah',
+    state: 'MS',
+    species: 'White-tailed Deer (velvet)',
+    hunt_type: 'Permit Deer Hunt',
+    dates: 'Sept 12-14, 2025',
+    application_url: 'https://www.mdwfp.com/wildlife-hunting/',
+    notes: 'Special permit required. All WMAs statewide. Mandatory CWD sampling.',
+  },
+  {
+    id: 'ms-qh-bear',
+    land_id: 'ms-divide-section',
+    state: 'MS',
+    species: 'Black Bear',
+    hunt_type: 'Permit Bear Hunt',
+    dates: 'Sept 1 – Oct 15, 2025',
+    application_url: 'https://www.mdwfp.com/wildlife-hunting/',
+    notes: 'Computerized draw hunt. Limited permits. Tishomingo/northeast MS area.',
+  },
+];
+
+export const MS_FISHING: FishingRegulation[] = [
+  {
+    id: 'ms-fw-bass',
+    state: 'MS',
+    species: 'Black Bass (Largemouth, Smallmouth, Spotted)',
+    water_type: 'freshwater',
+    bag_limit: '10/day',
+    season: 'Year-round',
+    notes: '10/day combined. No statewide minimum length. Individual waters may impose 14" or 15" minimums.',
+  },
+  {
+    id: 'ms-fw-crappie',
+    state: 'MS',
+    species: 'Crappie',
+    water_type: 'freshwater',
+    bag_limit: '30/day',
+    season: 'Year-round',
+    notes: '30/day combined black and white crappie. Some waters: 25/day. Check specific reservoir regulations.',
+  },
+  {
+    id: 'ms-fw-catfish',
+    state: 'MS',
+    species: 'Catfish (Channel, Blue, Flathead)',
+    water_type: 'freshwater',
+    bag_limit: 'No statewide limit',
+    season: 'Year-round',
+    notes: 'No statewide limit or minimum length on most public waters. Managed state fishing lakes: 10/day. Catfish classified as non-game fish in MS.',
+  },
+  {
+    id: 'ms-fw-striped-bass',
+    state: 'MS',
+    species: 'Striped Bass / Hybrid',
+    water_type: 'freshwater',
+    bag_limit: '10/day',
+    season: 'Year-round',
+    notes: 'Size limit applies on most border waters. Check specific water body regulations.',
+  },
+  {
+    id: 'ms-fw-walleye',
+    state: 'MS',
+    species: 'Walleye',
+    water_type: 'freshwater',
+    size_limit: '15 inches',
+    bag_limit: '5/day',
+    season: 'Year-round',
+    notes: 'Ross Barnett Reservoir: 15" minimum, 5/day.',
+  },
+];

@@ -11,7 +11,7 @@
  * unless noted. Total system: ~216,000+ acres across 46+ WMAs.
  */
 
-import { PublicLand, State } from '@/lib/types';
+import { PublicLand, HuntingSeason, QuotaHunt, FishingRegulation, State } from '@/lib/types';
 
 export const VA_STATE: State = {
   code: 'VA',
@@ -741,4 +741,140 @@ export const VA_LANDS: PublicLand[] = [
     tags: ['deer', 'turkey', 'dove', 'small game'],
     special_rules: 'Plateau terrain in Southside Virginia.',
   },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HUNTING SEASONS  (2025-2026)
+// Sources: https://www.eregulations.com/virginia/hunting/
+//          https://dwr.virginia.gov/hunting/regulations/
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const VA_SEASONS: HuntingSeason[] = [
+
+  // ── DEER — ARCHERY ──
+  { id: 'va-deer-archery-early', state: 'VA', species: 'Deer', weapon_type: 'Archery', start_date: '2025-10-04', end_date: '2025-11-14', quota_required: false, buck_only: false, bag_limit: 'Statewide limits', notes: 'Early archery statewide. Either-sex. Broadhead ≥7/8" required.', tags: ['deer', 'archery'] },
+  { id: 'va-deer-archery-late-se', state: 'VA', species: 'Deer', weapon_type: 'Archery', start_date: '2025-12-01', end_date: '2026-01-03', quota_required: false, buck_only: false, bag_limit: 'Statewide limits', notes: 'Late archery: Chesapeake, Suffolk (E of Dismal Swamp), Virginia Beach. Either-sex.', tags: ['deer', 'archery'] },
+  { id: 'va-deer-archery-late-w', state: 'VA', species: 'Deer', weapon_type: 'Archery', start_date: '2025-11-30', end_date: '2026-01-03', quota_required: false, buck_only: false, bag_limit: 'Statewide limits', notes: 'Late archery West: National Forest and Dept-owned lands west of Blue Ridge. Dec 14–Jan 3 in Henry/Patrick and select western counties.', tags: ['deer', 'archery'] },
+
+  // ── DEER — MUZZLELOADER ──
+  { id: 'va-deer-ml-early', state: 'VA', species: 'Deer', weapon_type: 'Muzzleloader', start_date: '2025-11-01', end_date: '2025-11-14', quota_required: false, bag_limit: 'Statewide limits', notes: 'Early muzzleloader statewide. Not in Chesapeake/Suffolk/VB. Antlered daily; antlerless on designated days.', tags: ['deer', 'muzzleloader'] },
+  { id: 'va-deer-ml-late', state: 'VA', species: 'Deer', weapon_type: 'Muzzleloader', start_date: '2025-12-13', end_date: '2026-01-03', quota_required: false, bag_limit: 'Statewide limits', notes: 'Late muzzleloader. Henry, Patrick counties; federal/Dept lands in Franklin; NF lands in Amherst/Bedford/Nelson.', tags: ['deer', 'muzzleloader'] },
+
+  // ── DEER — FIREARMS ──
+  { id: 'va-deer-firearms-z1', state: 'VA', species: 'Deer', weapon_type: 'Rifle', start_date: '2025-11-15', end_date: '2025-12-13', quota_required: false, bag_limit: 'Statewide limits', notes: 'Zone 1 (SW Mountains): Buchanan, Dickenson, Wise, surrounding counties. Antlered deer only in Buchanan. Either-sex varies.', tags: ['deer', 'rifle'] },
+  { id: 'va-deer-firearms-z2', state: 'VA', species: 'Deer', weapon_type: 'Rifle', start_date: '2025-11-15', end_date: '2026-01-03', quota_required: false, bag_limit: 'Statewide limits', notes: 'Zone 2 (Central/Eastern): Most of VA. Full either-sex in EAB counties. Nov 15–Jan 3.', tags: ['deer', 'rifle'] },
+  { id: 'va-deer-firearms-z3-se', state: 'VA', species: 'Deer', weapon_type: 'Rifle', start_date: '2025-10-01', end_date: '2025-11-30', quota_required: false, bag_limit: 'Statewide limits', notes: 'Zone 3 SE: Chesapeake, Suffolk (E of Dismal Swamp), Virginia Beach. Full either-sex.', tags: ['deer', 'rifle'] },
+
+  // ── TURKEY — FALL FIREARMS ──
+  { id: 'va-turkey-fall-z1', state: 'VA', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2025-10-18', end_date: '2025-10-31', quota_required: false, bag_limit: 'Statewide limits', notes: 'Fall Zone 1 (Albemarle, Alleghany, Augusta, Bath, Greene, Highland, Madison, Page, Rockingham). Oct 18–31, Nov 27.', tags: ['turkey', 'fall'] },
+  { id: 'va-turkey-fall-z2', state: 'VA', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2025-10-18', end_date: '2026-01-24', quota_required: false, bag_limit: 'Statewide limits', notes: 'Fall Zone 2 (large multi-county zone including Bedford, Carroll, Fauquier, Loudoun, etc.). Oct 18–31, Nov 26–27, Dec 1–27, Jan 10–24.', tags: ['turkey', 'fall'] },
+  { id: 'va-turkey-fall-z3', state: 'VA', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2025-10-18', end_date: '2025-12-13', quota_required: false, bag_limit: 'Statewide limits', notes: 'Fall Zone 3 (SE coastal counties). Oct 18–31, Nov 26–27, Dec 1–13.', tags: ['turkey', 'fall'] },
+  { id: 'va-turkey-fall-z4', state: 'VA', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2025-10-18', end_date: '2026-01-24', quota_required: false, bag_limit: 'Statewide limits', notes: 'Fall Zone 4 (central VA, Patrick, Henry, Floyd, etc.). Oct 18–31, Nov 26–27, Dec 1–13, Jan 10–24.', tags: ['turkey', 'fall'] },
+
+  // ── BEAR ──
+  { id: 'va-bear-z1', state: 'VA', species: 'Bear', weapon_type: 'Rifle', start_date: '2025-11-24', end_date: '2026-01-03', quota_required: false, bag_limit: '1/season', notes: 'Bear Zone 1 (Buchanan, Dickenson, Lee, Russell, Scott, Washington, Wise). Archery Oct 4–Nov 14; Muzzleloader Nov 8–14; Firearms Nov 24–Jan 3. Early firearms Sept 29–Oct 1.', tags: ['bear', 'rifle'] },
+  { id: 'va-bear-z1-archery', state: 'VA', species: 'Bear', weapon_type: 'Archery', start_date: '2025-10-04', end_date: '2025-11-14', quota_required: false, bag_limit: '1/season', notes: 'Zone 1 archery season.', tags: ['bear', 'archery'] },
+  { id: 'va-bear-z3', state: 'VA', species: 'Bear', weapon_type: 'Rifle', start_date: '2025-11-28', end_date: '2026-01-03', quota_required: false, bag_limit: '1/season', notes: 'Zone 3 (Albemarle, Alleghany, Amherst, Augusta, Bath, Bedford, etc.). Firearms Nov 28–30 & Dec 22–Jan 3. Archery Oct 18–Nov 14.', tags: ['bear', 'rifle'] },
+  { id: 'va-bear-z3-archery', state: 'VA', species: 'Bear', weapon_type: 'Archery', start_date: '2025-10-18', end_date: '2025-11-14', quota_required: false, bag_limit: '1/season', notes: 'Zone 3 archery.', tags: ['bear', 'archery'] },
+  { id: 'va-bear-z4', state: 'VA', species: 'Bear', weapon_type: 'Rifle', start_date: '2025-12-01', end_date: '2026-01-03', quota_required: false, bag_limit: '1/season', notes: 'Zone 4 (Central/Eastern VA). Archery Oct 4–Nov 14; Muzzleloader Nov 8–14; Firearms Dec 1–Jan 3.', tags: ['bear', 'rifle'] },
+  { id: 'va-bear-z4-archery', state: 'VA', species: 'Bear', weapon_type: 'Archery', start_date: '2025-10-04', end_date: '2025-11-14', quota_required: false, bag_limit: '1/season', notes: 'Zone 4 archery.', tags: ['bear', 'archery'] },
+  { id: 'va-bear-z2', state: 'VA', species: 'Bear', weapon_type: 'Rifle', start_date: '2025-11-24', end_date: '2026-01-03', quota_required: false, bag_limit: '1/season', notes: 'Zone 2 (Central: Arlington, Bland, Craig, Fairfax, Giles, Montgomery, Pulaski, Roanoke, Smyth, Spotsylvania, Stafford, Tazewell, Wythe + others). Archery Oct 4–Nov 14; Muzzleloader Nov 8–14; Firearms Nov 24–Jan 3. Min 100 lbs live weight. Tooth required.', tags: ['bear', 'rifle'] },
+  { id: 'va-bear-z2-archery', state: 'VA', species: 'Bear', weapon_type: 'Archery', start_date: '2025-10-04', end_date: '2025-11-14', quota_required: false, bag_limit: '1/season', notes: 'Zone 2 archery.', tags: ['bear', 'archery'] },
+
+  // ── TURKEY — FALL ARCHERY / SPRING ──
+  { id: 'va-turkey-fall-archery', state: 'VA', species: 'Turkey', weapon_type: 'Archery', start_date: '2025-10-04', end_date: '2025-11-14', quota_required: false, bag_limit: '1/day either-sex; 3/year max (2 fall max)', notes: 'Fall turkey archery statewide. Either-sex, 1/day. Crossbows allowed. No electronic calls.', tags: ['turkey', 'fall', 'archery'] },
+  { id: 'va-turkey-spring-youth', state: 'VA', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2026-04-04', end_date: '2026-04-05', quota_required: false, bag_limit: '1 bearded turkey', notes: 'Youth & Apprentice spring turkey weekend. Supervised youth 15 & under / apprentice. Hours: 30 min before sunrise to sunset.', tags: ['turkey', 'spring', 'youth'] },
+  { id: 'va-turkey-spring-phase1', state: 'VA', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2026-04-11', end_date: '2026-04-26', quota_required: false, bag_limit: '1/day bearded; 3/license year max', notes: 'Spring Phase 1 statewide. Bearded turkeys only. Hours: 30 min before sunrise to noon. No electronic calls. All harvest must be reported.', tags: ['turkey', 'spring'] },
+  { id: 'va-turkey-spring-phase2', state: 'VA', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2026-04-27', end_date: '2026-05-16', quota_required: false, bag_limit: '1/day bearded; 3/license year max', notes: 'Spring Phase 2 statewide. Bearded turkeys only. Hours: 30 min before sunrise to sunset. No electronic calls.', tags: ['turkey', 'spring'] },
+
+  // ── WATERFOWL ──
+  { id: 'va-teal-east', state: 'VA', species: 'Teal', weapon_type: 'Shotgun', start_date: '2025-09-20', end_date: '2025-09-28', quota_required: false, bag_limit: '6/day', notes: 'Early teal season east of I-95. Blue-wing and green-wing teal. Duck Stamp + HIP required. Non-toxic shot.', tags: ['waterfowl', 'teal', 'shotgun'] },
+  { id: 'va-teal-west', state: 'VA', species: 'Teal', weapon_type: 'Shotgun', start_date: '2025-09-23', end_date: '2025-09-28', quota_required: false, bag_limit: '6/day', notes: 'Early teal season west of I-95. Same rules as east zone.', tags: ['waterfowl', 'teal', 'shotgun'] },
+  { id: 'va-duck', state: 'VA', species: 'Duck', weapon_type: 'Shotgun', start_date: '2025-10-10', end_date: '2026-01-31', quota_required: false, bag_limit: '6/day (species sub-limits apply)', notes: 'Three segments: Oct 10–13, Nov 19–30, Dec 19–Jan 31. Youth/Veterans Days: Oct 25 and Feb 7. Species limits: mallard 4 (2 hen), wood duck 3, black duck 2, pintail 1. Federal Duck Stamp (16+) + HIP + VA Migratory Waterfowl Conservation Stamp required. Non-toxic shot. WMAs have day-of-week restrictions.', tags: ['waterfowl', 'duck', 'shotgun'] },
+  { id: 'va-canada-goose-sept', state: 'VA', species: 'Canada Goose', weapon_type: 'Shotgun', start_date: '2025-09-01', end_date: '2025-09-25', quota_required: false, bag_limit: '10/day', notes: 'September resident Canada goose season statewide. 30 possession. Restricted on Amelia and Dick Cross WMAs.', tags: ['waterfowl', 'goose', 'shotgun'] },
+  { id: 'va-canada-goose-resident', state: 'VA', species: 'Canada Goose', weapon_type: 'Shotgun', start_date: '2025-11-19', end_date: '2026-02-22', quota_required: false, bag_limit: '5/day', notes: 'Resident population zone: Nov 19–30, Dec 19–Feb 22. 15 possession. Atlantic Population zone: Dec 24–31 & Jan 10–31 (1/day, 3 possession). Non-toxic shot required.', tags: ['waterfowl', 'goose', 'shotgun'] },
+  { id: 'va-light-geese', state: 'VA', species: 'Light Goose (Snow/Blue/Ross)', weapon_type: 'Shotgun', start_date: '2025-10-18', end_date: '2026-01-31', quota_required: false, bag_limit: '25/day', notes: 'Regular season Oct 18–Jan 31. Conservation Order Feb 1–Apr 5 (no bag limit; electronic calls and unplugged guns allowed; registration required at virginiawildlife.gov/lightgoose).', tags: ['waterfowl', 'goose', 'shotgun'] },
+  { id: 'va-tundra-swan', state: 'VA', species: 'Tundra Swan', weapon_type: 'Shotgun', start_date: '2025-11-15', end_date: '2026-01-31', quota_required: true, bag_limit: '1/season per permit', notes: 'East of I-95, south of Prince William/Stafford County line only. Drawing required; max 475 permits; application deadline Sep 26, 2025. Questionnaire due Feb 15, 2026.', tags: ['waterfowl', 'swan', 'permit'] },
+
+  // ── SMALL GAME ──
+  { id: 'va-dove', state: 'VA', species: 'Dove', weapon_type: 'Shotgun', start_date: '2025-09-01', end_date: '2026-01-19', quota_required: false, bag_limit: '15/day', notes: 'Three segments: Sept 1–Oct 19, Nov 22–30, Dec 19–Jan 19. 45 possession. WMA hours restricted. HIP required.', tags: ['dove', 'shotgun'] },
+  { id: 'va-grouse', state: 'VA', species: 'Ruffed Grouse', weapon_type: 'Any', start_date: '2025-10-25', end_date: '2026-02-14', quota_required: false, bag_limit: '3/day', notes: 'West of I-95 only. Closed east of I-95. 9 possession.', tags: ['grouse', 'small-game'] },
+  { id: 'va-quail', state: 'VA', species: 'Quail (Bobwhite)', weapon_type: 'Any', start_date: '2025-11-08', end_date: '2026-01-31', quota_required: false, bag_limit: '6/day', notes: 'Closed on all public lands west of Blue Ridge and Flippo-Gentry WMA. 12 possession.', tags: ['quail', 'small-game'] },
+  { id: 'va-rabbit', state: 'VA', species: 'Rabbit', weapon_type: 'Any', start_date: '2025-11-01', end_date: '2026-02-28', quota_required: false, bag_limit: '6/day', notes: 'Statewide. 12 possession. RHDV2 monitoring — dispose of unharvested portions properly.', tags: ['rabbit', 'small-game'] },
+  { id: 'va-squirrel', state: 'VA', species: 'Squirrel (Gray/Red)', weapon_type: 'Any', start_date: '2025-09-06', end_date: '2026-02-28', quota_required: false, bag_limit: '6/day combined', notes: 'Fall season Sept 6–Feb 28. Spring season June 6–20 (closed on National Forest lands). 12 possession combined.', tags: ['squirrel', 'small-game'] },
+  { id: 'va-woodcock', state: 'VA', species: 'Woodcock', weapon_type: 'Shotgun', start_date: '2025-11-11', end_date: '2026-01-19', quota_required: false, bag_limit: '3/day', notes: 'Two segments: Nov 11–30, Dec 26–Jan 19. 9 possession. HIP required.', tags: ['woodcock', 'small-game'] },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// QUOTA HUNTS
+// Source: https://www.eregulations.com/virginia/hunting/public-hunting-quota-hunts
+//         https://dwr.virginia.gov/hunting/quota/
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const VA_QUOTA_HUNTS: QuotaHunt[] = [
+  {
+    id: 'va-qh-deer-quota-wma',
+    state: 'VA',
+    species: 'Deer',
+    hunt_type: 'Antlerless Quota Hunt',
+    dates: 'Various dates during firearms season',
+    application_url: 'https://dwr.virginia.gov/hunting/quota/',
+    notes: 'Antlerless quota hunts at Chickahominy WMA and select other WMAs. Does by permit. Apply through VDWR online system.',
+  },
+  {
+    id: 'va-qh-elk',
+    state: 'VA',
+    species: 'Elk',
+    hunt_type: 'Elk Permit Hunt',
+    dates: 'Oct–Nov 2025 (permit required)',
+    application_url: 'https://dwr.virginia.gov/hunting/elk/',
+    notes: 'Limited-entry elk hunt in Buchanan, Wise, Dickenson, and Russell counties. Tag system. Apply through VDWR.',
+  },
+  {
+    id: 'va-qh-bear-quota',
+    state: 'VA',
+    species: 'Bear',
+    hunt_type: 'Managed Bear Hunt',
+    dates: 'Within bear season dates by zone',
+    application_url: 'https://dwr.virginia.gov/hunting/quota/',
+    notes: 'Select WMAs host managed bear hunts with limited permits.',
+  },
+  {
+    id: 'va-qh-tundra-swan',
+    state: 'VA',
+    species: 'Tundra Swan',
+    hunt_type: 'Swan Permit Hunt',
+    dates: 'Nov 15, 2025 – Jan 31, 2026',
+    quota_size: 475,
+    application_deadline: '2025-09-26',
+    application_url: 'https://dwr.virginia.gov/hunting/migratory-birds/swan/',
+    notes: 'East of I-95, south of Prince William/Stafford County line only. Drawing required. Questionnaire must be returned by Feb 15, 2026.',
+  },
+  {
+    id: 'va-qh-waterfowl-wma',
+    state: 'VA',
+    species: 'Waterfowl',
+    hunt_type: 'WMA Quota Waterfowl Hunt',
+    dates: 'Season openers at Game Farm Marsh WMA and Mattaponi Bluffs WMA',
+    application_url: 'https://dwr.virginia.gov/hunting/quota/',
+    notes: 'Game Farm Marsh and Mattaponi Bluffs WMAs hold quota waterfowl hunts on season openers. Apply through VDWR online system.',
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// FISHING REGULATIONS
+// Source: https://dwr.virginia.gov/fishing/regulations/
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const VA_FISHING: FishingRegulation[] = [
+  { id: 'va-fw-trout-stocked', state: 'VA', species: 'Trout (Stocked Waters)', water_type: 'freshwater', bag_limit: '6/day', size_limit: '7 inch minimum', season: 'Year-round (stocked waters)', notes: 'Trout license required. WMA streams often designated Stocked Trout Waters. Popular: Rapidan WMA, Goshen WMA, Clinch Mountain WMA.' },
+  { id: 'va-fw-trout-native', state: 'VA', species: 'Trout (Native / Wild Trout)', water_type: 'freshwater', bag_limit: '6/day', size_limit: '7 inch minimum', season: 'Second Sat in March – Nov 30', notes: 'Artificial lures only on designated native trout waters. Wild Trout Waters have catch restrictions. Check dwr.virginia.gov for current stream designations.' },
+  { id: 'va-fw-bass-lm', state: 'VA', species: 'Largemouth / Smallmouth Bass', water_type: 'freshwater', bag_limit: '5/day combined', size_limit: '12 inch minimum (varies by water)', season: 'Year-round', notes: 'James River, New River, Shenandoah River — excellent smallmouth fisheries on National Forest and WMA lands.' },
+  { id: 'va-fw-walleye', state: 'VA', species: 'Walleye / Sauger', water_type: 'freshwater', bag_limit: '5/day combined', size_limit: '18 inch minimum', season: 'Year-round', notes: 'New River and southwestern VA reservoirs.' },
+  { id: 'va-fw-muskellunge', state: 'VA', species: 'Muskellunge', water_type: 'freshwater', bag_limit: '2/day', size_limit: '36 inch minimum', season: 'Year-round', notes: 'New River drainage. State record fishery on New River WMA and adjacent waters.' },
+  { id: 'va-fw-catfish', state: 'VA', species: 'Catfish (Channel / Blue / Flathead)', water_type: 'freshwater', bag_limit: 'No statewide limit', size_limit: 'No statewide minimum', season: 'Year-round' },
+  { id: 'va-sw-striped-bass', state: 'VA', species: 'Striped Bass', water_type: 'saltwater', bag_limit: '1/day', size_limit: '28 inch minimum', season: 'Apr 1 – Jun 15 and Sep 1 – Dec 31', notes: 'Coastal VA waters, Chesapeake Bay tributaries. Check VMRC for current season and slot limits.' },
+  { id: 'va-sw-red-drum', state: 'VA', species: 'Red Drum (Redfish)', water_type: 'saltwater', bag_limit: '3/day', size_limit: '18–26 inch slot limit', season: 'Year-round', notes: 'Virginia coastal bays and lower Chesapeake Bay.' },
+  { id: 'va-sw-flounder', state: 'VA', species: 'Summer Flounder', water_type: 'saltwater', bag_limit: '8/day', size_limit: '16.5 inch minimum', season: 'May 1 – Sep 30 (verify current season)', notes: 'Coastal VA and Chesapeake Bay. Check VMRC for current flounder season dates.' },
+  { id: 'va-sw-seatrout', state: 'VA', species: 'Spotted Seatrout', water_type: 'saltwater', bag_limit: '10/day', size_limit: '14 inch minimum', season: 'Year-round', notes: 'Chesapeake Bay and coastal sounds.' },
 ];

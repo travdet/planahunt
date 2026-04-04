@@ -6,15 +6,23 @@ export interface State {
 }
 
 export type LandType =
-  | 'WMA'               // Wildlife Management Area (state)
-  | 'National Forest'   // USDA Forest Service — hunting follows state regs
-  | 'National Wildlife Refuge' // USFWS — hunting allowed on designated units
-  | 'State Forest'      // State Forestry Commission lands
-  | 'State Park'        // State parks — often fishing only; note if hunting allowed
-  | 'National Park'     // NPS — usually fishing only; note exceptions
-  | 'Corps of Engineers' // USACE reservoirs / surrounding lands
-  | 'Military'          // Active military bases with public hunting programs
-  | 'TVA'               // Tennessee Valley Authority lands
+  | 'WMA'                       // Wildlife Management Area (state)
+  | 'National Forest'           // USDA Forest Service — hunting follows state regs
+  | 'National Wildlife Refuge'  // USFWS — hunting allowed on designated units
+  | 'National Recreation Area'  // NPS recreation areas
+  | 'National Seashore'         // NPS seashores
+  | 'National Grassland'        // USDA Forest Service grasslands
+  | 'State Forest'              // State Forestry Commission lands
+  | 'State Park'                // State parks — often fishing only; note if hunting allowed
+  | 'State Wildlife Area'       // State wildlife areas (non-WMA designation)
+  | 'National Park'             // NPS — usually fishing only; note exceptions
+  | 'Corps of Engineers'        // USACE reservoirs / surrounding lands
+  | 'Fish Hatchery'             // State/federal fish hatcheries with public fishing
+  | 'Waterfowl Production Area' // USFWS WPAs
+  | 'Conservation Area'         // Conservation easement / trust lands
+  | 'Heritage Preserve'         // SC Heritage Trust / state heritage preserves
+  | 'Military'                  // Active military bases with public hunting programs
+  | 'TVA'                       // Tennessee Valley Authority lands
   | 'Other';
 
 export interface PublicLand {
@@ -36,6 +44,8 @@ export interface PublicLand {
   fishing_allowed?: boolean;
   tags: string[]; // species, methods, special features
   special_rules?: string;
+  directions?: string;
+  other_type?: string; // for discovered categories not yet in LandType union
 }
 
 export interface HuntingSeason {

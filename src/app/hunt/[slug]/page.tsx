@@ -106,7 +106,10 @@ export default function HuntDetailPage() {
   const isFavorite = favorites.has(land.id);
 
   // Data for this land
-  const seasons = HUNTING_SEASONS.filter((s) => s.land_id === land.id);
+  const landSpecificSeasons = HUNTING_SEASONS.filter((s) => s.land_id === land.id);
+  const seasons = landSpecificSeasons.length > 0
+    ? landSpecificSeasons
+    : HUNTING_SEASONS.filter((s) => s.state === land.state && !s.land_id);
   const quotaHunts = QUOTA_HUNTS.filter((q) => q.land_id === land.id);
   const fishingRegs = filterFishingRegs(FISHING_REGULATIONS, land);
   const seasonGroups = groupSeasons(seasons);

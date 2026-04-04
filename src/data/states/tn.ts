@@ -14,7 +14,7 @@
  * Over 100 WMAs and refuges across Tennessee, ranging 53–625,000 acres.
  */
 
-import { PublicLand, State } from '@/lib/types';
+import { PublicLand, HuntingSeason, QuotaHunt, FishingRegulation, State } from '@/lib/types';
 
 export const TN_STATE: State = {
   code: 'TN',
@@ -1109,4 +1109,95 @@ export const TN_FEDERAL_LANDS: PublicLand[] = [
     tags: ['trout', 'bass', 'fishing', 'wildlife-viewing'],
     special_rules: 'No hunting. Fishing with TN or NC fishing license (honored reciprocally within park). Wild trout in most park streams. Special regulations on some streams.',
   },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HUNTING SEASONS  (2025-2026)
+// Sources: https://www.eregulations.com/tennessee/hunting/
+//          https://www.tn.gov/twra/hunting/seasons-and-regulations.html
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const TN_SEASONS: HuntingSeason[] = [
+
+  // ── DEER — ARCHERY ──
+  { id: 'tn-deer-archery-aug', state: 'TN', species: 'Deer', weapon_type: 'Archery', start_date: '2025-08-22', end_date: '2025-08-24', quota_required: false, bag_limit: '2 antlered/season', notes: 'August archery season — archery only. Private lands and select Unit 1 WMAs. 1 antlered deer per day.', tags: ['deer', 'archery'] },
+  { id: 'tn-deer-archery-fall', state: 'TN', species: 'Deer', weapon_type: 'Archery', start_date: '2025-09-27', end_date: '2025-11-07', quota_required: false, bag_limit: '2 antlered/season limit', notes: 'Fall archery. Units 1–3: antlerless varies. Units 4–6: antlerless varies. Archery Sept 27–Oct 24 and Oct 27–Nov 7.', tags: ['deer', 'archery'] },
+
+  // ── DEER — MUZZLELOADER / ARCHERY ──
+  { id: 'tn-deer-ml', state: 'TN', species: 'Deer', weapon_type: 'Muzzleloader', start_date: '2025-11-08', end_date: '2025-11-21', quota_required: false, bag_limit: '2 antlered/season', notes: 'Muzzleloader/archery combo season. Antlered deer ≥3 inch antler. Antlerless per unit rules.', tags: ['deer', 'muzzleloader'] },
+
+  // ── DEER — GUN / ALL WEAPONS ──
+  { id: 'tn-deer-gun', state: 'TN', species: 'Deer', weapon_type: 'Rifle', start_date: '2025-11-22', end_date: '2026-01-04', quota_required: false, bag_limit: '2 antlered/season', notes: 'Modern gun/muzzleloader/archery. Units 1–3: Nov 22–Jan 4. Units 4–6: Nov 22–Jan 4. Antlerless limits vary by unit. Antlered buck: ≥3" antler to qualify.', tags: ['deer', 'rifle'] },
+
+  // ── TURKEY — FALL ──
+  { id: 'tn-turkey-fall-archery', state: 'TN', species: 'Turkey', weapon_type: 'Archery', start_date: '2025-09-27', end_date: '2025-11-07', quota_required: false, bag_limit: '1 male per day', notes: 'Fall turkey archery — same dates as fall deer archery. 1 male turkey per day. Closed in Crockett, Dyer, Giles, Haywood, Lake, Lauderdale, Lawrence, Lincoln, Shelby, Tipton, and Wayne counties.', tags: ['turkey', 'fall', 'archery'] },
+  { id: 'tn-turkey-fall-shotgun', state: 'TN', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2025-10-11', end_date: '2025-10-24', quota_required: false, bag_limit: '1 male per day', notes: 'Fall turkey shotgun/archery Oct 11–24. Same county closures apply.', tags: ['turkey', 'fall'] },
+
+  // ── TURKEY — SPRING ──
+  { id: 'tn-turkey-spring-youth', state: 'TN', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2026-04-04', end_date: '2026-04-05', quota_required: false, bag_limit: '1 gobbler/day, 2/season (max 1 jake)', notes: 'Youth Sportsman spring turkey (ages 6–16). Non-hunting adult supervisor required.', tags: ['turkey', 'spring', 'youth'] },
+  { id: 'tn-turkey-spring', state: 'TN', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2026-04-11', end_date: '2026-05-24', quota_required: false, bag_limit: '1 gobbler/day, 2/season (max 1 jake)', notes: 'Statewide spring turkey season. Gobblers and bearded turkeys only. No hen harvest.', tags: ['turkey', 'spring'] },
+
+  // ── BEAR ──
+  { id: 'tn-bear-archery', state: 'TN', species: 'Bear', weapon_type: 'Archery', start_date: '2025-09-27', end_date: '2025-10-24', quota_required: false, bag_limit: '1/year', notes: 'Statewide archery-only bear season (no hounds). BHZ 1–5 and Transitional zones open. 1 bear per year, no cubs or females with cubs. Bears must be 75+ lbs.', tags: ['bear', 'archery'] },
+  { id: 'tn-bear-gun-bhz1', state: 'TN', species: 'Bear', weapon_type: 'Rifle', start_date: '2025-10-04', end_date: '2025-12-17', quota_required: false, bag_limit: '1/year', notes: 'BHZ 1 gun/muzzleloader/archery hound season. Multiple windows: Oct 4–6, Oct 11–12, Nov 10–17, Dec 1–17. Still hunting: Nov 22–25.', tags: ['bear', 'rifle'] },
+  { id: 'tn-bear-gun-bhz2', state: 'TN', species: 'Bear', weapon_type: 'Rifle', start_date: '2025-10-04', end_date: '2025-12-16', quota_required: false, bag_limit: '1/year', notes: 'BHZ 2 hound season: Oct 4–19, Oct 27–31, Dec 1–16.', tags: ['bear', 'rifle'] },
+  { id: 'tn-bear-gun-bhz3', state: 'TN', species: 'Bear', weapon_type: 'Rifle', start_date: '2025-10-04', end_date: '2025-12-28', quota_required: false, bag_limit: '1/year', notes: 'BHZ 3 hound season: Oct 4–5, Oct 11–17, Oct 27–31, Dec 1–14, Dec 25–28.', tags: ['bear', 'rifle'] },
+
+  // ── WATERFOWL ──
+  { id: 'tn-teal-early', state: 'TN', species: 'Teal', weapon_type: 'Shotgun', start_date: '2025-09-13', end_date: '2025-09-17', quota_required: false, bag_limit: '6/day', notes: 'Early teal season statewide. Blue-wing, green-wing, and cinnamon teal. Steel shot required.', tags: ['waterfowl', 'teal', 'shotgun'] },
+  { id: 'tn-duck-split1', state: 'TN', species: 'Duck', weapon_type: 'Shotgun', start_date: '2025-11-29', end_date: '2025-11-30', quota_required: false, bag_limit: '6/day (species restrictions apply)', notes: 'Duck split 1. Federal frameworks apply; daily limits vary by species. Steel shot required.', tags: ['waterfowl', 'duck', 'shotgun'] },
+  { id: 'tn-duck-split2', state: 'TN', species: 'Duck', weapon_type: 'Shotgun', start_date: '2025-12-05', end_date: '2026-01-31', quota_required: false, bag_limit: '6/day (species restrictions apply)', notes: 'Duck split 2. Merganser 5/day (2 hooded). Coot 15/day. Steel shot required. Reelfoot Lake and West TN reservoirs are premier duck hunting destinations.', tags: ['waterfowl', 'duck', 'shotgun'] },
+  { id: 'tn-canada-geese', state: 'TN', species: 'Canada Goose', weapon_type: 'Shotgun', start_date: '2025-09-01', end_date: '2026-02-09', quota_required: false, bag_limit: '3/day', notes: 'Multiple windows: Sept 1–15 (resident goose), Oct 11–12 (early season), Nov 8–Jan 31 (main season), Feb 1–9. Specific zones may vary. Check TWRA for zone details.', tags: ['waterfowl', 'goose', 'shotgun'] },
+  { id: 'tn-light-geese', state: 'TN', species: 'Light Goose (Snow/Blue/Ross)', weapon_type: 'Shotgun', start_date: '2026-02-15', end_date: '2026-03-31', quota_required: false, bag_limit: 'No daily limit', notes: 'Light Goose Conservation Order. Electronic calls and unplugged guns permitted. Intended to reduce overabundant snow/blue/Ross geese populations.', tags: ['waterfowl', 'goose', 'conservation-order'] },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// QUOTA HUNTS
+// Source: https://www.eregulations.com/tennessee/hunting/quota-hunts
+//         https://www.tn.gov/twra/hunting/quota-hunting.html
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const TN_QUOTA_HUNTS: QuotaHunt[] = [
+  {
+    id: 'tn-qh-deer-wma-tier1',
+    state: 'TN',
+    species: 'Deer',
+    hunt_type: 'Tier 1 WMA Quota Hunt',
+    dates: 'Within deer season (permit required for Tier 1 WMAs)',
+    application_url: 'https://www.tn.gov/twra/hunting/quota-hunting.html',
+    notes: 'Tier 1 WMAs require quota permit during deer firearm season. Apply through TWRA online. WMA permit required in addition.',
+  },
+  {
+    id: 'tn-qh-elk',
+    state: 'TN',
+    species: 'Elk',
+    hunt_type: 'Elk Lottery Hunt',
+    dates: 'Sept–Oct 2025 (permit required)',
+    application_url: 'https://www.tn.gov/twra/hunting/elk-in-tennessee.html',
+    notes: 'Limited-entry elk hunt in NWTF Elk Management Zone (Claiborne, Campbell, Claiborne, Fentress, Morgan, Scott counties). Apply through TWRA lottery.',
+  },
+  {
+    id: 'tn-qh-sandhill-crane',
+    state: 'TN',
+    species: 'Sandhill Crane',
+    hunt_type: 'Quota Crane Hunt',
+    dates: 'Within crane season',
+    application_url: 'https://www.tn.gov/twra/hunting/quota-hunting.html',
+    notes: 'Limited quota for sandhill crane. Apply through TWRA.',
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// FISHING REGULATIONS
+// Source: https://www.tn.gov/twra/fishing/regulations.html
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const TN_FISHING: FishingRegulation[] = [
+  { id: 'tn-fw-trout-stocked', state: 'TN', species: 'Trout (Stocked)', water_type: 'freshwater', bag_limit: '7/day', size_limit: '7 inch minimum', season: 'Year-round on most stocked waters', notes: 'Trout license required. WMA streams throughout East TN extensively stocked. Great Smoky Mountains park streams (wild trout): no stocking, C&R only on some tributaries.' },
+  { id: 'tn-fw-bass-sm', state: 'TN', species: 'Smallmouth Bass', water_type: 'freshwater', bag_limit: '5/day', size_limit: '15 inch minimum', season: 'Year-round', notes: 'Tennessee and Elk rivers, Cumberland plateau streams. Outstanding smallmouth fishery in Middle and East TN.' },
+  { id: 'tn-fw-bass-lm', state: 'TN', species: 'Largemouth Bass', water_type: 'freshwater', bag_limit: '5/day', size_limit: '15 inch minimum', season: 'Year-round', notes: 'Statewide. TVA reservoirs offer excellent fishing near public hunting lands.' },
+  { id: 'tn-fw-walleye', state: 'TN', species: 'Walleye / Sauger', water_type: 'freshwater', bag_limit: '10/day combined', size_limit: '15 inch minimum', season: 'Year-round', notes: 'Tennessee River system reservoirs, Cumberland River. Nickajack and Watts Bar lakes popular.' },
+  { id: 'tn-fw-crappie', state: 'TN', species: 'Crappie', water_type: 'freshwater', bag_limit: '30/day', size_limit: 'No statewide minimum', season: 'Year-round' },
+  { id: 'tn-fw-catfish', state: 'TN', species: 'Catfish (Channel / Blue / Flathead)', water_type: 'freshwater', bag_limit: 'No statewide limit', size_limit: 'No statewide minimum', season: 'Year-round', notes: 'Tennessee and Cumberland Rivers excellent for blue and flathead catfish.' },
+  { id: 'tn-fw-muskie', state: 'TN', species: 'Muskellunge / Tiger Muskie', water_type: 'freshwater', bag_limit: '1/day', size_limit: '36 inch minimum', season: 'Year-round', notes: 'Dale Hollow, Norris, and select other reservoirs. Tag required.' },
 ];

@@ -18,7 +18,7 @@
  * AREA Permit required for all AL WMAs; obtain via Outdoor Alabama app or GoOutdoorsAlabama.com
  */
 
-import { PublicLand, State } from '@/lib/types';
+import { PublicLand, HuntingSeason, QuotaHunt, FishingRegulation, State } from '@/lib/types';
 
 export const AL_STATE: State = {
   code: 'AL',
@@ -134,23 +134,6 @@ export const AL_LANDS: PublicLand[] = [
     special_rules: 'AREA Permit required. Barbour County antler rule: minimum 3 points on ONE SIDE. Zone D deer. Check in/out via Outdoor Alabama app.',
   },
   {
-    id: 'al-wma-cherokee',
-    state: 'AL',
-    name: 'Cherokee Wildlife Management Area',
-    type: 'WMA',
-    acreage: 7036,
-    counties: ['Cherokee'],
-    region: 'Northeast Alabama',
-    lat: 34.1800,
-    lng: -85.6000,
-    phone: '(256) 237-0442',
-    managing_agency: 'Alabama WFF',
-    hunting_allowed: true,
-    fishing_allowed: true,
-    tags: ['deer', 'turkey', 'small-game', 'archery', 'rifle'],
-    special_rules: 'AREA Permit required. Zone A deer season. Check in/out via Outdoor Alabama app.',
-  },
-  {
     id: 'al-wma-mud-creek',
     state: 'AL',
     name: 'Mud Creek Wildlife Management Area',
@@ -200,40 +183,6 @@ export const AL_LANDS: PublicLand[] = [
     fishing_allowed: false,
     tags: ['deer', 'turkey', 'small-game', 'archery', 'rifle'],
     special_rules: 'AREA Permit required. CWD Management Zone (Colbert portion). Bankhead turkey schedule applies to this WMA.',
-  },
-  {
-    id: 'al-wma-buck-island',
-    state: 'AL',
-    name: 'Buck Island Wildlife Management Area',
-    type: 'WMA',
-    acreage: 3200,
-    counties: ['Morgan'],
-    region: 'North Alabama',
-    lat: 34.4000,
-    lng: -86.9500,
-    phone: '(256) 350-9500',
-    managing_agency: 'Alabama WFF',
-    hunting_allowed: true,
-    fishing_allowed: true,
-    tags: ['deer', 'waterfowl', 'archery', 'rifle'],
-    special_rules: 'AREA Permit required. Wheeler Reservoir bottomlands; excellent waterfowl. Zone A deer.',
-  },
-  {
-    id: 'al-wma-elk-river',
-    state: 'AL',
-    name: 'Elk River Wildlife Management Area',
-    type: 'WMA',
-    acreage: 3168,
-    counties: ['Limestone'],
-    region: 'North Alabama',
-    lat: 34.9500,
-    lng: -86.9000,
-    phone: '(256) 350-9500',
-    managing_agency: 'Alabama WFF',
-    hunting_allowed: true,
-    fishing_allowed: true,
-    tags: ['deer', 'waterfowl', 'archery', 'rifle'],
-    special_rules: 'AREA Permit required. Zone A deer. Elk River bottomlands; good waterfowl habitat.',
   },
   {
     id: 'al-wma-hollins',
@@ -287,91 +236,6 @@ export const AL_LANDS: PublicLand[] = [
     special_rules: 'AREA Permit required. Zone C deer season. Prairie Black Belt soils; premium deer habitat.',
   },
   {
-    id: 'al-wma-conecuh',
-    state: 'AL',
-    name: 'Conecuh Wildlife Management Area',
-    type: 'WMA',
-    acreage: 36000,
-    counties: ['Covington', 'Escambia', 'Conecuh'],
-    region: 'South Alabama',
-    lat: 31.2500,
-    lng: -86.7000,
-    phone: '(334) 242-3469',
-    managing_agency: 'USDA Forest Service / Alabama WFF (Conecuh National Forest)',
-    hunting_allowed: true,
-    fishing_allowed: true,
-    tags: ['deer', 'turkey', 'quail', 'trout', 'archery', 'rifle', 'muzzleloader'],
-    special_rules: 'AREA Permit required. Longleaf pine flatwoods; managed quail habitat. Trout stocked in designated streams. Zone D deer.',
-  },
-  {
-    id: 'al-wma-chilatchee',
-    state: 'AL',
-    name: 'Chilatchee Wildlife Management Area',
-    type: 'WMA',
-    acreage: 4200,
-    counties: ['Dallas', 'Lowndes'],
-    region: 'Central Alabama — Black Belt',
-    lat: 32.2500,
-    lng: -87.0000,
-    phone: '(334) 242-3469',
-    managing_agency: 'Alabama WFF',
-    hunting_allowed: true,
-    fishing_allowed: false,
-    tags: ['deer', 'turkey', 'dove', 'archery', 'rifle'],
-    special_rules: 'AREA Permit required. Zone C deer. Black Belt prairie habitat.',
-  },
-  {
-    id: 'al-wma-gunter-hill',
-    state: 'AL',
-    name: 'Gunter Hill Wildlife Management Area',
-    type: 'WMA',
-    acreage: 1748,
-    counties: ['Elmore', 'Montgomery'],
-    region: 'Central Alabama',
-    lat: 32.4000,
-    lng: -86.3500,
-    phone: '(334) 242-3469',
-    managing_agency: 'Alabama WFF / U.S. Army Corps of Engineers',
-    hunting_allowed: true,
-    fishing_allowed: true,
-    tags: ['deer', 'turkey', 'waterfowl', 'archery', 'rifle'],
-    special_rules: 'AREA Permit required. Alabama River lakefront; good waterfowl access. COE land managed by state.',
-  },
-  {
-    id: 'al-wma-hatchet-creek',
-    state: 'AL',
-    name: 'Hatchet Creek Wildlife Management Area',
-    type: 'WMA',
-    acreage: 7300,
-    counties: ['Coosa', 'Cleburne'],
-    region: 'East-Central Alabama',
-    lat: 33.0000,
-    lng: -85.9500,
-    phone: '(256) 237-0442',
-    managing_agency: 'Alabama WFF',
-    hunting_allowed: true,
-    fishing_allowed: true,
-    tags: ['deer', 'turkey', 'bass', 'archery', 'rifle'],
-    special_rules: 'AREA Permit required. Good creek fishing access. Zone B/C deer.',
-  },
-  {
-    id: 'al-wma-james-f-folsom',
-    state: 'AL',
-    name: 'James F. Folsom Sr. Wildlife Management Area',
-    type: 'WMA',
-    acreage: 24000,
-    counties: ['Marshall', 'Blount', 'Etowah'],
-    region: 'North Alabama',
-    lat: 34.1000,
-    lng: -86.3500,
-    phone: '(256) 350-9500',
-    managing_agency: 'Alabama WFF',
-    hunting_allowed: true,
-    fishing_allowed: true,
-    tags: ['deer', 'turkey', 'small-game', 'archery', 'rifle'],
-    special_rules: 'AREA Permit required. Zone A deer. Multiple tracts along Neely Henry Lake.',
-  },
-  {
     id: 'al-wma-perdido',
     state: 'AL',
     name: 'Perdido Wildlife Management Area',
@@ -389,61 +253,11 @@ export const AL_LANDS: PublicLand[] = [
     special_rules: 'AREA Permit required. Zone D/E deer. Good hog hunting. Perdido River access for fishing.',
   },
   {
-    id: 'al-wma-winston',
-    state: 'AL',
-    name: 'Winston Wildlife Management Area',
-    type: 'WMA',
-    acreage: 11300,
-    counties: ['Winston'],
-    region: 'North Alabama',
-    lat: 34.0500,
-    lng: -87.4000,
-    phone: '(205) 339-5716',
-    managing_agency: 'Alabama WFF',
-    hunting_allowed: true,
-    fishing_allowed: false,
-    tags: ['deer', 'turkey', 'small-game', 'archery', 'rifle'],
-    special_rules: 'AREA Permit required. Zone A deer. Check in/out via Outdoor Alabama app.',
-  },
-  {
-    id: 'al-wma-cow-pen',
-    state: 'AL',
-    name: 'Cow Pen Wildlife Management Area',
-    type: 'WMA',
-    acreage: 3600,
-    counties: ['Shelby'],
-    region: 'Central Alabama',
-    lat: 33.2500,
-    lng: -86.6500,
-    phone: '(205) 339-5716',
-    managing_agency: 'Alabama WFF',
-    hunting_allowed: true,
-    fishing_allowed: false,
-    tags: ['deer', 'turkey', 'archery', 'rifle'],
-    special_rules: 'AREA Permit required. Zone A deer. Check in/out via Outdoor Alabama app.',
-  },
-  {
-    id: 'al-wma-jones',
-    state: 'AL',
-    name: 'Jones Wildlife Management Area',
-    type: 'WMA',
-    acreage: 1200,
-    counties: ['Tuscaloosa'],
-    region: 'West-Central Alabama',
-    lat: 33.3000,
-    lng: -87.6500,
-    phone: '(205) 339-5716',
-    managing_agency: 'Alabama WFF',
-    hunting_allowed: true,
-    fishing_allowed: false,
-    tags: ['deer', 'turkey', 'archery', 'rifle'],
-    special_rules: 'AREA Permit required. Zone C deer. Check in/out via Outdoor Alabama app.',
-  },
-  {
     id: 'al-cha-riverton',
     state: 'AL',
     name: 'Riverton Community Hunting Area',
-    type: 'WMA',
+    type: 'Other',
+    other_type: 'Community Hunting Area',
     acreage: 2500,
     counties: ['Colbert'],
     region: 'North Alabama',
@@ -460,7 +274,8 @@ export const AL_LANDS: PublicLand[] = [
     id: 'al-cha-martin',
     state: 'AL',
     name: 'Martin Community Hunting Area',
-    type: 'WMA',
+    type: 'Other',
+    other_type: 'Community Hunting Area',
     acreage: 1800,
     counties: ['Lawrence'],
     region: 'North Alabama',
@@ -861,4 +676,109 @@ export const AL_LANDS: PublicLand[] = [
     tags: ['bass', 'fishing', 'paddling'],
     special_rules: 'No hunting within parkway corridor. Fishing allowed at designated water access points with AL fishing license.',
   },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HUNTING SEASONS  (2025-2026)
+// Sources: https://www.eregulations.com/alabama/hunting/
+//          https://www.outdooralabama.com/hunting/seasons-and-bag-limits
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const AL_SEASONS: HuntingSeason[] = [
+
+  // ── DEER — ZONE A (North Alabama) ──
+  { id: 'al-deer-a-archery', state: 'AL', species: 'Deer', weapon_type: 'Archery', start_date: '2025-10-15', end_date: '2026-02-10', quota_required: false, buck_only: false, bag_limit: 'Statewide limits', notes: 'Zone A either-sex archery full season.', tags: ['deer', 'archery'] },
+  { id: 'al-deer-a-ml', state: 'AL', species: 'Deer', weapon_type: 'Muzzleloader', start_date: '2025-11-17', end_date: '2025-11-21', quota_required: false, buck_only: false, bag_limit: 'Statewide limits', notes: 'Zone A special muzzleloader/air rifle season. Either-sex on private and open permit public lands.', tags: ['deer', 'muzzleloader'] },
+  { id: 'al-deer-a-gun-public-1', state: 'AL', species: 'Deer', weapon_type: 'Rifle', start_date: '2025-11-22', end_date: '2025-12-12', quota_required: false, buck_only: true, bag_limit: 'Statewide limits', notes: 'Zone A open permit public land — antlered bucks only Nov 22–Dec 12.', tags: ['deer', 'rifle'] },
+  { id: 'al-deer-a-gun-public-2', state: 'AL', species: 'Deer', weapon_type: 'Rifle', start_date: '2025-12-13', end_date: '2026-01-04', quota_required: false, buck_only: false, bag_limit: 'Statewide limits', notes: 'Zone A open permit public land — either-sex Dec 13–Jan 4.', tags: ['deer', 'rifle'] },
+  { id: 'al-deer-a-gun-public-3', state: 'AL', species: 'Deer', weapon_type: 'Rifle', start_date: '2026-01-05', end_date: '2026-02-10', quota_required: false, buck_only: true, bag_limit: 'Statewide limits', notes: 'Zone A open permit public land — antlered bucks only Jan 5–Feb 10.', tags: ['deer', 'rifle'] },
+
+  // ── DEER — ZONE B (Central-North Alabama) ──
+  { id: 'al-deer-b-archery-early', state: 'AL', species: 'Deer', weapon_type: 'Archery', start_date: '2025-10-15', end_date: '2025-10-24', quota_required: false, buck_only: true, bag_limit: 'Statewide limits', notes: 'Zone B early archery — antlered bucks only Oct 15–24.', tags: ['deer', 'archery'] },
+  { id: 'al-deer-b-archery-main', state: 'AL', species: 'Deer', weapon_type: 'Archery', start_date: '2025-10-25', end_date: '2026-02-10', quota_required: false, buck_only: false, bag_limit: 'Statewide limits', notes: 'Zone B either-sex archery Oct 25–Feb 10.', tags: ['deer', 'archery'] },
+  { id: 'al-deer-b-ml', state: 'AL', species: 'Deer', weapon_type: 'Muzzleloader', start_date: '2025-11-17', end_date: '2025-11-21', quota_required: false, buck_only: false, bag_limit: 'Statewide limits', notes: 'Zone B special muzzleloader/air rifle. Either-sex.', tags: ['deer', 'muzzleloader'] },
+  { id: 'al-deer-b-gun-public', state: 'AL', species: 'Deer', weapon_type: 'Rifle', start_date: '2025-11-22', end_date: '2026-02-10', quota_required: false, bag_limit: 'Statewide limits', notes: 'Zone B public land: bucks only Nov 22–Dec 12; either-sex Dec 13–Jan 4; bucks only Jan 5–Feb 10.', tags: ['deer', 'rifle'] },
+
+  // ── DEER — ZONE D/E (South Alabama) ──
+  { id: 'al-deer-d-archery', state: 'AL', species: 'Deer', weapon_type: 'Archery', start_date: '2025-10-01', end_date: '2026-01-27', quota_required: false, buck_only: false, bag_limit: 'Statewide limits', notes: 'Zones D & E archery. Either-sex Oct 1–Jan 15; bucks only Jan 16–27.', tags: ['deer', 'archery'] },
+  { id: 'al-deer-d-ml', state: 'AL', species: 'Deer', weapon_type: 'Muzzleloader', start_date: '2025-11-03', end_date: '2025-11-07', quota_required: false, buck_only: false, bag_limit: 'Statewide limits', notes: 'Zones D & E special muzzleloader/air rifle. Either-sex.', tags: ['deer', 'muzzleloader'] },
+  { id: 'al-deer-d-gun-public', state: 'AL', species: 'Deer', weapon_type: 'Rifle', start_date: '2025-11-08', end_date: '2026-01-27', quota_required: false, bag_limit: 'Statewide limits', notes: 'Zone D public land: bucks only Nov 8–Dec 12; either-sex Dec 13–Jan 1; bucks only Jan 2–27.', tags: ['deer', 'rifle'] },
+
+  // ── TURKEY — SPRING (zone-specific) ──
+  { id: 'al-turkey-spring-z1', state: 'AL', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2026-03-25', end_date: '2026-05-08', quota_required: false, bag_limit: '5/season', notes: 'Zone 1 (north AL) spring turkey. Gobblers and bearded turkeys only. Youth/mobility season 1 week prior. AREA permit required on WMAs.', tags: ['turkey', 'spring'] },
+  { id: 'al-turkey-spring-z2', state: 'AL', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2026-04-01', end_date: '2026-05-08', quota_required: false, bag_limit: '5/season', notes: 'Zone 2 (central AL) spring turkey. Gobblers and bearded turkeys only.', tags: ['turkey', 'spring'] },
+  { id: 'al-turkey-spring-z3', state: 'AL', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2026-03-25', end_date: '2026-05-08', quota_required: false, bag_limit: '5/season', notes: 'Zone 3 (south AL) spring turkey. Gobblers and bearded turkeys only.', tags: ['turkey', 'spring'] },
+  { id: 'al-turkey-fall-z3', state: 'AL', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2025-11-15', end_date: '2025-11-23', quota_required: false, bag_limit: '1/day', notes: 'Zone 3 fall turkey split 1: Nov 15–23. Split 2: Dec 13–28. Either-sex.', tags: ['turkey', 'fall'] },
+
+  // ── BEAR ── (no bear season in AL currently — this note for reference)
+
+  // ── DOVE ──
+  { id: 'al-dove-split1', state: 'AL', species: 'Dove', weapon_type: 'Shotgun', start_date: '2025-09-06', end_date: '2025-10-26', quota_required: false, bag_limit: '15/day combined', notes: 'Split 1: Sept 6–Oct 26. Split 2: Dec 8–Jan 15. North & South zones.', tags: ['dove', 'shotgun'] },
+
+  // ── WATERFOWL ──
+  { id: 'al-teal-early', state: 'AL', species: 'Teal', weapon_type: 'Shotgun', start_date: '2025-09-13', end_date: '2025-09-21', quota_required: false, bag_limit: '6/day', notes: 'Early teal season statewide. Blue-wing, green-wing, and cinnamon teal. Steel shot required.', tags: ['waterfowl', 'teal', 'shotgun'] },
+  { id: 'al-duck-split1', state: 'AL', species: 'Duck', weapon_type: 'Shotgun', start_date: '2025-11-28', end_date: '2025-11-29', quota_required: false, bag_limit: '6/day (species restrictions apply)', notes: 'Duck split 1. Federal frameworks apply; daily limits vary by species (e.g., 4 mallard/2 hen mallard). Steel shot required.', tags: ['waterfowl', 'duck', 'shotgun'] },
+  { id: 'al-duck-split2', state: 'AL', species: 'Duck', weapon_type: 'Shotgun', start_date: '2025-12-05', end_date: '2026-01-31', quota_required: false, bag_limit: '6/day (species restrictions apply)', notes: 'Duck split 2. Merganser 5/day (2 hooded). Coot 15/day. Steel shot required. WMAs follow state season dates.', tags: ['waterfowl', 'duck', 'shotgun'] },
+  { id: 'al-sandhill-crane', state: 'AL', species: 'Sandhill Crane', weapon_type: 'Shotgun', start_date: '2025-11-28', end_date: '2026-01-26', quota_required: true, bag_limit: '3/day', notes: 'North of I-20 only. Split 1: Nov 28–Jan 4. Split 2: Jan 12–26. Permit required. Apply through ALDCNR quota system.', tags: ['waterfowl', 'crane', 'quota'] },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// QUOTA HUNTS
+// Source: https://www.outdooralabama.com/hunting/quota-hunts
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const AL_QUOTA_HUNTS: QuotaHunt[] = [
+  {
+    id: 'al-qh-deer-wma',
+    state: 'AL',
+    species: 'Deer',
+    hunt_type: 'WMA Quota Hunt',
+    dates: 'Various dates within deer season',
+    application_url: 'https://www.outdooralabama.com/hunting/quota-hunts',
+    notes: 'Multiple WMAs offer quota deer hunts. Apply through GoOutdoorsAlabama.com or Outdoor Alabama app. AREA Permit required for all WMA hunts.',
+  },
+  {
+    id: 'al-qh-turkey-wma',
+    state: 'AL',
+    species: 'Turkey',
+    hunt_type: 'WMA Spring Turkey',
+    dates: 'Within spring turkey season',
+    application_url: 'https://www.outdooralabama.com/hunting/quota-hunts',
+    notes: 'Quota turkey hunts on select WMAs. Apply through GoOutdoorsAlabama.com.',
+  },
+  {
+    id: 'al-qh-waterfowl-wheeler',
+    state: 'AL',
+    land_id: 'al-nwr-wheeler',
+    species: 'Waterfowl',
+    hunt_type: 'Refuge Quota Hunt',
+    dates: 'Federal waterfowl season (Nov–Jan)',
+    application_url: 'https://www.fws.gov/refuge/wheeler',
+    notes: 'Wheeler NWR — limited hunt permits available. Refuge-specific permit required. Steel shot only.',
+  },
+  {
+    id: 'al-qh-sandhill-crane',
+    state: 'AL',
+    species: 'Sandhill Crane',
+    hunt_type: 'Sandhill Crane Permit Hunt',
+    dates: 'Nov 28–Jan 4 (split 1); Jan 12–26 (split 2)',
+    application_url: 'https://www.outdooralabama.com/hunting/quota-hunts',
+    notes: 'North of I-20 only. Permit required in addition to HIP registration. Apply through ALDCNR quota system.',
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// FISHING REGULATIONS
+// Source: https://www.outdooralabama.com/fishing/freshwater-fishing-regulations
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const AL_FISHING: FishingRegulation[] = [
+  { id: 'al-fw-bass-lg', state: 'AL', species: 'Largemouth / Spotted Bass', water_type: 'freshwater', bag_limit: '10/day combined', size_limit: '12 inch minimum (most waters)', season: 'Year-round', notes: 'Some WMA lakes have stricter limits. Smith Lake: 14" min. Verify specific water regulations at outdooralabama.com.' },
+  { id: 'al-fw-bass-sm', state: 'AL', species: 'Smallmouth Bass', water_type: 'freshwater', bag_limit: '5/day', size_limit: '12 inch minimum', season: 'Year-round', notes: 'Tennessee River tributaries and Bankhead NF streams.' },
+  { id: 'al-fw-crappie', state: 'AL', species: 'Crappie', water_type: 'freshwater', bag_limit: '30/day', size_limit: '9 inch minimum', season: 'Year-round', notes: 'Wheeler, Guntersville, Martin, Jordan, Weiss lakes — excellent crappie fisheries.' },
+  { id: 'al-fw-catfish', state: 'AL', species: 'Catfish (Channel / Blue / Flathead)', water_type: 'freshwater', bag_limit: '20/day combined', size_limit: 'No statewide minimum', season: 'Year-round', notes: 'No minimum size on most waters. Tennessee River and tributaries excellent for blue catfish.' },
+  { id: 'al-fw-striped-bass', state: 'AL', species: 'Striped Bass / Hybrid', water_type: 'freshwater', bag_limit: '5/day combined', size_limit: '15 inch minimum', season: 'Year-round', notes: 'Tennessee River tailwaters, Coosa River chain. Wilson Dam tailwater is a premier striped bass fishery.' },
+  { id: 'al-fw-trout', state: 'AL', species: 'Trout', water_type: 'freshwater', bag_limit: '8/day', size_limit: '10 inch minimum', season: 'Year-round (tailwater fisheries)', notes: 'Tennessee River tailwaters (Wilson Dam, Wheeler Dam) — stocked rainbow and brown trout. Bankhead NF streams for wild trout.' },
+  { id: 'al-sw-red-drum', state: 'AL', species: 'Red Drum (Redfish)', water_type: 'saltwater', bag_limit: '3/day', size_limit: '18–27 inch slot', season: 'Year-round', notes: 'Mobile Bay and Gulf coast areas. Bon Secour NWR coastal access.' },
+  { id: 'al-sw-flounder', state: 'AL', species: 'Southern Flounder', water_type: 'saltwater', bag_limit: '12/day', size_limit: '12 inch minimum', season: 'Year-round', notes: 'Mobile Bay and coastal areas near Bon Secour NWR.' },
 ];

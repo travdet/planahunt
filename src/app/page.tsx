@@ -243,7 +243,15 @@ export default function HomePage() {
   }, [filters, favorites, distanceMap]);
 
   const selectedLand = selectedLandId ? PUBLIC_LANDS.find((l) => l.id === selectedLandId) : null;
-  const selectedSeasons = selectedLandId ? HUNTING_SEASONS.filter((s) => s.land_id === selectedLandId) : [];
+  const selectedSeasons = selectedLandId && selectedLand
+    ? (() => {
+        const landSpecific = HUNTING_SEASONS.filter((s) => s.land_id === selectedLandId);
+        // Fall back to statewide seasons (no land_id) when no land-specific seasons exist
+        return landSpecific.length > 0
+          ? landSpecific
+          : HUNTING_SEASONS.filter((s) => s.state === selectedLand.state && !s.land_id);
+      })()
+    : [];
   const selectedQuotas = selectedLandId ? QUOTA_HUNTS.filter((q) => q.land_id === selectedLandId) : [];
   const selectedFishing = selectedLandId && selectedLand ? filterFishingRegs(FISHING_REGULATIONS, selectedLand) : [];
 
@@ -482,7 +490,7 @@ export default function HomePage() {
                     <LandCard
                       key={land.id}
                       land={land}
-                      seasons={HUNTING_SEASONS.filter((s) => s.land_id === land.id)}
+                      seasons={(() => { const ls = HUNTING_SEASONS.filter((s) => s.land_id === land.id); return ls.length > 0 ? ls : HUNTING_SEASONS.filter((s) => s.state === land.state && !s.land_id); })()}
                       quotaHunts={QUOTA_HUNTS.filter((q) => q.land_id === land.id)}
                       isFavorite={favorites.has(land.id)}
                       onToggleFavorite={toggleFavorite}

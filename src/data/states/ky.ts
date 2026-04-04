@@ -23,7 +23,7 @@
  * Verify all dates and rules at fw.ky.gov — regulations change annually.
  */
 
-import { PublicLand, State } from '@/lib/types';
+import { PublicLand, HuntingSeason, QuotaHunt, FishingRegulation, State } from '@/lib/types';
 
 export const KY_STATE: State = {
   code: 'KY',
@@ -665,4 +665,87 @@ export const KY_LANDS: PublicLand[] = [
     tags: ['deer', 'turkey', 'bear', 'grouse', 'trout', 'bass', 'archery', 'rifle', 'muzzleloader'],
     special_rules: 'National Recreation Area — hunting permitted following KY state regs. Smallmouth bass and trout in Big South Fork River. No hunting in developed areas or picnic areas. Horse trails throughout. Daniel Boone NF surrounds.',
   },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HUNTING SEASONS  (2025-2026)
+// Sources: https://www.eregulations.com/kentucky/hunting/hunting-seasons-and-dates
+//          https://fw.ky.gov/Hunt/Pages/Deer-Hunting.aspx
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const KY_SEASONS: HuntingSeason[] = [
+
+  // ── DEER — ARCHERY ──
+  { id: 'ky-deer-archery', state: 'KY', species: 'Deer', weapon_type: 'Archery', start_date: '2025-09-06', end_date: '2026-01-19', quota_required: false, bag_limit: '1 antlered/season statewide', notes: 'Statewide archery season. Youth-only crossbow: Sept 20–Jan 19. 1 antlered deer total across all seasons.', tags: ['deer', 'archery'] },
+
+  // ── DEER — MUZZLELOADER ──
+  { id: 'ky-deer-ml-oct', state: 'KY', species: 'Deer', weapon_type: 'Muzzleloader', start_date: '2025-10-18', end_date: '2025-10-19', quota_required: false, bag_limit: 'Statewide limits', notes: 'Early muzzleloader weekend.', tags: ['deer', 'muzzleloader'] },
+  { id: 'ky-deer-ml-dec', state: 'KY', species: 'Deer', weapon_type: 'Muzzleloader', start_date: '2025-12-13', end_date: '2025-12-21', quota_required: false, bag_limit: 'Statewide limits', notes: 'Late muzzleloader season.', tags: ['deer', 'muzzleloader'] },
+
+  // ── DEER — MODERN FIREARM ──
+  { id: 'ky-deer-gun', state: 'KY', species: 'Deer', weapon_type: 'Rifle', start_date: '2025-11-08', end_date: '2025-11-23', quota_required: false, bag_limit: '1 antlered/season', notes: 'Modern firearm season Zones 1–4. Youth-only: Oct 11–12. Youth-free: Dec 27–28.', tags: ['deer', 'rifle'] },
+
+  // ── TURKEY — SPRING ──
+  { id: 'ky-turkey-spring-youth', state: 'KY', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2026-04-05', end_date: '2026-04-06', quota_required: false, bag_limit: '1/day, 2/season', notes: 'Youth-only spring turkey season.', tags: ['turkey', 'spring', 'youth'] },
+  { id: 'ky-turkey-spring', state: 'KY', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2026-04-12', end_date: '2026-05-04', quota_required: false, bag_limit: '1/day, 2/season', notes: 'General spring turkey season. Gobblers and bearded hens only.', tags: ['turkey', 'spring'] },
+
+  // ── TURKEY — FALL ──
+  { id: 'ky-turkey-fall-archery', state: 'KY', species: 'Turkey', weapon_type: 'Archery', start_date: '2025-09-06', end_date: '2026-01-19', quota_required: false, bag_limit: 'Fall bag limit varies', notes: 'Fall archery concurrent with deer archery season.', tags: ['turkey', 'fall', 'archery'] },
+  { id: 'ky-turkey-fall-shotgun', state: 'KY', species: 'Turkey', weapon_type: 'Shotgun', start_date: '2025-10-25', end_date: '2025-10-31', quota_required: false, bag_limit: 'Fall bag limit varies', notes: 'Fall shotgun: Oct 25–31. Second split: Dec 6–12.', tags: ['turkey', 'fall'] },
+
+  // ── BEAR ──
+  { id: 'ky-bear-archery-z1', state: 'KY', species: 'Bear', weapon_type: 'Archery', start_date: '2025-10-25', end_date: '2025-10-27', quota_required: true, bag_limit: '1/season (permit required)', notes: 'Zone 1 (Eastern KY) archery bear — permit required. Limited quota.', tags: ['bear', 'archery', 'quota'] },
+  { id: 'ky-bear-archery-z2', state: 'KY', species: 'Bear', weapon_type: 'Archery', start_date: '2025-10-25', end_date: '2025-10-29', quota_required: true, bag_limit: '1/season (permit required)', notes: 'Zone 2 archery bear — permit required.', tags: ['bear', 'archery', 'quota'] },
+  { id: 'ky-bear-gun-z1', state: 'KY', species: 'Bear', weapon_type: 'Rifle', start_date: '2025-12-13', end_date: '2025-12-15', quota_required: true, bag_limit: '1/season (permit required)', notes: 'Zone 1 firearm bear — permit required.', tags: ['bear', 'rifle', 'quota'] },
+  { id: 'ky-bear-gun-z2', state: 'KY', species: 'Bear', weapon_type: 'Rifle', start_date: '2025-12-13', end_date: '2025-12-17', quota_required: true, bag_limit: '1/season (permit required)', notes: 'Zone 2 firearm bear — permit required.', tags: ['bear', 'rifle', 'quota'] },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// QUOTA HUNTS
+// Source: https://fw.ky.gov/Hunt/Pages/quota-hunts.aspx
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const KY_QUOTA_HUNTS: QuotaHunt[] = [
+  {
+    id: 'ky-qh-bear',
+    state: 'KY',
+    species: 'Bear',
+    hunt_type: 'Bear Permit Hunt',
+    dates: 'Oct 25–29 (archery), Dec 13–17 (firearms) 2025',
+    application_url: 'https://fw.ky.gov/Hunt/Pages/Bear.aspx',
+    notes: 'Permit required for both zones. Limited quota. Apply through KDFWR online system. Eastern Kentucky bear populations centered in Breathitt, Knott, Letcher, Perry, Pike counties.',
+  },
+  {
+    id: 'ky-qh-deer-elk',
+    state: 'KY',
+    species: 'Elk',
+    hunt_type: 'Elk Lottery Hunt',
+    dates: 'Sept–Feb (various hunts)',
+    application_url: 'https://fw.ky.gov/Hunt/Pages/Elk-Hunt-Information.aspx',
+    notes: 'Limited-entry elk hunt in Eastern KY elk restoration zone. Both antlered and antlerless tags available by lottery. One of the largest elk herds east of the Mississippi.',
+  },
+  {
+    id: 'ky-qh-deer-wma',
+    state: 'KY',
+    species: 'Deer',
+    hunt_type: 'WMA Quota Deer Hunt',
+    dates: 'Within firearms season',
+    application_url: 'https://fw.ky.gov/Hunt/Pages/quota-hunts.aspx',
+    notes: 'Selected WMAs including Ballard WMA, Peabody WMA, and others offer quota firearm deer hunts. Apply through KDFWR.',
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// FISHING REGULATIONS
+// Source: https://fw.ky.gov/Fish/Pages/Fishing-Regulations.aspx
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const KY_FISHING: FishingRegulation[] = [
+  { id: 'ky-fw-trout', state: 'KY', species: 'Trout (Rainbow / Brown / Brook)', water_type: 'freshwater', bag_limit: '7/day', size_limit: '9 inch minimum', season: 'Year-round on stocked waters', notes: 'Trout license required. Numerous stocked streams and lakes in Daniel Boone NF and throughout eastern KY. Cumberland River below Wolf Creek Dam — year-round tailwater fishery.' },
+  { id: 'ky-fw-bass-sm', state: 'KY', species: 'Smallmouth Bass', water_type: 'freshwater', bag_limit: '6/day', size_limit: '12 inch minimum', season: 'Year-round', notes: 'Green River, Rockcastle River, Big South Fork — world-class smallmouth fisheries in public land corridors.' },
+  { id: 'ky-fw-bass-lm', state: 'KY', species: 'Largemouth Bass', water_type: 'freshwater', bag_limit: '6/day', size_limit: '12 inch minimum', season: 'Year-round', notes: 'Lake Cumberland, Laurel River Lake, Cave Run Lake — excellent bass fishing adjacent to national forest.' },
+  { id: 'ky-fw-muskie', state: 'KY', species: 'Muskellunge / Tiger Muskie', water_type: 'freshwater', bag_limit: '1/day', size_limit: '36 inch minimum', season: 'Year-round', notes: 'Cave Run Lake and select rivers. KDFWR stocking program.' },
+  { id: 'ky-fw-walleye', state: 'KY', species: 'Walleye / Sauger', water_type: 'freshwater', bag_limit: '10/day combined', size_limit: '15 inch minimum', season: 'Year-round', notes: 'Lake Cumberland and tailwaters. Green River Lake.' },
+  { id: 'ky-fw-crappie', state: 'KY', species: 'Crappie', water_type: 'freshwater', bag_limit: '30/day', size_limit: '9 inch minimum', season: 'Year-round', notes: 'Statewide. Ballard and other WMAs with managed lakes.' },
+  { id: 'ky-fw-catfish', state: 'KY', species: 'Catfish (Channel / Blue / Flathead)', water_type: 'freshwater', bag_limit: 'No statewide limit', size_limit: 'No statewide minimum', season: 'Year-round', notes: 'Ohio River and tributaries, Kentucky Lake area.' },
 ];
