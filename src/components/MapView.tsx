@@ -145,7 +145,7 @@ function addOverlayLayers(map: any, def: GeoJSONLayerDef, data: any, beforeLayer
       },
       paint: {
         'text-color': style.color,
-        'text-halo-color': 'rgba(20, 28, 16, 0.8)',
+        'text-halo-color': 'rgba(255, 255, 255, 0.85)',
         'text-halo-width': 1.5,
         'text-opacity': 0.8,
       },
@@ -181,7 +181,7 @@ function addOverlayLayers(map: any, def: GeoJSONLayerDef, data: any, beforeLayer
           'circle-radius': ['step', ['get', 'point_count'], 12, 50, 16, 200, 20],
           'circle-opacity': 0.7,
           'circle-stroke-width': 1.5,
-          'circle-stroke-color': '#1a1f16',
+          'circle-stroke-color': '#ffffff',
         },
       }, beforeLayer);
 
@@ -211,7 +211,7 @@ function addOverlayLayers(map: any, def: GeoJSONLayerDef, data: any, beforeLayer
           'circle-color': style.color,
           'circle-opacity': 0.85,
           'circle-stroke-width': 1.5,
-          'circle-stroke-color': '#1a1f16',
+          'circle-stroke-color': '#ffffff',
         },
       }, beforeLayer);
     } else {
@@ -225,7 +225,7 @@ function addOverlayLayers(map: any, def: GeoJSONLayerDef, data: any, beforeLayer
           'circle-color': style.color,
           'circle-opacity': 0.85,
           'circle-stroke-width': 1.5,
-          'circle-stroke-color': '#1a1f16',
+          'circle-stroke-color': '#ffffff',
         },
       }, beforeLayer);
     }
@@ -316,7 +316,7 @@ export default function MapView({ lands, selectedLandId, onSelectLand, enabledLa
 
       const map = new mapboxgl.default.Map({
         container: mapContainer.current!,
-        style: 'mapbox://styles/mapbox/dark-v11',
+        style: 'mapbox://styles/mapbox/outdoors-v12',
         center: [-83.5, 32.5],
         zoom: 6.5,
         attributionControl: false,
@@ -402,9 +402,9 @@ export default function MapView({ lands, selectedLandId, onSelectLand, enabledLa
             .setLngLat([lng, lat])
             .setHTML(`
               <div style="font-family:system-ui,sans-serif;padding:6px 2px 2px;">
-                <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:${accentColor};margin-bottom:3px;">${type}</div>
-                <div style="font-size:13px;font-weight:600;color:#e8e4d4;line-height:1.3;">${name}</div>
-                ${acreage ? `<div style="font-size:11px;color:#a8a490;margin-top:3px;">${Number(acreage).toLocaleString()} acres · ${state}</div>` : `<div style="font-size:11px;color:#a8a490;margin-top:3px;">${state}</div>`}
+                <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:${accentColor};margin-bottom:3px;">${type}</div>
+                <div style="font-size:13px;font-weight:600;color:#191c1d;line-height:1.3;">${name}</div>
+                ${acreage ? `<div style="font-size:11px;color:#717977;margin-top:3px;">${Number(acreage).toLocaleString()} acres · ${state}</div>` : `<div style="font-size:11px;color:#717977;margin-top:3px;">${state}</div>`}
               </div>
             `)
             .addTo(map);
@@ -444,8 +444,8 @@ export default function MapView({ lands, selectedLandId, onSelectLand, enabledLa
               .setLngLat(coords as [number, number])
               .setHTML(`
                 <div style="font-family:system-ui,sans-serif;padding:6px 2px 2px;">
-                  <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:${style.color};margin-bottom:3px;">${style.label}</div>
-                  <div style="font-size:12px;font-weight:600;color:#e8e4d4;line-height:1.3;">${name}</div>
+                  <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:${style.color};margin-bottom:3px;">${style.label}</div>
+                  <div style="font-size:12px;font-weight:600;color:#191c1d;line-height:1.3;">${name}</div>
                 </div>
               `)
               .addTo(map);
@@ -534,14 +534,14 @@ export default function MapView({ lands, selectedLandId, onSelectLand, enabledLa
       {noToken && (
         <div
           className="absolute inset-0 flex flex-col items-center justify-center"
-          style={{ background: '#1a2016' }}
+          style={{ background: '#f1f4f5' }}
         >
-          <svg className="w-12 h-12 mb-4" style={{ color: '#3d6b35' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-12 h-12 mb-4" style={{ color: '#c1c8c6' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
           </svg>
-          <p className="text-sm font-semibold mb-1" style={{ color: '#a8a490' }}>Map Unavailable</p>
-          <p className="text-xs text-center max-w-xs px-4" style={{ color: '#6e6b5e' }}>
-            Add <code className="px-1 py-0.5 rounded" style={{ background: '#252b21', color: '#c4923a' }}>NEXT_PUBLIC_MAPBOX_TOKEN</code> to your <code>.env.local</code> to enable the map.
+          <p className="text-sm font-semibold mb-1" style={{ color: '#414847' }}>Map Unavailable</p>
+          <p className="text-xs text-center max-w-xs px-4" style={{ color: '#717977' }}>
+            Add <code className="px-1 py-0.5 rounded" style={{ background: '#ffffff', color: '#c4923a', border: '1px solid #e1e3e4' }}>NEXT_PUBLIC_MAPBOX_TOKEN</code> to your <code>.env.local</code> to enable the map.
           </p>
         </div>
       )}

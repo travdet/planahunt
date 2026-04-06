@@ -59,6 +59,25 @@ function filterLands(
   favorites: Set<string>,
   distanceMap: Map<string, number> | null,
 ): PublicLand[] {
+  // Pre-group seasons for O(1) lookups
+  const seasonsByLandId = new Map<string, typeof HUNTING_SEASONS>();
+  const statewideSeasons = new Map<string, typeof HUNTING_SEASONS>();
+  for (const s of HUNTING_SEASONS) {
+    if (s.land_id) {
+      if (!seasonsByLandId.has(s.land_id)) seasonsByLandId.set(s.land_id, []);
+      seasonsByLandId.get(s.land_id)!.push(s);
+    } else {
+      if (!statewideSeasons.has(s.state)) statewideSeasons.set(s.state, []);
+      statewideSeasons.get(s.state)!.push(s);
+    }
+  }
+  // Returns land-specific seasons, or statewide fallback if none exist
+  const getEffectiveSeasons = (land: PublicLand) => {
+    const specific = seasonsByLandId.get(land.id);
+    if (specific && specific.length > 0) return specific;
+    return statewideSeasons.get(land.state) ?? [];
+  };
+
   return lands.filter((land) => {
     // State filter
     if (filters.states.length > 0 && !filters.states.includes(land.state)) return false;
@@ -94,7 +113,7 @@ function filterLands(
 
     // Buck/Doe filter
     if (filters.buckDoe !== 'any') {
-      const landSeasons = HUNTING_SEASONS.filter((s) => s.land_id === land.id);
+      const landSeasons = getEffectiveSeasons(land);
       if (filters.buckDoe === 'buck_only') {
         const hasBuckOnly = landSeasons.some((s) => s.buck_only === true);
         if (!hasBuckOnly) return false;
@@ -106,14 +125,14 @@ function filterLands(
 
     // Species filter — check if any seasons match
     if (filters.species.length > 0) {
-      const landSeasons = HUNTING_SEASONS.filter((s) => s.land_id === land.id);
+      const landSeasons = getEffectiveSeasons(land);
       const hasSpecies = filters.species.some((sp) => landSeasons.some((s) => s.species === sp));
       if (!hasSpecies) return false;
     }
 
     // Weapon type filter
     if (filters.weaponTypes.length > 0) {
-      const landSeasons = HUNTING_SEASONS.filter((s) => s.land_id === land.id);
+      const landSeasons = getEffectiveSeasons(land);
       const hasWeapon = filters.weaponTypes.some((w) => landSeasons.some((s) => s.weapon_type === w));
       if (!hasWeapon) return false;
     }
@@ -130,7 +149,7 @@ function filterLands(
     if (filters.dateRange?.start && filters.dateRange?.end) {
       const filterStart = new Date(filters.dateRange.start);
       const filterEnd = new Date(filters.dateRange.end);
-      const landSeasons = HUNTING_SEASONS.filter((s) => s.land_id === land.id);
+      const landSeasons = getEffectiveSeasons(land);
       const hasOverlap = landSeasons.some((s) => {
         const seasonStart = new Date(s.start_date);
         const seasonEnd = new Date(s.end_date);
@@ -288,18 +307,18 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden" style={{ background: '#1a1f16' }}>
+    <div className="flex flex-col h-screen overflow-hidden" style={{ background: '#f8f9fa' }}>
       {/* Top navbar */}
       <header
-        className="flex-shrink-0 flex items-center justify-between px-4 py-3 z-20"
-        style={{ background: '#161b12', borderBottom: '1px solid #2d342a' }}
+        className="flex-shrink-0 flex items-center justify-between px-5 h-14 z-20"
+        style={{ background: 'rgba(255,255,255,0.92)', borderBottom: '1px solid #e1e3e4', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}
       >
         <div className="flex items-center gap-3">
           {/* Hamburger — mobile only */}
           <button
             onClick={() => setSidebarOpen(true)}
             className="lg:hidden p-2 rounded-lg transition-colors"
-            style={{ background: '#252b21', color: '#a8a490' }}
+            style={{ background: '#f1f4f5', color: '#414847' }}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -314,8 +333,8 @@ export default function HomePage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
             </div>
-            <span className="font-bold text-base tracking-tight" style={{ color: '#e8e4d4' }}>
-              Plan<span style={{ color: '#5fad52' }}>A</span>Hunt
+            <span className="font-bold text-base tracking-tight" style={{ fontFamily: 'var(--font-manrope)', color: '#191c1d' }}>
+              Plan<span style={{ color: '#3d6b35' }}>A</span>Hunt
             </span>
           </div>
         </div>
@@ -329,9 +348,9 @@ export default function HomePage() {
             }
             className="text-sm px-3 py-2 rounded-lg outline-none cursor-pointer appearance-none"
             style={{
-              background: '#252b21',
-              border: '1px solid #333830',
-              color: filters.states.length ? '#e8e4d4' : '#6e6b5e',
+              background: '#f1f4f5',
+              border: '1px solid #e1e3e4',
+              color: filters.states.length ? '#191c1d' : '#717977',
             }}
           >
             <option value="">All States</option>
@@ -348,20 +367,20 @@ export default function HomePage() {
           <button
             onClick={handleTodayButton}
             className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all active:scale-95"
-            style={{ background: '#3d6b35', color: '#e8e4d4' }}
+            style={{ background: '#3d6b35', color: '#ffffff' }}
           >
-            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-green-300 animate-pulse" />
             Hunt Today?
           </button>
 
           {/* Map / List toggle */}
-          <div className="flex rounded-lg overflow-hidden" style={{ border: '1px solid #333830' }}>
+          <div className="flex rounded-lg overflow-hidden" style={{ border: '1px solid #e1e3e4' }}>
             <button
               onClick={() => setListView('list')}
               className="px-3 py-2 text-xs font-medium transition-colors"
               style={{
                 background: listView === 'list' ? '#3d6b35' : 'transparent',
-                color: listView === 'list' ? '#e8e4d4' : '#6e6b5e',
+                color: listView === 'list' ? '#ffffff' : '#717977',
               }}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -373,7 +392,7 @@ export default function HomePage() {
               className="px-3 py-2 text-xs font-medium transition-colors"
               style={{
                 background: listView === 'map' ? '#3d6b35' : 'transparent',
-                color: listView === 'map' ? '#e8e4d4' : '#6e6b5e',
+                color: listView === 'map' ? '#ffffff' : '#717977',
               }}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -432,26 +451,26 @@ export default function HomePage() {
             <div
               className="
                 absolute inset-0 lg:relative lg:inset-auto
-                lg:w-[360px] lg:flex-shrink-0
+                lg:w-[340px] lg:flex-shrink-0
                 flex flex-col overflow-hidden
               "
-              style={{ background: '#1a1f16', borderRight: '1px solid #2d342a' }}
+              style={{ background: '#ffffff', borderRight: '1px solid #e1e3e4' }}
             >
               {/* Results header */}
-              <div className="px-4 pt-4 pb-3" style={{ borderBottom: '1px solid #2d342a' }}>
+              <div className="px-4 pt-4 pb-3" style={{ borderBottom: '1px solid #ebeef0' }}>
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-sm font-semibold" style={{ color: '#e8e4d4' }}>
+                    <h2 className="text-sm font-bold tracking-tight" style={{ fontFamily: 'var(--font-manrope)', color: '#191c1d' }}>
                       {filteredLands.length} Location{filteredLands.length !== 1 ? 's' : ''}
                     </h2>
-                    <p className="text-xs mt-0.5" style={{ color: '#6e6b5e' }}>
+                    <p className="text-xs mt-0.5" style={{ color: '#717977' }}>
                       {currentState ? currentState.name : 'All states'} · {filters.activityType === 'all' ? 'Hunting & Fishing' : filters.activityType}
                     </p>
                   </div>
                   <button
                     onClick={() => setSidebarOpen(true)}
                     className="lg:hidden flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg"
-                    style={{ background: '#252b21', color: '#a8a490', border: '1px solid #333830' }}
+                    style={{ background: '#f1f4f5', color: '#414847', border: '1px solid #e1e3e4' }}
                   >
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -465,9 +484,9 @@ export default function HomePage() {
                   <button
                     onClick={handleTodayButton}
                     className="mt-2 w-full flex items-center gap-2 text-xs px-3 py-2 rounded-lg text-left transition-colors"
-                    style={{ background: 'rgba(61,107,53,0.12)', border: '1px solid rgba(61,107,53,0.25)', color: '#5fad52' }}
+                    style={{ background: 'rgba(61,107,53,0.08)', border: '1px solid rgba(61,107,53,0.2)', color: '#3d6b35' }}
                   >
-                    <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
+                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse flex-shrink-0" />
                     <span>
                       <span className="font-semibold">{todayHuntable.length} location{todayHuntable.length !== 1 ? 's' : ''}</span> have open seasons today — tap to filter
                     </span>
@@ -476,14 +495,14 @@ export default function HomePage() {
               </div>
 
               {/* Card list */}
-              <div className="flex-1 overflow-y-auto p-3 space-y-2">
+              <div className="flex-1 overflow-y-auto p-3 space-y-2" style={{ background: '#f8f9fa' }}>
                 {filteredLands.length === 0 ? (
                   <div className="flex flex-col items-center justify-center h-full py-16 text-center px-6">
-                    <svg className="w-10 h-10 mb-3" style={{ color: '#333830' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-10 h-10 mb-3" style={{ color: '#c1c8c6' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
-                    <p className="text-sm font-medium" style={{ color: '#4a5046' }}>No locations found</p>
-                    <p className="text-xs mt-1" style={{ color: '#3a3f36' }}>Try adjusting your filters</p>
+                    <p className="text-sm font-medium" style={{ color: '#414847' }}>No locations found</p>
+                    <p className="text-xs mt-1" style={{ color: '#717977' }}>Try adjusting your filters</p>
                   </div>
                 ) : (
                   filteredLands.map((land) => (

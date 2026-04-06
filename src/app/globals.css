@@ -1,19 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --bg-primary: #1a1f16;
-  --bg-secondary: #222820;
-  --bg-card: #252b21;
-  --bg-elevated: #2d342a;
-  --text-primary: #e8e4d4;
-  --text-secondary: #a8a490;
-  --text-muted: #6e6b5e;
+  --bg-primary: #f8f9fa;
+  --bg-secondary: #f1f4f5;
+  --bg-card: #ffffff;
+  --bg-sidebar: #f1f4f5;
+  --text-primary: #191c1d;
+  --text-secondary: #414847;
+  --text-muted: #717977;
   --accent-green: #3d6b35;
-  --accent-green-light: #4d8542;
+  --accent-green-light: #5fad52;
   --accent-amber: #c4923a;
-  --accent-amber-light: #d4a24a;
-  --border-color: #333830;
-  --border-subtle: #2a2f26;
+  --border-color: #e1e3e4;
+  --border-subtle: #ebeef0;
 }
 
 * {
@@ -35,10 +34,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1, h2, h3, h4 {
+  font-family: var(--font-manrope), 'Manrope', sans-serif;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -51,83 +54,66 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-green);
+  background: #c1c8c6;
 }
 
-/* Mapbox overrides */
+/* Mapbox overrides — light theme */
 .mapboxgl-ctrl-logo {
   display: none !important;
 }
 
 .mapboxgl-ctrl-attrib {
-  background: rgba(26, 31, 22, 0.8) !important;
-  color: #a8a490 !important;
+  background: rgba(248, 249, 250, 0.85) !important;
+  color: #717977 !important;
 }
 
 .mapboxgl-ctrl-attrib a {
-  color: #a8a490 !important;
+  color: #717977 !important;
 }
 
 .mapboxgl-popup-content {
-  background: var(--bg-elevated) !important;
-  color: var(--text-primary) !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: 8px !important;
+  background: #ffffff !important;
+  color: #191c1d !important;
+  border: 1px solid #e1e3e4 !important;
+  border-radius: 10px !important;
   padding: 12px 16px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
 }
 
 .mapboxgl-popup-tip {
-  border-top-color: var(--bg-elevated) !important;
-  border-bottom-color: var(--bg-elevated) !important;
+  border-top-color: #ffffff !important;
+  border-bottom-color: #ffffff !important;
 }
 
 .mapboxgl-ctrl-group {
-  background: var(--bg-elevated) !important;
-  border: 1px solid var(--border-color) !important;
+  background: #ffffff !important;
+  border: 1px solid #e1e3e4 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
 }
 
 .mapboxgl-ctrl-group button {
   background: transparent !important;
-  color: var(--text-secondary) !important;
+  color: #414847 !important;
 }
 
 .mapboxgl-ctrl-group button:hover {
-  background: var(--bg-card) !important;
+  background: #f1f4f5 !important;
 }
 
 /* Animations */
 @keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeIn {
@@ -136,15 +122,15 @@ body {
 }
 
 .animate-slide-in-left {
-  animation: slideInLeft 0.3s ease-out forwards;
+  animation: slideInLeft 0.25s ease-out forwards;
 }
 
 .animate-slide-in-right {
-  animation: slideInRight 0.3s ease-out forwards;
+  animation: slideInRight 0.25s ease-out forwards;
 }
 
 .animate-slide-in-up {
-  animation: slideInUp 0.3s ease-out forwards;
+  animation: slideInUp 0.25s ease-out forwards;
 }
 
 .animate-fade-in {

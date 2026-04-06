@@ -979,50 +979,6 @@ export const AL_NEW_LANDS: PublicLand[] = [
   },
 
   // ─────────────────────────────────────────────
-  // COMMUNITY HUNTING AREAS (CHAs) — corrected as Other/CHA
-  // ─────────────────────────────────────────────
-
-  {
-    id: 'al-cha-riverton',
-    state: 'AL',
-    name: 'Riverton Community Hunting Area',
-    type: 'Other',
-    other_type: 'Community Hunting Area',
-    acreage: 5285,
-    counties: ['Colbert'],
-    region: 'North Alabama — CWD Management Zone',
-    lat: 34.9000,
-    lng: -87.9000,
-    phone: '(256) 766-5064',
-    website: 'https://www.outdooralabama.com/hunting/wildlife-management-areas',
-    managing_agency: 'Alabama Division of Wildlife & Freshwater Fisheries',
-    hunting_allowed: true,
-    fishing_allowed: false,
-    tags: ['deer', 'turkey', 'archery', 'rifle'],
-    special_rules: 'AREA Permit required. Community Hunting Area — managed for low-intensity public hunting on enrolled private/state lands. Bankhead turkey schedule. CWD Management Zone — additional carcass transport and supplemental feed restrictions apply.',
-  },
-
-  {
-    id: 'al-cha-martin',
-    state: 'AL',
-    name: 'Martin Community Hunting Area',
-    type: 'Other',
-    other_type: 'Community Hunting Area',
-    acreage: 400,
-    counties: ['Tallapoosa'],
-    region: 'East-Central Alabama',
-    lat: 32.8500,
-    lng: -86.0500,
-    phone: '(256) 237-0442',
-    website: 'https://www.outdooralabama.com/hunting/wildlife-management-areas',
-    managing_agency: 'Alabama Division of Wildlife & Freshwater Fisheries',
-    hunting_allowed: true,
-    fishing_allowed: false,
-    tags: ['deer', 'turkey', 'archery', 'rifle'],
-    special_rules: 'AREA Permit required. Small CHA near Jacksons Gap on Lake Martin. Community Hunting Area format — limited quota access.',
-  },
-
-  // ─────────────────────────────────────────────
   // NATIONAL PARKS / NPS — additional units with hunting or fishing
   // ─────────────────────────────────────────────
 
